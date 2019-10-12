@@ -27,18 +27,10 @@ public class StudentManagement{
             System.exit(0);
         }
         gui = new MainGUI();
-        gui.getLoginButton().addActionListener(new ActionListener(){
+        gui.set("LoginGUI");
+        gui.getLoginGUI().getBtn1().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                System.out.println("Login clicked!");
-                user = db.getCollection("user");
-                if (user.findOne() == null){
-                    System.out.println("Wrong username or password");
-                }
-            }
-        });
-        gui.getRegisterButton().addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-
+                System.out.println("LoginGUI : Login btn clicked!!!");
             }
         });
     }
