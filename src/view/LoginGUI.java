@@ -5,7 +5,8 @@ public class LoginGUI{
     private JButton btn1, btn2;
     private JPanel p1;
     private JLabel l1, l2;
-    private JTextField f1, f2;
+    private JTextField f1;
+    private JPasswordField f2;
     private GridBagConstraints gbc;
     public LoginGUI(){
         btn1 = new JButton("Login");
@@ -13,7 +14,7 @@ public class LoginGUI{
         l1 = new JLabel("User name : ");
         l2 = new JLabel("Password : ");
         f1 = new JTextField(20);
-        f2 = new JTextField(20);
+        f2 = new JPasswordField(20);
         p1 = new JPanel();
         gbc = new GridBagConstraints();
         p1.setLayout(new GridBagLayout());
@@ -44,5 +45,14 @@ public class LoginGUI{
     }
     public JButton getBtn1(){
         return this.btn1;
+    }
+    public JButton getBtn2(){
+        return this.btn2;
+    }
+    public JTextField getF1(){
+        return this.f1;
+    }
+    public JTextField getF2(){
+        return this.f2;
     }
 }

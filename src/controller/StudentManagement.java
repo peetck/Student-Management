@@ -31,6 +31,20 @@ public class StudentManagement{
         gui.getLoginGUI().getBtn1().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 System.out.println("LoginGUI : Login btn clicked!!!");
+                System.out.println("Username : " + gui.getLoginGUI().getF1().getText());
+                System.out.println("Password : " + gui.getLoginGUI().getF2().getText());
+            }
+        });
+        gui.getLoginGUI().getBtn2().addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                System.out.println("LoginGUI : Register btn clicked!!!");
+                gui.set("RegisterGUI");
+            }
+        });
+        gui.getRegisterGUI().getBtn2().addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                System.out.println("RegisterGUI : Back btn clicked!!");
+                gui.set("LoginGUI");
             }
         });
     }

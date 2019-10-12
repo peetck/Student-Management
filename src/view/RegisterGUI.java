@@ -4,8 +4,9 @@ import javax.swing.*;
 public class RegisterGUI{
     private JPanel p1;
     private JLabel l1, l2, l3, l4;
-    private JTextField f1, f2, f3;
-    private JButton btn1;
+    private JTextField f1;
+    private JPasswordField f2, f3;
+    private JButton btn1, btn2;
     private GridBagConstraints gbc;
     public RegisterGUI(){
         p1 = new JPanel();
@@ -14,9 +15,10 @@ public class RegisterGUI{
         l3 = new JLabel("Password : ");
         l4 = new JLabel("Confirm password : ");
         btn1 = new JButton("Register");
+        btn2 = new JButton("Back");
         f1 = new JTextField(20);
-        f2 = new JTextField(20);
-        f3 = new JTextField(20);
+        f2 = new JPasswordField(20);
+        f3 = new JPasswordField(20);
         gbc = new GridBagConstraints();
 
         p1.setLayout(new GridBagLayout());
@@ -42,11 +44,18 @@ public class RegisterGUI{
         gbc.gridx = 0;
         gbc.gridy = 4;
         p1.add(btn1, gbc);
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        p1.add(btn2, gbc);
     }
     public RegisterGUI getGUI(){
         return this;
     }
+    public JButton getBtn2(){
+        return this.btn2;
+    }
     public JPanel getPanel(){
         return this.p1;
     }
+
 }

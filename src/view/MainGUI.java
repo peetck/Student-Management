@@ -17,9 +17,13 @@ public class MainGUI{
     public void set(String select){
         if (select.equals("LoginGUI")){
             fr.setContentPane(login.getPanel());
+            fr.repaint();
+            fr.revalidate();
         }
         else if (select.equals("RegisterGUI")){
             fr.setContentPane(register.getPanel());
+            fr.repaint();
+            fr.revalidate();
         }
     }
     public LoginGUI getLoginGUI(){

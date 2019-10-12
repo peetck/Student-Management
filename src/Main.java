@@ -8,6 +8,8 @@ public class Main{
         catch (Exception e) {
             e.printStackTrace();
         }
-        SwingUtilities.invokeLater(() -> { StudentManagement n = new StudentManagement(); });
+        SwingUtilities.invokeLater(() -> {
+            StudentManagement n = new StudentManagement();
+        });
     }
 }
