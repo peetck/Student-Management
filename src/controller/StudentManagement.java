@@ -2,6 +2,7 @@ package controller;
 import view.MainGUI;
 import java.awt.event.*;
 import com.mongodb.*;
+import java.util.*;
 public class StudentManagement{
     private MainGUI gui;
     private Mongo connect;
@@ -12,7 +13,7 @@ public class StudentManagement{
             System.out.println("Connecting to mongoDB...");
             connect = new Mongo("localhost", 27017);
             db = connect.getDB("StudentManagement");
-
+            user = db.getCollection("user");
             /* if (user.findOne() == null){
 
             } */
@@ -33,6 +34,13 @@ public class StudentManagement{
                 System.out.println("LoginGUI : Login btn clicked!!!");
                 System.out.println("Username : " + gui.getLoginGUI().getF1().getText());
                 System.out.println("Password : " + gui.getLoginGUI().getF2().getText());
+                DBCursor curs = user.find();
+                while (curs.hasNext()){
+                    DBObject t = curs.next();
+                    System.out.println((String)t.get("username"));
+                    System.out.println((String)t.get("password"));
+                    System.out.println("--------------------------");
+                }
             }
         });
         gui.getLoginGUI().getBtn2().addActionListener(new ActionListener(){
@@ -45,6 +53,28 @@ public class StudentManagement{
             public void actionPerformed(ActionEvent e){
                 System.out.println("RegisterGUI : Back btn clicked!!");
                 gui.set("LoginGUI");
+            }
+        });
+        gui.getRegisterGUI().getBtn1().addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                System.out.println("RegisterGUI : Register btn clicked!!");
+                BasicDBObject n = new BasicDBObject();
+                String username = gui.getRegisterGUI().getF1().getText();
+                String password = gui.getRegisterGUI().getF2().getText();
+                String cpassword = gui.getRegisterGUI().getF3().getText();
+                DBCursor curs = user.find();
+                while (curs.hasNext()){
+                    DBObject t = curs.next();
+                    if (((String)t.get("username")).equals(username)){
+                        System.out.println("this username already taken!!");
+                        return;
+                    }
+                }
+                if (password.equals(cpassword)){
+                    n.put("username", username);
+                    n.put("password", password);
+                    user.insert(n);
+                }
             }
         });
     }

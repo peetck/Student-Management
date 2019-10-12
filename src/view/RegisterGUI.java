@@ -51,8 +51,20 @@ public class RegisterGUI{
     public RegisterGUI getGUI(){
         return this;
     }
+    public JButton getBtn1(){
+        return this.btn1;
+    }
     public JButton getBtn2(){
         return this.btn2;
+    }
+    public JTextField getF1(){
+        return this.f1;
+    }
+    public JPasswordField getF2(){
+        return this.f2;
+    }
+    public JPasswordField getF3(){
+        return this.f3;
     }
     public JPanel getPanel(){
         return this.p1;
