@@ -48,7 +48,7 @@ public class StudentManagement{
                         return;
                     }
                 }
-                System.out.println("Can't find username or password##");
+                gui.getLoginGUI().getL3().setText("Wrong Username or Password");
             }
         });
         gui.getLoginGUI().getBtn2().addActionListener(new ActionListener(){

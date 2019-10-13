@@ -18,6 +18,9 @@ public class MainGUI{
     }
     public void set(String select){
         if (select.equals("LoginGUI")){
+            login.getF1().setText("");
+            login.getF2().setText("");
+            login.getL3().setText("");
             fr.setContentPane(login.getPanel());
             fr.repaint();
             fr.revalidate();
