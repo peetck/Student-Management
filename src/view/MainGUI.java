@@ -15,6 +15,7 @@ public class MainGUI{
         fr.setSize(800, 500);
         fr.setVisible(true);
         //fr.setResizable(false);
+        fr.setLayout(null);
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     public void set(String select){
