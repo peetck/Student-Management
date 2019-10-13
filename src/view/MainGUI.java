@@ -5,10 +5,12 @@ public class MainGUI{
     private JFrame fr;
     private LoginGUI login;
     private RegisterGUI register;
+    private ManagementGUI management;
     public MainGUI(){
         fr = new JFrame("Student Management");
         login = new LoginGUI();
         register = new RegisterGUI();
+        management = new ManagementGUI();
         fr.setSize(800, 500);
         fr.setVisible(true);
         fr.setResizable(false);
@@ -22,6 +24,11 @@ public class MainGUI{
         }
         else if (select.equals("RegisterGUI")){
             fr.setContentPane(register.getPanel());
+            fr.repaint();
+            fr.revalidate();
+        }
+        else if (select.equals("ManagementGUI")){
+            fr.setContentPane(management.getPanel());
             fr.repaint();
             fr.revalidate();
         }

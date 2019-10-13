@@ -1,10 +1,12 @@
 package controller;
-import view.MainGUI;
+import view.*;
 import java.awt.event.*;
 import com.mongodb.*;
 import java.util.*;
+import model.*;
 public class StudentManagement{
     private MainGUI gui;
+    private Teacher teacher;
     private Mongo connect;
     private DB db;
     private DBCollection user;
@@ -32,15 +34,21 @@ public class StudentManagement{
         gui.getLoginGUI().getBtn1().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 System.out.println("LoginGUI : Login btn clicked!!!");
-                System.out.println("Username : " + gui.getLoginGUI().getF1().getText());
-                System.out.println("Password : " + gui.getLoginGUI().getF2().getText());
+                String username = gui.getLoginGUI().getF1().getText();
+                String password = gui.getLoginGUI().getF2().getText();
                 DBCursor curs = user.find();
                 while (curs.hasNext()){
                     DBObject t = curs.next();
                     System.out.println((String)t.get("username"));
                     System.out.println((String)t.get("password"));
                     System.out.println("--------------------------");
+                    if (((String)t.get("username")).equals(username) && ((String)t.get("password")).equals(password)){
+                        System.out.println("Login success!!");
+                        gui.set("ManagementGUI");
+                        return;
+                    }
                 }
+                System.out.println("Can't find username or password##");
             }
         });
         gui.getLoginGUI().getBtn2().addActionListener(new ActionListener(){

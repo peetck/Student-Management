@@ -18,6 +18,7 @@ public class LoginGUI{
         p1 = new JPanel();
         gbc = new GridBagConstraints();
         p1.setLayout(new GridBagLayout());
+        gbc.insets = new Insets(5, 5, 5, 5);
         gbc.gridx = 0;
         gbc.gridy = 0;
         p1.add(l1, gbc);
