@@ -1,4 +1,3 @@
-package view;
 import java.awt.*;
 import javax.swing.*;
 import java.net.URL;
@@ -15,7 +14,6 @@ public class MainGUI{
         fr.setSize(800, 500);
         fr.setVisible(true);
         //fr.setResizable(false);
-        fr.setLayout(null);
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     public void set(String select){
@@ -23,14 +21,6 @@ public class MainGUI{
             login.getF1().setText("");
             login.getF2().setText("");
             login.getL3().setText("");
-
-
-            /* URL imageURL = MainGUI.class.getResource("bg.png");
-            ImageIcon image = new ImageIcon(imageURL);
-            JLabel bg = new JLabel(image);
-            fr.getContentPane().add(bg, BorderLayout.WEST);
-            fr.getContentPane().add(login.getPanel()); */
-
             fr.setContentPane(login.getPanel());
             fr.repaint();
             fr.revalidate();

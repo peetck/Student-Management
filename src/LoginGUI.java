@@ -1,9 +1,8 @@
-package view;
 import java.awt.*;
 import javax.swing.*;
 public class LoginGUI{
     private JButton btn1, btn2;
-    private JPanel p1;
+    private MyPanel p1;
     private JLabel l1, l2, l3;
     private JTextField f1;
     private JPasswordField f2;
@@ -18,7 +17,7 @@ public class LoginGUI{
         l3.setForeground(Color.red);
         f1 = new JTextField(20);
         f2 = new JPasswordField(20);
-        p1 =  new JPanel();
+        p1 =  new MyPanel();
         gbc = new GridBagConstraints();
         p1.setLayout(new GridBagLayout());
         gbc.insets = new Insets(5, 5, 5, 5);
@@ -50,7 +49,7 @@ public class LoginGUI{
     public LoginGUI getGUI(){
         return this;
     }
-    public JPanel getPanel(){
+    public MyPanel getPanel(){
         return this.p1;
     }
     public JButton getBtn1(){
