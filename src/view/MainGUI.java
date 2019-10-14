@@ -1,3 +1,4 @@
+package view;
 import java.awt.*;
 import javax.swing.*;
 import java.net.URL;
@@ -13,7 +14,7 @@ public class MainGUI{
         management = new ManagementGUI();
         fr.setSize(800, 500);
         fr.setVisible(true);
-        //fr.setResizable(false);
+        fr.setResizable(false);
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     public void set(String select){
@@ -22,18 +23,18 @@ public class MainGUI{
             login.getF2().setText("");
             login.getL3().setText("");
             fr.setContentPane(login.getPanel());
-            fr.repaint();
             fr.revalidate();
+            fr.repaint();
         }
         else if (select.equals("RegisterGUI")){
             fr.setContentPane(register.getPanel());
-            fr.repaint();
             fr.revalidate();
+            fr.repaint();
         }
         else if (select.equals("ManagementGUI")){
             fr.setContentPane(management.getPanel());
-            fr.repaint();
             fr.revalidate();
+            fr.repaint();
         }
     }
     public LoginGUI getLoginGUI(){

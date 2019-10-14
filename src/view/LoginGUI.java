@@ -1,3 +1,4 @@
+package view;
 import java.awt.*;
 import javax.swing.*;
 public class LoginGUI{
@@ -17,7 +18,7 @@ public class LoginGUI{
         l3.setForeground(Color.red);
         f1 = new JTextField(20);
         f2 = new JPasswordField(20);
-        p1 =  new MyPanel();
+        p1 =  new MyPanel(Toolkit.getDefaultToolkit().createImage("../images/bg.png"));
         gbc = new GridBagConstraints();
         p1.setLayout(new GridBagLayout());
         gbc.insets = new Insets(5, 5, 5, 5);

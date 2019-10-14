@@ -1,6 +1,9 @@
+package controller;
 import java.awt.event.*;
 import com.mongodb.*;
 import java.util.*;
+import model.*;
+import view.*;
 public class StudentManagement{
     private MainGUI gui;
     private Teacher teacher;
