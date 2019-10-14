@@ -18,6 +18,7 @@ public class LoginGUI{
         l3.setForeground(Color.red);
         f1 = new JTextField(20);
         f2 = new JPasswordField(20);
+        //f2.setFont(new Font("TimesRoman", Font.BOLD, 30));
         p1 =  new MyPanel(Toolkit.getDefaultToolkit().createImage("../images/bg.png"));
         gbc = new GridBagConstraints();
         p1.setLayout(new GridBagLayout());

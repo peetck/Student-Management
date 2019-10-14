@@ -12,7 +12,7 @@ public class MainGUI{
         login = new LoginGUI();
         register = new RegisterGUI();
         management = new ManagementGUI();
-        fr.setSize(800, 500);
+        fr.setSize(1200, 700);
         fr.setVisible(true);
         fr.setResizable(false);
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
