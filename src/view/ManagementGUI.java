@@ -2,21 +2,28 @@ package view;
 import java.awt.*;
 import javax.swing.*;
 public class ManagementGUI{
-    private JPanel p1, left, right;
+    private JDesktopPane desktop;
+    private JInternalFrame menu, program;
     public ManagementGUI(){
-        p1 = new JPanel();
-        left = new JPanel();
-        right = new JPanel();
-        p1.setLayout(new BorderLayout());
-        left.setLayout(new GridLayout(5, 1));
-        for (int i = 0; i < 5; i++){
-            left.add(new JButton("" + i));
-        }
-        right.add(new JButton("ss"));
-        p1.add(right, BorderLayout.CENTER);
-        p1.add(left, BorderLayout.WEST);
+        desktop = new JDesktopPane();
+        menu = new JInternalFrame("menu", true, true, true, true);
+        program = new JInternalFrame("program", true, true, true, true);
+
+
+        menu.setLocation(0, 0);
+        menu.setSize(300, 700);
+        menu.setVisible(true);
+
+
+        program.setSize(900, 700);
+        program.setLocation(300, 0);
+        program.setVisible(true);
+
+        desktop.setVisible(true);
+        desktop.add(menu);
+        desktop.add(program);
     }
-    public JPanel getPanel(){
-        return this.p1;
+    public JDesktopPane getPanel(){
+        return this.desktop;
     }
 }

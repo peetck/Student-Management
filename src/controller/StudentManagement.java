@@ -15,7 +15,7 @@ public class StudentManagement{
             System.out.println("Connecting to mongoDB...");
             connect = new Mongo("localhost", 27017);
             db = connect.getDB("StudentManagement");
-            user = db.getCollection("user");
+            user = db.getCollection("users");
             /* if (user.findOne() == null){
 
             } */
@@ -39,9 +39,6 @@ public class StudentManagement{
                 DBCursor curs = user.find();
                 while (curs.hasNext()){
                     DBObject t = curs.next();
-                    System.out.println((String)t.get("username"));
-                    System.out.println((String)t.get("password"));
-                    System.out.println("--------------------------");
                     if (((String)t.get("username")).equals(username) && ((String)t.get("password")).equals(password)){
                         System.out.println("Login success!!");
                         gui.set("ManagementGUI");
@@ -82,6 +79,7 @@ public class StudentManagement{
                     n.put("username", username);
                     n.put("password", password);
                     user.insert(n);
+                    DBCollection teacher_coll = db.getCollection(username);
                 }
             }
         });

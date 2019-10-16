@@ -2,6 +2,8 @@ import controller.*;
 import javax.swing.*;
 import mdlaf.*;
 import mdlaf.animation.*;
+import java.awt.*;
+import java.io.*;
 public class Main{
     public static void main(String[] args) {
         try {
