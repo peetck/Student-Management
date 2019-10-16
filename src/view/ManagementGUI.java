@@ -3,17 +3,21 @@ import java.awt.*;
 import javax.swing.*;
 public class ManagementGUI{
     private JDesktopPane desktop;
-    private JInternalFrame menu, program;
+    private JPanel menu, program;
     public ManagementGUI(){
         desktop = new JDesktopPane();
-        menu = new JInternalFrame("menu", true, true, true, true);
-        program = new JInternalFrame("program", true, true, true, true);
+        menu = new JPanel();
+        program = new JPanel();
 
-
+        menu.setLayout(new GridLayout(5, 1));
         menu.setLocation(0, 0);
         menu.setSize(300, 700);
         menu.setVisible(true);
-
+        menu.add(new JButton("s"));
+        menu.add(new JButton("s"));
+        menu.add(new JButton("s"));
+        menu.add(new JButton("s"));
+        menu.add(new JButton("s"));
 
         program.setSize(900, 700);
         program.setLocation(300, 0);

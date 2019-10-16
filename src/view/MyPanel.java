@@ -5,7 +5,6 @@ public class MyPanel extends JPanel{
     private Image bgImage;
     public MyPanel(Image bg){
         bgImage = bg.getScaledInstance(1200, 700, Image.SCALE_DEFAULT);
-
     }
     @Override
     protected void paintComponent(Graphics g) {

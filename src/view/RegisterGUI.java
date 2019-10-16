@@ -10,17 +10,18 @@ public class RegisterGUI{
     private GridBagConstraints gbc;
     public RegisterGUI(){
         p1 = new JPanel();
-        l1 = new JLabel("Register");
-        l2 = new JLabel("Username : ");
-        l3 = new JLabel("Password : ");
-        l4 = new JLabel("Confirm password : ");
-        btn1 = new JButton("Register");
-        btn2 = new JButton("Back");
-        f1 = new JTextField(20);
-        f2 = new JPasswordField(20);
-        f3 = new JPasswordField(20);
-        gbc = new GridBagConstraints();
+        l1 = Helper.createLabel("Register");
+        l2 = Helper.createLabel("Username : ");
+        l3 = Helper.createLabel("Password : ");
+        l4 = Helper.createLabel("Confirm password : ");
+        btn1 = Helper.createButton("Register");
+        btn2 = Helper.createButton("Back");
+        f1 = Helper.createTextField(20);
+        f2 = Helper.createPasswordField(20);
+        f3 = Helper.createPasswordField(20);
 
+
+        gbc = new GridBagConstraints();
         p1.setLayout(new GridBagLayout());
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.gridwidth = 2;

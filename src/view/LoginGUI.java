@@ -10,21 +10,18 @@ public class LoginGUI{
     private GridBagConstraints gbc;
     private ImageIcon background;
     public LoginGUI(){
-        btn1 = new JButton("Login");
-        btn2 = new JButton("Register");
-        l1 = new JLabel("Username ");
-        l1.setOpaque(false);
-        l2 = new JLabel("Password ");
-        l2.setOpaque(false);
-        l3 = new JLabel();
-        l3.setOpaque(false);
+
+        p1 =  Helper.createPanel("../images/bg.png");
+        btn1 = Helper.createButton("Login");
+        btn2 = Helper.createButton("Register");
+        l1 = Helper.createLabel("Username ");
+        l2 = Helper.createLabel("Password ");
+        l3 = Helper.createLabel("");
         l3.setForeground(Color.red);
-        f1 = new JTextField(20);
-        f1.setOpaque(false);
-        f2 = new JPasswordField(30);
-        f2.setOpaque(false);
-        //f2.setFont(new Font("TimesRoman", Font.BOLD, 30));
-        p1 =  new MyPanel(Toolkit.getDefaultToolkit().createImage("../images/bg.png"));
+        f1 = Helper.createTextField(20);
+        f2 = Helper.createPasswordField(29);
+
+
         gbc = new GridBagConstraints();
         p1.setLayout(new GridBagLayout());
         gbc.insets = new Insets(5, 5, 5, 5);
