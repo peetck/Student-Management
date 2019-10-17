@@ -11,7 +11,7 @@ public class LoginGUI{
     private ImageIcon background;
     public LoginGUI(){
 
-        p1 =  Helper.createPanel("../images/bg.png");
+        p1 =  Helper.createPanel("images/bg.png");
         btn1 = Helper.createButton("Login");
         btn2 = Helper.createButton("Register");
         l1 = Helper.createLabel("Username ");
