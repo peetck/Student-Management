@@ -2,14 +2,14 @@ package view;
 import java.awt.*;
 import javax.swing.*;
 public class RegisterGUI{
-    private JPanel p1;
+    private MyPanel p1;
     private JLabel l1, l2, l3, l4;
     private JTextField f1;
     private JPasswordField f2, f3;
     private JButton btn1, btn2;
     private GridBagConstraints gbc;
     public RegisterGUI(){
-        p1 = new JPanel();
+        p1 = Helper.createPanel("images/bg.png");
         l1 = Helper.createLabel("Register");
         l2 = Helper.createLabel("Username : ");
         l3 = Helper.createLabel("Password : ");
@@ -70,7 +70,7 @@ public class RegisterGUI{
     public JPasswordField getF3(){
         return this.f3;
     }
-    public JPanel getPanel(){
+    public MyPanel getPanel(){
         return this.p1;
     }
 
