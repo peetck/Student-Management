@@ -83,5 +83,24 @@ public class StudentManagement{
                 }
             }
         });
+        KeyListener listener = new KeyListener() {
+        	@Override
+        	public void keyPressed(KeyEvent e) {
+        		int keycode = e.getKeyCode();
+        		if (keycode == 10) {
+        			gui.getLoginGUI().getBtn1().doClick();
+        		}
+        	}
+        	 
+        	@Override
+        	public void keyReleased(KeyEvent event) {
+        	}
+        	 
+        	@Override
+        	public void keyTyped(KeyEvent event) {       
+        	}
+        };
+        gui.getLoginGUI().getF1().addKeyListener(listener);
+        gui.getLoginGUI().getF2().addKeyListener(listener);
     }
 }

@@ -13,15 +13,16 @@ public class ManagementGUI{
         menu.setLocation(0, 0);
         menu.setSize(300, 700);
         menu.setVisible(true);
-        menu.add(new JButton("s"));
-        menu.add(new JButton("s"));
-        menu.add(new JButton("s"));
-        menu.add(new JButton("s"));
-        menu.add(new JButton("s"));
+        menu.add(Helper.createButton("รายชื่อนักเรียนที่ดูแลอยู่"));
+        menu.add(Helper.createButton("-------"));
+        menu.add(Helper.createButton("-------"));
+        menu.add(Helper.createButton("-------"));
+        menu.add(Helper.createButton("เพิ่ม / ลบ นักเรียน"));
 
         program.setSize(900, 700);
         program.setLocation(300, 0);
         program.setVisible(true);
+        //program.add(new MyStudentGUI().getPanel());
 
         desktop.setVisible(true);
         desktop.add(menu);

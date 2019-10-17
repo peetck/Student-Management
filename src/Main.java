@@ -14,7 +14,7 @@ public class Main{
             e.printStackTrace();
         }
         SwingUtilities.invokeLater(() -> {
-            StudentManagement n = new StudentManagement();
+            new StudentManagement();
         });
     }
 }

@@ -2,28 +2,33 @@ package view;
 import java.awt.*;
 import javax.swing.*;
 public class Helper{
+	// return MyPanel with image if want
     public static MyPanel createPanel(String url){
         Image img = Toolkit.getDefaultToolkit().createImage(url);
         return new MyPanel(img);
     }
+    // return JLabel with font 
     public static JLabel createLabel(String msg){
         JLabel l = new JLabel(msg);
         l.setFont(new Font("itim", Font.PLAIN, 16));
         l.setOpaque(false);
         return l;
     }
+    // return JTextField with font and selected size
     public static JTextField createTextField(int size){
         JTextField f = new JTextField(size);
         f.setFont(new Font("itim", Font.PLAIN, 16));
         f.setOpaque(false);
         return f;
     }
+    // return JPasswordField with font and selected size
     public static JPasswordField createPasswordField(int size){
         JPasswordField pf = new JPasswordField(size);
         pf.setFont(new Font("itim", Font.PLAIN, 16));
         pf.setOpaque(false);
         return pf;
     }
+    // return JButton with font and message
     public static JButton createButton(String msg){
         JButton btn = new JButton(msg);
         btn.setFont(new Font("itim", Font.PLAIN, 16));

@@ -8,7 +8,6 @@ public class LoginGUI{
     private JTextField f1;
     private JPasswordField f2;
     private GridBagConstraints gbc;
-    private ImageIcon background;
     public LoginGUI(){
 
         p1 =  Helper.createPanel("images/bg.png");
@@ -25,7 +24,7 @@ public class LoginGUI{
         gbc = new GridBagConstraints();
         p1.setLayout(new GridBagLayout());
         gbc.insets = new Insets(5, 5, 5, 5);
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.fill = GridBagConstraints.BOTH;
         gbc.gridx = 0;
         gbc.gridy = 0;
         p1.add(l1, gbc);
@@ -40,7 +39,9 @@ public class LoginGUI{
         p1.add(f2, gbc);
         gbc.gridx = 0;
         gbc.gridy = 2;
+        gbc.gridwidth = 2;
         p1.add(l3, gbc);
+        gbc.gridwidth = 1;
         gbc.gridx = 0;
         gbc.gridy = 3;
         p1.add(btn1, gbc);

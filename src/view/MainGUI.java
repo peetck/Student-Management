@@ -1,7 +1,5 @@
 package view;
-import java.awt.*;
 import javax.swing.*;
-import java.net.URL;
 public class MainGUI{
     private JFrame fr;
     private LoginGUI login;
@@ -43,4 +41,9 @@ public class MainGUI{
     public RegisterGUI getRegisterGUI(){
         return this.register;
     }
+    public JFrame getFrame() {
+    	return this.fr;
+    }
+
+
 }
