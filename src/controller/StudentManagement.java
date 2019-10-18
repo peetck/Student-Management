@@ -83,7 +83,8 @@ public class StudentManagement{
                 }
             }
         });
-        KeyListener listener = new KeyListener() {
+        // LoginGui enter event
+        KeyListener loginListener = new KeyListener() {
         	@Override
         	public void keyPressed(KeyEvent e) {
         		int keycode = e.getKeyCode();
@@ -100,7 +101,21 @@ public class StudentManagement{
         	public void keyTyped(KeyEvent event) {       
         	}
         };
-        gui.getLoginGUI().getF1().addKeyListener(listener);
-        gui.getLoginGUI().getF2().addKeyListener(listener);
+        gui.getLoginGUI().getF1().addKeyListener(loginListener);
+        gui.getLoginGUI().getF2().addKeyListener(loginListener);
+        
+        gui.getManagementGUI().getBtn5().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		gui.getManagementGUI().set("add/delete");
+        	}
+        });
+        gui.getManagementGUI().getBtn1().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		gui.getManagementGUI().set("list");
+        	}
+        });
+    }
+    public void addStudent() {
+    	
     }
 }

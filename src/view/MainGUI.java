@@ -41,6 +41,9 @@ public class MainGUI{
     public RegisterGUI getRegisterGUI(){
         return this.register;
     }
+    public ManagementGUI getManagementGUI() {
+    	return this.management;
+    }
     public JFrame getFrame() {
     	return this.fr;
     }
