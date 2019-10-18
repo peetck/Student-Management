@@ -14,6 +14,7 @@ public class MainGUI{
         fr.setVisible(true);
         fr.setResizable(false);
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        fr.setIconImage(new ImageIcon("images/icon.png").getImage());
     }
     public void set(String select){
         if (select.equals("LoginGUI")){
