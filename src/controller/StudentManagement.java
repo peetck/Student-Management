@@ -114,8 +114,15 @@ public class StudentManagement{
         		gui.getManagementGUI().set("list");
         	}
         });
+        
+        
+        gui.getManagementGUI().getAddDeleteStudentGUI().getBtn1().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		System.out.println("Add Student");
+        	}
+        });
     }
-    public void addStudent() {
+    public static void addStudent() {
     	
     }
 }

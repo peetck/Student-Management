@@ -7,6 +7,10 @@ public class Helper{
         Image img = Toolkit.getDefaultToolkit().createImage(url);
         return new MyPanel(img);
     }
+    public static MyPanel createPanel(String url, String select){
+        Image img = Toolkit.getDefaultToolkit().createImage(url);
+        return new MyPanel(img, select);
+    }
     // return JLabel with font 
     public static JLabel createLabel(String msg){
         JLabel l = new JLabel(msg);

@@ -11,6 +11,7 @@ public class ManagementGUI{
         desktop = new JDesktopPane();
         menu = new JPanel();
         program = new JPanel();
+        program.setLayout(new GridLayout(1, 1));
         list = new MyStudentGUI();
         add_delete = new AddDeleteStudentGUI();
         btn1 = Helper.createButton("รายชื่อ");
@@ -55,6 +56,9 @@ public class ManagementGUI{
     }
     public JDesktopPane getPanel(){
         return this.desktop;
+    }
+    public AddDeleteStudentGUI getAddDeleteStudentGUI() {
+    	return this.add_delete;
     }
     public JButton getBtn1() {
     	return this.btn1;

@@ -6,6 +6,11 @@ public class MyPanel extends JPanel{
     public MyPanel(Image bg){
         bgImage = bg.getScaledInstance(1200, 700, Image.SCALE_DEFAULT);
     }
+    public MyPanel(Image bg, String select) {
+    	if (select.equals("title")) {
+    		bgImage = bg.getScaledInstance(900, 150, Image.SCALE_DEFAULT);
+    	}
+    }
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
