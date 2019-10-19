@@ -5,6 +5,7 @@ public class MainGUI{
     private LoginGUI login;
     private RegisterGUI register;
     private ManagementGUI management;
+    
     public MainGUI(){
         fr = new JFrame("Student Management");
         login = new LoginGUI();
@@ -33,6 +34,11 @@ public class MainGUI{
         else if (select.equals("ManagementGUI")){
             fr.setContentPane(management.getPanel());
             fr.revalidate();
+            fr.repaint();
+        }
+        else if (select.equals("AddGUI")) {
+        	fr.setContentPane(management.getAddDeleteStudentGUI().getAddGUI().getPanel());
+        	fr.revalidate();
             fr.repaint();
         }
     }

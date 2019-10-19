@@ -110,6 +110,7 @@ public class StudentManagement{
         gui.getManagementGUI().getBtn5().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		gui.getManagementGUI().set("add/delete");
+        		
         	}
         });
         gui.getManagementGUI().getMenu1().addMouseListener(new MouseListener() {
@@ -132,9 +133,28 @@ public class StudentManagement{
         });
         
         
-        gui.getManagementGUI().getAddDeleteStudentGUI().getBtn1().addActionListener(new ActionListener() {
+        gui.getManagementGUI().getAddDeleteStudentGUI().getLeft().addMouseListener(new MouseListener() {
+        	@Override
+			public void mouseClicked(MouseEvent e) {
+				gui.set("AddGUI");
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+
+			@Override
+			public void mouseExited(MouseEvent e) {}
+        });
+        gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getBtn1().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		System.out.println("Add Student");
+        		gui.set("ManagementGUI");
+        		
         	}
         });
     }

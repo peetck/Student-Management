@@ -5,7 +5,7 @@ public class ManagementGUI{
     private JDesktopPane desktop;
     private JPanel menu, program;
     private MyPanel menu1;
-    private JButton btn5;
+    private JButton btn5, btn6;
     private MyStudentGUI list;
     private AddDeleteStudentGUI add_delete;
     public ManagementGUI(){
@@ -19,9 +19,9 @@ public class ManagementGUI{
         
         
         btn5 = Helper.createButton("เพิ่ม / ลบ");
-   
+        btn6 = Helper.createButton("ตั้งค่า");
         
-        menu.setLayout(new GridLayout(5, 1));
+        menu.setLayout(new GridLayout(6, 1));
         menu.setLocation(0, 0);
         menu.setSize(300, 700);
         menu.setVisible(true);
@@ -30,7 +30,8 @@ public class ManagementGUI{
         menu.add(Helper.createButton("-------"));
         menu.add(Helper.createButton("-------"));
         menu.add(btn5);
-
+        menu.add(btn6);
+        
         program.setSize(900, 700);
         program.setLocation(300, 0);
         program.setVisible(true);

@@ -18,7 +18,7 @@ public class MyStudentGUI {
 		
 		container = Helper.createPanel("");
 		container.setLayout(new BorderLayout());
-		container.setSize(900, 510);
+		container.setSize(900, 550);
 		container.setLocation(0, 150);
 		
 		String[][] data = new String[30][4];

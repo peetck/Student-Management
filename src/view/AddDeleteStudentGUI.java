@@ -3,47 +3,48 @@ import java.awt.*;
 import javax.swing.*;
 public class AddDeleteStudentGUI {
 	private JDesktopPane p1;
-	private MyPanel container, title;
-	private JButton btn1, btn2;
+	private MyPanel title, left, right;
+	private AddGUI add_gui;
 	private GridBagConstraints gbc;
 	public AddDeleteStudentGUI() {
+		add_gui = new AddGUI();
 		p1 = new JDesktopPane();
 		gbc = new GridBagConstraints();
-		container = Helper.createPanel("");
-		container.setLayout(new GridBagLayout());
-		container.setSize(900, 550);
-		container.setLocation(0, 150);
+		
 		title = Helper.createPanel("images/AddDeleteStudentGUI_bg.png", "title");
 		title.setSize(900, 150);
 		title.setLocation(0, 0);
 		
+		left = Helper.createPanel("");
+		left.setSize(450, 550);
+		left.setLocation(0, 150);
+		left.setBackground(Color.BLUE);
 		
-		btn1 = Helper.createButton("ADD");
-		btn2 = Helper.createButton("Delete");
-
+		right = Helper.createPanel("");
+		right.setSize(450, 550);
+		right.setLocation(450, 150);
+		right.setBackground(Color.RED);
 
 		
-		container.add(btn1, gbc);
-		gbc.gridx = 0;
-		gbc.gridy = 1;
-		container.add(btn2, gbc);
-		for (int i = 2; i < 22; i++) {
-			gbc.gridy = i;
-			container.add(new JButton("ss"), gbc);
-		}
+		
 		
 		
 		p1.add(title);
-		p1.add(container);
+		p1.add(left);
+		p1.add(right);
 	}
 	
+
 	public JDesktopPane getPanel() {
 		return this.p1;
 	}
-	public JButton getBtn1() {
-		return this.btn1;
+	public MyPanel getLeft() {
+		return this.left;
 	}
-	public JButton getBtn2() {
-		return this.btn2;
+	public MyPanel getRight() {
+		return this.right;
+	}
+	public AddGUI getAddGUI() {
+		return add_gui;
 	}
 }
