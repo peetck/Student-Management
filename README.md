@@ -1,2 +1,2 @@
 # Student-Management
-#![Alt text](ClassDiagram.jpg)
+![Alt text](ClassDiagram.jpg)
