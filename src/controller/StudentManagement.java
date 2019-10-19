@@ -48,11 +48,14 @@ public class StudentManagement{
                 gui.getLoginGUI().getL3().setText("Wrong Username or Password");
             }
         });
-        gui.getLoginGUI().getBtn2().addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                System.out.println("LoginGUI : Register btn clicked!!!");
+        gui.getLoginGUI().getL4().addMouseListener (new MouseListener (){
+            public void mouseClicked (MouseEvent e){
                 gui.set("RegisterGUI");
             }
+            public void mouseEntered(MouseEvent e) {}        	
+			public void mousePressed(MouseEvent e) {}
+			public void mouseReleased(MouseEvent e) {}
+			public void mouseExited(MouseEvent e) {}
         });
         gui.getRegisterGUI().getBtn2().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
