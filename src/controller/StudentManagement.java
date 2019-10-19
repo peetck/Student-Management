@@ -112,10 +112,23 @@ public class StudentManagement{
         		gui.getManagementGUI().set("add/delete");
         	}
         });
-        gui.getManagementGUI().getBtn1().addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		gui.getManagementGUI().set("list");
-        	}
+        gui.getManagementGUI().getMenu1().addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				gui.getManagementGUI().set("list");
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+
+			@Override
+			public void mouseExited(MouseEvent e) {}
         });
         
         

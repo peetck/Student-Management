@@ -4,7 +4,8 @@ import javax.swing.*;
 public class ManagementGUI{
     private JDesktopPane desktop;
     private JPanel menu, program;
-    private JButton btn1, btn5;
+    private MyPanel menu1;
+    private JButton btn5;
     private MyStudentGUI list;
     private AddDeleteStudentGUI add_delete;
     public ManagementGUI(){
@@ -14,7 +15,9 @@ public class ManagementGUI{
         program.setLayout(new GridLayout(1, 1));
         list = new MyStudentGUI();
         add_delete = new AddDeleteStudentGUI();
-        btn1 = Helper.createButton("รายชื่อ");
+        menu1 = Helper.createPanel("images/Menu_bg1.jpg", "menu");
+        
+        
         btn5 = Helper.createButton("เพิ่ม / ลบ");
    
         
@@ -22,7 +25,7 @@ public class ManagementGUI{
         menu.setLocation(0, 0);
         menu.setSize(300, 700);
         menu.setVisible(true);
-        menu.add(btn1);
+        menu.add(menu1);
         menu.add(Helper.createButton("-------"));
         menu.add(Helper.createButton("-------"));
         menu.add(Helper.createButton("-------"));
@@ -60,10 +63,11 @@ public class ManagementGUI{
     public AddDeleteStudentGUI getAddDeleteStudentGUI() {
     	return this.add_delete;
     }
-    public JButton getBtn1() {
-    	return this.btn1;
-    }
+
     public JButton getBtn5() {
     	return this.btn5;
+    }
+    public MyPanel getMenu1() {
+    	return this.menu1;
     }
 }
