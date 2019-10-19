@@ -14,8 +14,7 @@ public class Main{
         catch (Exception e) {
             e.printStackTrace();
         }
-        SwingUtilities.invokeLater(() -> {
-            new StudentManagement();
-        });
+           new StudentManagement();
+
     }
 }
