@@ -11,7 +11,7 @@ public class AddDeleteStudentGUI {
 		p1 = new JDesktopPane();
 		gbc = new GridBagConstraints();
 		
-		title = Helper.createPanel("images/AddDeleteStudentGUI_bg.png", "title");
+		title = Helper.createPanel("images/011.jpg", "title");
 		title.setSize(900, 150);
 		title.setLocation(0, 0);
 		
