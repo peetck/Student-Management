@@ -107,12 +107,25 @@ public class StudentManagement{
         gui.getLoginGUI().getF1().addKeyListener(loginListener);
         gui.getLoginGUI().getF2().addKeyListener(loginListener);
         
-        gui.getManagementGUI().getBtn5().addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		gui.getManagementGUI().set("add/delete");
-        		
-        	}
+        gui.getManagementGUI().getMenu2().addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				gui.getManagementGUI().set("add/delete");
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+
+			@Override
+			public void mouseExited(MouseEvent e) {}
         });
+        
         gui.getManagementGUI().getMenu1().addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

@@ -4,8 +4,7 @@ import javax.swing.*;
 public class ManagementGUI{
     private JDesktopPane desktop;
     private JPanel menu, program;
-    private MyPanel menu1;
-    private JButton btn5, btn6;
+    private MyPanel menu1, menu2, menu3;
     private MyStudentGUI list;
     private AddDeleteStudentGUI add_delete;
     public ManagementGUI(){
@@ -15,22 +14,20 @@ public class ManagementGUI{
         program.setLayout(new GridLayout(1, 1));
         list = new MyStudentGUI();
         add_delete = new AddDeleteStudentGUI();
-        menu1 = Helper.createPanel("images/Menu_bg1.jpg", "menu");
+        menu1 = Helper.createPanel("images/List_bg.jpg", "menu");
+        menu2 = Helper.createPanel("images/AddDelete_bg.jpg", "menu");
+        menu3 = Helper.createPanel("images/Setting_bg.jpg", "menu");
         
         
-        btn5 = Helper.createButton("เพิ่ม / ลบ");
-        btn6 = Helper.createButton("ตั้งค่า");
+
         
         menu.setLayout(new GridLayout(6, 1));
         menu.setLocation(0, 0);
         menu.setSize(300, 700);
         menu.setVisible(true);
         menu.add(menu1);
-        menu.add(Helper.createButton("-------"));
-        menu.add(Helper.createButton("-------"));
-        menu.add(Helper.createButton("-------"));
-        menu.add(btn5);
-        menu.add(btn6);
+        menu.add(menu2);
+        menu.add(menu3);
         
         program.setSize(900, 700);
         program.setLocation(300, 0);
@@ -65,10 +62,14 @@ public class ManagementGUI{
     	return this.add_delete;
     }
 
-    public JButton getBtn5() {
-    	return this.btn5;
-    }
+
     public MyPanel getMenu1() {
     	return this.menu1;
+    }
+    public MyPanel getMenu2() {
+    	return this.menu2;
+    }
+    public MyPanel getMenu3() {
+    	return this.menu3;
     }
 }
