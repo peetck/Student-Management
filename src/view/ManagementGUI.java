@@ -7,12 +7,14 @@ public class ManagementGUI{
     private MyPanel menu1, menu2, menu3;
     private MyStudentGUI list;
     private AddDeleteStudentGUI add_delete;
+    private MyPanel below;
     public ManagementGUI(){
         desktop = new JDesktopPane();
         menu = new JPanel();
         program = new JPanel();
         program.setLayout(new GridLayout(1, 1));
         list = new MyStudentGUI();
+        below = Helper.createPanel("");
         add_delete = new AddDeleteStudentGUI();
         menu1 = Helper.createPanel("images/List_bg.jpg", "menu");
         menu2 = Helper.createPanel("images/AddDelete_bg.jpg", "menu");
@@ -21,13 +23,15 @@ public class ManagementGUI{
         
 
         
-        menu.setLayout(new GridLayout(6, 1));
+        menu.setLayout(new GridLayout(4, 1));
         menu.setLocation(0, 0);
         menu.setSize(300, 700);
         menu.setVisible(true);
+        
         menu.add(menu1);
         menu.add(menu2);
         menu.add(menu3);
+        menu.add(below);
         
         program.setSize(900, 700);
         program.setLocation(300, 0);
