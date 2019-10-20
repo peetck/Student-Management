@@ -12,7 +12,7 @@ public class MyStudentGUI {
 		p1 = new JDesktopPane();
 		
 		
-		title = Helper.createPanel("images/MyStudentGUI_bg.png", "title");
+		title = Helper.createPanel("images/01.jpg", "title");
 		title.setSize(900, 150);
 		title.setLocation(0, 0);
 		
