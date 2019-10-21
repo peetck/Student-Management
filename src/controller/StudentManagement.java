@@ -31,6 +31,10 @@ public class StudentManagement{
         }
         gui = new MainGUI();
         gui.set("LoginGUI");
+        
+        
+        
+        // ********* below here is event of all application *********
         gui.getLoginGUI().getBtn1().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 System.out.println("LoginGUI : Login btn clicked!!!");
@@ -170,8 +174,40 @@ public class StudentManagement{
         		
         	}
         });
+        gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getBtn2().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		addStudent();
+        	}
+    	});
     }
-    public static void addStudent() {
-    	
+    
+    // below here is method in all application
+    
+    public void addStudent() {
+    	String name, surname, studentID, address;
+    	studentID = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF1().getText();
+    	name = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF2().getText();
+    	surname = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF3().getText();
+    	address = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF4().getText();
+    	System.out.println(studentID + name + surname + address);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
