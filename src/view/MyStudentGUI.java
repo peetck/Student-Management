@@ -25,6 +25,7 @@ public class MyStudentGUI {
 		
 
 		table_scroll = new JScrollPane(new JTable());
+		
 		container.add(table_scroll);
     		
 		p1.add(title);

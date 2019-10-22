@@ -188,22 +188,23 @@ public class StudentManagement{
     // below here is method in all application
     
     public void addStudent() {
-    	String name, surname, studentID, address;
+    	String name, surname, studentID, address, enrollAt;
     	studentID = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF1().getText();
     	name = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF2().getText();
     	surname = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF3().getText();
     	address = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF4().getText();
-    	
+    	enrollAt = "" + java.time.LocalDate.now();
     	BasicDBObject n = new BasicDBObject();
     	n.put("name", name);
     	n.put("surname", surname);
     	n.put("address", address);
     	n.put("studentID", studentID);
+    	n.put("enrollAt", enrollAt);
     	
     	DBCollection myStudent = db.getCollection(myUsername);
     	myStudent.insert(n);
     	
-    	teacher.addStudent(new Student(name, surname, address, studentID));
+    	teacher.addStudent(new Student(name, surname, address, studentID, enrollAt));
     	// add success
     	
     	// update table
@@ -217,7 +218,7 @@ public class StudentManagement{
     	DBCursor curs = myStudent.find();
         while (curs.hasNext()){
             DBObject t = curs.next();
-            teacher.addStudent(new Student((String)t.get("name"), (String)t.get("surname"), (String)t.get("address"), (String)t.get("studentID")));
+            teacher.addStudent(new Student((String)t.get("name"), (String)t.get("surname"), (String)t.get("address"), (String)t.get("studentID"), (String)t.get("enrollAt")));
         }
         // update Table
         updateTable();
@@ -225,11 +226,11 @@ public class StudentManagement{
     public void updateTable() {
     	ArrayList<Student> students = teacher.getStudents();
     	JTable table = new JTable();
-    	String[][] data = new String[students.size()][4];
+    	String[][] data = new String[students.size()][5];
 		for (int i = 0; i < students.size(); i++) {
 			data[i] = students.get(i).getInfo();
 		}
-		String[] header = {"รหัสนักศึกษา", "ชื่อ", "นามสกุล", "เพิ่มเข้ามาในวันที่"};
+		String[] header = {"รหัสนักศึกษา", "ชื่อ", "นามสกุล", "ที่อยู่", "เพิ่มเข้ามาในวันที่"};
 		table = new JTable(data, header);
 		table.getTableHeader().setReorderingAllowed(false);
 		table.setDefaultEditor(Object.class, null);
