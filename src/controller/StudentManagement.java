@@ -2,6 +2,9 @@ package controller;
 import java.awt.event.*;
 import com.mongodb.*;
 import java.util.*;
+
+import javax.swing.JTable;
+
 import model.*;
 import view.*;
 public class StudentManagement{
@@ -9,13 +12,14 @@ public class StudentManagement{
     private Teacher teacher;
     private Mongo connect;
     private DB db;
-    private DBCollection user;
+    private DBCollection users;
+    private String myUsername;
     public StudentManagement(){
         try{
             System.out.println("Connecting to mongoDB...");
             connect = new Mongo("localhost", 27017);
             db = connect.getDB("StudentManagement");
-            user = db.getCollection("users");
+            users = db.getCollection("users");
             /* if (user.findOne() == null){
 
             } */
@@ -40,12 +44,13 @@ public class StudentManagement{
                 System.out.println("LoginGUI : Login btn clicked!!!");
                 String username = gui.getLoginGUI().getF1().getText();
                 String password = gui.getLoginGUI().getF2().getText();
-                DBCursor curs = user.find();
+                DBCursor curs = users.find();
                 while (curs.hasNext()){
                     DBObject t = curs.next();
                     if (((String)t.get("username")).equals(username) && ((String)t.get("password")).equals(password)){
-                        System.out.println("Login success!!");
                         gui.set("ManagementGUI");
+                        myUsername = username;
+                        login_success();
                         return;
                     }
                 }
@@ -74,7 +79,7 @@ public class StudentManagement{
                 String username = gui.getRegisterGUI().getF1().getText();
                 String password = gui.getRegisterGUI().getF2().getText();
                 String cpassword = gui.getRegisterGUI().getF3().getText();
-                DBCursor curs = user.find();
+                DBCursor curs = users.find();
                 while (curs.hasNext()){
                     DBObject t = curs.next();
                     if (((String)t.get("username")).equals(username)){
@@ -85,8 +90,7 @@ public class StudentManagement{
                 if (password.equals(cpassword)){
                     n.put("username", username);
                     n.put("password", password);
-                    user.insert(n);
-                    DBCollection teacher_coll = db.getCollection(username);
+                    users.insert(n);
                 }
             }
         });
@@ -133,7 +137,7 @@ public class StudentManagement{
         gui.getManagementGUI().getMenu1().addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				gui.getManagementGUI().set("list");
+				gui.getManagementGUI().set("mystudent");
 			}
 
 			@Override
@@ -189,7 +193,53 @@ public class StudentManagement{
     	name = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF2().getText();
     	surname = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF3().getText();
     	address = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF4().getText();
-    	System.out.println(studentID + name + surname + address);
+    	
+    	BasicDBObject n = new BasicDBObject();
+    	n.put("name", name);
+    	n.put("surname", surname);
+    	n.put("address", address);
+    	n.put("studentID", studentID);
+    	
+    	DBCollection myStudent = db.getCollection(myUsername);
+    	myStudent.insert(n);
+    	
+    	teacher.addStudent(new Student(name, surname, address, studentID));
+    	// add success
+    	
+    	// update table
+    	updateTable();
+    	
+    }
+    public void login_success() {
+        System.out.println("Login success!!");
+    	teacher = new Teacher();
+    	DBCollection myStudent = db.getCollection(myUsername);
+    	DBCursor curs = myStudent.find();
+        while (curs.hasNext()){
+            DBObject t = curs.next();
+            teacher.addStudent(new Student((String)t.get("name"), (String)t.get("surname"), (String)t.get("address"), (String)t.get("studentID")));
+        }
+        // update Table
+        updateTable();
+    }
+    public void updateTable() {
+    	ArrayList<Student> students = teacher.getStudents();
+    	JTable table = new JTable();
+    	String[][] data = new String[students.size()][4];
+		for (int i = 0; i < students.size(); i++) {
+			data[i] = students.get(i).getInfo();
+		}
+		String[] header = {"รหัสนักศึกษา", "ชื่อ", "นามสกุล", "เพิ่มเข้ามาในวันที่"};
+		table = new JTable(data, header);
+		table.getTableHeader().setReorderingAllowed(false);
+		table.setDefaultEditor(Object.class, null);
+		table.setFillsViewportHeight(true);
+		 
+		for (int i = 0; i < table.getColumnCount(); i++) {
+			table.getColumnModel().getColumn(i).setCellRenderer(new CellRenderer());
+		}
+		gui.getManagementGUI().getMyStudentGUI().updateTable(table);
+
     }
 }
 

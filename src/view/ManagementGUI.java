@@ -5,7 +5,7 @@ public class ManagementGUI{
     private JDesktopPane desktop;
     private JPanel menu, program;
     private MyPanel menu1, menu2, menu3;
-    private MyStudentGUI list;
+    private MyStudentGUI mystudent;
     private AddDeleteStudentGUI add_delete;
     private MyPanel below;
     public ManagementGUI(){
@@ -13,7 +13,7 @@ public class ManagementGUI{
         menu = new JPanel();
         program = new JPanel();
         program.setLayout(new GridLayout(1, 1));
-        list = new MyStudentGUI();
+        mystudent = new MyStudentGUI();
         below = Helper.createPanel("");
         add_delete = new AddDeleteStudentGUI();
         menu1 = Helper.createPanel("images/List_bg.jpg", "menu");
@@ -36,7 +36,7 @@ public class ManagementGUI{
         program.setSize(900, 700);
         program.setLocation(300, 0);
         program.setVisible(true);
-        program.add(list.getPanel());
+        program.add(mystudent.getPanel());
         
         desktop.setVisible(true);
         desktop.add(menu);
@@ -51,12 +51,12 @@ public class ManagementGUI{
     		program.repaint();
     		program.add(add_delete.getPanel());
     	}
-    	else if (select.equals("list")) {
+    	else if (select.equals("mystudent")) {
     		program.removeAll();
     		
     		program.revalidate();
     		program.repaint();
-    		program.add(list.getPanel());
+    		program.add(mystudent.getPanel());
     	}
     }
     public JDesktopPane getPanel(){
@@ -65,7 +65,9 @@ public class ManagementGUI{
     public AddDeleteStudentGUI getAddDeleteStudentGUI() {
     	return this.add_delete;
     }
-
+    public MyStudentGUI getMyStudentGUI() {
+    	return this.mystudent;
+    }
 
     public MyPanel getMenu1() {
     	return this.menu1;
