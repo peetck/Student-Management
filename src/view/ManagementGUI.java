@@ -4,21 +4,21 @@ import javax.swing.*;
 public class ManagementGUI{
     private JDesktopPane desktop;
     private JPanel menu, program;
-    private MyPanel menu1, menu2, menu3;
+    private MyPanel menu1, menu2, menu3, menu4;
     private MyStudentGUI mystudent;
     private AddDeleteStudentGUI add_delete;
-    private MyPanel below;
     public ManagementGUI(){
         desktop = new JDesktopPane();
         menu = new JPanel();
         program = new JPanel();
         program.setLayout(new GridLayout(1, 1));
         mystudent = new MyStudentGUI();
-        below = Helper.createPanel("");
+
         add_delete = new AddDeleteStudentGUI();
-        menu1 = Helper.createPanel("images/List_bg.jpg", "menu");
-        menu2 = Helper.createPanel("images/AddDelete_bg.jpg", "menu");
-        menu3 = Helper.createPanel("images/Setting_bg.jpg", "menu");
+        menu1 = Helper.createPanel("images/menu/List.jpg", "menu");
+        menu2 = Helper.createPanel("images/menu/Score.jpg", "menu");
+        menu3 = Helper.createPanel("images/menu/AddDelete.jpg", "menu");
+        menu4 = Helper.createPanel("images/menu/Setting.jpg", "menu");
         
         
 
@@ -31,7 +31,7 @@ public class ManagementGUI{
         menu.add(menu1);
         menu.add(menu2);
         menu.add(menu3);
-        menu.add(below);
+        menu.add(menu4);
         
         program.setSize(900, 700);
         program.setLocation(300, 0);
@@ -77,5 +77,8 @@ public class ManagementGUI{
     }
     public MyPanel getMenu3() {
     	return this.menu3;
+    }
+    public MyPanel getMenu4() {
+    	return this.menu4;
     }
 }

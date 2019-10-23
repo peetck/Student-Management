@@ -115,7 +115,7 @@ public class StudentManagement{
         gui.getLoginGUI().getF1().addKeyListener(loginListener);
         gui.getLoginGUI().getF2().addKeyListener(loginListener);
         
-        gui.getManagementGUI().getMenu2().addMouseListener(new MouseListener() {
+        gui.getManagementGUI().getMenu3().addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				gui.getManagementGUI().set("add/delete");

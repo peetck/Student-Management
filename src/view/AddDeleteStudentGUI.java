@@ -15,15 +15,14 @@ public class AddDeleteStudentGUI {
 		title.setSize(900, 150);
 		title.setLocation(0, 0);
 		
-		left = Helper.createPanel("");
+		left = Helper.createPanel("images/AddDelete_left.jpg", "adddelete");
 		left.setSize(450, 550);
 		left.setLocation(0, 150);
-		left.setBackground(Color.BLUE);
 		
-		right = Helper.createPanel("");
+		right = Helper.createPanel("images/AddDelete_right.jpg", "adddelete");
 		right.setSize(450, 550);
 		right.setLocation(450, 150);
-		right.setBackground(Color.RED);
+
 
 		
 		
