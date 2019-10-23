@@ -15,7 +15,7 @@ public class Main{
         catch (Exception e) {
             e.printStackTrace();
         }
-           new StudentManagement();
+           new StudentManagement("localhost", 27017);
 
     }
 }

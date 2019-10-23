@@ -13,10 +13,10 @@ public class StudentManagement{
     private DB db;
     private DBCollection users;
     private String myUsername;
-    public StudentManagement(){
+    public StudentManagement(String hostname, int port){
         try{
             System.out.println("Connecting to mongoDB...");
-            connect = new Mongo("localhost", 27017);
+            connect = new Mongo(hostname, port);
             db = connect.getDB("StudentManagement");
             users = db.getCollection("users");
             /* if (user.findOne() == null){
@@ -26,10 +26,9 @@ public class StudentManagement{
             newProduct.put("productID", "productID");
             newProduct.put("productName", "productName");
             test.insert(newProduct); */
-            System.out.println("Connected!!");
         }
         catch (Exception e){
-            System.out.println("Can't Connect to Database!");
+        	JOptionPane.showMessageDialog(null, "Can't Connect to MongoDB with \nHOSTNAME: " + hostname + "\nPORT: " + port);
             System.exit(0);
         }
         gui = new MainGUI();
