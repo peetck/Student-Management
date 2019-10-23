@@ -1,11 +1,9 @@
 package controller;
-import java.awt.Color;
+import java.awt.*;
 import java.awt.event.*;
 import com.mongodb.*;
 import java.util.*;
-
-import javax.swing.JTable;
-
+import javax.swing.*;
 import model.*;
 import view.*;
 public class StudentManagement{
@@ -42,13 +40,12 @@ public class StudentManagement{
         // ********* below here is event of all application *********
         gui.getLoginGUI().getBtn1().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                //System.out.println("LoginGUI : Login btn clicked!!!");
                 String username = gui.getLoginGUI().getF1().getText();
                 String password = gui.getLoginGUI().getF2().getText();
                 DBCursor curs = users.find();
                 while (curs.hasNext()){
                     DBObject t = curs.next();
-                    if (((String)t.get("username")).equals(username) && ((String)t.get("password")).equals(password)){
+                    if (((String)t.get("username")).equals(username) && ((String)t.get("password")).equals(Base64.getEncoder().withoutPadding().encodeToString(password.getBytes()))){
                         gui.set("ManagementGUI");
                         myUsername = username;
                         login_success();
@@ -102,8 +99,6 @@ public class StudentManagement{
                 	gui.getRegisterGUI().getL5().setForeground(Color.RED);
                 }
                 else if (password.equals(cpassword)){
-                    n.put("username", username);
-                    n.put("password", password);
                     boolean upper = false, lower = false, alphabet = true, number = false;
                     String check = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
                     for (int i = 0; i < password.length(); i++) {
@@ -130,6 +125,8 @@ public class StudentManagement{
                     	gui.getRegisterGUI().getL5().setForeground(Color.RED);
                     	return;
                     }
+                    n.put("username", username);
+                    n.put("password", Base64.getEncoder().withoutPadding().encodeToString(password.getBytes()));
                     users.insert(n);
                     gui.getRegisterGUI().getL5().setText("Register complete!!");
                 	gui.getRegisterGUI().getL5().setForeground(Color.GREEN);
