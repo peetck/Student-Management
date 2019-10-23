@@ -9,47 +9,52 @@ public class RegisterGUI{
     private JButton btn1, btn2;
     private GridBagConstraints gbc;
     public RegisterGUI(){
-        p1 = Helper.createPanel("images/bg.png");
-        l1 = Helper.createLabel("Register");
-        l2 = Helper.createLabel("Username : ");
-        l3 = Helper.createLabel("Password : ");
-        l4 = Helper.createLabel("Confirm password : ");
+        p1 = Helper.createPanel("images/bg.jpg");
+        l1 = Helper.createLabel("Register ");
+        l1.setHorizontalAlignment(JLabel.CENTER);
+        l2 = Helper.createLabel("Username ");
+        l3 = Helper.createLabel("Password ");
+        l4 = Helper.createLabel("Confirm password ");
         btn1 = Helper.createButton("Register");
         btn2 = Helper.createButton("Back");
-        f1 = Helper.createTextField(20);
-        f2 = Helper.createPasswordField(20);
-        f3 = Helper.createPasswordField(20);
+        f1 = Helper.createTextField(30);
+        f2 = Helper.createPasswordField(30);
+        f3 = Helper.createPasswordField(30);
 
 
         gbc = new GridBagConstraints();
         p1.setLayout(new GridBagLayout());
-        gbc.insets = new Insets(5, 5, 5, 5);
+        
+        
+        gbc.insets = new Insets(160, 0, 20, 0);
+        gbc.fill = GridBagConstraints.BOTH;
         gbc.gridwidth = 2;
         p1.add(l1, gbc);
+        gbc.insets = new Insets(5, 0, 5, 0);
         gbc.gridwidth = 1;
         gbc.gridx = 0;
         gbc.gridy = 1;
         p1.add(l2, gbc);
-        gbc.gridx = 1;
-        gbc.gridy = 1;
+        gbc.gridx = 0;
+        gbc.gridy = 2;
         p1.add(f1, gbc);
         gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc.gridy = 3;
         p1.add(l3, gbc);
-        gbc.gridx = 1;
-        gbc.gridy = 2;
+        gbc.gridx = 0;
+        gbc.gridy = 4;
         p1.add(f2, gbc);
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy = 5;
         p1.add(l4, gbc);
-        gbc.gridx = 1;
-        gbc.gridy = 3;
+        gbc.gridx = 0;
+        gbc.gridy = 6;
         p1.add(f3, gbc);
         gbc.gridx = 0;
-        gbc.gridy = 4;
+        gbc.gridy = 7;
         p1.add(btn1, gbc);
-        gbc.gridx = 1;
-        gbc.gridy = 4;
+        gbc.gridx = 0;
+        gbc.gridy = 8;
         p1.add(btn2, gbc);
     }
     public RegisterGUI getGUI(){

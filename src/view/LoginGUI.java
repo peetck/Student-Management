@@ -18,8 +18,8 @@ public class LoginGUI{
         l3.setForeground(Color.red);
         l4 = Helper.createLabel("Create an account.");
         l4.setHorizontalAlignment(JLabel.CENTER);
-        f1 = Helper.createTextField(20);
-        f2 = Helper.createPasswordField(29);
+        f1 = Helper.createTextField(30);
+        f2 = Helper.createPasswordField(30);
 
 
         gbc = new GridBagConstraints();
