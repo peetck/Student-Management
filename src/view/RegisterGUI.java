@@ -3,7 +3,7 @@ import java.awt.*;
 import javax.swing.*;
 public class RegisterGUI{
     private MyPanel p1;
-    private JLabel l1, l2, l3, l4;
+    private JLabel l1, l2, l3, l4, l5;
     private JTextField f1;
     private JPasswordField f2, f3;
     private JButton btn1, btn2;
@@ -15,6 +15,7 @@ public class RegisterGUI{
         l2 = Helper.createLabel("Username ");
         l3 = Helper.createLabel("Password ");
         l4 = Helper.createLabel("Confirm password ");
+        l5 = Helper.createLabel("");
         btn1 = Helper.createButton("Register");
         btn2 = Helper.createButton("Back");
         f1 = Helper.createTextField(30);
@@ -52,9 +53,12 @@ public class RegisterGUI{
         p1.add(f3, gbc);
         gbc.gridx = 0;
         gbc.gridy = 7;
-        p1.add(btn1, gbc);
+        p1.add(l5, gbc);
         gbc.gridx = 0;
         gbc.gridy = 8;
+        p1.add(btn1, gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 9;
         p1.add(btn2, gbc);
     }
     public RegisterGUI getGUI(){
@@ -77,6 +81,9 @@ public class RegisterGUI{
     }
     public MyPanel getPanel(){
         return this.p1;
+    }
+    public JLabel getL5() {
+    	return this.l5;
     }
 
 }

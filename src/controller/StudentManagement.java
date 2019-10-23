@@ -1,4 +1,5 @@
 package controller;
+import java.awt.Color;
 import java.awt.event.*;
 import com.mongodb.*;
 import java.util.*;
@@ -83,7 +84,8 @@ public class StudentManagement{
                 while (curs.hasNext()){
                     DBObject t = curs.next();
                     if (((String)t.get("username")).equals(username)){
-                        System.out.println("this username already taken!!");
+                    	gui.getRegisterGUI().getL5().setText("This username already taken!!");
+                    	gui.getRegisterGUI().getL5().setForeground(Color.RED);
                         return;
                     }
                 }
@@ -91,6 +93,12 @@ public class StudentManagement{
                     n.put("username", username);
                     n.put("password", password);
                     users.insert(n);
+                    gui.getRegisterGUI().getL5().setText("Register complete!!");
+                	gui.getRegisterGUI().getL5().setForeground(Color.GREEN);
+                }
+                else {
+                	gui.getRegisterGUI().getL5().setText("Password not match!!");
+                	gui.getRegisterGUI().getL5().setForeground(Color.RED);
                 }
             }
         });
