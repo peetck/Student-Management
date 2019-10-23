@@ -93,8 +93,8 @@ public class StudentManagement{
                 	gui.getRegisterGUI().getL5().setText("Username length should be 4-20 characters.");
                 	gui.getRegisterGUI().getL5().setForeground(Color.RED);
                 }
-                else if (password.length() < 8 || username.length() > 30) {
-                	gui.getRegisterGUI().getL5().setText("Password length should be 8-30 characters.");
+                else if (password.length() < 6 || username.length() > 30) {
+                	gui.getRegisterGUI().getL5().setText("Password length should be 6-30 characters.");
                 	gui.getRegisterGUI().getL5().setForeground(Color.RED);
                 }
                 else if (username.equals(password)) {
@@ -104,10 +104,8 @@ public class StudentManagement{
                 else if (password.equals(cpassword)){
                     n.put("username", username);
                     n.put("password", password);
-                    if (username.equals(password)) {
-                    	
-                    }
                     boolean upper = false, lower = false, alphabet = true, number = false;
+                    String check = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
                     for (int i = 0; i < password.length(); i++) {
                     	if (Character.isUpperCase(password.charAt(i))){
                     		upper = true;
@@ -118,7 +116,7 @@ public class StudentManagement{
                     	if (password.charAt(i) >= '0' && password.charAt(i) <= '9') {
                     		number = true;
                     	}
-                    	if((password.charAt(i) < 'a' || password.charAt(i) > 'z') && (password.charAt(i) < 'A' || password.charAt(i) > 'Z')) {
+                    	if(!(check.contains("" + password.charAt(i)))) {
                     		alphabet = false;
                     	}
                     }
@@ -128,7 +126,7 @@ public class StudentManagement{
                     	return;
                     }
                     if (number == false || lower == false || upper == false) {
-                    	gui.getRegisterGUI().getL5().setText("Password should have numbers upper and lower case characters.");
+                    	gui.getRegisterGUI().getL5().setText("Password should have numbers upper case and lower case characters.");
                     	gui.getRegisterGUI().getL5().setForeground(Color.RED);
                     	return;
                     }
