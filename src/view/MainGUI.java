@@ -11,11 +11,12 @@ public class MainGUI{
         login = new LoginGUI();
         register = new RegisterGUI();
         management = new ManagementGUI();
-        fr.setSize(1200, 700);
-        fr.setVisible(true);
+        fr.setSize(1200, 730); // 1200 * 700 (730 because title bar)
         fr.setResizable(false);
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         fr.setIconImage(new ImageIcon("images/icon.png").getImage());
+        fr.setVisible(true);
+        fr.setLocationRelativeTo(null);
     }
     public void set(String select){
         if (select.equals("LoginGUI")){
@@ -27,6 +28,10 @@ public class MainGUI{
             fr.repaint();
         }
         else if (select.equals("RegisterGUI")){
+        	register.getF1().setText("");
+            register.getF2().setText("");
+            register.getF3().setText("");
+            register.getL5().setText("");
             fr.setContentPane(register.getPanel());
             fr.revalidate();
             fr.repaint();

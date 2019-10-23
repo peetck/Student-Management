@@ -42,7 +42,7 @@ public class StudentManagement{
         // ********* below here is event of all application *********
         gui.getLoginGUI().getBtn1().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                System.out.println("LoginGUI : Login btn clicked!!!");
+                //System.out.println("LoginGUI : Login btn clicked!!!");
                 String username = gui.getLoginGUI().getF1().getText();
                 String password = gui.getLoginGUI().getF2().getText();
                 DBCursor curs = users.find();
@@ -55,7 +55,7 @@ public class StudentManagement{
                         return;
                     }
                 }
-                gui.getLoginGUI().getL3().setText("Wrong Username or Password");
+                gui.getLoginGUI().getL3().setText("Wrong Username or Password.");
             }
         });
         gui.getLoginGUI().getL4().addMouseListener (new MouseListener (){
@@ -89,12 +89,55 @@ public class StudentManagement{
                         return;
                     }
                 }
-                if (password.equals(cpassword)){
+                if (username.length() < 4 || username.length() > 20) {
+                	gui.getRegisterGUI().getL5().setText("Username length should be 4-20 characters.");
+                	gui.getRegisterGUI().getL5().setForeground(Color.RED);
+                }
+                else if (password.length() < 8 || username.length() > 30) {
+                	gui.getRegisterGUI().getL5().setText("Password length should be 8-30 characters.");
+                	gui.getRegisterGUI().getL5().setForeground(Color.RED);
+                }
+                else if (username.equals(password)) {
+                	gui.getRegisterGUI().getL5().setText("Password should be different from your username.");
+                	gui.getRegisterGUI().getL5().setForeground(Color.RED);
+                }
+                else if (password.equals(cpassword)){
                     n.put("username", username);
                     n.put("password", password);
+                    if (username.equals(password)) {
+                    	
+                    }
+                    boolean upper = false, lower = false, alphabet = true, number = false;
+                    for (int i = 0; i < password.length(); i++) {
+                    	if (Character.isUpperCase(password.charAt(i))){
+                    		upper = true;
+                    	}
+                    	if (Character.isLowerCase(password.charAt(i))){
+                    		lower = true;
+                    	}
+                    	if (password.charAt(i) >= '0' && password.charAt(i) <= '9') {
+                    		number = true;
+                    	}
+                    	if((password.charAt(i) < 'a' || password.charAt(i) > 'z') && (password.charAt(i) < 'A' || password.charAt(i) > 'Z')) {
+                    		alphabet = false;
+                    	}
+                    }
+                    if (alphabet == false) {
+                    	gui.getRegisterGUI().getL5().setText("Password can contain only letters a-z (A-Z) and any numbers from 0-9.");
+                    	gui.getRegisterGUI().getL5().setForeground(Color.RED);
+                    	return;
+                    }
+                    if (number == false || lower == false || upper == false) {
+                    	gui.getRegisterGUI().getL5().setText("Password should have numbers upper and lower case characters.");
+                    	gui.getRegisterGUI().getL5().setForeground(Color.RED);
+                    	return;
+                    }
                     users.insert(n);
                     gui.getRegisterGUI().getL5().setText("Register complete!!");
                 	gui.getRegisterGUI().getL5().setForeground(Color.GREEN);
+                	gui.getRegisterGUI().getF1().setText("");
+                	gui.getRegisterGUI().getF2().setText("");
+                	gui.getRegisterGUI().getF3().setText("");
                 }
                 else {
                 	gui.getRegisterGUI().getL5().setText("Password not match!!");

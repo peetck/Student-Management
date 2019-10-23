@@ -16,6 +16,7 @@ public class LoginGUI{
         l2 = Helper.createLabel("Password ");
         l3 = Helper.createLabel("");
         l3.setForeground(Color.red);
+        l3.setHorizontalAlignment(JLabel.CENTER);
         l4 = Helper.createLabel("Create an account.");
         l4.setHorizontalAlignment(JLabel.CENTER);
         f1 = Helper.createTextField(30);
@@ -24,7 +25,7 @@ public class LoginGUI{
 
         gbc = new GridBagConstraints();
         p1.setLayout(new GridBagLayout());
-        gbc.insets = new Insets(125, 0, 0, 0);
+        gbc.insets = new Insets(125, 0, 5, 0);
         gbc.fill = GridBagConstraints.BOTH;
         gbc.gridx = 0;
         gbc.gridy = 0;

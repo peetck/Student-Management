@@ -16,6 +16,7 @@ public class RegisterGUI{
         l3 = Helper.createLabel("Password ");
         l4 = Helper.createLabel("Confirm password ");
         l5 = Helper.createLabel("");
+        l5.setHorizontalAlignment(JLabel.CENTER);
         btn1 = Helper.createButton("Register");
         btn2 = Helper.createButton("Back");
         f1 = Helper.createTextField(30);
