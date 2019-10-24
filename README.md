@@ -11,4 +11,6 @@
  |:---:|:---:|:---:|:---:|:--:|
 |[peetck](https://github.com/peetck)|[thangmo29](https://github.com/thangmo29)|[skaferun9](https://github.com/skaferun9)|[blackjokerr](https://github.com/blackjokerrr)|[nnotex99](https://github.com/nnotex99)|
 
+[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/made-with-java.svg)](https://forthebadge.com)
+
 ![Alt text](ClassDiagram.jpg)
