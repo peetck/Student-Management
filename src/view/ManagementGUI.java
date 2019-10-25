@@ -29,7 +29,7 @@ public class ManagementGUI{
         
         topmenu.setLocation(0, 0);
         topmenu.setSize(300, 130);
-        topmenu.setBackground(Color.lightGray);
+        topmenu.setBackground(Color.PINK);
         
         bottommenu.setLocation(0, 590);
         bottommenu.setSize(300, 110);
