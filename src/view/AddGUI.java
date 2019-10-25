@@ -3,63 +3,76 @@ import java.awt.*;
 import javax.swing.*;
 public class AddGUI {
 	private JDesktopPane p1;
-	private JLabel l1, l2, l3, l4;
-	private JTextField f1, f2, f3, f4;
+	private JLabel l1, l2, l3, l4, l5;
+	private JTextField f1, f2, f3, f4, f5;
 	private JButton btn1, btn2;
-	private MyPanel title, container;
-	//private GridBagConstraints gbc;
+	private MyPanel title, left, right;
 	public AddGUI() {
 		p1 = new JDesktopPane();
-		//p1.setLayout(new GridBagLayout());
+
 		title = Helper.createPanel("");
-		container = Helper.createPanel("");
+		left = Helper.createPanel("");
+		right = Helper.createPanel("");
 		
 		title.setSize(1200, 150);
 		title.setLocation(0, 0);
 		title.setBackground(Color.BLUE);
 		
-		container.setSize(1200, 550);
-		container.setLocation(0, 150);
+		left.setSize(600, 550);
+		left.setLocation(0, 150);
+		left.setLayout(new GridLayout(5, 2));
 		
+		right.setSize(600, 550);
+		right.setLocation(600, 150);
+		right.setLayout(new GridLayout(5, 2));
 		
 		btn1 = Helper.createButton("Back");
 		btn2 = Helper.createButton("ADD");
 		
 		l1 = Helper.createLabel("รหัสนักศึกษา");
+		l1.setHorizontalAlignment(JLabel.CENTER);
 		l2 = Helper.createLabel("ชื่อ");
+		l2.setHorizontalAlignment(JLabel.CENTER);
 		l3 = Helper.createLabel("นามสกุล");
+		l3.setHorizontalAlignment(JLabel.CENTER);
 		l4 = Helper.createLabel("ที่อยู่");
+		l4.setHorizontalAlignment(JLabel.CENTER);
+		l5 = Helper.createLabel("เบอร์ติดต่อ");
+		l5.setHorizontalAlignment(JLabel.CENTER);
 		
 		f1 = Helper.createTextField(20);
 		f2 = Helper.createTextField(20);
 		f3 = Helper.createTextField(20);
 		f4 = Helper.createTextField(20);
-		
-		//gbc = new GridBagConstraints();
-		
+		f5 = Helper.createTextField(20);
 		
 		
-		container.add(l1);
-
-		container.add(f1);
-
-		container.add(l2);
-
-		container.add(f2);
-
-		container.add(l3);
-
-		container.add(f3);
 		
-		container.add(l4);
-
-		container.add(f4);
+		left.add(l1);
+		left.add(f1);
+		left.add(l2);
+		left.add(f2);
+		left.add(l3);
+		left.add(f3);
+		left.add(l4);
+		left.add(f4);
+		left.add(l5);
+		left.add(f5);
 		
-		container.add(btn1);
-		container.add(btn2);
+		right.add(new JButton("ss"));
+		right.add(new JButton("ss"));
+		right.add(new JButton("ss"));
+		right.add(new JButton("ss"));
+		right.add(new JButton("ss"));
+		right.add(new JButton("ss"));
+		right.add(new JButton("ss"));
+		right.add(new JButton("ss"));
+		right.add(btn1);
+		right.add(btn2);
 		
 		p1.add(title);
-		p1.add(container);
+		p1.add(left);
+		p1.add(right);
 	}
 	public JDesktopPane getPanel() {
 		return this.p1;
