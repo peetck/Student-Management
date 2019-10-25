@@ -22,7 +22,6 @@ public class LoginGUI{
         f1 = Helper.createTextField(30);
         f2 = Helper.createPasswordField(30);
 
-
         gbc = new GridBagConstraints();
         p1.setLayout(new GridBagLayout());
         gbc.insets = new Insets(125, 0, 5, 0);

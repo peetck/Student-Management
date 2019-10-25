@@ -7,6 +7,8 @@ public class ManagementGUI{
     private MyPanel menu1, menu2, menu3, menu4;
     private MyStudentGUI mystudent;
     private AddDeleteStudentGUI add_delete;
+    private SettingGUI setting;
+    private ScoreGUI score;
     public ManagementGUI(){
         desktop = new JDesktopPane();
         menu = new JPanel();
@@ -14,7 +16,9 @@ public class ManagementGUI{
         program.setLayout(new GridLayout(1, 1));
         mystudent = new MyStudentGUI();
 
+        score = new ScoreGUI();
         add_delete = new AddDeleteStudentGUI();
+        setting = new SettingGUI();
         menu1 = Helper.createPanel("images/menu/List.jpg", "menu");
         menu2 = Helper.createPanel("images/menu/Score.jpg", "menu");
         menu3 = Helper.createPanel("images/menu/AddDelete.jpg", "menu");
@@ -57,6 +61,20 @@ public class ManagementGUI{
     		program.revalidate();
     		program.repaint();
     		program.add(mystudent.getPanel());
+    	}
+    	else if (select.equals("setting")) {
+    		program.removeAll();
+    		
+    		program.revalidate();
+    		program.repaint();
+    		program.add(setting.getPanel());
+    	}
+    	else if (select.equals("score")) {
+    		program.removeAll();
+    		
+    		program.revalidate();
+    		program.repaint();
+    		program.add(score.getPanel());
     	}
     }
     public JDesktopPane getPanel(){

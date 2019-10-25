@@ -198,11 +198,67 @@ public class StudentManagement{
 			public void mouseExited(MouseEvent e) {}
         });
         
+        gui.getManagementGUI().getMenu4().addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				gui.getManagementGUI().set("setting");
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+
+			@Override
+			public void mouseExited(MouseEvent e) {}
+        });
+        
+        gui.getManagementGUI().getMenu2().addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				gui.getManagementGUI().set("score");
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+
+			@Override
+			public void mouseExited(MouseEvent e) {}
+        });
         
         gui.getManagementGUI().getAddDeleteStudentGUI().getLeft().addMouseListener(new MouseListener() {
         	@Override
 			public void mouseClicked(MouseEvent e) {
 				gui.set("AddGUI");
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+
+			@Override
+			public void mouseExited(MouseEvent e) {}
+        });
+        
+        gui.getManagementGUI().getAddDeleteStudentGUI().getRight().addMouseListener(new MouseListener() {
+        	@Override
+			public void mouseClicked(MouseEvent e) {
+				gui.set("DeleteGUI");
 			}
 
 			@Override
@@ -228,28 +284,53 @@ public class StudentManagement{
         		addStudent();
         	}
     	});
+        gui.getManagementGUI().getAddDeleteStudentGUI().getDeleteGUI().getBtn1().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		gui.set("ManagementGUI");
+        		
+        	}
+        });
     }
     
     // below here is method in all application
     
     public void addStudent() {
-    	String name, surname, studentID, address, enrollAt;
+    	String studentID, title, name, surname, cardID, address, race, religion, bloodType, tel, height, weight, parentTel, enrollAt;
     	studentID = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF1().getText();
-    	name = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF2().getText();
-    	surname = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF3().getText();
-    	address = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF4().getText();
+    	title = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF2().getText();
+    	name = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF3().getText();
+    	surname = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF4().getText();
+    	cardID = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF5().getText();
+    	address = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF6().getText();
+    	race = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF7().getText();
+    	religion = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF8().getText();
+    	bloodType = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF9().getText();
+    	tel = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF10().getText();
+    	height = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF11().getText();
+    	weight = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF12().getText();
+    	parentTel = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF13().getText();
     	enrollAt = "" + java.time.LocalDate.now();
+    	
     	BasicDBObject n = new BasicDBObject();
+    	n.put("studentID", studentID);
+    	n.put("title", title);
     	n.put("name", name);
     	n.put("surname", surname);
+    	n.put("cardID", cardID);
     	n.put("address", address);
-    	n.put("studentID", studentID);
+    	n.put("race", race);
+    	n.put("religion", religion);
+    	n.put("bloodType", bloodType);
+    	n.put("tel", tel);
+    	n.put("height", height);
+    	n.put("weight", weight);
+    	n.put("parentTel", parentTel);
     	n.put("enrollAt", enrollAt);
     	
     	DBCollection myStudent = db.getCollection(myUsername);
     	myStudent.insert(n);
     	
-    	teacher.addStudent(new Student(name, surname, address, studentID, enrollAt));
+    	teacher.addStudent(new Student(studentID, title, name, surname, cardID, address, race, religion, bloodType, tel, height, weight, parentTel, enrollAt));
     	// add success
     	
     	// update table
@@ -263,7 +344,7 @@ public class StudentManagement{
     	DBCursor curs = myStudent.find();
         while (curs.hasNext()){
             DBObject t = curs.next();
-            teacher.addStudent(new Student((String)t.get("name"), (String)t.get("surname"), (String)t.get("address"), (String)t.get("studentID"), (String)t.get("enrollAt")));
+            teacher.addStudent(new Student((String)t.get("studentID"), (String)t.get("title"), (String)t.get("name"), (String)t.get("surname"), (String)t.get("cardID"), (String)t.get("address"), (String)t.get("race"), (String)t.get("religion"), (String)t.get("bloodType"), (String)t.get("tel"), (String)t.get("height"), (String)t.get("weight"), (String)t.get("parentTel"), (String)t.get("enrollAt")));
         }
         // update Table
         updateTable();
@@ -271,11 +352,11 @@ public class StudentManagement{
     public void updateTable() {
     	ArrayList<Student> students = teacher.getStudents();
     	JTable table = new JTable();
-    	String[][] data = new String[students.size()][5];
+    	String[][] data = new String[students.size()][4];
 		for (int i = 0; i < students.size(); i++) {
 			data[i] = students.get(i).getInfo();
 		}
-		String[] header = {"รหัสนักศึกษา", "ชื่อ", "นามสกุล", "ที่อยู่", "เพิ่มเข้ามาในวันที่"};
+		String[] header = {"รหัสนักศึกษา", "ชื่อ", "นามสกุล", "เพิ่มเข้ามาในวันที่",""};
 		table = new JTable(data, header);
 		table.getTableHeader().setReorderingAllowed(false);
 		table.setDefaultEditor(Object.class, null);

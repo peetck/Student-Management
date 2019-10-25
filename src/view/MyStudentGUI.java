@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class MyStudentGUI {
 	private JDesktopPane p1;
-	private MyPanel container, title;
+	private MyPanel container, title, bottom;
 	private JTable table;
 	private JScrollPane table_scroll; 
 	public MyStudentGUI() {
@@ -18,10 +18,13 @@ public class MyStudentGUI {
 		
 		container = Helper.createPanel("");
 		container.setLayout(new BorderLayout());
-		container.setSize(900, 550);
+		container.setSize(900, 450);
 		container.setLocation(0, 150);
 		
-		
+		bottom = Helper.createPanel("");
+		bottom.setSize(900, 100);
+		bottom.setLocation(0, 600);
+		bottom.setBackground(Color.RED);
 		
 
 		table_scroll = new JScrollPane(new JTable());
@@ -30,6 +33,7 @@ public class MyStudentGUI {
     		
 		p1.add(title);
 		p1.add(container);
+		p1.add(bottom);
 	}
 	public void updateTable(JTable table) {
 

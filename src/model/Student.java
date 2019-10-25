@@ -1,22 +1,32 @@
 package model;
 
 public class Student {
-	private String name, surname, address, studentID, enrollAt;
+	private String studentID, title, name, surname, cardID, address, race, religion, bloodType, tel, height, weight, parentTel, enrollAt;
 	private int age;
-	public Student(String name, String surname, String address, String studentID, String enrollAt) {
+	public Student(String studentID, String title, String name, String surname, String cardID, String address, String race, String religion, String bloodType, String tel, String height, String weight, String parentTel, String enrollAt) {
+
+		this.studentID = studentID;
+		this.title = title;
 		this.name = name;
 		this.surname = surname;
+		this.cardID = cardID;
 		this.address = address;
-		this.studentID = studentID;
+		this.race = race;
+		this.religion = religion;
+		this.bloodType = bloodType;
+		this.tel = tel;
+		this.height = height;
+		this.weight = weight;
+		this.parentTel = parentTel;
 		this.enrollAt = enrollAt;
+		
 	}
 	public String[] getInfo() {
 		String[] info = new String[5];
 		info[0] = studentID;
 		info[1] = name;
 		info[2] = surname;
-		info[3] = address;
-		info[4] = enrollAt;
+		info[3] = enrollAt;
 		return info;
 	}
 }
