@@ -13,6 +13,7 @@ public class ScoreGUI {
 		title = Helper.createPanel("", "title");
 		title.setSize(900, 150);
 		title.setLocation(0, 0);
+		title.setBackground(Color.CYAN);
 		
 		container = Helper.createPanel("");
 		container.setLayout(new BorderLayout());
