@@ -21,12 +21,16 @@ public class Student {
 		this.enrollAt = enrollAt;
 		
 	}
-	public String[] getInfo() {
-		String[] info = new String[5];
+	public Object[] getInfo() {
+		Object[] info = new Object[5];
 		info[0] = studentID;
 		info[1] = name;
 		info[2] = surname;
 		info[3] = enrollAt;
+		info[4] = " ดูข้อมูลเพิ่มเติม";
 		return info;
+	}
+	public String getStudentID() {
+		return this.studentID;
 	}
 }

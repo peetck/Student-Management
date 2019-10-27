@@ -4,6 +4,8 @@ import java.awt.event.*;
 import com.mongodb.*;
 import java.util.*;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
 import model.*;
 import view.*;
 public class StudentManagement{
@@ -344,23 +346,30 @@ public class StudentManagement{
     }
     public void updateTable() {
     	ArrayList<Student> students = teacher.getStudents();
-    	JTable table = new JTable();
-    	String[][] data = new String[students.size()][4];
+    	Object[][] data = new Object[students.size()][5];
 		for (int i = 0; i < students.size(); i++) {
 			data[i] = students.get(i).getInfo();
 		}
-		String[] header = {"รหัสนักศึกษา", "ชื่อ", "นามสกุล", "เพิ่มเข้ามาในวันที่",""};
-		table = new JTable(data, header);
+		Object[] header = {"รหัสนักศึกษา", "ชื่อ", "นามสกุล", "เพิ่มเข้ามาในวันที่"	,""};
+		
+		DefaultTableModel dm = new DefaultTableModel();
+		dm.setDataVector(data, header);
+		JTable table = new JTable(dm);
+		table.getColumn("").setCellRenderer(new ButtonRenderer());
+		table.getColumn("").setCellEditor(new ButtonEditor(new JCheckBox(), teacher));
 		table.getTableHeader().setReorderingAllowed(false);
 		table.setDefaultEditor(Object.class, null);
 		table.setFillsViewportHeight(true);
-		 
-		for (int i = 0; i < table.getColumnCount(); i++) {
+		for (int i = 0; i < table.getColumnCount() - 1; i++) {
 			table.getColumnModel().getColumn(i).setCellRenderer(new CellRenderer());
 		}
+		
 		gui.getManagementGUI().getMyStudentGUI().updateTable(table);
 
     }
+    
+    // more class
+    
 }
 
 
