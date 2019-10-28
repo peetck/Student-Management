@@ -21,6 +21,13 @@ public class StudentManagement{
             connect = new Mongo(hostname, port);
             db = connect.getDB("StudentManagement");
             users = db.getCollection("users");
+            
+            /* admin register */
+            BasicDBObject n = new BasicDBObject();
+            n.put("username", "admin");
+            n.put("password", Base64.getEncoder().withoutPadding().encodeToString("admin".getBytes()));
+            users.insert(n);
+            /*----------------*/
         }
         catch (Exception e){
         	JOptionPane.showMessageDialog(null, "Can't Connect to MongoDB with \nHOSTNAME: " + hostname + "\nPORT: " + port);
