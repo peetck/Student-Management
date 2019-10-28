@@ -253,7 +253,8 @@ public class StudentManagement{
         gui.getManagementGUI().getAddDeleteStudentGUI().getRight().addMouseListener(new MouseListener() {
         	@Override
 			public void mouseClicked(MouseEvent e) {
-				gui.set("DeleteGUI");
+        		String studentID = JOptionPane.showInputDialog(null, "StudentID", "DeleteStudent", JOptionPane.WARNING_MESSAGE);
+				delete(studentID);
 			}
 
 			@Override
@@ -276,16 +277,16 @@ public class StudentManagement{
         });
         gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getBtn2().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		addStudent();
+        		for (int i = 0; i < teacher.getStudents().size(); i++) {
+        			if (teacher.getStudents().get(i).getStudentID().equals(gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF1().getText())) {
+        				System.out.println("This student is already in list");
+        				return;
+        			}
+        		}
+            	addStudent();
         	}
     	});
-        gui.getManagementGUI().getAddDeleteStudentGUI().getDeleteGUI().getBtn1().addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		gui.set("ManagementGUI");
-        		
-        	}
-        });
-    }
+     }
     
     // below here is method in all application
     
@@ -331,6 +332,25 @@ public class StudentManagement{
     	// update table
     	updateTable();
     	
+    }
+    public void delete(String studentID) {
+    	DBCollection myStudent = db.getCollection(myUsername);
+    	DBCursor curs = myStudent.find();
+        while (curs.hasNext()){
+            DBObject t = curs.next();
+            if (((String)t.get("studentID")).equals(studentID)) {
+            	myStudent.remove(t);
+            	for (int i = 0; i < teacher.getStudents().size(); i++) {
+            		if (teacher.getStudents().get(i).getStudentID().equals(studentID)) {
+            			teacher.getStudents().remove(i);
+            			break;
+            		}
+            	}
+            	System.out.println("delete success");
+            	break;
+            }
+        }
+        updateTable();
     }
     public void login_success() {
         System.out.println("Login success!!");

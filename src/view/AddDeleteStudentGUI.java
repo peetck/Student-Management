@@ -5,11 +5,9 @@ public class AddDeleteStudentGUI {
 	private JDesktopPane p1;
 	private MyPanel title, left, right;
 	private AddGUI add_gui;
-	private DeleteGUI delete_gui;
 	private GridBagConstraints gbc;
 	public AddDeleteStudentGUI() {
 		add_gui = new AddGUI();
-		delete_gui = new DeleteGUI();
 		p1 = new JDesktopPane();
 		gbc = new GridBagConstraints();
 		
@@ -47,8 +45,5 @@ public class AddDeleteStudentGUI {
 	}
 	public AddGUI getAddGUI() {
 		return add_gui;
-	}
-	public DeleteGUI getDeleteGUI() {
-		return delete_gui;
 	}
 }
