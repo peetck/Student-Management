@@ -27,12 +27,12 @@ public class AddGUI {
 		left.setLocation(0, 150);
 		left.setLayout(new GridBagLayout());
 		
-		right.setSize(600, 450);
+		right.setSize(600, 400);
 		right.setLocation(600, 150);
 		right.setLayout(new GridBagLayout());
 		
 		rightbot.setSize(600, 100);
-		rightbot.setLocation(600, 600);
+		rightbot.setLocation(600, 550);
 		rightbot.setLayout(new GridLayout(1, 2));
 		//rightbot.setBackground(Color.RED);
 		
