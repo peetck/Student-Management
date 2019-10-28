@@ -18,6 +18,12 @@ public class Helper{
         l.setOpaque(false);
         return l;
     }
+    public static JLabel createLabel(String msg, int size){
+        JLabel l = new JLabel(msg);
+        l.setFont(new Font("itim", Font.PLAIN, size));
+        l.setOpaque(false);
+        return l;
+    }
     // return JTextField with font and selected size
     public static JTextField createTextField(int size){
         JTextField f = new JTextField(size);

@@ -21,19 +21,39 @@ public class ManagementGUI{
         topmenu = Helper.createPanel("");
         bottommenu = Helper.createPanel("");
         
-        menu1 = Helper.createPanel("images/menu/List.jpg", "menu");
-        menu2 = Helper.createPanel("images/menu/Score.jpg", "menu");
-        menu3 = Helper.createPanel("images/menu/AddDelete.jpg", "menu");
-        menu4 = Helper.createPanel("images/menu/Setting.jpg", "menu");
+
+        menu1 = Helper.createPanel("");
+        menu1.setLayout(new BorderLayout());
+        JLabel msg = Helper.createLabel("รายชื่อนักเรียน", 25);
+        msg.setHorizontalAlignment(JLabel.CENTER);
+        menu1.add(msg);
+
+        menu2 = Helper.createPanel("");
+        menu2.setLayout(new BorderLayout());
+        msg = Helper.createLabel("คะแนน", 25);
+        msg.setHorizontalAlignment(JLabel.CENTER);
+        menu2.add(msg);
+        
+        menu3 = Helper.createPanel("");
+        menu3.setLayout(new BorderLayout());
+        msg = Helper.createLabel("เพิ่ม / ลบ นักเรียน", 25);
+        msg.setHorizontalAlignment(JLabel.CENTER);
+        menu3.add(msg);
+        
+        menu4 = Helper.createPanel("");
+        menu4.setLayout(new BorderLayout());
+        msg = Helper.createLabel("ตั้งค่า", 25);
+        msg.setHorizontalAlignment(JLabel.CENTER);
+        menu4.add(msg);
         
         
         topmenu.setLocation(0, 0);
         topmenu.setSize(300, 130);
-        topmenu.setBackground(Color.PINK);
+        topmenu.setBackground(Color.lightGray);
         
         bottommenu.setLocation(0, 590);
         bottommenu.setSize(300, 110);
-        bottommenu.setBackground(Color.PINK);
+        bottommenu.setBackground(Color.lightGray);
         
         menu.setLayout(new GridLayout(4, 1));
         menu.setLocation(0, 130);
