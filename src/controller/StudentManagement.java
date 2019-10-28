@@ -162,6 +162,27 @@ public class StudentManagement{
         gui.getLoginGUI().getF1().addKeyListener(loginListener);
         gui.getLoginGUI().getF2().addKeyListener(loginListener);
         
+        KeyListener registerListener = new KeyListener() {
+        	@Override
+        	public void keyPressed(KeyEvent e) {
+        		int keycode = e.getKeyCode();
+        		if (keycode == 10) {
+        			gui.getRegisterGUI().getBtn1().doClick();
+        		}
+        	}
+        	 
+        	@Override
+        	public void keyReleased(KeyEvent event) {
+        	}
+        	 
+        	@Override
+        	public void keyTyped(KeyEvent event) {       
+        	}
+        };
+        gui.getRegisterGUI().getF1().addKeyListener(registerListener);
+        gui.getRegisterGUI().getF2().addKeyListener(registerListener);
+        gui.getRegisterGUI().getF3().addKeyListener(registerListener);
+        
         gui.getManagementGUI().getMenu3().addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
