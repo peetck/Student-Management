@@ -3,8 +3,8 @@ import java.awt.*;
 import javax.swing.*;
 public class AddGUI {
 	private JDesktopPane p1;
-	private JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12, l13, l14;
-	private JTextField f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14;
+	private JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12, l13, l14, l15;
+	private JTextField f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15;
 	private JButton btn1, btn2;
 	private MyPanel title, left, right, rightbot;
 	private GridBagConstraints gbc;
@@ -36,8 +36,8 @@ public class AddGUI {
 		rightbot.setLayout(new GridLayout(1, 2));
 		//rightbot.setBackground(Color.RED);
 		
-		btn1 = Helper.createButton("Back");
-		btn2 = Helper.createButton("ADD");
+		btn1 = Helper.createButton("ย้อนกลับ");
+		btn2 = Helper.createButton("เพิ่ม");
 		
 		l1 = Helper.createLabel("รหัสนักศึกษา");
 		l2 = Helper.createLabel("คํานําหน้า");
@@ -53,7 +53,7 @@ public class AddGUI {
 		l12 = Helper.createLabel("ส่วนสูง");
 		l13 = Helper.createLabel("นํ้าหนัก");
 		l14 = Helper.createLabel("เบอร์ติดต่อผู้ปกครอง");
-		
+		l15 = Helper.createLabel("โรคประจําตัว");
 		
 		f1 = Helper.createTextField(20);
 		f2 = Helper.createTextField(20);
@@ -69,6 +69,7 @@ public class AddGUI {
 		f12 = Helper.createTextField(20);
 		f13 = Helper.createTextField(20);
 		f14 = Helper.createTextField(20);
+		f15 = Helper.createTextField(20);
 		
 		left.add(l1, gbc);
 		gbc.gridx = 0;
@@ -154,8 +155,12 @@ public class AddGUI {
 		gbc.gridx = 0;
 		gbc.gridy = 9;
 		right.add(f14, gbc);
-
-		
+		gbc.gridx = 0;
+		gbc.gridy = 10;
+		right.add(l15, gbc);
+		gbc.gridx = 0;
+		gbc.gridy = 11;
+		right.add(f15, gbc);
 		
 		rightbot.add(btn2);
 		rightbot.add(btn1);
@@ -212,5 +217,11 @@ public class AddGUI {
 	}
 	public JTextField getF13() {
 		return this.f13;
+	}
+	public JTextField getF14() {
+		return this.f14;
+	}
+	public JTextField getF15() {
+		return this.f15;
 	}
 }

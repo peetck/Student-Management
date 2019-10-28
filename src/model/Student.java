@@ -1,9 +1,12 @@
 package model;
 
 public class Student {
-	private String studentID, title, name, surname, cardID, address, race, religion, bloodType, tel, height, weight, parentTel, enrollAt;
+	private String studentID, title, name, surname, cardID, address, race, religion, bloodType, tel, email, height, weight, parentTel, disease, enrollAt;
 	private int age;
-	public Student(String studentID, String title, String name, String surname, String cardID, String address, String race, String religion, String bloodType, String tel, String height, String weight, String parentTel, String enrollAt) {
+	public Student(String studentID, String title, String name, String surname, 
+			String cardID, String address, String race, String religion, 
+			String bloodType, String tel, String email, String height, String weight, 
+			String parentTel, String disease, String enrollAt) {
 
 		this.studentID = studentID;
 		this.title = title;
@@ -15,9 +18,11 @@ public class Student {
 		this.religion = religion;
 		this.bloodType = bloodType;
 		this.tel = tel;
+		this.email = email;
 		this.height = height;
 		this.weight = weight;
 		this.parentTel = parentTel;
+		this.disease = disease;
 		this.enrollAt = enrollAt;
 		
 	}

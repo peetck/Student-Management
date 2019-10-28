@@ -281,7 +281,8 @@ public class StudentManagement{
         gui.getManagementGUI().getAddDeleteStudentGUI().getRight().addMouseListener(new MouseListener() {
         	@Override
 			public void mouseClicked(MouseEvent e) {
-        		String studentID = JOptionPane.showInputDialog(null, "StudentID", "DeleteStudent", JOptionPane.WARNING_MESSAGE);
+        		JLabel msg = Helper.createLabel("รหัสนักศึกษาที่ต้องการลบออก");
+        		String studentID = JOptionPane.showInputDialog(null, msg, "Delete Student", JOptionPane.WARNING_MESSAGE);
 				delete(studentID);
 			}
 
@@ -307,7 +308,8 @@ public class StudentManagement{
         	public void actionPerformed(ActionEvent e) {
         		for (int i = 0; i < teacher.getStudents().size(); i++) {
         			if (teacher.getStudents().get(i).getStudentID().equals(gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF1().getText())) {
-        				System.out.println("This student is already in list");
+        				JLabel msg = Helper.createLabel("มีรหัสนักศึกษานี้อยู่ในระบบอยู่แล้ว");
+        				JOptionPane.showMessageDialog(null, msg);
         				return;
         			}
         		}
@@ -319,7 +321,7 @@ public class StudentManagement{
     // below here is method in all application
     
     public void addStudent() {
-    	String studentID, title, name, surname, cardID, address, race, religion, bloodType, tel, height, weight, parentTel, enrollAt;
+    	String studentID, title, name, surname, cardID, address, race, religion, bloodType, tel, email, height, weight, parentTel, disease, enrollAt;
     	studentID = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF1().getText();
     	title = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF2().getText();
     	name = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF3().getText();
@@ -330,9 +332,11 @@ public class StudentManagement{
     	religion = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF8().getText();
     	bloodType = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF9().getText();
     	tel = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF10().getText();
-    	height = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF11().getText();
-    	weight = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF12().getText();
-    	parentTel = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF13().getText();
+    	email = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF11().getText();
+    	height = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF12().getText();
+    	weight = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF13().getText();
+    	parentTel = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF14().getText();
+    	disease = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF15().getText();
     	enrollAt = "" + java.time.LocalDate.now();
     	
     	BasicDBObject n = new BasicDBObject();
@@ -346,15 +350,17 @@ public class StudentManagement{
     	n.put("religion", religion);
     	n.put("bloodType", bloodType);
     	n.put("tel", tel);
+    	n.put("email", email);
     	n.put("height", height);
     	n.put("weight", weight);
     	n.put("parentTel", parentTel);
+    	n.put("disease", disease);
     	n.put("enrollAt", enrollAt);
     	
     	DBCollection myStudent = db.getCollection(myUsername);
     	myStudent.insert(n);
     	
-    	teacher.addStudent(new Student(studentID, title, name, surname, cardID, address, race, religion, bloodType, tel, height, weight, parentTel, enrollAt));
+    	teacher.addStudent(new Student(studentID, title, name, surname, cardID, address, race, religion, bloodType, tel, email, height, weight, parentTel, disease, enrollAt));
     	// add success
     	
     	// update table
@@ -387,7 +393,7 @@ public class StudentManagement{
     	DBCursor curs = myStudent.find();
         while (curs.hasNext()){
             DBObject t = curs.next();
-            teacher.addStudent(new Student((String)t.get("studentID"), (String)t.get("title"), (String)t.get("name"), (String)t.get("surname"), (String)t.get("cardID"), (String)t.get("address"), (String)t.get("race"), (String)t.get("religion"), (String)t.get("bloodType"), (String)t.get("tel"), (String)t.get("height"), (String)t.get("weight"), (String)t.get("parentTel"), (String)t.get("enrollAt")));
+            teacher.addStudent(new Student((String)t.get("studentID"), (String)t.get("title"), (String)t.get("name"), (String)t.get("surname"), (String)t.get("cardID"), (String)t.get("address"), (String)t.get("race"), (String)t.get("religion"), (String)t.get("bloodType"), (String)t.get("tel"), (String)t.get("email"), (String)t.get("height"), (String)t.get("weight"), (String)t.get("parentTel"), (String)t.get("disease"), (String)t.get("enrollAt")));
         }
         // update Table
         updateTable();

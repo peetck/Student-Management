@@ -7,14 +7,11 @@ public class MyPanel extends JPanel{
         bgImage = bg.getScaledInstance(1200, 700, Image.SCALE_DEFAULT);
     }
     public MyPanel(Image bg, String select) {
-    	if (select.equals("title")) {
-    		bgImage = bg.getScaledInstance(900, 150, Image.SCALE_DEFAULT);
-    	}
-    	else if (select.equals("menu")) {
+    	if (select.equals("menu")) {
     		bgImage = bg.getScaledInstance(300, 115, Image.SCALE_DEFAULT);
     	}
     	else if (select.equals("adddelete")) {
-    		bgImage = bg.getScaledInstance(450, 550, Image.SCALE_DEFAULT);
+    		bgImage = bg.getScaledInstance(450, 700, Image.SCALE_DEFAULT);
     	}
     }
     @Override
