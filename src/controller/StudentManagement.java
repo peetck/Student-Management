@@ -4,6 +4,7 @@ import java.awt.event.*;
 import com.mongodb.*;
 import java.util.*;
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import model.*;
@@ -22,7 +23,7 @@ public class StudentManagement{
             db = connect.getDB("StudentManagement");
             users = db.getCollection("users");
             
-            /* admin register */
+            /* Auto register (admin/admin) register */
             BasicDBObject n = new BasicDBObject();
             n.put("username", "admin");
             n.put("password", Base64.getEncoder().withoutPadding().encodeToString("admin".getBytes()));
@@ -259,55 +260,20 @@ public class StudentManagement{
 			public void mouseExited(MouseEvent e) {}
         });
         
-        gui.getManagementGUI().getAddDeleteStudentGUI().getLeft().addMouseListener(new MouseListener() {
-        	@Override
-			public void mouseClicked(MouseEvent e) {
-				gui.set("AddGUI");
-			}
 
-			@Override
-			public void mousePressed(MouseEvent e) {}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {}
-
-			@Override
-			public void mouseExited(MouseEvent e) {}
-        });
         
-        gui.getManagementGUI().getAddDeleteStudentGUI().getRight().addMouseListener(new MouseListener() {
-        	@Override
-			public void mouseClicked(MouseEvent e) {
-        		JLabel msg = Helper.createLabel("รหัสนักศึกษาที่ต้องการลบออก");
+        gui.getManagementGUI().getAddDeleteStudentGUI().getBtn2().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JLabel msg = Helper.createLabel("รหัสนักศึกษาที่ต้องการลบออก");
         		String studentID = JOptionPane.showInputDialog(null, msg, "Delete Student", JOptionPane.WARNING_MESSAGE);
 				delete(studentID);
 			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {}
-
-			@Override
-			public void mouseExited(MouseEvent e) {}
         });
-        gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getBtn1().addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		gui.set("ManagementGUI");
-        		
-        	}
-        });
-        gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getBtn2().addActionListener(new ActionListener() {
+
+        gui.getManagementGUI().getAddDeleteStudentGUI().getBtn1().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		for (int i = 0; i < teacher.getStudents().size(); i++) {
-        			if (teacher.getStudents().get(i).getStudentID().equals(gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF1().getText())) {
+        			if (teacher.getStudents().get(i).getStudentID().equals(gui.getManagementGUI().getAddDeleteStudentGUI().getF1().getText())) {
         				JLabel msg = Helper.createLabel("มีรหัสนักศึกษานี้อยู่ในระบบอยู่แล้ว");
         				JOptionPane.showMessageDialog(null, msg);
         				return;
@@ -322,21 +288,21 @@ public class StudentManagement{
     
     public void addStudent() {
     	String studentID, title, name, surname, cardID, address, race, religion, bloodType, tel, email, height, weight, parentTel, disease, enrollAt;
-    	studentID = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF1().getText();
-    	title = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF2().getText();
-    	name = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF3().getText();
-    	surname = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF4().getText();
-    	cardID = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF5().getText();
-    	address = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF6().getText();
-    	race = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF7().getText();
-    	religion = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF8().getText();
-    	bloodType = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF9().getText();
-    	tel = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF10().getText();
-    	email = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF11().getText();
-    	height = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF12().getText();
-    	weight = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF13().getText();
-    	parentTel = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF14().getText();
-    	disease = gui.getManagementGUI().getAddDeleteStudentGUI().getAddGUI().getF15().getText();
+    	studentID = gui.getManagementGUI().getAddDeleteStudentGUI().getF1().getText();
+    	title = gui.getManagementGUI().getAddDeleteStudentGUI().getF2().getText();
+    	name = gui.getManagementGUI().getAddDeleteStudentGUI().getF3().getText();
+    	surname = gui.getManagementGUI().getAddDeleteStudentGUI().getF4().getText();
+    	cardID = gui.getManagementGUI().getAddDeleteStudentGUI().getF5().getText();
+    	address = gui.getManagementGUI().getAddDeleteStudentGUI().getF6().getText();
+    	race = gui.getManagementGUI().getAddDeleteStudentGUI().getF7().getText();
+    	religion = gui.getManagementGUI().getAddDeleteStudentGUI().getF8().getText();
+    	bloodType = gui.getManagementGUI().getAddDeleteStudentGUI().getF9().getText();
+    	tel = gui.getManagementGUI().getAddDeleteStudentGUI().getF10().getText();
+    	email = gui.getManagementGUI().getAddDeleteStudentGUI().getF11().getText();
+    	height = gui.getManagementGUI().getAddDeleteStudentGUI().getF12().getText();
+    	weight = gui.getManagementGUI().getAddDeleteStudentGUI().getF13().getText();
+    	parentTel = gui.getManagementGUI().getAddDeleteStudentGUI().getF14().getText();
+    	disease = gui.getManagementGUI().getAddDeleteStudentGUI().getF15().getText();
     	enrollAt = "" + java.time.LocalDate.now();
     	
     	BasicDBObject n = new BasicDBObject();
@@ -417,7 +383,7 @@ public class StudentManagement{
 		for (int i = 0; i < table.getColumnCount() - 1; i++) {
 			table.getColumnModel().getColumn(i).setCellRenderer(new CellRenderer());
 		}
-		
+		table.setBorder(new LineBorder(Color.RED, 0));
 		gui.getManagementGUI().getMyStudentGUI().updateTable(table);
 
     }

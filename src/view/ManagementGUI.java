@@ -1,6 +1,8 @@
 package view;
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.*;
+
 public class ManagementGUI{
     private JDesktopPane desktop;
     private JPanel menu, program, topmenu, bottommenu;

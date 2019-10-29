@@ -41,11 +41,6 @@ public class MainGUI{
             fr.revalidate();
             fr.repaint();
         }
-        else if (select.equals("AddGUI")) {
-        	fr.setContentPane(management.getAddDeleteStudentGUI().getAddGUI().getPanel());
-        	fr.revalidate();
-            fr.repaint();
-        }
     }
     public LoginGUI getLoginGUI(){
         return this.login;

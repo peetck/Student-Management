@@ -30,11 +30,13 @@ public class ButtonEditor extends DefaultCellEditor {
 		  this.row = row;
 		  if (isSelected) {
 			  button.setForeground(table.getSelectionForeground());
-			  button.setBackground(table.getSelectionBackground());
+			  //button.setBackground(table.getSelectionBackground());
+			  button.setBackground(Color.WHITE);
 		  }
 		  else {
 			  button.setForeground(table.getForeground());
-			  button.setBackground(table.getBackground());
+			  //button.setBackground(table.getBackground());
+			  button.setBackground(Color.WHITE);
 		  }
 		  label = (value == null) ? "" : value.toString();
 		  button.setText(label);

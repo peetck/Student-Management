@@ -12,6 +12,7 @@ public class CellRenderer extends DefaultTableCellRenderer {
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
 	    super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 	    this.setValue(table.getValueAt(row, column));
+	    this.setBackground(Color.WHITE);
 	    this.setFont(new Font("itim", Font.PLAIN, 16));
 	    return this;
 	}
