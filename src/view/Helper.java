@@ -2,6 +2,11 @@ package view;
 import java.awt.*;
 import javax.swing.*;
 public class Helper{
+	public static JComboBox<String> createComboBox() {
+		JComboBox<String> c = new JComboBox<String>();
+		c.setFont(new Font("itim", Font.PLAIN, 16));
+		return c;
+	}
 	// return MyPanel with image if want
     public static MyPanel createPanel(String url){
         Image img = Toolkit.getDefaultToolkit().createImage(url);

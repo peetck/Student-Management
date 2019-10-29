@@ -16,6 +16,7 @@ public class StudentManagement{
     private DB db;
     private DBCollection users;
     private String myUsername;
+    private int currentPage = 1;
     public StudentManagement(String hostname, int port){
         try{
             System.out.println("Connecting to mongoDB...");
@@ -188,6 +189,8 @@ public class StudentManagement{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				gui.getManagementGUI().set("add/delete");
+				currentPage = 3;
+				updatePage();
 			}
 
 			@Override
@@ -207,6 +210,8 @@ public class StudentManagement{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				gui.getManagementGUI().set("mystudent");
+				currentPage = 1;
+				updatePage();
 			}
 
 			@Override
@@ -226,6 +231,8 @@ public class StudentManagement{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				gui.getManagementGUI().set("setting");
+				currentPage = 4;
+				updatePage();
 			}
 
 			@Override
@@ -245,6 +252,8 @@ public class StudentManagement{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				gui.getManagementGUI().set("score");
+				currentPage = 2;
+				updatePage();
 			}
 
 			@Override
@@ -264,9 +273,25 @@ public class StudentManagement{
         
         gui.getManagementGUI().getAddDeleteStudentGUI().getBtn2().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JLabel msg = Helper.createLabel("รหัสนักศึกษาที่ต้องการลบออก");
-        		String studentID = JOptionPane.showInputDialog(null, msg, "Delete Student", JOptionPane.WARNING_MESSAGE);
-				delete(studentID);
+				JPanel p1 = Helper.createPanel("");
+				JLabel msg = Helper.createLabel("รหัสนักศึกษา : ");
+				JTextField tf = Helper.createTextField(10);
+				p1.add(msg);
+				p1.add(tf);
+				int alert = JOptionPane.showConfirmDialog(null, p1, "ลบนักเรียน", JOptionPane.OK_CANCEL_OPTION);
+				if (alert == JOptionPane.OK_OPTION) {
+					if ((delete(tf.getText()))) {
+						JLabel msg2 = Helper.createLabel("ลบนักศึกษานี้ออกจากระบบเรียบร้อยแล้ว");
+	    				JOptionPane.showMessageDialog(null, msg2);
+					}
+					else {
+						JLabel msg2 = Helper.createLabel("ไม่มีรหัสนักศึกษานี้อยู่ในระบบ");
+	    				JOptionPane.showMessageDialog(null, msg2);
+					}
+                } else {
+                	System.out.println("User didn't input anything");
+                }
+
 			}
         });
 
@@ -289,7 +314,8 @@ public class StudentManagement{
     public void addStudent() {
     	String studentID, title, name, surname, cardID, address, race, religion, bloodType, tel, email, height, weight, parentTel, disease, enrollAt;
     	studentID = gui.getManagementGUI().getAddDeleteStudentGUI().getF1().getText();
-    	title = gui.getManagementGUI().getAddDeleteStudentGUI().getF2().getText();
+    	//title = gui.getManagementGUI().getAddDeleteStudentGUI().getF2().getText();
+    	title = gui.getManagementGUI().getAddDeleteStudentGUI().getF2().getSelectedItem().toString();
     	name = gui.getManagementGUI().getAddDeleteStudentGUI().getF3().getText();
     	surname = gui.getManagementGUI().getAddDeleteStudentGUI().getF4().getText();
     	cardID = gui.getManagementGUI().getAddDeleteStudentGUI().getF5().getText();
@@ -333,7 +359,7 @@ public class StudentManagement{
     	updateTable();
     	
     }
-    public void delete(String studentID) {
+    public boolean delete(String studentID) {
     	DBCollection myStudent = db.getCollection(myUsername);
     	DBCursor curs = myStudent.find();
         while (curs.hasNext()){
@@ -347,10 +373,12 @@ public class StudentManagement{
             		}
             	}
             	System.out.println("delete success");
-            	break;
+                updateTable();
+            	return true;
             }
         }
         updateTable();
+        return false;
     }
     public void login_success() {
         System.out.println("Login success!!");
@@ -361,9 +389,11 @@ public class StudentManagement{
             DBObject t = curs.next();
             teacher.addStudent(new Student((String)t.get("studentID"), (String)t.get("title"), (String)t.get("name"), (String)t.get("surname"), (String)t.get("cardID"), (String)t.get("address"), (String)t.get("race"), (String)t.get("religion"), (String)t.get("bloodType"), (String)t.get("tel"), (String)t.get("email"), (String)t.get("height"), (String)t.get("weight"), (String)t.get("parentTel"), (String)t.get("disease"), (String)t.get("enrollAt")));
         }
-        // update Table
         updateTable();
+        updatePage();
     }
+    
+    // update Student table method
     public void updateTable() {
     	ArrayList<Student> students = teacher.getStudents();
     	Object[][] data = new Object[students.size()][5];
@@ -388,7 +418,19 @@ public class StudentManagement{
 
     }
     
-    // more class
+    public void updatePage() {      
+    	gui.getManagementGUI().getMenu1().setBackground(Color.getHSBColor(179, 58, 53));
+    	gui.getManagementGUI().getMenu2().setBackground(Color.getHSBColor(179, 58, 53));
+		gui.getManagementGUI().getMenu3().setBackground(Color.getHSBColor(179, 58, 53));
+		gui.getManagementGUI().getMenu4().setBackground(Color.getHSBColor(179, 58, 53));
+    	switch(currentPage) {
+    		case 1: gui.getManagementGUI().getMenu1().setBackground(Color.WHITE);break;
+    		case 2: gui.getManagementGUI().getMenu2().setBackground(Color.WHITE);break;
+    		case 3: gui.getManagementGUI().getMenu3().setBackground(Color.WHITE);break;
+    		case 4: gui.getManagementGUI().getMenu4().setBackground(Color.WHITE);break;
+    	}
+    }
+    
     
 }
 

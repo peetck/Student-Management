@@ -5,13 +5,14 @@ public class AddDeleteStudentGUI {
 	private JDesktopPane p1;
 	private MyPanel left, right;
 	private JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12, l13, l14, l15;
-	private JTextField f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15;
+	private JTextField f1, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15;
+	private JComboBox<String> f2;
 	private JButton btn1, btn2;
 	private GridBagConstraints gbc;
 	public AddDeleteStudentGUI() {
 		p1 = new JDesktopPane();
 		gbc = new GridBagConstraints();
-		gbc.insets = new Insets(2, 0, 2, 0);
+		gbc.insets = new Insets(5, 0, 5, 0);
         gbc.fill = GridBagConstraints.BOTH;
         btn1 = Helper.createButton("เพิ่มนักศึกษา");
         btn2 = Helper.createButton("ลบนักศึกษา");
@@ -43,7 +44,10 @@ public class AddDeleteStudentGUI {
 		l15 = Helper.createLabel("โรคประจําตัว");
 		
 		f1 = Helper.createTextField(20);
-		f2 = Helper.createTextField(20);
+		//f2 = Helper.createTextField(20);
+		f2 = Helper.createComboBox();
+		f2.addItem("นาย");
+		f2.addItem("นางสาว");
 		f3 = Helper.createTextField(20);
 		f4 = Helper.createTextField(20);
 		f5 = Helper.createTextField(20);
@@ -176,7 +180,7 @@ public class AddDeleteStudentGUI {
 	public JTextField getF1() {
 		return this.f1;
 	}
-	public JTextField getF2() {
+	public JComboBox<String> getF2() {
 		return this.f2;
 	}
 	public JTextField getF3() {
