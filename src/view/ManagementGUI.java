@@ -118,7 +118,9 @@ public class ManagementGUI{
     public MyStudentGUI getMyStudentGUI() {
     	return this.mystudent;
     }
-
+    public ScoreGUI getScoreGUI() {
+    	return this.score;
+    }
     public MyPanel getMenu1() {
     	return this.menu1;
     }
