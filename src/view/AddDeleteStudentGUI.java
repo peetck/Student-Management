@@ -4,7 +4,7 @@ import javax.swing.*;
 public class AddDeleteStudentGUI {
 	private JDesktopPane p1;
 	private MyPanel left, right;
-	private JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12, l13, l14, l15;
+	private JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12, l13, l14, l15, l16;
 	private JTextField f1, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15;
 	private JComboBox<String> f2;
 	private JButton btn1, btn2;
@@ -27,8 +27,10 @@ public class AddDeleteStudentGUI {
         right.setLocation(450, 0);
         right.setLayout(new GridBagLayout());
         
+
+        
         l1 = Helper.createLabel("รหัสนักศึกษา");
-		l2 = Helper.createLabel("คํานําหน้า");
+        l2 = Helper.createLabel("คํานําหน้า");
 		l3 = Helper.createLabel("ชื่อ");
 		l4 = Helper.createLabel("นามสกุล");
 		l5 = Helper.createLabel("หมายเลขบัตรประชาชน");

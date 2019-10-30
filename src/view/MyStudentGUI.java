@@ -14,12 +14,13 @@ public class MyStudentGUI {
 		
 		container = Helper.createPanel("");
 		container.setLayout(new BorderLayout());
-		container.setSize(900, 700);
+		container.setSize(885, 700);
 		container.setLocation(0, 0);
 
 		
 
 		table_scroll = new JScrollPane(new JTable());
+		table_scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS); 
 		
 		container.add(table_scroll);
 
@@ -32,6 +33,9 @@ public class MyStudentGUI {
 		container.repaint();
 		table_scroll = new JScrollPane(table);
 		table_scroll.getViewport().setBackground(Color.WHITE);
+		
+		table_scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS); 
+		
 		container.add(table_scroll);
 
 		

@@ -15,13 +15,14 @@ public class ScoreGUI {
 		
 		container = Helper.createPanel("");
 		container.setLayout(new BorderLayout());
-		container.setSize(900, 590);
+		container.setSize(885, 590);
 		container.setLocation(0, 0);
 		
 		
 		
 		
 		table_scroll = new JScrollPane(new JTable());
+		table_scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS); 
 		container.add(table_scroll);
 		
 		bottom = Helper.createPanel("");
@@ -30,6 +31,7 @@ public class ScoreGUI {
 		bottom.setLocation(0, 590);
     		
 		btn1 = Helper.createButton("แก้ไขคะแนน");
+		//btn1.setBackground(new Color(0, 99, 178));
 		
 		bottom.add(btn1);
 
@@ -48,6 +50,7 @@ public class ScoreGUI {
 		container.repaint();
 		table_scroll = new JScrollPane(table);
 		table_scroll.getViewport().setBackground(Color.WHITE);
+		table_scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS); 
 		container.add(table_scroll);
 	}
 	public JButton getBtn1() {

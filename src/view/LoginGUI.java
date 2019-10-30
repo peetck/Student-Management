@@ -1,6 +1,9 @@
 package view;
 import java.awt.*;
 import javax.swing.*;
+
+import mdlaf.animation.MaterialUIMovement;
+import mdlaf.utils.MaterialColors;
 public class LoginGUI{
     private JButton btn1;
     private MyPanel p1;

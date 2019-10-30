@@ -504,6 +504,7 @@ public class StudentManagement{
 		table = new JTable(dm);
 		table.getColumn("").setCellRenderer(new ButtonRenderer());
 		table.getColumn("").setCellEditor(new ButtonEditor(new JCheckBox(), teacher));
+		
 		table.getTableHeader().setReorderingAllowed(false);
 		table.setDefaultEditor(Object.class, null);
 		table.setFillsViewportHeight(true);

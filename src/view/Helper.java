@@ -1,6 +1,11 @@
 package view;
-import java.awt.*;
+
+import mdlaf.*;
+import mdlaf.animation.*;
+import mdlaf.utils.*;
+
 import javax.swing.*;
+import java.awt.*;
 public class Helper{
 	public static JComboBox<String> createComboBox() {
 		JComboBox<String> c = new JComboBox<String>();
@@ -23,12 +28,27 @@ public class Helper{
         l.setOpaque(false);
         return l;
     }
+    public static JLabel createLabel(String msg, Color color){
+        JLabel l = new JLabel(msg);
+        l.setFont(new Font("itim", Font.PLAIN, 16));
+        l.setForeground(color);
+        l.setOpaque(false);
+        return l;
+    }
     public static JLabel createLabel(String msg, int size){
         JLabel l = new JLabel(msg);
         l.setFont(new Font("itim", Font.PLAIN, size));
         l.setOpaque(false);
         return l;
     }
+    public static JLabel createLabel(String msg, int size, Color color){
+        JLabel l = new JLabel(msg);
+        l.setFont(new Font("itim", Font.PLAIN, size));
+        l.setForeground(color);
+        l.setOpaque(false);
+        return l;
+    }
+
     // return JTextField with font and selected size
     public static JTextField createTextField(int size){
         JTextField f = new JTextField(size);
@@ -47,6 +67,14 @@ public class Helper{
     public static JButton createButton(String msg){
         JButton btn = new JButton(msg);
         btn.setFont(new Font("itim", Font.PLAIN, 16));
+        MaterialUIMovement.add (btn, MaterialColors.LIGHT_BLUE_500, 5, 1000 / 60);
+        btn.setOpaque(false);
+        return btn;
+    }
+    public static JButton createButton(String msg, Color color){
+        JButton btn = new JButton(msg);
+        btn.setFont(new Font("itim", Font.PLAIN, 16));
+        btn.setForeground(color);
         btn.setOpaque(false);
         return btn;
     }

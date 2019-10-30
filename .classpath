@@ -6,7 +6,7 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Picnic101/Desktop/IT/Student-Management/lib/material-ui-swing-0.9.6.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Picnic101/Desktop/IT/Student-Management/lib/mongo-2.10.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Picnic101/Desktop/IT/Student-Management/lib/material-ui-swing-0.9.6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
