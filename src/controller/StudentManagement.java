@@ -537,10 +537,10 @@ public class StudentManagement{
 		managementPage.getScoreGUI().updateTable(scoreTable);
     }
     public void updatePage() {      
-    	managementPage.getMenu1().setBackground(Color.getHSBColor(179, 58, 53));
-    	managementPage.getMenu2().setBackground(Color.getHSBColor(179, 58, 53));
-		managementPage.getMenu3().setBackground(Color.getHSBColor(179, 58, 53));
-		managementPage.getMenu4().setBackground(Color.getHSBColor(179, 58, 53));
+    	managementPage.getMenu1().setBackground(new Color(156, 195, 213));
+    	managementPage.getMenu2().setBackground(new Color(156, 195, 213));
+		managementPage.getMenu3().setBackground(new Color(156, 195, 213));
+		managementPage.getMenu4().setBackground(new Color(156, 195, 213));
     	switch(currentPage) {
     		case 1: managementPage.getMenu1().setBackground(Color.WHITE);break;
     		case 2: managementPage.getMenu2().setBackground(Color.WHITE);break;

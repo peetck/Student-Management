@@ -51,11 +51,11 @@ public class ManagementGUI{
         
         topmenu.setLocation(0, 0);
         topmenu.setSize(300, 130);
-        topmenu.setBackground(Color.lightGray);
+        topmenu.setBackground(new Color(0, 99, 178));
         
         bottommenu.setLocation(0, 590);
         bottommenu.setSize(300, 110);
-        bottommenu.setBackground(Color.lightGray);
+        bottommenu.setBackground(new Color(0, 99, 178));
         
         menu.setLayout(new GridLayout(4, 1));
         menu.setLocation(0, 130);
