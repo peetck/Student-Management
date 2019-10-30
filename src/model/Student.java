@@ -51,31 +51,32 @@ public class Student {
 	public Object[] getScore() {
 		Object[] score = new Object[7];
 		score[0] = studentID;
-		score[1] = this.assignment1;
-		score[2] = this.assignment2;
-		score[3] = midterm_score;
-		score[4] = final_score;
+		score[1] = String.format("%.3f", assignment1);
+		score[2] = String.format("%.3f", assignment2);
+		score[3] = String.format("%.3f", midterm_score);
+		score[4] = String.format("%.3f", final_score);
+		
 		double allScore = this.assignment1 + this.assignment2 + midterm_score + final_score;
-		score[5] = allScore;
+		score[5] = String.format("%.3f", allScore);
 		if (allScore >= 80) {
 			score[6] = "A";
 		}
 		else if (allScore >= 75) {
 			score[6] = "B+";
 		}
-		if (allScore >= 70) {
+		else if (allScore >= 70) {
 			score[6] = "B";
 		}
-		if (allScore >= 65) {
+		else if (allScore >= 65) {
 			score[6] = "C+";
 		}
-		if (allScore >= 60) {
+		else if (allScore >= 60) {
 			score[6] = "C";
 		}
-		if (allScore >= 55) {
+		else if (allScore >= 55) {
 			score[6] = "D+";
 		}
-		if (allScore >= 50) {
+		else if (allScore >= 50) {
 			score[6] = "D";
 		}
 		else {

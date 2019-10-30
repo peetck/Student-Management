@@ -222,5 +222,23 @@ public class AddDeleteStudentGUI {
 	public JTextField getF15() {
 		return this.f15;
 	}
-
+	
+	public void reset() {
+		f1.setText("");
+		f2.setSelectedIndex(0);
+		f3.setText("");
+		f4.setText("");
+		f5.setText("");
+		f6.setText("");
+		f7.setText("");
+		f8.setText("");
+		f9.setText("");
+		f10.setText("");
+		f11.setText("");
+		f12.setText("");
+		f13.setText("");
+		f14.setText("");
+		f15.setText("");
+		
+	}
 }

@@ -14,6 +14,7 @@ public class CellRenderer extends DefaultTableCellRenderer {
 	    this.setValue(table.getValueAt(row, column));
 	    this.setBackground(Color.WHITE);
 	    this.setFont(new Font("itim", Font.PLAIN, 16));
+	    this.setHorizontalAlignment( JLabel.CENTER );
 	    return this;
 	}
 }

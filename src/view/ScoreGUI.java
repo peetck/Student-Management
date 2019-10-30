@@ -15,7 +15,7 @@ public class ScoreGUI {
 		
 		container = Helper.createPanel("");
 		container.setLayout(new BorderLayout());
-		container.setSize(900, 600);
+		container.setSize(900, 590);
 		container.setLocation(0, 0);
 		
 		
@@ -26,8 +26,8 @@ public class ScoreGUI {
 		
 		bottom = Helper.createPanel("");
 		bottom.setLayout(new GridLayout(1, 2));
-		bottom.setSize(900, 100);
-		bottom.setLocation(0, 600);
+		bottom.setSize(900, 110);
+		bottom.setLocation(0, 590);
     		
 		btn1 = Helper.createButton("แก้ไขคะแนน");
 		

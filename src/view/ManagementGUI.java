@@ -85,6 +85,8 @@ public class ManagementGUI{
     		
     		program.revalidate();
     		program.repaint();
+    		
+    		add_delete.reset();
     		program.add(add_delete.getPanel());
     	}
     	else if (select.equals("mystudent")) {
