@@ -67,7 +67,7 @@ public class Helper{
     public static JButton createButton(String msg){
         JButton btn = new JButton(msg);
         btn.setFont(new Font("itim", Font.PLAIN, 16));
-        MaterialUIMovement.add (btn, MaterialColors.LIGHT_BLUE_500, 5, 1000 / 60);
+        MaterialUIMovement.add (btn, new Color(156, 195, 213), 5, 1000 / 60);
         btn.setOpaque(false);
         return btn;
     }
