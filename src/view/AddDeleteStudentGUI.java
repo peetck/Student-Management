@@ -1,14 +1,17 @@
 package view;
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 public class AddDeleteStudentGUI {
 	private JDesktopPane p1;
-	private MyPanel left, right;
-	private JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12, l13, l14, l15, l16;
+	private MyPanel left, right, picture;
+	private JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12, l13, l14, l15, l16, pictureLabel;
 	private JTextField f1, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15;
 	private JComboBox<String> f2;
-	private JButton btn1, btn2;
+	private JButton btn1, btn2, btn3;
 	private GridBagConstraints gbc;
+	private Image defaultImg;
+	private String imgPath;
 	public AddDeleteStudentGUI() {
 		p1 = new JDesktopPane();
 		gbc = new GridBagConstraints();
@@ -16,6 +19,7 @@ public class AddDeleteStudentGUI {
         gbc.fill = GridBagConstraints.BOTH;
         btn1 = Helper.createButton("เพิ่มนักศึกษา");
         btn2 = Helper.createButton("ลบนักศึกษา");
+        btn3 = Helper.createButton("เพิ่มรูป");
         
         left = Helper.createPanel("");
         left.setSize(450, 700);
@@ -23,9 +27,15 @@ public class AddDeleteStudentGUI {
         left.setLayout(new GridBagLayout());
         
         right = Helper.createPanel("");
-        right.setSize(450, 700);
-        right.setLocation(450, 0);
+        right.setSize(450, 540);
+        right.setLocation(450, 160);
         right.setLayout(new GridBagLayout());
+        
+        picture = Helper.createPanel("");
+        picture.setBorder(BorderFactory.createLineBorder(Color.black));
+        picture.setSize(150, 150);
+        picture.setLocation(650, 10);
+        picture.setLayout(new BorderLayout());
         
 
         
@@ -159,13 +169,23 @@ public class AddDeleteStudentGUI {
 		right.add(btn1, gbc);
 		gbc.gridx = 0;
 		gbc.gridy = 13;
+		right.add(btn3, gbc);
+		gbc.gridx = 0;
+		gbc.gridy = 14;
 		right.add(btn2, gbc);
 
+        pictureLabel = Helper.createLabel("");
+        pictureLabel.setBackground(Color.RED);
+		picture.add(pictureLabel);
 		
-
+		defaultImg = Toolkit.getDefaultToolkit().createImage("images/blank_profile.png");
+		defaultImg = defaultImg.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
+	    pictureLabel.setIcon(new ImageIcon(defaultImg));
+		
+		
 		p1.add(left);
 		p1.add(right);
-		
+		p1.add(picture);
 
 	}
 	
@@ -178,6 +198,9 @@ public class AddDeleteStudentGUI {
 	}
 	public JButton getBtn2() {
 		return this.btn2;
+	}
+	public JButton getBtn3() {
+		return this.btn3;
 	}
 	public JTextField getF1() {
 		return this.f1;
@@ -225,6 +248,17 @@ public class AddDeleteStudentGUI {
 		return this.f15;
 	}
 	
+	public JLabel getPictureLabel() {
+		return this.pictureLabel;
+	}
+	
+	public String getImagePath() {
+		return imgPath;
+	}
+	
+	public void setImagePath(String path) {
+		this.imgPath = path;
+	}
 	public void reset() {
 		f1.setText("");
 		f2.setSelectedIndex(0);

@@ -33,6 +33,105 @@ public class Student {
 		this.assignment1 = assignment1;
 		this.assignment2 = assignment2;
 	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getSurname() {
+		return surname;
+	}
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+	public String getCardID() {
+		return cardID;
+	}
+	public void setCardID(String cardID) {
+		this.cardID = cardID;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getRace() {
+		return race;
+	}
+	public void setRace(String race) {
+		this.race = race;
+	}
+	public String getReligion() {
+		return religion;
+	}
+	public void setReligion(String religion) {
+		this.religion = religion;
+	}
+	public String getBloodType() {
+		return bloodType;
+	}
+	public void setBloodType(String bloodType) {
+		this.bloodType = bloodType;
+	}
+	public String getTel() {
+		return tel;
+	}
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getHeight() {
+		return height;
+	}
+	public void setHeight(String height) {
+		this.height = height;
+	}
+	public String getWeight() {
+		return weight;
+	}
+	public void setWeight(String weight) {
+		this.weight = weight;
+	}
+	public String getParentTel() {
+		return parentTel;
+	}
+	public void setParentTel(String parentTel) {
+		this.parentTel = parentTel;
+	}
+	public String getDisease() {
+		return disease;
+	}
+	public void setDisease(String disease) {
+		this.disease = disease;
+	}
+	public String getEnrollAt() {
+		return enrollAt;
+	}
+	public void setEnrollAt(String enrollAt) {
+		this.enrollAt = enrollAt;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	public void setStudentID(String studentID) {
+		this.studentID = studentID;
+	}
 	public void setScore( double assignment1, double assignment2, double midterm_score, double final_score) {
 		this.midterm_score = midterm_score;
 		this.final_score = final_score;

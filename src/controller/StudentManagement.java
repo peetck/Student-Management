@@ -1,13 +1,18 @@
 package controller;
 import java.awt.*;
+import java.awt.List;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.*;
 
 import com.mongodb.*;
 import com.mongodb.gridfs.*;
 import com.mongodb.io.*;
 import java.util.*;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.border.LineBorder;
@@ -357,6 +362,10 @@ public class StudentManagement{
 							p2.add(tf04);
 							int alert2 = JOptionPane.showConfirmDialog(null, p2, "แก้ไขคะแนน", JOptionPane.OK_CANCEL_OPTION);
 							if (alert2 == JOptionPane.OK_OPTION) {
+								if (Double.parseDouble(tf01.getText()) + Double.parseDouble(tf02.getText()) + Double.parseDouble(tf03.getText()) + Double.parseDouble(tf04.getText()) > 100) {
+									JOptionPane.showMessageDialog(null, Helper.createLabel("ไม่สามารถกําหนคะแนนให้เกิน 100 ได้"));
+									return;
+								}
 								arr.get(i).setScore(Double.parseDouble(tf01.getText()), Double.parseDouble(tf02.getText()), Double.parseDouble(tf03.getText()), Double.parseDouble(tf04.getText()));
 								updateScoreTable();
 								
@@ -389,10 +398,27 @@ public class StudentManagement{
         	}
         });
         
+        managementPage.getAddDeleteStudentGUI().getBtn3().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		JFileChooser chooser = new JFileChooser();
+        	    chooser.showOpenDialog(null);
+        	    File f = chooser.getSelectedFile();
+        	    String filename = f.getAbsolutePath();
+        	    
+        	    
+        	    Image img = Toolkit.getDefaultToolkit().createImage(filename);
+        	    img = img.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
+        	    ImageIcon icon = new ImageIcon(img);
+        	    managementPage.getAddDeleteStudentGUI().getPictureLabel().setIcon(icon);
+        	    managementPage.getAddDeleteStudentGUI().setImagePath(filename);
+
+        	}
+        });
+        
      }
     
     // below here is method in all application
-    
+
     public void addStudent() {
     	String studentID, title, name, surname, cardID, address, race, religion, bloodType, tel, email, height, weight, parentTel, disease, enrollAt;
     	studentID = managementPage.getAddDeleteStudentGUI().getF1().getText();
@@ -413,7 +439,17 @@ public class StudentManagement{
     	disease = managementPage.getAddDeleteStudentGUI().getF15().getText();
     	enrollAt = "" + java.time.LocalDate.now();
     	
+    	DBCollection myStudent = db.getCollection(myUsername);
+    	
+    	/*String img_path = managementPage.getAddDeleteStudentGUI().getImagePath();
+    	if (img_path == null) {
+    		img_path = "images/blank_profile.png";
+    	}
+    	System.out.println(img_path);*/
+
+    	
     	BasicDBObject n = new BasicDBObject();
+
     	n.put("studentID", studentID);
     	n.put("title", title);
     	n.put("name", name);
@@ -435,7 +471,7 @@ public class StudentManagement{
     	n.put("assignment1", 0.0);
     	n.put("assignment2", 0.0);
     	
-    	DBCollection myStudent = db.getCollection(myUsername);
+    	
     	myStudent.insert(n);
     	
     	teacher.addStudent(new Student(studentID, title, name, surname, cardID, address, 
@@ -448,6 +484,8 @@ public class StudentManagement{
     	updateScoreTable();
     	
     }
+    
+
     public boolean delete(String studentID) {
     	DBCollection myStudent = db.getCollection(myUsername);
     	DBCursor curs = myStudent.find();
