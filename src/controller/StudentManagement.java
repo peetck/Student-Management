@@ -253,7 +253,8 @@ public class StudentManagement{
         managementPage.getMenu4().addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				managementPage.set("setting");
+				// Delete student ** 
+				//managementPage.set("setting");
 				currentPage = 4;
 				updatePage();
 			}
@@ -291,7 +292,26 @@ public class StudentManagement{
 			@Override
 			public void mouseExited(MouseEvent e) {}
         });
-        
+        managementPage.getMenu5().addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				managementPage.set("setting");
+				currentPage = 5;
+				updatePage();
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+
+			@Override
+			public void mouseExited(MouseEvent e) {}
+        });
 
         
         managementPage.getAddDeleteStudentGUI().getBtn2().addActionListener(new ActionListener() {
@@ -580,11 +600,13 @@ public class StudentManagement{
     	managementPage.getMenu2().setBackground(new Color(156, 195, 213));
 		managementPage.getMenu3().setBackground(new Color(156, 195, 213));
 		managementPage.getMenu4().setBackground(new Color(156, 195, 213));
+		managementPage.getMenu5().setBackground(new Color(156, 195, 213));
     	switch(currentPage) {
     		case 1: managementPage.getMenu1().setBackground(Color.WHITE);break;
     		case 2: managementPage.getMenu2().setBackground(Color.WHITE);break;
     		case 3: managementPage.getMenu3().setBackground(Color.WHITE);break;
     		case 4: managementPage.getMenu4().setBackground(Color.WHITE);break;
+    		case 5: managementPage.getMenu5().setBackground(Color.WHITE);break;
     	}
     }
     

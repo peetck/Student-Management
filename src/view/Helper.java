@@ -48,6 +48,28 @@ public class Helper{
         l.setOpaque(false);
         return l;
     }
+    // menu JLable icon only !!
+    public static JLabel createLabel(String msg, String path) {
+    	Image img = Toolkit.getDefaultToolkit().getImage(path);
+	    img = img.getScaledInstance(80, 80, Image.SCALE_DEFAULT);
+	    ImageIcon icon = new ImageIcon(img);
+	    JLabel l = new JLabel(msg + "   ");
+        l.setFont(new Font("itim", Font.PLAIN, 16));
+        l.setIcon(icon);
+        l.setOpaque(false);
+        return l;
+    }
+    public static JLabel createLabel(String msg, String path, int size) {
+    	Image img = Toolkit.getDefaultToolkit().getImage(path);
+	    img = img.getScaledInstance(80, 80, Image.SCALE_DEFAULT);
+	    ImageIcon icon = new ImageIcon(img);
+	    JLabel l = new JLabel(msg);
+        l.setFont(new Font("itim", Font.PLAIN, size));
+        l.setIcon(icon);
+        l.setOpaque(false);
+        //l.setHorizontalTextPosition(JLabel.LEFT);
+        return l;
+    }
 
     // return JTextField with font and selected size
     public static JTextField createTextField(int size){
