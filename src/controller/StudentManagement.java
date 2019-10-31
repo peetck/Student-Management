@@ -253,10 +253,24 @@ public class StudentManagement{
         managementPage.getMenu4().addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// Delete student ** 
-				//managementPage.set("setting");
-				currentPage = 4;
-				updatePage();
+				
+				JPanel p1 = Helper.createPanel("");
+				JLabel msg = Helper.createLabel("รหัสนักศึกษา : ");
+				JTextField tf = Helper.createTextField(10);
+				p1.add(msg);
+				p1.add(tf);
+				int alert = JOptionPane.showConfirmDialog(null, p1, "ลบนักเรียน", JOptionPane.OK_CANCEL_OPTION);
+				if (alert == JOptionPane.OK_OPTION) {
+					if ((delete(tf.getText()))) {
+						JLabel msg2 = Helper.createLabel("ลบนักศึกษานี้ออกจากระบบเรียบร้อยแล้ว");
+	    				JOptionPane.showMessageDialog(null, msg2);
+					}
+					else{
+						JLabel msg2 = Helper.createLabel("ไม่มีรหัสนักศึกษานี้อยู่ในระบบ");
+	    				JOptionPane.showMessageDialog(null, msg2);
+					}
+                }
+
 			}
 
 			@Override
@@ -314,32 +328,11 @@ public class StudentManagement{
         });
 
         
-        managementPage.getAddDeleteStudentGUI().getBtn2().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JPanel p1 = Helper.createPanel("");
-				JLabel msg = Helper.createLabel("รหัสนักศึกษา : ");
-				JTextField tf = Helper.createTextField(10);
-				p1.add(msg);
-				p1.add(tf);
-				int alert = JOptionPane.showConfirmDialog(null, p1, "ลบนักเรียน", JOptionPane.OK_CANCEL_OPTION);
-				if (alert == JOptionPane.OK_OPTION) {
-					if ((delete(tf.getText()))) {
-						JLabel msg2 = Helper.createLabel("ลบนักศึกษานี้ออกจากระบบเรียบร้อยแล้ว");
-	    				JOptionPane.showMessageDialog(null, msg2);
-					}
-					else{
-						JLabel msg2 = Helper.createLabel("ไม่มีรหัสนักศึกษานี้อยู่ในระบบ");
-	    				JOptionPane.showMessageDialog(null, msg2);
-					}
-                }
 
-			}
-        });
-
-        managementPage.getAddDeleteStudentGUI().getBtn1().addActionListener(new ActionListener() {
+        managementPage.getAddStudentGUI().getBtn1().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		for (int i = 0; i < teacher.getStudents().size(); i++) {
-        			if (teacher.getStudents().get(i).getStudentID().equals(managementPage.getAddDeleteStudentGUI().getF1().getText())) {
+        			if (teacher.getStudents().get(i).getStudentID().equals(managementPage.getAddStudentGUI().getF1().getText())) {
         				JLabel msg = Helper.createLabel("มีรหัสนักศึกษานี้อยู่ในระบบอยู่แล้ว");
         				JOptionPane.showMessageDialog(null, msg);
         				return;
@@ -418,7 +411,7 @@ public class StudentManagement{
         	}
         });
         
-        managementPage.getAddDeleteStudentGUI().getBtn3().addActionListener(new ActionListener() {
+        managementPage.getAddStudentGUI().getBtn3().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		JFileChooser chooser = new JFileChooser();
         	    chooser.showOpenDialog(null);
@@ -429,8 +422,8 @@ public class StudentManagement{
         	    Image img = Toolkit.getDefaultToolkit().createImage(filename);
         	    img = img.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
         	    ImageIcon icon = new ImageIcon(img);
-        	    managementPage.getAddDeleteStudentGUI().getPictureLabel().setIcon(icon);
-        	    managementPage.getAddDeleteStudentGUI().setImagePath(filename);
+        	    managementPage.getAddStudentGUI().getPictureLabel().setIcon(icon);
+        	    managementPage.getAddStudentGUI().setImagePath(filename);
 
         	}
         });
@@ -441,27 +434,27 @@ public class StudentManagement{
 
     public void addStudent() {
     	String studentID, title, name, surname, cardID, address, race, religion, bloodType, tel, email, height, weight, parentTel, disease, enrollAt;
-    	studentID = managementPage.getAddDeleteStudentGUI().getF1().getText();
-    	//title = managementPage.getAddDeleteStudentGUI().getF2().getText();
-    	title = managementPage.getAddDeleteStudentGUI().getF2().getSelectedItem().toString();
-    	name = managementPage.getAddDeleteStudentGUI().getF3().getText();
-    	surname = managementPage.getAddDeleteStudentGUI().getF4().getText();
-    	cardID = managementPage.getAddDeleteStudentGUI().getF5().getText();
-    	address = managementPage.getAddDeleteStudentGUI().getF6().getText();
-    	race = managementPage.getAddDeleteStudentGUI().getF7().getText();
-    	religion = managementPage.getAddDeleteStudentGUI().getF8().getText();
-    	bloodType = managementPage.getAddDeleteStudentGUI().getF9().getText();
-    	tel = managementPage.getAddDeleteStudentGUI().getF10().getText();
-    	email = managementPage.getAddDeleteStudentGUI().getF11().getText();
-    	height = managementPage.getAddDeleteStudentGUI().getF12().getText();
-    	weight = managementPage.getAddDeleteStudentGUI().getF13().getText();
-    	parentTel = managementPage.getAddDeleteStudentGUI().getF14().getText();
-    	disease = managementPage.getAddDeleteStudentGUI().getF15().getText();
+    	studentID = managementPage.getAddStudentGUI().getF1().getText();
+    	//title = managementPage.getAddStudentGUI().getF2().getText();
+    	title = managementPage.getAddStudentGUI().getF2().getSelectedItem().toString();
+    	name = managementPage.getAddStudentGUI().getF3().getText();
+    	surname = managementPage.getAddStudentGUI().getF4().getText();
+    	cardID = managementPage.getAddStudentGUI().getF5().getText();
+    	address = managementPage.getAddStudentGUI().getF6().getText();
+    	race = managementPage.getAddStudentGUI().getF7().getText();
+    	religion = managementPage.getAddStudentGUI().getF8().getText();
+    	bloodType = managementPage.getAddStudentGUI().getF9().getText();
+    	tel = managementPage.getAddStudentGUI().getF10().getText();
+    	email = managementPage.getAddStudentGUI().getF11().getText();
+    	height = managementPage.getAddStudentGUI().getF12().getText();
+    	weight = managementPage.getAddStudentGUI().getF13().getText();
+    	parentTel = managementPage.getAddStudentGUI().getF14().getText();
+    	disease = managementPage.getAddStudentGUI().getF15().getText();
     	enrollAt = "" + java.time.LocalDate.now();
     	
     	DBCollection myStudent = db.getCollection(myUsername);
     	
-    	/*String img_path = managementPage.getAddDeleteStudentGUI().getImagePath();
+    	/*String img_path = managementPage.getAddStudentGUI().getImagePath();
     	if (img_path == null) {
     		img_path = "images/blank_profile.png";
     	}

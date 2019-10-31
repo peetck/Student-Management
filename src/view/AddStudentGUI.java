@@ -2,7 +2,7 @@ package view;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-public class AddDeleteStudentGUI {
+public class AddStudentGUI {
 	private JDesktopPane p1;
 	private MyPanel left, right, picture;
 	private JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12, l13, l14, l15, l16, pictureLabel;
@@ -12,13 +12,12 @@ public class AddDeleteStudentGUI {
 	private GridBagConstraints gbc;
 	private Image defaultImg;
 	private String imgPath;
-	public AddDeleteStudentGUI() {
+	public AddStudentGUI() {
 		p1 = new JDesktopPane();
 		gbc = new GridBagConstraints();
 		gbc.insets = new Insets(5, 0, 5, 0);
         gbc.fill = GridBagConstraints.BOTH;
         btn1 = Helper.createButton("เพิ่มนักศึกษา");
-        btn2 = Helper.createButton("ลบนักศึกษา");
         btn3 = Helper.createButton("เพิ่มรูป");
         
         left = Helper.createPanel("");
@@ -172,7 +171,7 @@ public class AddDeleteStudentGUI {
 		right.add(btn3, gbc);
 		gbc.gridx = 0;
 		gbc.gridy = 14;
-		right.add(btn2, gbc);
+
 
         pictureLabel = Helper.createLabel("");
         pictureLabel.setBackground(Color.RED);
@@ -196,9 +195,7 @@ public class AddDeleteStudentGUI {
 	public JButton getBtn1() {
 		return this.btn1;
 	}
-	public JButton getBtn2() {
-		return this.btn2;
-	}
+
 	public JButton getBtn3() {
 		return this.btn3;
 	}

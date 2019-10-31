@@ -12,7 +12,7 @@ public class ManagementGUI{
     private MyPanel menu1, menu2, menu3, menu4, menu5;
     private JLabel menuMsg1, menuMsg2, menuMsg3, menuMsg4, menuMsg5, icon1, icon2, icon3, icon4, icon5;
     private MyStudentGUI mystudent;
-    private AddDeleteStudentGUI add_delete;
+    private AddStudentGUI add;
     private SettingGUI setting;
     private ScoreGUI score;
     public ManagementGUI(){
@@ -22,7 +22,7 @@ public class ManagementGUI{
         program.setLayout(new GridLayout(1, 1));
         mystudent = new MyStudentGUI();
         score = new ScoreGUI();
-        add_delete = new AddDeleteStudentGUI();
+        add = new AddStudentGUI();
         setting = new SettingGUI();
         topmenu = Helper.createPanel("");
         bottommenu = Helper.createPanel("");
@@ -107,8 +107,8 @@ public class ManagementGUI{
     		program.revalidate();
     		program.repaint();
     		
-    		add_delete.reset();
-    		program.add(add_delete.getPanel());
+    		add.reset();
+    		program.add(add.getPanel());
     	}
     	else if (select.equals("mystudent")) {
     		program.removeAll();
@@ -135,8 +135,8 @@ public class ManagementGUI{
     public JDesktopPane getPanel(){
         return this.desktop;
     }
-    public AddDeleteStudentGUI getAddDeleteStudentGUI() {
-    	return this.add_delete;
+    public AddStudentGUI getAddStudentGUI() {
+    	return this.add;
     }
     public MyStudentGUI getMyStudentGUI() {
     	return this.mystudent;
