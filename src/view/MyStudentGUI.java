@@ -1,7 +1,6 @@
 package view;
 import javax.swing.*;
-import javax.swing.border.LineBorder;
-import javax.swing.table.*;
+
 import java.awt.*;
 
 public class MyStudentGUI {

@@ -1,8 +1,8 @@
 package model;
 
 public class Student {
-	private String studentID, title, name, surname, cardID, address, race, religion, bloodType, tel, email, height, weight, parentTel, disease, enrollAt;
-	private int age;
+	private String studentID, title, name, surname, cardID, address, race, religion, bloodType, 
+					tel, email, height, weight, parentTel, disease, enrollAt, day, month, year;
 	private double midterm_score, final_score, assignment1, assignment2;
 	public Student(String studentID, String title, String name, String surname, 
 			String cardID, String address, String race, String religion, 
@@ -123,12 +123,7 @@ public class Student {
 	public void setEnrollAt(String enrollAt) {
 		this.enrollAt = enrollAt;
 	}
-	public int getAge() {
-		return age;
-	}
-	public void setAge(int age) {
-		this.age = age;
-	}
+
 	public void setStudentID(String studentID) {
 		this.studentID = studentID;
 	}

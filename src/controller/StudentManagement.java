@@ -1,25 +1,19 @@
 package controller;
 import java.awt.*;
-import java.awt.List;
+
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+
 import java.io.*;
 
 import com.mongodb.*;
-import com.mongodb.gridfs.*;
-import com.mongodb.io.*;
+
 import java.util.*;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.border.LineBorder;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
 
-import org.bson.types.ObjectId;
+import javax.swing.*;
+import javax.swing.border.*;
+import javax.swing.table.*;
+
 
 import model.*;
 import view.*;
@@ -81,14 +75,12 @@ public class StudentManagement{
                 loginPage.getL3().setText("Wrong Username or Password.");
             }
         });
-        loginPage.getL4().addMouseListener (new MouseListener (){
+        loginPage.getL4().addMouseListener (new MouseAdapter (){
+
             public void mouseClicked (MouseEvent e){
                 gui.set("RegisterGUI");
             }
-            public void mouseEntered(MouseEvent e) {}        	
-			public void mousePressed(MouseEvent e) {}
-			public void mouseReleased(MouseEvent e) {}
-			public void mouseExited(MouseEvent e) {}
+
         });
         registerPage.getBtn2().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
@@ -167,49 +159,33 @@ public class StudentManagement{
             }
         });
         // LoginGui enter event
-        KeyListener loginListener = new KeyListener() {
-        	@Override
+        KeyListener loginListener = new KeyAdapter() {
         	public void keyPressed(KeyEvent e) {
         		int keycode = e.getKeyCode();
         		if (keycode == 10) {
         			loginPage.getBtn1().doClick();
         		}
         	}
-        	 
-        	@Override
-        	public void keyReleased(KeyEvent event) {
-        	}
-        	 
-        	@Override
-        	public void keyTyped(KeyEvent event) {       
-        	}
         };
         loginPage.getF1().addKeyListener(loginListener);
         loginPage.getF2().addKeyListener(loginListener);
         
-        KeyListener registerListener = new KeyListener() {
-        	@Override
+        KeyListener registerListener = new KeyAdapter() {
+
         	public void keyPressed(KeyEvent e) {
         		int keycode = e.getKeyCode();
         		if (keycode == 10) {
         			registerPage.getBtn1().doClick();
         		}
         	}
-        	 
-        	@Override
-        	public void keyReleased(KeyEvent event) {
-        	}
-        	 
-        	@Override
-        	public void keyTyped(KeyEvent event) {       
-        	}
+
         };
         registerPage.getF1().addKeyListener(registerListener);
         registerPage.getF2().addKeyListener(registerListener);
         registerPage.getF3().addKeyListener(registerListener);
         
-        managementPage.getMenu3().addMouseListener(new MouseListener() {
-			@Override
+        managementPage.getMenu3().addMouseListener(new MouseAdapter() {
+
 			public void mouseClicked(MouseEvent e) {
 				if (currentPage == 3) {
 					return;
@@ -220,21 +196,10 @@ public class StudentManagement{
 				updatePage();
 			}
 
-			@Override
-			public void mousePressed(MouseEvent e) {}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {}
-
-			@Override
-			public void mouseExited(MouseEvent e) {}
         });
         
-        managementPage.getMenu1().addMouseListener(new MouseListener() {
-			@Override
+        managementPage.getMenu1().addMouseListener(new MouseAdapter() {
+
 			public void mouseClicked(MouseEvent e) {
 				if (currentPage == 1) {
 					return;
@@ -245,21 +210,10 @@ public class StudentManagement{
 				updatePage();
 			}
 
-			@Override
-			public void mousePressed(MouseEvent e) {}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {}
-
-			@Override
-			public void mouseExited(MouseEvent e) {}
         });
         
-        managementPage.getMenu4().addMouseListener(new MouseListener() {
-			@Override
+        managementPage.getMenu4().addMouseListener(new MouseAdapter() {
+
 			public void mouseClicked(MouseEvent e) {
 				
 				JPanel p1 = Helper.createPanel("");
@@ -281,21 +235,10 @@ public class StudentManagement{
 
 			}
 
-			@Override
-			public void mousePressed(MouseEvent e) {}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {}
-
-			@Override
-			public void mouseExited(MouseEvent e) {}
         });
         
-        managementPage.getMenu2().addMouseListener(new MouseListener() {
-			@Override
+        managementPage.getMenu2().addMouseListener(new MouseAdapter() {
+
 			public void mouseClicked(MouseEvent e) {
 				if (currentPage == 2) {
 					return;
@@ -306,20 +249,9 @@ public class StudentManagement{
 				updatePage();
 			}
 
-			@Override
-			public void mousePressed(MouseEvent e) {}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {}
-
-			@Override
-			public void mouseExited(MouseEvent e) {}
         });
-        managementPage.getMenu5().addMouseListener(new MouseListener() {
-			@Override
+        managementPage.getMenu5().addMouseListener(new MouseAdapter() {
+
 			public void mouseClicked(MouseEvent e) {
 				if (currentPage == 5) {
 					return;
@@ -330,17 +262,6 @@ public class StudentManagement{
 				updatePage();
 			}
 
-			@Override
-			public void mousePressed(MouseEvent e) {}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {}
-
-			@Override
-			public void mouseExited(MouseEvent e) {}
         });
 
         

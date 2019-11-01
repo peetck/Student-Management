@@ -1,8 +1,8 @@
 package view;
 
-import mdlaf.*;
+
 import mdlaf.animation.*;
-import mdlaf.utils.*;
+
 
 import javax.swing.*;
 import java.awt.*;
