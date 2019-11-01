@@ -1,24 +1,29 @@
 package view;
 import java.awt.*;
+
+
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 public class AddStudentGUI {
 	private JDesktopPane p1;
-	private MyPanel left, right, picture;
-	private JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12, l13, l14, l15, l16, pictureLabel;
-	private JTextField f1, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15;
-	private JComboBox<String> f2;
-	private JButton btn1, btn2, btn3;
+	private MyPanel left, right, picture, f6;
+	private JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12, l13, l14, l15, l16, l17, pictureLabel;
+	private JTextField f1,f4, f5, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17;
+	private JComboBox<String> f2, f3, f6_1, f6_2, f6_3;
+	private JButton btn1, btn2;
 	private GridBagConstraints gbc;
 	private Image defaultImg;
 	private String imgPath;
 	public AddStudentGUI() {
+		
+
 		p1 = new JDesktopPane();
 		gbc = new GridBagConstraints();
-		gbc.insets = new Insets(5, 0, 5, 0);
+		gbc.insets = new Insets(5, 0, 0, 0);
         gbc.fill = GridBagConstraints.BOTH;
         btn1 = Helper.createButton("เพิ่มนักศึกษา");
-        btn3 = Helper.createButton("เพิ่มรูป");
+        btn2 = Helper.createButton("เพิ่มรูป");
         
         left = Helper.createPanel("");
         left.setSize(450, 700);
@@ -26,43 +31,82 @@ public class AddStudentGUI {
         left.setLayout(new GridBagLayout());
         
         right = Helper.createPanel("");
-        right.setSize(450, 540);
-        right.setLocation(450, 160);
+        right.setSize(450, 545);
+        right.setLocation(450, 155);
         right.setLayout(new GridBagLayout());
         
         picture = Helper.createPanel("");
         picture.setBorder(BorderFactory.createLineBorder(Color.black));
         picture.setSize(150, 150);
-        picture.setLocation(650, 10);
+        picture.setLocation(610, 5);
         picture.setLayout(new BorderLayout());
         
 
         
         l1 = Helper.createLabel("รหัสนักศึกษา");
-        l2 = Helper.createLabel("คํานําหน้า");
-		l3 = Helper.createLabel("ชื่อ");
-		l4 = Helper.createLabel("นามสกุล");
-		l5 = Helper.createLabel("หมายเลขบัตรประชาชน");
-		l6 = Helper.createLabel("ที่อยู่");
-		l7 = Helper.createLabel("เชื้อชาติ");
-		l8 = Helper.createLabel("ศาสนา");
-		l9 = Helper.createLabel("หมู่เลือด");
-		l10 = Helper.createLabel("เบอร์ติดต่อ");
-		l11 = Helper.createLabel("อีเมล์");
-		l12 = Helper.createLabel("ส่วนสูง");
-		l13 = Helper.createLabel("นํ้าหนัก");
-		l14 = Helper.createLabel("เบอร์ติดต่อผู้ปกครอง");
-		l15 = Helper.createLabel("โรคประจําตัว");
+		l2 = Helper.createLabel("คณะ");
+        l3 = Helper.createLabel("คํานําหน้า");
+		l4 = Helper.createLabel("ชื่อ");
+		l5 = Helper.createLabel("นามสกุล");
+		l6 = Helper.createLabel("วันเดือนปีเกิด");
+		
+		l7 = Helper.createLabel("หมายเลขบัตรประชาชน");
+		l8 = Helper.createLabel("ที่อยู่");
+		l9 = Helper.createLabel("เชื้อชาติ");
+		l10 = Helper.createLabel("ศาสนา");
+		l11 = Helper.createLabel("หมู่เลือด");
+		l12 = Helper.createLabel("เบอร์ติดต่อ");
+		l13 = Helper.createLabel("อีเมล์");
+		l14 = Helper.createLabel("ส่วนสูง");
+		l15 = Helper.createLabel("นํ้าหนัก");
+		l16 = Helper.createLabel("เบอร์ติดต่อผู้ปกครอง");
+		l17 = Helper.createLabel("โรคประจําตัว");
+
 		
 		f1 = Helper.createTextField(20);
-		//f2 = Helper.createTextField(20);
 		f2 = Helper.createComboBox();
-		f2.addItem("นาย");
-		f2.addItem("นางสาว");
-		f3 = Helper.createTextField(20);
+		f2.addItem("วิศวกรรมศาสตร์");
+		f2.addItem("สถาปัตยกรรมศาสตร์");
+		f2.addItem("ครุศาสตร์อุตสาหกรรม");
+		f2.addItem("เทคโนโลยีการเกษตร");
+		f2.addItem("วิทยาศาสตร์");
+		f2.addItem("อุตสาหกรรมเกษตร");
+		f2.addItem("เทคโนโลยีสารสนเทศ");
+		f2.addItem("วิทยาลัยนานาชาติ");
+		f2.addItem("วิทยาลัยนาโนเทคโนโลยี ฯ");
+		f2.addItem("วิทยาลัยนวัตกรรมการจัดการข้อมูล");
+		f2.addItem("วิทยาลัยการบริหารและจัดการ");
+		f2.addItem("ศิลปศาสตร์");
+		f2.addItem("วิศกรรมการบินและนักบินพาณิชย์");
+
+		f3 = Helper.createComboBox();
+		f3.addItem("นาย");
+		f3.addItem("นางสาว");
 		f4 = Helper.createTextField(20);
 		f5 = Helper.createTextField(20);
-		f6 = Helper.createTextField(20);
+		
+		
+		f6 = Helper.createPanel("");
+		f6.setLayout(new GridLayout(1, 3));
+		
+		f6_1 = Helper.createComboBox();
+		for (int i = 1; i <= 31; i++) {
+			f6_1.addItem("" + i);
+		}
+		f6_2 = Helper.createComboBox();
+		for (int i = 1; i <= 12; i++) {
+			f6_2.addItem("" + i);
+		}
+		f6_3 = Helper.createComboBox();
+		for (int i = 1950; i <= 2019; i++) {
+			f6_3.addItem("" + i);
+		}
+		
+		
+		f6.add(f6_1);
+		f6.add(f6_2);
+		f6.add(f6_3);
+		
 		f7 = Helper.createTextField(20);
 		f8 = Helper.createTextField(20);
 		f9 = Helper.createTextField(20);
@@ -72,6 +116,8 @@ public class AddStudentGUI {
 		f13 = Helper.createTextField(20);
 		f14 = Helper.createTextField(20);
 		f15 = Helper.createTextField(20);
+		f16 = Helper.createTextField(20);
+		f17 = Helper.createTextField(20);
 		
 		left.add(l1, gbc);
 		gbc.gridx = 0;
@@ -125,53 +171,64 @@ public class AddStudentGUI {
 		gbc.gridx = 0;
 		gbc.gridy = 17;
 		left.add(f9, gbc);
+		gbc.gridx = 0;
+		gbc.gridy = 18;
+		left.add(l10, gbc);
+		gbc.gridx = 0;
+		gbc.gridy = 19;
+		left.add(f10, gbc);
 		
 		
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		right.add(l10, gbc);
-		gbc.gridx = 0;
-		gbc.gridy = 1;
-		right.add(f10, gbc);
-		gbc.gridx = 0;
-		gbc.gridy = 2;
+		gbc.insets = new Insets(5, 0, 0, 0);
 		right.add(l11, gbc);
 		gbc.gridx = 0;
-		gbc.gridy = 3;
+		gbc.gridy = 1;
 		right.add(f11, gbc);
 		gbc.gridx = 0;
-		gbc.gridy = 4;
+		gbc.gridy = 2;
 		right.add(l12, gbc);
 		gbc.gridx = 0;
-		gbc.gridy = 5;
+		gbc.gridy = 3;
 		right.add(f12, gbc);
 		gbc.gridx = 0;
-		gbc.gridy = 6;
+		gbc.gridy = 4;
 		right.add(l13, gbc);
 		gbc.gridx = 0;
-		gbc.gridy = 7;
+		gbc.gridy = 5;
 		right.add(f13, gbc);
 		gbc.gridx = 0;
-		gbc.gridy = 8;
+		gbc.gridy = 6;
 		right.add(l14, gbc);
 		gbc.gridx = 0;
-		gbc.gridy = 9;
+		gbc.gridy = 7;
 		right.add(f14, gbc);
 		gbc.gridx = 0;
-		gbc.gridy = 10;
+		gbc.gridy = 8;
 		right.add(l15, gbc);
 		gbc.gridx = 0;
-		gbc.gridy = 11;
+		gbc.gridy = 9;
 		right.add(f15, gbc);
 		gbc.gridx = 0;
+		gbc.gridy = 10;
+		right.add(l16, gbc);
+		gbc.gridx = 0;
+		gbc.gridy = 11;
+		right.add(f16, gbc);
+		gbc.gridx = 0;
 		gbc.gridy = 12;
-		right.add(btn1, gbc);
+		right.add(l17, gbc);
 		gbc.gridx = 0;
 		gbc.gridy = 13;
-		right.add(btn3, gbc);
+		right.add(f17, gbc);
 		gbc.gridx = 0;
 		gbc.gridy = 14;
-
+		right.add(btn1, gbc);
+		gbc.gridx = 0;
+		gbc.gridy = 15;
+		right.add(btn2, gbc);
+		
 
         pictureLabel = Helper.createLabel("");
         pictureLabel.setBackground(Color.RED);
@@ -189,6 +246,191 @@ public class AddStudentGUI {
 	}
 	
 
+	public JTextField getF4() {
+		return f4;
+	}
+
+
+	public void setF4(JTextField f4) {
+		this.f4 = f4;
+	}
+
+
+	public JTextField getF5() {
+		return f5;
+	}
+
+
+	public void setF5(JTextField f5) {
+		this.f5 = f5;
+	}
+
+
+	public JTextField getF7() {
+		return f7;
+	}
+
+
+	public void setF7(JTextField f7) {
+		this.f7 = f7;
+	}
+
+
+	public JTextField getF8() {
+		return f8;
+	}
+
+
+	public void setF8(JTextField f8) {
+		this.f8 = f8;
+	}
+
+
+	public JTextField getF9() {
+		return f9;
+	}
+
+
+	public void setF9(JTextField f9) {
+		this.f9 = f9;
+	}
+
+
+	public JTextField getF10() {
+		return f10;
+	}
+
+
+	public void setF10(JTextField f10) {
+		this.f10 = f10;
+	}
+
+
+	public JTextField getF11() {
+		return f11;
+	}
+
+
+	public void setF11(JTextField f11) {
+		this.f11 = f11;
+	}
+
+
+	public JTextField getF12() {
+		return f12;
+	}
+
+
+	public void setF12(JTextField f12) {
+		this.f12 = f12;
+	}
+
+
+	public JTextField getF13() {
+		return f13;
+	}
+
+
+	public void setF13(JTextField f13) {
+		this.f13 = f13;
+	}
+
+
+	public JTextField getF14() {
+		return f14;
+	}
+
+
+	public void setF14(JTextField f14) {
+		this.f14 = f14;
+	}
+
+
+	public JTextField getF15() {
+		return f15;
+	}
+
+
+	public void setF15(JTextField f15) {
+		this.f15 = f15;
+	}
+
+
+	public JTextField getF16() {
+		return f16;
+	}
+
+
+	public void setF16(JTextField f16) {
+		this.f16 = f16;
+	}
+
+
+	public JTextField getF17() {
+		return f17;
+	}
+
+
+	public void setF17(JTextField f17) {
+		this.f17 = f17;
+	}
+
+
+	public JComboBox<String> getF2() {
+		return f2;
+	}
+
+
+	public void setF2(JComboBox<String> f2) {
+		this.f2 = f2;
+	}
+
+
+	public JComboBox<String> getF3() {
+		return f3;
+	}
+
+
+	public void setF3(JComboBox<String> f3) {
+		this.f3 = f3;
+	}
+
+
+	public JComboBox<String> getF6_1() {
+		return f6_1;
+	}
+
+
+	public void setF6_1(JComboBox<String> f6_1) {
+		this.f6_1 = f6_1;
+	}
+
+
+	public JComboBox<String> getF6_2() {
+		return f6_2;
+	}
+
+
+	public void setF6_2(JComboBox<String> f6_2) {
+		this.f6_2 = f6_2;
+	}
+
+
+	public JComboBox<String> getF6_3() {
+		return f6_3;
+	}
+
+
+	public void setF6_3(JComboBox<String> f6_3) {
+		this.f6_3 = f6_3;
+	}
+
+
+	public void setF1(JTextField f1) {
+		this.f1 = f1;
+	}
+
+
 	public JDesktopPane getPanel() {
 		return this.p1;
 	}
@@ -196,53 +438,8 @@ public class AddStudentGUI {
 		return this.btn1;
 	}
 
-	public JButton getBtn3() {
-		return this.btn3;
-	}
-	public JTextField getF1() {
-		return this.f1;
-	}
-	public JComboBox<String> getF2() {
-		return this.f2;
-	}
-	public JTextField getF3() {
-		return this.f3;
-	}
-	public JTextField getF4() {
-		return this.f4;
-	}
-	public JTextField getF5() {
-		return this.f5;
-	}
-	public JTextField getF6() {
-		return this.f6;
-	}
-	public JTextField getF7() {
-		return this.f7;
-	}
-	public JTextField getF8() {
-		return this.f8;
-	}
-	public JTextField getF9() {
-		return this.f9;
-	}
-	public JTextField getF10() {
-		return this.f10;
-	}
-	public JTextField getF11() {
-		return this.f11;
-	}
-	public JTextField getF12() {
-		return this.f12;
-	}
-	public JTextField getF13() {
-		return this.f13;
-	}
-	public JTextField getF14() {
-		return this.f14;
-	}
-	public JTextField getF15() {
-		return this.f15;
+	public JButton getBtn2() {
+		return this.btn2;
 	}
 	
 	public JLabel getPictureLabel() {
@@ -256,13 +453,17 @@ public class AddStudentGUI {
 	public void setImagePath(String path) {
 		this.imgPath = path;
 	}
+	
+
 	public void reset() {
 		f1.setText("");
 		f2.setSelectedIndex(0);
-		f3.setText("");
+		f3.setSelectedIndex(0);
 		f4.setText("");
 		f5.setText("");
-		f6.setText("");
+		f6_1.setSelectedIndex(0);
+		f6_2.setSelectedIndex(0);
+		f6_3.setSelectedIndex(0);
 		f7.setText("");
 		f8.setText("");
 		f9.setText("");
@@ -272,6 +473,11 @@ public class AddStudentGUI {
 		f13.setText("");
 		f14.setText("");
 		f15.setText("");
-		
+		f16.setText("");
+		f17.setText("");
+	}
+	
+	public JTextField getF1() {
+		return f1;
 	}
 }

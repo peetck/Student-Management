@@ -348,7 +348,7 @@ public class StudentManagement{
         	}
         });
         
-        managementPage.getAddStudentGUI().getBtn3().addActionListener(new ActionListener() {
+        managementPage.getAddStudentGUI().getBtn2().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		JFileChooser chooser = new JFileChooser();
         	    chooser.showOpenDialog(null);
@@ -370,24 +370,39 @@ public class StudentManagement{
     // below here is method in all application
 
     public void addStudent() {
-    	String studentID, title, name, surname, cardID, address, race, religion, bloodType, tel, email, height, weight, parentTel, disease, enrollAt;
+    	String studentID, faculty, title, name, surname, day, month, year, cardID,
+    	address, race, religion, bloodType, tel, email, height, weight, 
+    	parentTel, disease, enrollAt;
+    	
     	studentID = managementPage.getAddStudentGUI().getF1().getText();
-    	//title = managementPage.getAddStudentGUI().getF2().getText();
-    	title = managementPage.getAddStudentGUI().getF2().getSelectedItem().toString();
-    	name = managementPage.getAddStudentGUI().getF3().getText();
-    	surname = managementPage.getAddStudentGUI().getF4().getText();
-    	cardID = managementPage.getAddStudentGUI().getF5().getText();
-    	address = managementPage.getAddStudentGUI().getF6().getText();
-    	race = managementPage.getAddStudentGUI().getF7().getText();
-    	religion = managementPage.getAddStudentGUI().getF8().getText();
-    	bloodType = managementPage.getAddStudentGUI().getF9().getText();
-    	tel = managementPage.getAddStudentGUI().getF10().getText();
-    	email = managementPage.getAddStudentGUI().getF11().getText();
-    	height = managementPage.getAddStudentGUI().getF12().getText();
-    	weight = managementPage.getAddStudentGUI().getF13().getText();
-    	parentTel = managementPage.getAddStudentGUI().getF14().getText();
-    	disease = managementPage.getAddStudentGUI().getF15().getText();
+
+    	faculty = managementPage.getAddStudentGUI().getF2().getSelectedItem().toString();
+    	title = managementPage.getAddStudentGUI().getF3().getSelectedItem().toString();
+    	name = managementPage.getAddStudentGUI().getF4().getText();
+    	surname = managementPage.getAddStudentGUI().getF5().getText();
+    	
+    	day = managementPage.getAddStudentGUI().getF6_1().getSelectedItem().toString();
+    	month = managementPage.getAddStudentGUI().getF6_2().getSelectedItem().toString();
+    	year = managementPage.getAddStudentGUI().getF6_3().getSelectedItem().toString();
+    	
+    	cardID = managementPage.getAddStudentGUI().getF7().getText();
+    	address = managementPage.getAddStudentGUI().getF8().getText();
+    	race = managementPage.getAddStudentGUI().getF9().getText();
+    	religion = managementPage.getAddStudentGUI().getF10().getText();
+    	bloodType = managementPage.getAddStudentGUI().getF11().getText();
+    	tel = managementPage.getAddStudentGUI().getF12().getText();
+    	email = managementPage.getAddStudentGUI().getF13().getText();
+    	height = managementPage.getAddStudentGUI().getF14().getText();
+    	weight = managementPage.getAddStudentGUI().getF15().getText();
+    	parentTel = managementPage.getAddStudentGUI().getF16().getText();
+    	disease = managementPage.getAddStudentGUI().getF17().getText();
     	enrollAt = "" + java.time.LocalDate.now();
+    	
+    	
+    	HashMap<String, String> information = new HashMap<String, String>();
+    	HashMap<String, Double> score = new HashMap<String, Double>();
+    	
+    	
     	
     	DBCollection myStudent = db.getCollection(myUsername);
     	
@@ -401,9 +416,15 @@ public class StudentManagement{
     	BasicDBObject n = new BasicDBObject();
 
     	n.put("studentID", studentID);
+    	n.put("faculty", faculty);
     	n.put("title", title);
     	n.put("name", name);
     	n.put("surname", surname);
+    	
+    	n.put("day", day);
+    	n.put("month", month);
+    	n.put("year", year);
+    	
     	n.put("cardID", cardID);
     	n.put("address", address);
     	n.put("race", race);
@@ -416,6 +437,7 @@ public class StudentManagement{
     	n.put("parentTel", parentTel);
     	n.put("disease", disease);
     	n.put("enrollAt", enrollAt);
+    	
     	n.put("midterm_score", 0.0);
     	n.put("final_score", 0.0);
     	n.put("assignment1", 0.0);
@@ -423,10 +445,36 @@ public class StudentManagement{
     	
     	
     	myStudent.insert(n);
+
+    	information.put("studentID", studentID);
+    	information.put("faculty", faculty);
+    	information.put("title", title);
+    	information.put("name", name);
+    	information.put("surname", surname);
     	
-    	teacher.addStudent(new Student(studentID, title, name, surname, cardID, address, 
-    			race, religion, bloodType, tel, email, height, weight, parentTel, disease, 
-    			enrollAt, 0.0, 0.0, 0.0, 0.0));
+    	information.put("day", day);
+    	information.put("month", month);
+    	information.put("year", year);
+    	
+    	information.put("cardID", cardID);
+    	information.put("address", address);
+    	information.put("race", race);
+    	information.put("religion", religion);
+    	information.put("bloodType", bloodType);
+    	information.put("tel", tel);
+    	information.put("email", email);
+    	information.put("height", height);
+    	information.put("weight", weight);
+    	information.put("parentTel", parentTel);
+    	information.put("disease", disease);
+    	information.put("enrollAt", enrollAt);
+    	
+    	score.put("midterm_score", 0.0);
+    	score.put("final_score", 0.0);
+    	score.put("assignment1", 0.0);
+    	score.put("assignment2", 0.0);
+    	
+    	teacher.addStudent(new Student(information, score));
     	// add success
     	
     	// update table
@@ -466,12 +514,38 @@ public class StudentManagement{
     	DBCursor curs = myStudent.find();
         while (curs.hasNext()){
             DBObject t = curs.next();
-            teacher.addStudent(new Student((String)t.get("studentID"), (String)t.get("title"), (String)t.get("name"), 
-            		(String)t.get("surname"), (String)t.get("cardID"), (String)t.get("address"), (String)t.get("race"), 
-            		(String)t.get("religion"), (String)t.get("bloodType"), (String)t.get("tel"), (String)t.get("email"), 
-            		(String)t.get("height"), (String)t.get("weight"), (String)t.get("parentTel"), (String)t.get("disease"), 
-            		(String)t.get("enrollAt"), (Double)t.get("midterm_score"), (Double)t.get("final_score"), 
-            		(Double)t.get("assignment1"), (Double)t.get("assignment2")));
+            HashMap<String, String> information = new HashMap<String, String>();
+        	HashMap<String, Double> score = new HashMap<String, Double>();
+        	
+        	information.put("studentID", "" + t.get("studentID"));
+        	information.put("faculty", "" + t.get("faculty"));
+        	information.put("title", "" + t.get("title"));
+        	information.put("name", "" + t.get("name"));
+        	information.put("surname", "" + t.get("surname"));
+        	
+        	information.put("day", "" + t.get("day"));
+        	information.put("month", "" + t.get("month"));
+        	information.put("year", "" + t.get("year"));
+        	
+        	information.put("cardID", "" + t.get("cardID"));
+        	information.put("address", "" + t.get("address"));
+        	information.put("race", "" + t.get("race"));
+        	information.put("religion", "" + t.get("religion"));
+        	information.put("bloodType", "" + t.get("bloodType"));
+        	information.put("tel", "" + t.get("tel"));
+        	information.put("email", "" + t.get("email"));
+        	information.put("height", "" + t.get("height"));
+        	information.put("weight", "" + t.get("weight"));
+        	information.put("parentTel", "" + t.get("parentTel"));
+        	information.put("disease", "" + t.get("disease"));
+        	information.put("enrollAt", "" + t.get("enrollAt"));
+        	
+        	score.put("midterm_score", Double.parseDouble("" + t.get("midterm_score")));
+        	score.put("final_score", Double.parseDouble("" + t.get("final_score")));
+        	score.put("assignment1", Double.parseDouble("" + t.get("assignment1")));
+        	score.put("assignment2", Double.parseDouble("" + t.get("assignment2")));
+        	
+            teacher.addStudent(new Student(information, score));
         }
         updateTable();
         updateScoreTable();
