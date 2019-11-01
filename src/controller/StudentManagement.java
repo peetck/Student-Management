@@ -211,7 +211,11 @@ public class StudentManagement{
         managementPage.getMenu3().addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				if (currentPage == 3) {
+					return;
+				}
 				managementPage.set("add/delete");
+				
 				currentPage = 3;
 				updatePage();
 			}
@@ -232,7 +236,11 @@ public class StudentManagement{
         managementPage.getMenu1().addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				if (currentPage == 1) {
+					return;
+				}
 				managementPage.set("mystudent");
+				
 				currentPage = 1;
 				updatePage();
 			}
@@ -289,7 +297,11 @@ public class StudentManagement{
         managementPage.getMenu2().addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				if (currentPage == 2) {
+					return;
+				}
 				managementPage.set("score");
+				
 				currentPage = 2;
 				updatePage();
 			}
@@ -309,7 +321,11 @@ public class StudentManagement{
         managementPage.getMenu5().addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				if (currentPage == 5) {
+					return;
+				}
 				managementPage.set("setting");
+				
 				currentPage = 5;
 				updatePage();
 			}
