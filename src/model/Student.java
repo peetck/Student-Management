@@ -4,7 +4,8 @@ public class Student {
 
 	private HashMap<String, String> information;
 	private HashMap<String, Double> score;
-	public Student(HashMap<String, String> information, HashMap<String, Double> score) {
+	private String picturePath;
+	public Student(HashMap<String, String> information, HashMap<String, Double> score, String picturePath) {
 		
 		this.information = new HashMap<String, String>();
 		this.score = new HashMap<String, Double>();
@@ -16,6 +17,8 @@ public class Student {
 		for (String i : score.keySet()) {
 			this.score.put(i, score.get(i));
 		}
+		
+		this.picturePath = picturePath;
 		
 	}
 
@@ -75,5 +78,8 @@ public class Student {
 	}
 	public String getStudentID() {
 		return this.information.get("studentID");
+	}
+	public String getPicturePath() {
+		return this.picturePath;
 	}
 }

@@ -14,7 +14,7 @@ public class AddStudentGUI {
 	private JButton btn1, btn2;
 	private GridBagConstraints gbc;
 	private Image defaultImg;
-	private String imgPath;
+	private String picturePath;
 	public AddStudentGUI() {
 		
 
@@ -224,10 +224,10 @@ public class AddStudentGUI {
 		right.add(f17, gbc);
 		gbc.gridx = 0;
 		gbc.gridy = 14;
-		right.add(btn1, gbc);
+		right.add(btn2, gbc);
 		gbc.gridx = 0;
 		gbc.gridy = 15;
-		right.add(btn2, gbc);
+		right.add(btn1, gbc);
 		
 
         pictureLabel = Helper.createLabel("");
@@ -238,6 +238,7 @@ public class AddStudentGUI {
 		defaultImg = defaultImg.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 	    pictureLabel.setIcon(new ImageIcon(defaultImg));
 		
+	    picturePath = "images/blank_profile.png";
 		
 		p1.add(left);
 		p1.add(right);
@@ -446,12 +447,12 @@ public class AddStudentGUI {
 		return this.pictureLabel;
 	}
 	
-	public String getImagePath() {
-		return imgPath;
+	public String getPicturePath() {
+		return picturePath;
 	}
 	
-	public void setImagePath(String path) {
-		this.imgPath = path;
+	public void setPicturePath(String path) {
+		this.picturePath = path;
 	}
 	
 

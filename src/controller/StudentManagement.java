@@ -4,6 +4,10 @@ import java.awt.*;
 import java.awt.event.*;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 import com.mongodb.*;
 
@@ -353,14 +357,15 @@ public class StudentManagement{
         		JFileChooser chooser = new JFileChooser();
         	    chooser.showOpenDialog(null);
         	    File f = chooser.getSelectedFile();
-        	    String filename = f.getAbsolutePath();
+        	    String sourcePath = f.getAbsolutePath();
+  
         	    
         	    
-        	    Image img = Toolkit.getDefaultToolkit().createImage(filename);
+        	    Image img = Toolkit.getDefaultToolkit().createImage(sourcePath);
         	    img = img.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
         	    ImageIcon icon = new ImageIcon(img);
         	    managementPage.getAddStudentGUI().getPictureLabel().setIcon(icon);
-        	    managementPage.getAddStudentGUI().setImagePath(filename);
+        	    managementPage.getAddStudentGUI().setPicturePath(sourcePath);
 
         	}
         });
@@ -371,8 +376,8 @@ public class StudentManagement{
 
     public void addStudent() {
     	String studentID, faculty, title, name, surname, day, month, year, cardID,
-    	address, race, religion, bloodType, tel, email, height, weight, 
-    	parentTel, disease, enrollAt;
+    	address, race, religion, bloodType, tel, email, height, weight, sourcePath,
+    	parentTel, disease, enrollAt, picturePath;
     	
     	studentID = managementPage.getAddStudentGUI().getF1().getText();
 
@@ -398,7 +403,25 @@ public class StudentManagement{
     	disease = managementPage.getAddStudentGUI().getF17().getText();
     	enrollAt = "" + java.time.LocalDate.now();
     	
+    	sourcePath = managementPage.getAddStudentGUI().getPicturePath();
     	
+    	
+	    
+	    try {
+    	    Path source = Paths.get(sourcePath);
+    	    Path targetDir = Paths.get("images/studentPicture");
+    	    
+    	    Files.createDirectories(targetDir);
+    	    Path target = targetDir.resolve((studentID + ".jpg"));
+    	    Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING);
+	    }
+	    catch(Exception e1) {
+	    	JLabel alert = Helper.createLabel("ไม่สามารถอัพโหลดรูปภาพได้");
+			JOptionPane.showMessageDialog(null, alert);
+	    }
+    	
+	    picturePath = "images/studentPicture/" + studentID + ".jpg";
+	    
     	HashMap<String, String> information = new HashMap<String, String>();
     	HashMap<String, Double> score = new HashMap<String, Double>();
     	
@@ -443,6 +466,7 @@ public class StudentManagement{
     	n.put("assignment1", 0.0);
     	n.put("assignment2", 0.0);
     	
+    	n.put("picturePath", picturePath);
     	
     	myStudent.insert(n);
 
@@ -474,7 +498,7 @@ public class StudentManagement{
     	score.put("assignment1", 0.0);
     	score.put("assignment2", 0.0);
     	
-    	teacher.addStudent(new Student(information, score));
+    	teacher.addStudent(new Student(information, score, picturePath));
     	// add success
     	
     	// update table
@@ -545,7 +569,8 @@ public class StudentManagement{
         	score.put("assignment1", Double.parseDouble("" + t.get("assignment1")));
         	score.put("assignment2", Double.parseDouble("" + t.get("assignment2")));
         	
-            teacher.addStudent(new Student(information, score));
+        	String picturePath = "" + t.get("picturePath");
+            teacher.addStudent(new Student(information, score, picturePath));
         }
         updateTable();
         updateScoreTable();
