@@ -11,8 +11,10 @@ public class Main{
     public static void main(String[] args) {
         try {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("font/itim.ttf")));
-
+            
+            InputStream font = Main.class.getResourceAsStream("fonts/itim.ttf");
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, font));
+            font.close();
             UIManager.setLookAndFeel(new MaterialLookAndFeel());
             JDialog.setDefaultLookAndFeelDecorated(false);
             UIManager.put("Button.mouseHoverEnable", true);
