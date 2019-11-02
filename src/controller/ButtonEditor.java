@@ -59,7 +59,7 @@ public class ButtonEditor extends DefaultCellEditor {
 	    	
 	    	JLabel pictureLabel = Helper.createLabel("");
 
-	    	if (choose.getPicturePath() != "default") {
+	    	if ( ! (choose.getPicturePath().equals("default"))) {
 	    		Image img = Toolkit.getDefaultToolkit().createImage(choose.getPicturePath());
 		    	img = img.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 			    pictureLabel.setIcon(new ImageIcon(img));

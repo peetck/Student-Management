@@ -239,6 +239,7 @@ public class AddStudentGUI {
 		defaultImg = defaultImg.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 	    pictureLabel.setIcon(new ImageIcon(defaultImg));
 		
+	    picturePath = "default";
 	
 		
 		p1.add(left);
@@ -480,7 +481,7 @@ public class AddStudentGUI {
 		defaultImg = Helper.createImage("/images/blank_profile.png");
 		defaultImg = defaultImg.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 	    pictureLabel.setIcon(new ImageIcon(defaultImg));
-	    picturePath = null;
+	    picturePath = "default";
 	}
 	
 	public JTextField getF1() {
