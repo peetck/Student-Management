@@ -72,7 +72,7 @@ public class ButtonEditor extends DefaultCellEditor {
 
 		    p1.add(pictureLabel);
 	    	
-			JOptionPane.showMessageDialog(null, p1, choose.getStudentID(), JOptionPane.OK_CANCEL_OPTION);
+			JOptionPane.showMessageDialog(null, p1, choose.getStudentID(), -1);
 	    }
 	    isPushed = false;
 	    return new String(label);
