@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.2.3" icons="true" automaticImage="JPEG" always-add-relationships="false" 
-  generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true" 
-  router="FAN">  
+<class-diagram version="1.2.3" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="Main" project="StudentManagement" file="/StudentManagement/src/Main.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="99" width="113" x="969" y="37"/>    
+    <position height="99" width="113" x="966" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -13,7 +12,7 @@
   </class>  
   <class id="2" language="java" name="model.Teacher" project="StudentManagement" 
     file="/StudentManagement/src/model/Teacher.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="117" width="189" x="988" y="801"/>    
+    <position height="117" width="189" x="482" y="819"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -22,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="view.CellRenderer" project="StudentManagement" 
     file="/StudentManagement/src/view/CellRenderer.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="99" width="421" x="47" y="37"/>    
+    <position height="99" width="421" x="44" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -31,7 +30,7 @@
   </class>  
   <class id="4" language="java" name="view.LoginGUI" project="StudentManagement" 
     file="/StudentManagement/src/view/LoginGUI.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="351" width="144" x="431" y="1030"/>    
+    <position height="351" width="144" x="884" y="1048"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -40,7 +39,7 @@
   </class>  
   <class id="5" language="java" name="view.MainGUI" project="StudentManagement" 
     file="/StudentManagement/src/view/MainGUI.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="189" width="208" x="650" y="801"/>    
+    <position height="189" width="208" x="884" y="819"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -49,7 +48,7 @@
   </class>  
   <class id="6" language="java" name="view.ManagementGUI" project="StudentManagement" 
     file="/StudentManagement/src/view/ManagementGUI.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="621" width="200" x="799" y="1030"/>    
+    <position height="621" width="200" x="1086" y="1048"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -58,7 +57,7 @@
   </class>  
   <class id="7" language="java" name="view.MyPanel" project="StudentManagement" 
     file="/StudentManagement/src/view/MyPanel.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="157" width="191" x="431" y="2015"/>    
+    <position height="157" width="191" x="761" y="3414"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -67,7 +66,7 @@
   </class>  
   <class id="8" language="java" name="view.MyStudentGUI" project="StudentManagement" 
     file="/StudentManagement/src/view/MyStudentGUI.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="153" width="146" x="264" y="1691"/>    
+    <position height="153" width="146" x="533" y="1709"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -76,7 +75,7 @@
   </class>  
   <class id="9" language="java" name="view.RegisterGUI" project="StudentManagement" 
     file="/StudentManagement/src/view/RegisterGUI.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="423" width="144" x="615" y="1030"/>    
+    <position height="423" width="144" x="700" y="1048"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -85,7 +84,7 @@
   </class>  
   <class id="10" language="java" name="controller.StudentManagement" project="StudentManagement" 
     file="/StudentManagement/src/controller/StudentManagement.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="369" width="195" x="753" y="392"/>    
+    <position height="369" width="195" x="884" y="410"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -94,7 +93,7 @@
   </class>  
   <class id="11" language="java" name="view.Helper" project="StudentManagement" 
     file="/StudentManagement/src/view/Helper.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="315" width="228" x="1122" y="37"/>    
+    <position height="333" width="228" x="1119" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -103,7 +102,7 @@
   </class>  
   <class id="12" language="java" name="model.Student" project="StudentManagement" 
     file="/StudentManagement/src/model/Student.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="189" width="311" x="1039" y="1030"/>    
+    <position height="225" width="342" x="318" y="1048"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -112,7 +111,7 @@
   </class>  
   <class id="13" language="java" name="view.ScoreGUI" project="StudentManagement" 
     file="/StudentManagement/src/view/ScoreGUI.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="225" width="146" x="492" y="1691"/>    
+    <position height="225" width="146" x="994" y="1709"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -121,7 +120,7 @@
   </class>  
   <class id="14" language="java" name="view.SettingGUI" project="StudentManagement" 
     file="/StudentManagement/src/view/SettingGUI.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="117" width="146" x="678" y="1691"/>    
+    <position height="117" width="146" x="1180" y="1709"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -130,7 +129,7 @@
   </class>  
   <class id="15" language="java" name="view.AddStudentGUI" project="StudentManagement" 
     file="/StudentManagement/src/view/AddStudentGUI.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="1665" width="193" x="864" y="1691"/>    
+    <position height="1665" width="193" x="761" y="1709"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -139,7 +138,7 @@
   </class>  
   <class id="16" language="java" name="view.ButtonRenderer" project="StudentManagement" 
     file="/StudentManagement/src/view/ButtonRenderer.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="99" width="421" x="508" y="37"/>    
+    <position height="99" width="421" x="505" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -148,7 +147,7 @@
   </class>  
   <class id="17" language="java" name="controller.ButtonEditor" project="StudentManagement" 
     file="/StudentManagement/src/controller/ButtonEditor.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="243" width="362" x="988" y="392"/>    
+    <position height="243" width="362" x="482" y="410"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -156,71 +155,80 @@
     </display>  
   </class>  
   <association id="18">    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="19" name="f6"/>      
-      <multiplicity id="20" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="21">    
     <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="22" name="teacher">        
+      <attribute id="19" name="teacher">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="23" minimum="0" maximum="1">        
+      <multiplicity id="20" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="24">    
+  <association id="21">    
     <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="25" name="login">        
+      <attribute id="22" name="register">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="26" minimum="0" maximum="1">        
+      <multiplicity id="23" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="24">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="25" name="container">        
+        <position height="0" width="0" x="-247" y="-1381"/>      
+      </attribute>      
+      <multiplicity id="26" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-247" y="-1381"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="27">    
-    <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="28" name="gui">        
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="28" name="picture">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="29" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
+    <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="30">    
+    <bendpoint x="1356" y="1709"/>    
     <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="31" name="add"/>      
-      <multiplicity id="32" minimum="0" maximum="1"/>    
+      <attribute id="31" name="menu1">        
+        <position height="0" width="0" x="-247" y="-1381"/>      
+      </attribute>      
+      <multiplicity id="32" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-247" y="-1381"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
+    <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="33">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="34" name="score">        
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="34" name="login">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="35" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="36">    
-    <end type="SOURCE" refId="8" navigable="false">      
+    <end type="SOURCE" refId="13" navigable="false">      
       <attribute id="37" name="container">        
         <position height="0" width="0" x="-247" y="-1381"/>      
       </attribute>      
@@ -233,40 +241,44 @@
   </association>  
   <association id="39">    
     <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="40" name="left"/>      
-      <multiplicity id="41" minimum="0" maximum="1"/>    
+      <attribute id="40" name="f6">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="41" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="42">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="43" name="management">        
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="43" name="right">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="44" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="45">    
-    <bendpoint x="1087" y="1691"/>    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="46" name="menu1">        
-        <position height="0" width="0" x="-247" y="-1381"/>      
-      </attribute>      
-      <multiplicity id="47" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-247" y="-1381"/>      
-      </multiplicity>    
-    </end>    
     <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <association id="45">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="46" name="setting">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="47" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <association id="48">    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="49" name="container">        
+    <bendpoint x="730" y="1709"/>    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="49" name="p1">        
         <position height="0" width="0" x="-247" y="-1381"/>      
       </attribute>      
       <multiplicity id="50" minimum="0" maximum="1">        
@@ -276,85 +288,96 @@
     <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="51">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="10"/>  
-  </dependency>  
-  <association id="52">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="53" name="setting">        
+  <association id="51">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="52" name="management">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="54" minimum="0" maximum="1">        
+      <multiplicity id="53" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
+    <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="55">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="56" name="students">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="57" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="58">    
-    <bendpoint x="440" y="1691"/>    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="59" name="p1">        
+  <association id="54">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="55" name="container">        
         <position height="0" width="0" x="-247" y="-1381"/>      
       </attribute>      
-      <multiplicity id="60" minimum="0" maximum="1">        
+      <multiplicity id="56" minimum="0" maximum="1">        
         <position height="0" width="0" x="-247" y="-1381"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="61">    
-    <end type="SOURCE" refId="17" navigable="false">      
-      <attribute id="62" name="teacher"/>      
-      <multiplicity id="63" minimum="0" maximum="1"/>    
+  <association id="57">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="58" name="gui">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="59" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
+    <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <association id="60">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="61" name="score">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="62" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="63">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="10"/>  
+  </dependency>  
   <association id="64">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="65" name="register">        
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="65" name="teacher">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="66" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
+    <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="67">    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="68" name="picture"/>      
-      <multiplicity id="69" minimum="0" maximum="1"/>    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="68" name="add">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="69" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
+    <end type="TARGET" refId="15" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="70">    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="71" name="right"/>      
-      <multiplicity id="72" minimum="0" maximum="1"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="71" name="students">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="72" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
+    <end type="TARGET" refId="12" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="73">    
-    <bendpoint x="461" y="1691"/>    
+    <bendpoint x="709" y="1709"/>    
     <end type="SOURCE" refId="9" navigable="false">      
       <attribute id="74" name="p1">        
         <position height="0" width="0" x="-247" y="-1381"/>      
@@ -367,12 +390,12 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="76">    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="77" name="container">        
-        <position height="0" width="0" x="-247" y="-1381"/>      
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="77" name="left">        
+        <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="78" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-247" y="-1381"/>      
+        <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="7" navigable="true"/>    

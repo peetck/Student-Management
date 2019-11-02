@@ -358,7 +358,7 @@ public class StudentManagement{
         	    chooser.showOpenDialog(null);
         	    File f = chooser.getSelectedFile();
         	    String sourcePath = f.getAbsolutePath();
-  
+
         	    
         	    
         	    Image img = Toolkit.getDefaultToolkit().createImage(sourcePath);
@@ -405,22 +405,20 @@ public class StudentManagement{
     	
     	sourcePath = managementPage.getAddStudentGUI().getPicturePath();
     	
+    	try {
+    		Path source = Paths.get(sourcePath);
+        	Path targetDir = Paths.get(System.getProperty("user.home") + "/StudentManagement/" + myUsername + "/images/studentPicture");
+        	Files.createDirectories(targetDir);
+        	Path target = targetDir.resolve((studentID + ".jpg"));
+        	Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING);
+        	picturePath = System.getProperty("user.home") + "/StudentManagement/" + myUsername + "/images/studentPicture/" + studentID + ".jpg";
+    	}
+    	catch(Exception e1) {
+    		picturePath = "default";
+    	}
+	    
     	
 	    
-	    try {
-    	    Path source = Paths.get(sourcePath);
-    	    Path targetDir = Paths.get("images/studentPicture");
-    	    
-    	    Files.createDirectories(targetDir);
-    	    Path target = targetDir.resolve((studentID + ".jpg"));
-    	    Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING);
-	    }
-	    catch(Exception e1) {
-	    	JLabel alert = Helper.createLabel("ไม่สามารถอัพโหลดรูปภาพได้");
-			JOptionPane.showMessageDialog(null, alert);
-	    }
-    	
-	    picturePath = "images/studentPicture/" + studentID + ".jpg";
 	    
     	HashMap<String, String> information = new HashMap<String, String>();
     	HashMap<String, Double> score = new HashMap<String, Double>();
@@ -429,11 +427,7 @@ public class StudentManagement{
     	
     	DBCollection myStudent = db.getCollection(myUsername);
     	
-    	/*String img_path = managementPage.getAddStudentGUI().getImagePath();
-    	if (img_path == null) {
-    		img_path = "images/blank_profile.png";
-    	}
-    	System.out.println(img_path);*/
+
 
     	
     	BasicDBObject n = new BasicDBObject();
@@ -505,6 +499,9 @@ public class StudentManagement{
     	updateTable();
     	updateScoreTable();
     	
+    	managementPage.getAddStudentGUI().reset();
+    	JLabel msg = Helper.createLabel("เพิ่มนักเรียนเรียบร้อยแล้ว");
+		JOptionPane.showMessageDialog(null, msg);
     }
     
 
