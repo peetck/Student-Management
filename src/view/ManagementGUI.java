@@ -7,24 +7,39 @@ import javax.swing.*;
 
 public class ManagementGUI{
     private JDesktopPane desktop;
-    private JPanel menu, program, topmenu, bottommenu;
-    private MyPanel menu1, menu2, menu3, menu4, menu5;
-    private JLabel menuMsg1, menuMsg2, menuMsg3, menuMsg4, menuMsg5, icon1, icon2, icon3, icon4, icon5;
+    private MyPanel menu, program, topmenu, bottommenu;
+    private MyPanel menu1, menu2, menu3, menu4, menu5, menu6;
+    private JLabel menuMsg1, menuMsg2, menuMsg3, menuMsg4, menuMsg5, menuMsg6, icon1, icon2, icon3, icon4, icon5, icon6;
     private MyStudentGUI mystudent;
     private AddStudentGUI add;
     private SettingGUI setting;
     private ScoreGUI score;
     public ManagementGUI(){
         desktop = new JDesktopPane();
-        menu = new JPanel();
-        program = new JPanel();
+        
+        menu = Helper.createPanel("");
+        menu.setLayout(new GridLayout(5, 1));
+        menu.setLocation(0, 130);
+        menu.setSize(300, 460);
+        menu.setVisible(true);
+        
+        program = Helper.createPanel("");
         program.setLayout(new GridLayout(1, 1));
         mystudent = new MyStudentGUI();
         score = new ScoreGUI();
         add = new AddStudentGUI();
         setting = new SettingGUI();
+        
         topmenu = Helper.createPanel("");
+        topmenu.setLocation(0, 0);
+        topmenu.setSize(300, 130);
+        topmenu.setBackground(new Color(0, 99, 178));
+        
         bottommenu = Helper.createPanel("");
+        bottommenu.setLocation(0, 590);
+        bottommenu.setSize(300, 110);
+        bottommenu.setBackground(new Color(0, 99, 178));
+
         
 
         menu1 = Helper.createPanel("");
@@ -67,25 +82,23 @@ public class ManagementGUI{
         menu5.add(menuMsg5);
         menu5.add(icon5, BorderLayout.EAST);
         
+        menu6 = Helper.createPanel("");
+        menu6.setLayout(new BorderLayout());
+        menuMsg6 = Helper.createLabel("ออกจากระบบ    ",  25);
+        icon6 = Helper.createLabel("", "/images/menu_icon/Setting.png");
+        menuMsg6.setHorizontalAlignment(JLabel.CENTER);
+        menu6.add(menuMsg6);
+        menu6.add(icon6, BorderLayout.EAST);
         
-        topmenu.setLocation(0, 0);
-        topmenu.setSize(300, 130);
-        topmenu.setBackground(new Color(0, 99, 178));
         
-        bottommenu.setLocation(0, 590);
-        bottommenu.setSize(300, 110);
-        bottommenu.setBackground(new Color(0, 99, 178));
-        
-        menu.setLayout(new GridLayout(5, 1));
-        menu.setLocation(0, 130);
-        menu.setSize(300, 460);
-        menu.setVisible(true);
+       
         
         menu.add(menu1);
         menu.add(menu2);
         menu.add(menu3);
         menu.add(menu4);
         menu.add(menu5);
+        //menu.add(menu6);
         
         program.setSize(900, 700);
         program.setLocation(300, 0);

@@ -5,7 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import model.*;
-import view.Helper;
+import view.*;
 
 public class ButtonEditor extends DefaultCellEditor {
 	  protected JButton button;
@@ -49,7 +49,7 @@ public class ButtonEditor extends DefaultCellEditor {
 	  public Object getCellEditorValue() {
 	    if (isPushed) {
 	    	Student choose = teacher.getStudents().get(row);
-	    	JPanel p1 = Helper.createPanel("");
+	    	MyPanel p1 = Helper.createPanel("");
 	    	p1.setLayout(new GridBagLayout());
 	    	GridBagConstraints gbc = new GridBagConstraints();
 	    	gbc.insets = new Insets(10, 100, 5, 5);

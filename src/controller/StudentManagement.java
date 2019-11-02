@@ -220,7 +220,7 @@ public class StudentManagement{
 
 			public void mouseClicked(MouseEvent e) {
 				
-				JPanel p1 = Helper.createPanel("");
+				MyPanel p1 = Helper.createPanel("");
 				JLabel msg = Helper.createLabel("รหัสนักศึกษา : ");
 				JTextField tf = Helper.createTextField(10);
 				p1.add(msg);
@@ -285,7 +285,7 @@ public class StudentManagement{
 
         managementPage.getScoreGUI().getBtn1().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		JPanel p1 = Helper.createPanel("");
+        		MyPanel p1 = Helper.createPanel("");
 				JLabel msg = Helper.createLabel("รหัสนักศึกษา : ");
 				JTextField tf = Helper.createTextField(10);
 				p1.add(msg);
@@ -296,7 +296,7 @@ public class StudentManagement{
 					for (int i = 0; i < arr.size(); i++) {
 						if (tf.getText().equals(arr.get(i).getStudentID())) {
 							// แก้ไข คะแนน
-							JPanel p2 = Helper.createPanel("");
+							MyPanel p2 = Helper.createPanel("");
 							p2.setLayout(new GridLayout(4, 2));
 							JLabel msg01 = Helper.createLabel("Assignment1");
 							JLabel msg02 = Helper.createLabel("Assignment2");
