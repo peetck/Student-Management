@@ -14,7 +14,7 @@ public class MainGUI{
         fr.setSize(1200, 730); // 1200 * 700 (730 because title bar)
         fr.setResizable(false);
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        fr.setIconImage(new ImageIcon("images/icon.png").getImage());
+        fr.setIconImage(new ImageIcon("/images/icon.png").getImage());
         fr.setVisible(true);
         fr.setLocationRelativeTo(null);
     }

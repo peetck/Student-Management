@@ -31,14 +31,14 @@ public class ManagementGUI{
         menu1.setLayout(new BorderLayout());
         menuMsg1 = Helper.createLabel("รายชื่อนักเรียน    ", 25);
         menuMsg1.setHorizontalAlignment(JLabel.CENTER);
-        icon1 = Helper.createLabel("", "images/menu_icon/List.png");
+        icon1 = Helper.createLabel("", "/images/menu_icon/List.png");
         menu1.add(menuMsg1);
         menu1.add(icon1, BorderLayout.EAST);
 
         menu2 = Helper.createPanel("");
         menu2.setLayout(new BorderLayout());
         menuMsg2 = Helper.createLabel("คะแนน    ",  25);
-        icon2 = Helper.createLabel("", "images/menu_icon/Score.png");
+        icon2 = Helper.createLabel("", "/images/menu_icon/Score.png");
         menuMsg2.setHorizontalAlignment(JLabel.CENTER);
         menu2.add(menuMsg2);
         menu2.add(icon2, BorderLayout.EAST);
@@ -46,7 +46,7 @@ public class ManagementGUI{
         menu3 = Helper.createPanel("");
         menu3.setLayout(new BorderLayout());
         menuMsg3 = Helper.createLabel("เพิ่มนักเรียน    ",  25);
-        icon3 = Helper.createLabel("", "images/menu_icon/Add.png");
+        icon3 = Helper.createLabel("", "/images/menu_icon/Add.png");
         menuMsg3.setHorizontalAlignment(JLabel.CENTER);
         menu3.add(menuMsg3);
         menu3.add(icon3, BorderLayout.EAST);
@@ -54,7 +54,7 @@ public class ManagementGUI{
         menu4 = Helper.createPanel("");
         menu4.setLayout(new BorderLayout());
         menuMsg4 = Helper.createLabel("ลบนักเรียน    ",  25);
-        icon4 = Helper.createLabel("", "images/menu_icon/Delete.png");
+        icon4 = Helper.createLabel("", "/images/menu_icon/Delete.png");
         menuMsg4.setHorizontalAlignment(JLabel.CENTER);
         menu4.add(menuMsg4);
         menu4.add(icon4, BorderLayout.EAST);
@@ -62,7 +62,7 @@ public class ManagementGUI{
         menu5 = Helper.createPanel("");
         menu5.setLayout(new BorderLayout());
         menuMsg5 = Helper.createLabel("ตั้งค่า    ",  25);
-        icon5 = Helper.createLabel("", "images/menu_icon/Setting.png");
+        icon5 = Helper.createLabel("", "/images/menu_icon/Setting.png");
         menuMsg5.setHorizontalAlignment(JLabel.CENTER);
         menu5.add(menuMsg5);
         menu5.add(icon5, BorderLayout.EAST);

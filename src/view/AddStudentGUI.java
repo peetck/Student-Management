@@ -234,11 +234,12 @@ public class AddStudentGUI {
         pictureLabel.setBackground(Color.RED);
 		picture.add(pictureLabel);
 		
-		defaultImg = Toolkit.getDefaultToolkit().createImage("images/blank_profile.png");
+
+		defaultImg = Helper.createImage("/images/blank_profile.png");
 		defaultImg = defaultImg.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 	    pictureLabel.setIcon(new ImageIcon(defaultImg));
 		
-	    picturePath = "images/blank_profile.png";
+	    picturePath = "/images/blank_profile.png";
 		
 		p1.add(left);
 		p1.add(right);

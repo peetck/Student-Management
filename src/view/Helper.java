@@ -14,11 +14,11 @@ public class Helper{
 	}
 	// return MyPanel with image if want
     public static MyPanel createPanel(String url){
-        Image img = Toolkit.getDefaultToolkit().createImage(url);
+    	Image img = createImage(url);
         return new MyPanel(img);
     }
     public static MyPanel createPanel(String url, String select){
-        Image img = Toolkit.getDefaultToolkit().createImage(url);
+    	Image img = createImage(url);
         return new MyPanel(img, select);
     }
     // return JLabel with font 
@@ -50,7 +50,7 @@ public class Helper{
     }
     // menu JLable icon only !!
     public static JLabel createLabel(String msg, String path) {
-    	Image img = Toolkit.getDefaultToolkit().getImage(path);
+    	Image img = createImage(path);
 	    img = img.getScaledInstance(80, 80, Image.SCALE_DEFAULT);
 	    ImageIcon icon = new ImageIcon(img);
 	    JLabel l = new JLabel(msg + "   ");
@@ -60,7 +60,7 @@ public class Helper{
         return l;
     }
     public static JLabel createLabel(String msg, String path, int size) {
-    	Image img = Toolkit.getDefaultToolkit().getImage(path);
+    	Image img = createImage(path);
 	    img = img.getScaledInstance(80, 80, Image.SCALE_DEFAULT);
 	    ImageIcon icon = new ImageIcon(img);
 	    JLabel l = new JLabel(msg);
@@ -99,5 +99,9 @@ public class Helper{
         btn.setForeground(color);
         btn.setOpaque(false);
         return btn;
+    }
+    public static Image createImage(String url) {
+    	Image img = Toolkit.getDefaultToolkit().getImage(Helper.class.getResource(url));
+    	return img;
     }
 }

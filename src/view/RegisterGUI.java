@@ -9,7 +9,7 @@ public class RegisterGUI{
     private JButton btn1, btn2;
     private GridBagConstraints gbc;
     public RegisterGUI(){
-        p1 = Helper.createPanel("images/bg.jpg");
+        p1 = Helper.createPanel("/images/bg.jpg");
         l1 = Helper.createLabel("Register ");
         l1.setHorizontalAlignment(JLabel.CENTER);
         l2 = Helper.createLabel("Username ");

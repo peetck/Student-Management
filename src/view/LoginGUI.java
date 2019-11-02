@@ -11,7 +11,7 @@ public class LoginGUI{
     private GridBagConstraints gbc;
     public LoginGUI(){
 
-        p1 =  Helper.createPanel("images/bg.jpg");
+        p1 =  Helper.createPanel("/images/bg.jpg");
         btn1 = Helper.createButton("Login");
         l1 = Helper.createLabel("Username ");
         l2 = Helper.createLabel("Password ");
