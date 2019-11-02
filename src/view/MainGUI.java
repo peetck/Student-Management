@@ -1,11 +1,13 @@
 package view;
+import java.awt.*;
+
 import javax.swing.*;
 public class MainGUI{
     private JFrame fr;
     private LoginGUI login;
     private RegisterGUI register;
     private ManagementGUI management;
-    
+    private Image programIcon;
     public MainGUI(){
         fr = new JFrame("Student Management");
         login = new LoginGUI();
@@ -14,7 +16,9 @@ public class MainGUI{
         fr.setSize(1200, 730); // 1200 * 700 (730 because title bar)
         fr.setResizable(false);
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        fr.setIconImage(new ImageIcon("/images/icon.png").getImage());
+        
+        programIcon = Helper.createImage("/images/icon.png");
+        fr.setIconImage(programIcon);
         fr.setVisible(true);
         fr.setLocationRelativeTo(null);
     }
