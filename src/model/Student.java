@@ -22,14 +22,15 @@ public class Student {
 		
 	}
 
+	
 	public void setScore( double assignment1, double assignment2, double midterm_score, double final_score) {
-		this.information.put("midterm_score", "" + midterm_score);
-		this.information.put("final_score", "" + final_score);
-		this.information.put("assignment1", "" + assignment1);
-		this.information.put("assignment2", "" + assignment2);
+		this.score.put("midterm_score", midterm_score);
+		this.score.put("final_score", final_score);
+		this.score.put("assignment1", assignment1);
+		this.score.put("assignment2", assignment2);
 
 	}
-	public Object[] getInfo() {
+	public Object[] getTableHeadInfo() {
 		Object[] info = new Object[5];
 		
 		info[0] = this.information.get("studentID");
@@ -81,5 +82,9 @@ public class Student {
 	}
 	public String getPicturePath() {
 		return this.picturePath;
+	}
+	
+	public HashMap<String, String> getInformation(){
+		return this.information;
 	}
 }

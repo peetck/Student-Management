@@ -361,6 +361,7 @@ public class StudentManagement{
 						    	
 								myStudent.update(t, n);								
 			    				JOptionPane.showMessageDialog(null, Helper.createLabel("แก้ไขคะแนนเรียบร้อยแล้ว"));
+			    				updateScoreTable();
 							}
 							return;
 						}
@@ -386,6 +387,55 @@ public class StudentManagement{
         	    managementPage.getAddStudentGUI().getPictureLabel().setIcon(icon);
         	    managementPage.getAddStudentGUI().setPicturePath(sourcePath);
 
+        	}
+        });
+        
+        managementPage.getAddStudentGUI().getBtn3().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		MyPanel p1 = Helper.createPanel("");
+				JLabel msg = Helper.createLabel("รหัสนักศึกษา : ");
+				JTextField tf = Helper.createTextField(10);
+				p1.add(msg);
+				p1.add(tf);
+				int alert = JOptionPane.showConfirmDialog(null, p1, "ดึงข้อมูล", JOptionPane.OK_CANCEL_OPTION);
+				if (alert == JOptionPane.OK_OPTION) {
+					ArrayList<Student> arr = teacher.getStudents();
+					for (int i = 0; i < arr.size(); i++) {
+						if (arr.get(i).getStudentID().equals(tf.getText())) {
+					    	HashMap<String, String> info = arr.get(i).getInformation();
+					    	
+					    	
+					    	managementPage.getAddStudentGUI().getF1().setText(info.get("studentID"));
+
+					    	managementPage.getAddStudentGUI().getF2().setSelectedItem(info.get("faculty"));
+					    	
+					    	
+					    	managementPage.getAddStudentGUI().getF3().setSelectedItem(info.get("title"));
+					    	managementPage.getAddStudentGUI().getF4().setText(info.get("name"));
+					    	managementPage.getAddStudentGUI().getF5().setText(info.get("surname"));
+					    	
+					    	managementPage.getAddStudentGUI().getF6_1().setSelectedItem(info.get("day"));
+					    	managementPage.getAddStudentGUI().getF6_2().setSelectedItem(info.get("month"));
+					    	managementPage.getAddStudentGUI().getF6_3().setSelectedItem(info.get("year"));
+					    	
+					    	managementPage.getAddStudentGUI().getF7().setText(info.get("cardID"));
+					    	managementPage.getAddStudentGUI().getF8().setText(info.get("address"));
+					    	managementPage.getAddStudentGUI().getF9().setText(info.get("race"));
+					    	managementPage.getAddStudentGUI().getF10().setText(info.get("religion"));
+					    	managementPage.getAddStudentGUI().getF11().setText(info.get("bloodType"));
+					    	managementPage.getAddStudentGUI().getF12().setText(info.get("tel"));
+					    	managementPage.getAddStudentGUI().getF13().setText(info.get("email"));
+					    	managementPage.getAddStudentGUI().getF14().setText(info.get("height"));
+					    	managementPage.getAddStudentGUI().getF15().setText(info.get("weight"));
+					    	managementPage.getAddStudentGUI().getF16().setText(info.get("parentTel"));
+					    	managementPage.getAddStudentGUI().getF17().setText(info.get("disease"));
+
+							return;
+						}
+					}
+				}
+				JLabel msg2 = Helper.createLabel("ไม่มีรหัสนักศึกษานี้อยู่ในระบบ");
+				JOptionPane.showMessageDialog(null, msg2);
         	}
         });
         
@@ -421,6 +471,14 @@ public class StudentManagement{
     	parentTel = managementPage.getAddStudentGUI().getF16().getText();
     	disease = managementPage.getAddStudentGUI().getF17().getText();
     	enrollAt = "" + java.time.LocalDate.now();
+    	
+    	if (studentID.equals("") || name.equals("") || surname.equals("") || cardID.equals("") || address.equals("") ||
+    		race.equals("") || religion.equals("") || bloodType.equals("") || tel.equals("") || email.equals("") ||
+    		height.equals("") || weight.equals("") || parentTel.equals("") || disease.equals("")) {
+    		
+    		JOptionPane.showMessageDialog(null, Helper.createLabel("กรุณากรอกข้อมูลให้ครบถ้วน"));
+    		return;
+    	}
     	
     	sourcePath = managementPage.getAddStudentGUI().getPicturePath();
     	
@@ -598,7 +656,7 @@ public class StudentManagement{
     	ArrayList<Student> students = teacher.getStudents();
     	Object[][] data = new Object[students.size()][5];
 		for (int i = 0; i < students.size(); i++) {
-			data[i] = students.get(i).getInfo();
+			data[i] = students.get(i).getTableHeadInfo();
 		}
 		Object[] header = {"รหัสนักศึกษา", "ชื่อ", "นามสกุล", "เพิ่มเข้ามาในวันที่"	,""};
 		

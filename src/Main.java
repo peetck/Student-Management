@@ -1,6 +1,6 @@
 import controller.*;
 import javax.swing.*;
-
+import javax.swing.plaf.ColorUIResource;
 
 import mdlaf.*;
 import java.awt.*;
@@ -18,8 +18,8 @@ public class Main{
             UIManager.setLookAndFeel(new MaterialLookAndFeel());
             JDialog.setDefaultLookAndFeelDecorated(false);
             UIManager.put("Button.mouseHoverEnable", true);
-            
             UIManager.put("TableHeader.font", new Font("itim", Font.PLAIN, 16));
+
         }
         catch (Exception e) {
             e.printStackTrace();

@@ -11,7 +11,7 @@ public class AddStudentGUI {
 	private JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12, l13, l14, l15, l16, l17, pictureLabel;
 	private JTextField f1,f4, f5, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17;
 	private JComboBox<String> f2, f3, f6_1, f6_2, f6_3;
-	private JButton btn1, btn2;
+	private JButton btn1, btn2, btn3;
 	private GridBagConstraints gbc;
 	private Image defaultImg;
 	private String picturePath;
@@ -23,7 +23,8 @@ public class AddStudentGUI {
 		gbc.insets = new Insets(5, 0, 0, 0);
         gbc.fill = GridBagConstraints.BOTH;
         btn1 = Helper.createButton("เพิ่มนักศึกษา");
-        btn2 = Helper.createButton("เพิ่มรูป");
+        btn2 = Helper.createButton("แก้ไขรูป");
+        btn3 = Helper.createButton("ดึงข้อมูลนักเรียนที่มีอยู่ในระบบ");
         
         left = Helper.createPanel("");
         left.setSize(450, 700);
@@ -31,13 +32,13 @@ public class AddStudentGUI {
         left.setLayout(new GridBagLayout());
         
         right = Helper.createPanel("");
-        right.setSize(450, 545);
-        right.setLocation(450, 155);
+        right.setSize(450, 525);
+        right.setLocation(450, 175);
         right.setLayout(new GridBagLayout());
         
         picture = Helper.createPanel("");
         picture.setBorder(BorderFactory.createLineBorder(Color.black));
-        picture.setSize(150, 150);
+        picture.setSize(150, 170);
         picture.setLocation(610, 5);
         picture.setLayout(new BorderLayout());
         
@@ -176,6 +177,9 @@ public class AddStudentGUI {
 		gbc.gridx = 0;
 		gbc.gridy = 19;
 		left.add(f10, gbc);
+		gbc.gridx = 0;
+		gbc.gridy = 20;
+		left.add(btn3, gbc);
 		
 		
 		gbc.gridx = 0;
@@ -223,15 +227,14 @@ public class AddStudentGUI {
 		right.add(f17, gbc);
 		gbc.gridx = 0;
 		gbc.gridy = 14;
-		right.add(btn2, gbc);
-		gbc.gridx = 0;
-		gbc.gridy = 15;
 		right.add(btn1, gbc);
+
 		
 
         pictureLabel = Helper.createLabel("");
         pictureLabel.setBackground(Color.RED);
 		picture.add(pictureLabel);
+		picture.add(btn2, BorderLayout.SOUTH);
 		
 
 		defaultImg = Helper.createImage("/images/blank_profile.png");
@@ -442,6 +445,10 @@ public class AddStudentGUI {
 
 	public JButton getBtn2() {
 		return this.btn2;
+	}
+	
+	public JButton getBtn3() {
+		return this.btn3;
 	}
 	
 	public JLabel getPictureLabel() {
