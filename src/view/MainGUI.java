@@ -17,6 +17,8 @@ public class MainGUI{
         fr.setResizable(false);
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
+
+        
         programIcon = Helper.createImage("/images/icon.png");
         fr.setIconImage(programIcon);
         fr.setVisible(true);

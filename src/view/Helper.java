@@ -51,7 +51,7 @@ public class Helper{
     // menu JLable icon only !!
     public static JLabel createLabel(String msg, String path) {
     	Image img = createImage(path);
-	    img = img.getScaledInstance(80, 80, Image.SCALE_DEFAULT);
+	    img = img.getScaledInstance(70, 70, Image.SCALE_DEFAULT);
 	    ImageIcon icon = new ImageIcon(img);
 	    JLabel l = new JLabel(msg + "   ");
         l.setFont(new Font("itim", Font.PLAIN, 16));
@@ -61,7 +61,7 @@ public class Helper{
     }
     public static JLabel createLabel(String msg, String path, int size) {
     	Image img = createImage(path);
-	    img = img.getScaledInstance(80, 80, Image.SCALE_DEFAULT);
+	    img = img.getScaledInstance(70, 70, Image.SCALE_DEFAULT);
 	    ImageIcon icon = new ImageIcon(img);
 	    JLabel l = new JLabel(msg);
         l.setFont(new Font("itim", Font.PLAIN, size));
@@ -104,4 +104,5 @@ public class Helper{
     	Image img = Toolkit.getDefaultToolkit().getImage(Helper.class.getResource(url));
     	return img;
     }
+
 }

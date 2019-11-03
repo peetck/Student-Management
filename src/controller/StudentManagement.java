@@ -219,7 +219,9 @@ public class StudentManagement{
         managementPage.getMenu4().addMouseListener(new MouseAdapter() {
 
 			public void mouseClicked(MouseEvent e) {
-				
+				int before = currentPage;
+				currentPage = 4;
+				updatePage();
 				MyPanel p1 = Helper.createPanel("");
 				JLabel msg = Helper.createLabel("รหัสนักศึกษา : ");
 				JTextField tf = Helper.createTextField(10);
@@ -236,7 +238,8 @@ public class StudentManagement{
 	    				JOptionPane.showMessageDialog(null, msg2);
 					}
                 }
-
+				currentPage = before;
+				updatePage();
 			}
 
         });
@@ -268,7 +271,23 @@ public class StudentManagement{
 
         });
 
-        
+        managementPage.getMenu6().addMouseListener(new MouseAdapter() {
+
+			public void mouseClicked(MouseEvent e) {
+				int before = currentPage;
+				currentPage = 6;
+				updatePage();
+				JLabel msg = Helper.createLabel("คุณแน่ใจที่จะออกจากโปรแกรมใช่หรือไม่");
+				int dialogButton = JOptionPane.YES_NO_OPTION;
+				int dialogResult = JOptionPane.showConfirmDialog (null, msg, "Exit", dialogButton);
+				if(dialogResult == JOptionPane.YES_OPTION){
+					System.exit(0);
+				}
+				currentPage = before;
+				updatePage();
+			}
+
+        });
 
         managementPage.getAddStudentGUI().getBtn1().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
@@ -616,6 +635,7 @@ public class StudentManagement{
 		scoreTable.setFillsViewportHeight(true);
 		for (int i = 0; i < scoreTable.getColumnCount(); i++) {
 			scoreTable.getColumnModel().getColumn(i).setCellRenderer(new CellRenderer());
+
 		}
 		
 		scoreTable.setBorder(new LineBorder(Color.RED, 0));
@@ -627,12 +647,14 @@ public class StudentManagement{
 		managementPage.getMenu3().setBackground(new Color(156, 195, 213));
 		managementPage.getMenu4().setBackground(new Color(156, 195, 213));
 		managementPage.getMenu5().setBackground(new Color(156, 195, 213));
+		managementPage.getMenu6().setBackground(new Color(156, 195, 213));
     	switch(currentPage) {
     		case 1: managementPage.getMenu1().setBackground(Color.WHITE);break;
     		case 2: managementPage.getMenu2().setBackground(Color.WHITE);break;
     		case 3: managementPage.getMenu3().setBackground(Color.WHITE);break;
     		case 4: managementPage.getMenu4().setBackground(Color.WHITE);break;
     		case 5: managementPage.getMenu5().setBackground(Color.WHITE);break;
+    		case 6: managementPage.getMenu6().setBackground(Color.WHITE);break;
     	}
     }
     

@@ -18,9 +18,9 @@ public class ManagementGUI{
         desktop = new JDesktopPane();
         
         menu = Helper.createPanel("");
-        menu.setLayout(new GridLayout(5, 1));
+        menu.setLayout(new GridLayout(6, 1));
         menu.setLocation(0, 130);
-        menu.setSize(300, 460);
+        menu.setSize(300, 480);
         menu.setVisible(true);
         
         program = Helper.createPanel("");
@@ -36,8 +36,8 @@ public class ManagementGUI{
         topmenu.setBackground(new Color(0, 99, 178));
         
         bottommenu = Helper.createPanel("");
-        bottommenu.setLocation(0, 590);
-        bottommenu.setSize(300, 110);
+        bottommenu.setLocation(0, 610);
+        bottommenu.setSize(300, 90);
         bottommenu.setBackground(new Color(0, 99, 178));
 
         
@@ -84,8 +84,8 @@ public class ManagementGUI{
         
         menu6 = Helper.createPanel("");
         menu6.setLayout(new BorderLayout());
-        menuMsg6 = Helper.createLabel("ออกจากระบบ    ",  25);
-        icon6 = Helper.createLabel("", "/images/menu_icon/Setting.png");
+        menuMsg6 = Helper.createLabel("ออกจากโปรแกรม   ",  25);
+        icon6 = Helper.createLabel("", "/images/menu_icon/Exit.png");
         menuMsg6.setHorizontalAlignment(JLabel.CENTER);
         menu6.add(menuMsg6);
         menu6.add(icon6, BorderLayout.EAST);
@@ -98,7 +98,7 @@ public class ManagementGUI{
         menu.add(menu3);
         menu.add(menu4);
         menu.add(menu5);
-        //menu.add(menu6);
+        menu.add(menu6);
         
         program.setSize(900, 700);
         program.setLocation(300, 0);
@@ -170,5 +170,8 @@ public class ManagementGUI{
     }
     public MyPanel getMenu5() {
     	return this.menu5;
+    }
+    public MyPanel getMenu6() {
+    	return this.menu6;
     }
 }

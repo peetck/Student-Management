@@ -43,25 +43,24 @@ public class AddStudentGUI {
         
 
         
-        l1 = Helper.createLabel("รหัสนักศึกษา");
-		l2 = Helper.createLabel("คณะ");
-        l3 = Helper.createLabel("คํานําหน้า");
-		l4 = Helper.createLabel("ชื่อ");
-		l5 = Helper.createLabel("นามสกุล");
-		l6 = Helper.createLabel("วันเดือนปีเกิด");
+        l1 = Helper.createLabel("รหัสนักศึกษา : ");
+		l2 = Helper.createLabel("คณะ : ");
+        l3 = Helper.createLabel("คํานําหน้า : ");
+		l4 = Helper.createLabel("ชื่อ : ");
+		l5 = Helper.createLabel("นามสกุล : ");
+		l6 = Helper.createLabel("วันเดือนปีเกิด : ");
 		
-		l7 = Helper.createLabel("หมายเลขบัตรประชาชน");
-		l8 = Helper.createLabel("ที่อยู่");
-		l9 = Helper.createLabel("เชื้อชาติ");
-		l10 = Helper.createLabel("ศาสนา");
-		l11 = Helper.createLabel("หมู่เลือด");
-		l12 = Helper.createLabel("เบอร์ติดต่อ");
-		l13 = Helper.createLabel("อีเมล์");
-		l14 = Helper.createLabel("ส่วนสูง");
-		l15 = Helper.createLabel("นํ้าหนัก");
-		l16 = Helper.createLabel("เบอร์ติดต่อผู้ปกครอง");
-		l17 = Helper.createLabel("โรคประจําตัว");
-
+		l7 = Helper.createLabel("หมายเลขบัตรประชาชน : ");
+		l8 = Helper.createLabel("ที่อยู่ : ");
+		l9 = Helper.createLabel("เชื้อชาติ : ");
+		l10 = Helper.createLabel("ศาสนา : ");
+		l11 = Helper.createLabel("หมู่เลือด : ");
+		l12 = Helper.createLabel("เบอร์ติดต่อ : ");
+		l13 = Helper.createLabel("อีเมล์ : ");
+		l14 = Helper.createLabel("ส่วนสูง : ");
+		l15 = Helper.createLabel("นํ้าหนัก : ");
+		l16 = Helper.createLabel("เบอร์ติดต่อผู้ปกครอง : ");
+		l17 = Helper.createLabel("โรคประจําตัว : ");
 		
 		f1 = Helper.createTextField(20);
 		f2 = Helper.createComboBox();
