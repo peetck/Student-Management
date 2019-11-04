@@ -1,6 +1,6 @@
 import controller.*;
 import javax.swing.*;
-import javax.swing.plaf.ColorUIResource;
+
 
 import mdlaf.*;
 import java.awt.*;
@@ -27,7 +27,4 @@ public class Main{
            new StudentManagement("localhost", 27017);
 
     }
-    
-
-	
 }
