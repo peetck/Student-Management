@@ -59,12 +59,12 @@ public class Helper{
         l.setOpaque(false);
         return l;
     }
-    public static JLabel createLabel(String msg, String path, int size) {
+    public static JLabel createLabel(String msg, String path, int width, int height) {
     	Image img = createImage(path);
-	    img = img.getScaledInstance(70, 70, Image.SCALE_DEFAULT);
+	    img = img.getScaledInstance(width, height, Image.SCALE_DEFAULT);
 	    ImageIcon icon = new ImageIcon(img);
 	    JLabel l = new JLabel(msg);
-        l.setFont(new Font("itim", Font.PLAIN, size));
+        l.setFont(new Font("itim", Font.PLAIN, 16));
         l.setIcon(icon);
         l.setOpaque(false);
         //l.setHorizontalTextPosition(JLabel.LEFT);

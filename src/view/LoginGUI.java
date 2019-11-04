@@ -1,17 +1,48 @@
 package view;
 import java.awt.*;
+
 import javax.swing.*;
 
 public class LoginGUI{
     private JButton btn1;
-    private MyPanel p1;
-    private JLabel l1, l2, l3, l4, title;
+    private JDesktopPane desktop, linkPanel;
+    private MyPanel link, p1, href;
+    private JLabel l1, l2, l3, l4, title, github;
     private JTextField f1;
     private JPasswordField f2;
     private GridBagConstraints gbc;
     public LoginGUI(){
 
+    	desktop = new JDesktopPane();
+    	
         p1 =  Helper.createPanel("/images/bg.jpg");
+        p1.setSize(1200, 630);
+        p1.setLocation(0, 0);
+        
+        link = Helper.createPanel("");
+        link.setLayout(new BorderLayout());
+        link.setSize(1200, 70);
+        link.setLocation(0, 630);
+        
+        linkPanel = new JDesktopPane();
+        linkPanel.setBackground(new Color(0, 138, 177));
+        
+        href = Helper.createPanel("");
+        href.setBackground(new Color(0, 138, 177));
+        href.setSize(60, 60);
+        href.setLocation(1110, 0);
+
+        
+        github = Helper.createLabel("", "/images/github.png", 50, 50);
+        
+        
+        href.add(github);
+        
+        linkPanel.add(href);
+        
+        link.add(linkPanel);
+        
+        
         btn1 = Helper.createButton("Login");
         
         title = Helper.createLabel("Student Management", 20);
@@ -29,12 +60,14 @@ public class LoginGUI{
         
         f1 = Helper.createTextField(30);
         f2 = Helper.createPasswordField(30);
+        
+        
 
         gbc = new GridBagConstraints();
         p1.setLayout(new GridBagLayout());
         gbc.fill = GridBagConstraints.BOTH;
 
-        gbc.insets = new Insets(150, 0, 30, 0);
+        gbc.insets = new Insets(200, 0, 30, 0);
         gbc.gridx = 0;
         gbc.gridy = 0;
         p1.add(title, gbc);
@@ -64,13 +97,16 @@ public class LoginGUI{
         gbc.gridx = 0;
         gbc.gridy = 7;
         p1.add(l4, gbc);
+        
+        desktop.add(p1);
+        desktop.add(link);
 
     }
     public LoginGUI getGUI(){
         return this;
     }
-    public MyPanel getPanel(){
-        return this.p1;
+    public JDesktopPane getPanel(){
+        return this.desktop;
     }
     public JButton getBtn1(){
         return this.btn1;
@@ -86,5 +122,8 @@ public class LoginGUI{
     }
     public JLabel getL4() {
     	return this.l4;
+    }
+    public JLabel getGithub() {
+    	return this.github;
     }
 }

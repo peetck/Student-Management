@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 import java.io.*;
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -445,6 +446,20 @@ public class StudentManagement{
 				JLabel msg2 = Helper.createLabel("ไม่มีรหัสนักศึกษานี้อยู่ในระบบ");
 				JOptionPane.showMessageDialog(null, msg2);
         	}
+        });
+        
+        loginPage.getGithub().addMouseListener(new MouseAdapter() {
+        	public void mouseClicked(MouseEvent e) {
+				if (Desktop.isDesktopSupported()) {
+					try {
+				        Desktop.getDesktop().browse(new URI("https://github.com/peetck/Student-Management"));
+					}
+					catch (Exception e1) {}
+				} 
+				else {
+					System.out.println("Desktop is not supported!!");
+				}
+			}
         });
         
      }
