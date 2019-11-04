@@ -22,7 +22,7 @@ public class AddStudentGUI {
 		gbc = new GridBagConstraints();
 		gbc.insets = new Insets(5, 0, 0, 0);
         gbc.fill = GridBagConstraints.BOTH;
-        btn1 = Helper.createButton("เพิ่มนักศึกษา");
+        btn1 = Helper.createButton("ยืนยัน");
         btn2 = Helper.createButton("แก้ไขรูป");
         btn3 = Helper.createButton("ดึงข้อมูลนักเรียนที่มีอยู่ในระบบ");
         

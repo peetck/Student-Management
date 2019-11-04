@@ -10,7 +10,7 @@ public class RegisterGUI{
     private GridBagConstraints gbc;
     public RegisterGUI(){
         p1 = Helper.createPanel("/images/bg.jpg");
-        l1 = Helper.createLabel("Register ");
+        l1 = Helper.createLabel("Register ", 20);
         l1.setHorizontalAlignment(JLabel.CENTER);
         l2 = Helper.createLabel("Username ");
         l3 = Helper.createLabel("Password ");

@@ -7,9 +7,9 @@ import javax.swing.*;
 
 public class ManagementGUI{
     private JDesktopPane desktop;
-    private MyPanel menu, program, topmenu, bottommenu;
-    private MyPanel menu1, menu2, menu3, menu4, menu5, menu6;
-    private JLabel menuMsg1, menuMsg2, menuMsg3, menuMsg4, menuMsg5, menuMsg6, icon1, icon2, icon3, icon4, icon5, icon6;
+    private MyPanel menu, program, topmenu, bottommenu, menu1, menu2, menu3, menu4, menu5, menu6, version;
+    private JDesktopPane bottommenu_desktopPane;
+    private JLabel menuMsg1, menuMsg2, menuMsg3, menuMsg4, menuMsg5, menuMsg6, icon1, icon2, icon3, icon4, icon5, icon6, bottoml1;
     private MyStudentGUI mystudent;
     private AddStudentGUI add;
     private SettingGUI setting;
@@ -36,9 +36,23 @@ public class ManagementGUI{
         topmenu.setBackground(new Color(0, 99, 178));
         
         bottommenu = Helper.createPanel("");
+        bottommenu.setLayout(new BorderLayout());
         bottommenu.setLocation(0, 610);
         bottommenu.setSize(300, 90);
-        bottommenu.setBackground(new Color(0, 99, 178));
+        bottommenu_desktopPane = new JDesktopPane();
+        bottommenu_desktopPane.setBackground(new Color(0, 99, 178));
+        version = Helper.createPanel("");
+        version.setSize(100, 30);
+        version.setLocation(205, 50);
+        version.setBackground(new Color(0, 99, 178));
+
+        bottoml1 = Helper.createLabel("Version 1.0", Color.WHITE);
+        version.add(bottoml1);
+        
+        bottommenu_desktopPane.add(version);
+
+        bottommenu.add(bottommenu_desktopPane);
+
 
         
 

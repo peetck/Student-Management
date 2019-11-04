@@ -87,4 +87,5 @@ public class Student {
 	public HashMap<String, String> getInformation(){
 		return this.information;
 	}
+
 }

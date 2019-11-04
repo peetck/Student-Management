@@ -429,10 +429,18 @@ public class StudentManagement{
 					    	managementPage.getAddStudentGUI().getF15().setText(info.get("weight"));
 					    	managementPage.getAddStudentGUI().getF16().setText(info.get("parentTel"));
 					    	managementPage.getAddStudentGUI().getF17().setText(info.get("disease"));
-
+					    	
+					    	
+					    	Image img = Toolkit.getDefaultToolkit().createImage(arr.get(i).getPicturePath());
+			        	    img = img.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
+			        	    ImageIcon icon = new ImageIcon(img);
+			        	    managementPage.getAddStudentGUI().getPictureLabel().setIcon(icon);
 							return;
 						}
 					}
+				}
+				else {
+					return;
 				}
 				JLabel msg2 = Helper.createLabel("ไม่มีรหัสนักศึกษานี้อยู่ในระบบ");
 				JOptionPane.showMessageDialog(null, msg2);
