@@ -382,7 +382,7 @@ public class StudentManagement{
 
         	    
         	    
-        	    Image img = Toolkit.getDefaultToolkit().createImage(sourcePath);
+        	    Image img = Toolkit.getDefaultToolkit().getImage(sourcePath);
         	    img = img.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
         	    ImageIcon icon = new ImageIcon(img);
         	    managementPage.getAddStudentGUI().getPictureLabel().setIcon(icon);
@@ -431,11 +431,17 @@ public class StudentManagement{
 					    	managementPage.getAddStudentGUI().getF16().setText(info.get("parentTel"));
 					    	managementPage.getAddStudentGUI().getF17().setText(info.get("disease"));
 					    	
-					    	
-					    	Image img = Toolkit.getDefaultToolkit().createImage(arr.get(i).getPicturePath());
-			        	    img = img.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
-			        	    ImageIcon icon = new ImageIcon(img);
-			        	    managementPage.getAddStudentGUI().getPictureLabel().setIcon(icon);
+					    	String path = arr.get(i).getPicturePath();
+					    	Image img = null;
+					    	if (path.equals("default")) {
+					    		img = Helper.getImage("/images/blank_profile.png");
+					    	}
+					    	else {
+					    		img = Toolkit.getDefaultToolkit().getImage(path);
+					    	}
+					    	img = img.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
+				        	ImageIcon icon = new ImageIcon(img);
+				        	managementPage.getAddStudentGUI().getPictureLabel().setIcon(icon);
 							return;
 						}
 					}

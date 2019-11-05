@@ -19,7 +19,7 @@ public class MainGUI{
         
 
         
-        programIcon = Helper.createImage("/images/icon.png");
+        programIcon = Helper.getImage("/images/icon.png");
         fr.setIconImage(programIcon);
         fr.setVisible(true);
         fr.setLocationRelativeTo(null);

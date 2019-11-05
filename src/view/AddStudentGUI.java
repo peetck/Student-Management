@@ -237,7 +237,7 @@ public class AddStudentGUI {
 		picture.add(btn2, BorderLayout.SOUTH);
 		
 
-		defaultImg = Helper.createImage("/images/blank_profile.png");
+		defaultImg = Helper.getImage("/images/blank_profile.png");
 		defaultImg = defaultImg.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 	    pictureLabel.setIcon(new ImageIcon(defaultImg));
 		
@@ -484,7 +484,7 @@ public class AddStudentGUI {
 		f15.setText("");
 		f16.setText("");
 		f17.setText("");
-		defaultImg = Helper.createImage("/images/blank_profile.png");
+		defaultImg = Helper.getImage("/images/blank_profile.png");
 		defaultImg = defaultImg.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 	    pictureLabel.setIcon(new ImageIcon(defaultImg));
 	    picturePath = "default";

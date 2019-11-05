@@ -1,6 +1,7 @@
 package controller;
 
 import java.awt.*;
+import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -9,12 +10,17 @@ import view.*;
 
 public class ButtonEditor extends DefaultCellEditor {
 	  protected JButton button;
-	  private int row;
-	  private int col;
+	  private int row, col;
 	  private String label;
 	  private Teacher teacher;
+	  private Student student;
+	  private HashMap<String, String> information;
 	  private boolean isPushed;
-
+	  private MyPanel p1;
+	  private JLabel l1, l2, l3, pictureLabel;
+	  private JLabel a1, a2, a3;
+	  private GridBagConstraints gbc;
+	  
 	  public ButtonEditor(JCheckBox checkBox, Teacher teacher) {
 	    super(checkBox);
 	    this.teacher = teacher;
@@ -30,17 +36,21 @@ public class ButtonEditor extends DefaultCellEditor {
 	  public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
 		  this.row = row;
 		  this.col = column;
+		  System.out.printf("Button press at (%d, %d)\n", this.row, this.col);
 		  if (isSelected) {
 			  button.setForeground(table.getSelectionForeground());
-			  //button.setBackground(table.getSelectionBackground());
 			  button.setBackground(Color.WHITE);
 		  }
 		  else {
 			  button.setForeground(table.getForeground());
-			  //button.setBackground(table.getBackground());
 			  button.setBackground(Color.WHITE);
 		  }
-		  label = (value == null) ? "" : value.toString();
+		  if (value == null) {
+			  label = "";
+		  }
+		  else {
+			  label = value.toString();
+		  }
 		  button.setText(label);
 		  isPushed = true;
 		  return button;
@@ -48,31 +58,63 @@ public class ButtonEditor extends DefaultCellEditor {
 
 	  public Object getCellEditorValue() {
 	    if (isPushed) {
-	    	Student choose = teacher.getStudents().get(row);
-	    	MyPanel p1 = Helper.createPanel("");
-	    	p1.setLayout(new GridBagLayout());
-	    	GridBagConstraints gbc = new GridBagConstraints();
-	    	gbc.insets = new Insets(10, 100, 5, 5);
-	        gbc.fill = GridBagConstraints.BOTH;
-	    	JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12, l13, l14, l15;
-	    	JLabel a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15;
 	    	
-	    	JLabel pictureLabel = Helper.createLabel("");
+	    	student = teacher.getStudents().get(row);
+	    	information = student.getInformation();
+	    	
+	    	p1 = Helper.createPanel("");
+	    	p1.setLayout(new GridBagLayout());
+	    	gbc = new GridBagConstraints();
 
-	    	if ( ! (choose.getPicturePath().equals("default"))) {
-	    		Image img = Toolkit.getDefaultToolkit().createImage(choose.getPicturePath());
+	    	
+	    	pictureLabel = Helper.createLabel("");
+	    	pictureLabel.setBorder(BorderFactory.createLineBorder(Color.black));
+
+	    	if ( ! (student.getPicturePath().equals("default"))) {
+	    		Image img = Toolkit.getDefaultToolkit().getImage(student.getPicturePath());
 		    	img = img.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 			    pictureLabel.setIcon(new ImageIcon(img));
 	    	}
 	    	else {
-	    		Image img = Helper.createImage("/images/blank_profile.png");
+	    		Image img = Helper.getImage("/images/blank_profile.png");
 	    		img = img.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 	    		pictureLabel.setIcon(new ImageIcon(img));
 	    	}
-
-		    p1.add(pictureLabel);
 	    	
-			JOptionPane.showMessageDialog(null, p1, choose.getStudentID(), -1);
+	    	l1 = Helper.createLabel("รหัสนักเรียน");
+	    	a1 = Helper.createLabel(information.get("studentID"));
+	    	l2 = Helper.createLabel("คํานําหน้า");
+	    	a2 = Helper.createLabel(information.get("title"));
+	    	l3 = Helper.createLabel("ชื่อ");
+	    	a3 = Helper.createLabel(information.get("name"));
+	    	
+
+	    	gbc.insets = new Insets(5, 10, 5, 0);
+	        //gbc.fill = GridBagConstraints.BOTH;
+	        
+	        gbc.gridwidth = 2;
+		    p1.add(pictureLabel, gbc);
+		    gbc.gridwidth = 1;
+		    gbc.gridx = 0;
+		    gbc.gridy = 1;
+		    p1.add(l1, gbc);
+		    gbc.gridx = 1;
+		    gbc.gridy = 1;
+		    p1.add(a1, gbc);
+		    gbc.gridx = 0;
+		    gbc.gridy = 2;
+		    p1.add(l2, gbc);
+		    gbc.gridx = 1;
+		    gbc.gridy = 2;
+		    p1.add(a2, gbc);
+		    gbc.gridx = 0;
+		    gbc.gridy = 3;
+		    p1.add(l3, gbc);
+		    gbc.gridx = 1;
+		    gbc.gridy = 3;
+		    p1.add(a3, gbc);
+	    	
+			JOptionPane.showMessageDialog(null, p1, information.get("studentID"), -1);
 	    }
 	    isPushed = false;
 	    return new String(label);
