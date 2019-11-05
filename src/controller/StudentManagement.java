@@ -448,6 +448,7 @@ public class StudentManagement{
 					    	img = img.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 				        	ImageIcon icon = new ImageIcon(img);
 				        	managementPage.getAddStudentGUI().getPictureLabel().setIcon(icon);
+				        	managementPage.getAddStudentGUI().setPicturePath(path);
 							return;
 						}
 					}
