@@ -31,6 +31,7 @@ public class ButtonEditor extends DefaultCellEditor {
 	        fireEditingStopped();
 	      }
 	    });
+
 	  }
 
 	  public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
@@ -58,7 +59,7 @@ public class ButtonEditor extends DefaultCellEditor {
 
 	  public Object getCellEditorValue() {
 	    if (isPushed) {
-	    	
+		    System.out.println("Pressed");
 	    	student = teacher.getStudents().get(row);
 	    	information = student.getInformation();
 	    	

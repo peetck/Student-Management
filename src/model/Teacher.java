@@ -12,4 +12,8 @@ public class Teacher{
     public ArrayList<Student> getStudents(){
     	return this.students;
     }
+    
+    public void setStudents(ArrayList<Student> arr) {
+    	this.students = arr;
+    }
 }

@@ -36,6 +36,7 @@ public class StudentManagement{
     private LoginGUI loginPage;
     private RegisterGUI registerPage;
     private ManagementGUI managementPage;
+    private int TableSortStatus = 0;
     
     public StudentManagement(String hostname, int port){
         try{
@@ -606,6 +607,7 @@ public class StudentManagement{
     	// add success
     	
     	// update table
+    	sortTable(0, false);
     	updateTable();
     	updateScoreTable();
     	
@@ -634,6 +636,7 @@ public class StudentManagement{
             	return true;
             }
         }
+        sortTable(0, false);
         updateTable();
         updateScoreTable();
         return false;
@@ -679,6 +682,7 @@ public class StudentManagement{
         	String picturePath = "" + t.get("picturePath");
             teacher.addStudent(new Student(information, score, picturePath));
         }
+        sortTable(0, false);
         updateTable();
         updateScoreTable();
         updatePage();
@@ -702,10 +706,20 @@ public class StudentManagement{
 		table.getTableHeader().setReorderingAllowed(false);
 		table.setDefaultEditor(Object.class, null);
 		table.setFillsViewportHeight(true);
+		
 		for (int i = 0; i < table.getColumnCount() - 1; i++) {
 			table.getColumnModel().getColumn(i).setCellRenderer(new CellRenderer());
 		}
 		table.setBorder(new LineBorder(Color.RED, 0));
+		
+		table.getTableHeader().addMouseListener(new MouseAdapter() {
+		    @Override
+		    public void mouseClicked(MouseEvent e) {
+		        int col = table.columnAtPoint(e.getPoint());
+		        sortTable(col, true);
+		    }
+		});
+		
 		managementPage.getMyStudentGUI().updateTable(table);
     }
     
@@ -749,7 +763,92 @@ public class StudentManagement{
     	}
     }
     
-    
+    public void sortTable(int col, boolean change) {
+    	ArrayList<Student> arr = teacher.getStudents();
+    	if (change) {
+        	if (TableSortStatus == 0) {
+        		TableSortStatus = 1;
+        	}
+        	else {
+        		TableSortStatus = 0;
+        	}
+    	}
+    	if (col == 0) { // studentID
+    		sort(arr, 0, arr.size() - 1, "studentID");
+    	}
+
+    	
+    	teacher.setStudents(arr);
+    	updateTable();
+
+    }
+    public void sort(ArrayList<Student> arr, int l, int r, String select) {
+    	if (l < r) {
+    		int m = l + ((r - l) / 2);
+    		sort(arr, l, m, select);
+    		sort(arr, m + 1, r, select);
+    		merge(arr, l, m, r, select);
+    	}
+
+    }
+    public void merge(ArrayList<Student> arr, int l, int m, int r, String select) {
+    	int s1 = m - l + 1;
+    	int s2 = r - m;
+    	Student[] n1 = new Student[s1];
+    	Student[] n2 = new Student[s2];
+    	for (int i = 0; i < s1; i++) {
+    		n1[i] = arr.get(l + i);
+    	}
+    	for (int i = 0; i < s2; i++) {
+    		n2[i] = arr.get(m + i + 1);
+    	}
+    	
+    	int i = 0, j = 0, k = l;
+    	if (select.equals("studentID")) {
+    		if (this.TableSortStatus == 0) {
+    			while (i < s1 && j < s2) {
+            		if (Integer.parseInt(n1[i].getStudentID()) < Integer.parseInt(n2[j].getStudentID())){
+            			arr.set(k, n1[i]);
+            			i++;
+            			k++;
+            		}
+            		else {
+            			arr.set(k, n2[j]);
+            			j++;
+            			k++;
+            		}
+            	}
+    		}
+    		else if (this.TableSortStatus == 1) {
+    			while (i < s1 && j < s2) {
+            		if (Integer.parseInt(n1[i].getStudentID()) > Integer.parseInt(n2[j].getStudentID())){
+            			arr.set(k, n1[i]);
+            			i++;
+            			k++;
+            		}
+            		else {
+            			arr.set(k, n2[j]);
+            			j++;
+            			k++;
+            		}
+            	}
+    		}
+    		
+    	}
+    	
+    	
+    	while (i < s1) {
+    		arr.set(k, n1[i]);
+			i++;
+			k++;
+    	}
+    	
+    	while (j < s2) {
+    		arr.set(k, n2[j]);
+			j++;
+			k++;
+    	}
+    }
 }
 
 
