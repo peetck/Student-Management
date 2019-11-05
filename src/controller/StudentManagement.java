@@ -294,9 +294,13 @@ public class StudentManagement{
         	public void actionPerformed(ActionEvent e) {
         		for (int i = 0; i < teacher.getStudents().size(); i++) {
         			if (teacher.getStudents().get(i).getStudentID().equals(managementPage.getAddStudentGUI().getF1().getText())) {
-        				JLabel msg = Helper.createLabel("มีรหัสนักศึกษานี้อยู่ในระบบอยู่แล้ว");
-        				JOptionPane.showMessageDialog(null, msg);
-        				return;
+        				JLabel msg = Helper.createLabel("มีรหัสนักศึกษานี้อยู่ในระบบอยู่แล้ว คุณต้องการที่จะแก้ไขข้อมูลหรือไม่??");
+        				int alert = JOptionPane.showConfirmDialog(null, msg, "ยืนยัน", JOptionPane.OK_CANCEL_OPTION);
+        				if (alert == JOptionPane.OK_OPTION) {
+        					delete(teacher.getStudents().get(i).getStudentID());
+        					addStudent();
+        				}
+            			return;	
         			}
         		}
             	addStudent();
