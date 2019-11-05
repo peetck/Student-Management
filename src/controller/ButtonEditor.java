@@ -17,8 +17,8 @@ public class ButtonEditor extends DefaultCellEditor {
 	  private HashMap<String, String> information;
 	  private boolean isPushed;
 	  private MyPanel p1;
-	  private JLabel l1, l2, l3, pictureLabel;
-	  private JLabel a1, a2, a3;
+	  private JLabel l1, l2, l3, l4, l5, l6, l7, l8 , pictureLabel;
+	  private JLabel a1, a2, a3, a4, a5, a6, a7, a8;
 	  private GridBagConstraints gbc;
 	  
 	  public ButtonEditor(JCheckBox checkBox, Teacher teacher) {
@@ -82,14 +82,20 @@ public class ButtonEditor extends DefaultCellEditor {
 	    	}
 	    	
 	    	l1 = Helper.createLabel("รหัสนักเรียน");
+	    	
 	    	a1 = Helper.createLabel(information.get("studentID"));
-	    	l2 = Helper.createLabel("คํานําหน้า");
-	    	a2 = Helper.createLabel(information.get("title"));
-	    	l3 = Helper.createLabel("ชื่อ");
-	    	a3 = Helper.createLabel(information.get("name"));
+	    	l2 = Helper.createLabel("คณะ");
+	    	a2 = Helper.createLabel(information.get("faculty"));
+	    	l3 = Helper.createLabel("คํานําหน้า");
+	    	a3 = Helper.createLabel(information.get("title"));
+	    	l4 = Helper.createLabel("ชื่อ");
+	    	a4 = Helper.createLabel(information.get("name"));
+	    	l5 = Helper.createLabel("นามสกุล");
+	    	a5 = Helper.createLabel(information.get("surname"));
 	    	
 
 	    	gbc.insets = new Insets(5, 10, 5, 0);
+	    	
 	        //gbc.fill = GridBagConstraints.BOTH;
 	        
 	        gbc.gridwidth = 2;
@@ -97,10 +103,13 @@ public class ButtonEditor extends DefaultCellEditor {
 		    gbc.gridwidth = 1;
 		    gbc.gridx = 0;
 		    gbc.gridy = 1;
+		    gbc.insets = new Insets(20, 10, 5, 0);
+		    gbc.anchor = GridBagConstraints.WEST;
 		    p1.add(l1, gbc);
 		    gbc.gridx = 1;
 		    gbc.gridy = 1;
 		    p1.add(a1, gbc);
+		    gbc.insets = new Insets(5, 10, 5, 0);
 		    gbc.gridx = 0;
 		    gbc.gridy = 2;
 		    p1.add(l2, gbc);
@@ -113,6 +122,18 @@ public class ButtonEditor extends DefaultCellEditor {
 		    gbc.gridx = 1;
 		    gbc.gridy = 3;
 		    p1.add(a3, gbc);
+		    gbc.gridx = 0;
+		    gbc.gridy = 4;
+		    p1.add(l4, gbc);
+		    gbc.gridx = 1;
+		    gbc.gridy = 4;
+		    p1.add(a4, gbc);
+		    gbc.gridx = 0;
+		    gbc.gridy = 5;
+		    p1.add(l5, gbc);
+		    gbc.gridx = 1;
+		    gbc.gridy = 5;
+		    p1.add(a5, gbc);
 	    	
 			JOptionPane.showMessageDialog(null, p1, information.get("studentID"), -1);
 	    }
