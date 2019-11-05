@@ -80,6 +80,12 @@ public class Student {
 	public String getStudentID() {
 		return this.information.get("studentID");
 	}
+	public String getName() {
+		return this.information.get("name");
+	}
+	public String getSurname() {
+		return this.information.get("surname");
+	}
 	public String getPicturePath() {
 		return this.picturePath;
 	}

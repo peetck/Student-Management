@@ -37,6 +37,7 @@ public class StudentManagement{
     private RegisterGUI registerPage;
     private ManagementGUI managementPage;
     private int TableSortStatus = 0;
+    private String sortFrom = "studentID";
     
     public StudentManagement(String hostname, int port){
         try{
@@ -607,7 +608,7 @@ public class StudentManagement{
     	// add success
     	
     	// update table
-    	sortTable(0, false);
+    	sortTable(false);
     	updateTable();
     	updateScoreTable();
     	
@@ -631,14 +632,13 @@ public class StudentManagement{
             		}
             	}
             	System.out.println("delete success");
-                updateTable();
+
+            	updateTable();
                 updateScoreTable();
             	return true;
             }
         }
-        sortTable(0, false);
-        updateTable();
-        updateScoreTable();
+
         return false;
     }
     public void login_success() {
@@ -682,7 +682,7 @@ public class StudentManagement{
         	String picturePath = "" + t.get("picturePath");
             teacher.addStudent(new Student(information, score, picturePath));
         }
-        sortTable(0, false);
+        sortTable(false);
         updateTable();
         updateScoreTable();
         updatePage();
@@ -695,10 +695,18 @@ public class StudentManagement{
 		for (int i = 0; i < students.size(); i++) {
 			data[i] = students.get(i).getTableHeadInfo();
 		}
-		Object[] header = {"รหัสนักศึกษา", "ชื่อ", "นามสกุล", "เพิ่มเข้ามาในวันที่"	,""};
+
 		
 		DefaultTableModel dm = new DefaultTableModel();
-		dm.setDataVector(data, header);
+		
+		if (this.TableSortStatus == 0) {
+			Object[] header = {"รหัสนักศึกษา <", "ชื่อ", "นามสกุล", "เพิ่มเข้ามาในวันที่"	,""};
+			dm.setDataVector(data, header);
+		}
+		else {
+			Object[] header = {"รหัสนักศึกษา  >", "ชื่อ", "นามสกุล", "เพิ่มเข้ามาในวันที่"	,""};
+			dm.setDataVector(data, header);
+		}
 		table = new JTable(dm);
 		table.getColumn("").setCellRenderer(new ButtonRenderer());
 		table.getColumn("").setCellEditor(new ButtonEditor(new JCheckBox(), teacher));
@@ -716,7 +724,11 @@ public class StudentManagement{
 		    @Override
 		    public void mouseClicked(MouseEvent e) {
 		        int col = table.columnAtPoint(e.getPoint());
-		        sortTable(col, true);
+		        if (col == 0) {
+		        	sortTable(true);
+		        	updateTable();
+		        	updateScoreTable();
+		        }
 		    }
 		});
 		
@@ -729,11 +741,17 @@ public class StudentManagement{
 		for (int i = 0; i < students.size(); i++) {
 			data[i] = students.get(i).getScore();
 		}
-		Object[] header = {"รหัสนักศึกษา", "Assignment1", "Assignment2", "Midterm", "Final", "รวมคะแนน", "เกรดที่ได้"};
 
 		DefaultTableModel dm = new DefaultTableModel();
 
-		dm.setDataVector(data, header);
+		if (this.TableSortStatus == 0) {
+			Object[] header = {"รหัสนักศึกษา <", "ชื่อ", "นามสกุล", "เพิ่มเข้ามาในวันที่"	,""};
+			dm.setDataVector(data, header);
+		}
+		else {
+			Object[] header = {"รหัสนักศึกษา  >", "ชื่อ", "นามสกุล", "เพิ่มเข้ามาในวันที่"	,""};
+			dm.setDataVector(data, header);
+		}
 		scoreTable = new JTable(dm);
 		scoreTable.setDefaultEditor(Object.class, null);
 		scoreTable.getTableHeader().setReorderingAllowed(false);
@@ -742,6 +760,19 @@ public class StudentManagement{
 			scoreTable.getColumnModel().getColumn(i).setCellRenderer(new CellRenderer());
 
 		}
+
+		scoreTable.getTableHeader().addMouseListener(new MouseAdapter() {
+		    @Override
+		    public void mouseClicked(MouseEvent e) {
+		        int col = scoreTable.columnAtPoint(e.getPoint());
+		        if (col == 0) {
+		        	sortTable(true);
+		        	updateTable();
+		        	updateScoreTable();
+		        }
+       
+		    }
+		});
 		
 		scoreTable.setBorder(new LineBorder(Color.RED, 0));
 		managementPage.getScoreGUI().updateTable(scoreTable);
@@ -763,35 +794,32 @@ public class StudentManagement{
     	}
     }
     
-    public void sortTable(int col, boolean change) {
+    public void sortTable(boolean change) {
     	ArrayList<Student> arr = teacher.getStudents();
     	if (change) {
-        	if (TableSortStatus == 0) {
-        		TableSortStatus = 1;
+        	if (this.TableSortStatus == 0) {
+        		this.TableSortStatus = 1;
         	}
         	else {
-        		TableSortStatus = 0;
+        		this.TableSortStatus = 0;
         	}
     	}
-    	if (col == 0) { // studentID
-    		sort(arr, 0, arr.size() - 1, "studentID");
-    	}
-
+    	sort(arr, 0, arr.size() - 1);
     	
     	teacher.setStudents(arr);
-    	updateTable();
+
 
     }
-    public void sort(ArrayList<Student> arr, int l, int r, String select) {
+    public void sort(ArrayList<Student> arr, int l, int r) {
     	if (l < r) {
     		int m = l + ((r - l) / 2);
-    		sort(arr, l, m, select);
-    		sort(arr, m + 1, r, select);
-    		merge(arr, l, m, r, select);
+    		sort(arr, l, m);
+    		sort(arr, m + 1, r);
+    		merge(arr, l, m, r);
     	}
 
     }
-    public void merge(ArrayList<Student> arr, int l, int m, int r, String select) {
+    public void merge(ArrayList<Student> arr, int l, int m, int r) {
     	int s1 = m - l + 1;
     	int s2 = r - m;
     	Student[] n1 = new Student[s1];
@@ -804,39 +832,35 @@ public class StudentManagement{
     	}
     	
     	int i = 0, j = 0, k = l;
-    	if (select.equals("studentID")) {
-    		if (this.TableSortStatus == 0) {
-    			while (i < s1 && j < s2) {
-            		if (Integer.parseInt(n1[i].getStudentID()) < Integer.parseInt(n2[j].getStudentID())){
-            			arr.set(k, n1[i]);
-            			i++;
-            			k++;
-            		}
-            		else {
-            			arr.set(k, n2[j]);
-            			j++;
-            			k++;
-            		}
+
+    	if (this.TableSortStatus == 0) {
+    		while (i < s1 && j < s2) {
+            	if (Integer.parseInt(n1[i].getStudentID()) < Integer.parseInt(n2[j].getStudentID())){
+            		arr.set(k, n1[i]);
+            		i++;
+            		k++;
             	}
-    		}
-    		else if (this.TableSortStatus == 1) {
-    			while (i < s1 && j < s2) {
-            		if (Integer.parseInt(n1[i].getStudentID()) > Integer.parseInt(n2[j].getStudentID())){
-            			arr.set(k, n1[i]);
-            			i++;
-            			k++;
-            		}
-            		else {
-            			arr.set(k, n2[j]);
-            			j++;
-            			k++;
-            		}
+            	else {
+            		arr.set(k, n2[j]);
+            		j++;
+            		k++;
             	}
-    		}
-    		
+            }
     	}
-    	
-    	
+    	else if (this.TableSortStatus == 1) {
+    		while (i < s1 && j < s2) {
+            	if (Integer.parseInt(n1[i].getStudentID()) > Integer.parseInt(n2[j].getStudentID())){
+            		arr.set(k, n1[i]);
+            		i++;
+            		k++;
+            	}
+            	else {
+            		arr.set(k, n2[j]);
+            		j++;
+            		k++;
+            	}
+            }
+    	}
     	while (i < s1) {
     		arr.set(k, n1[i]);
 			i++;
