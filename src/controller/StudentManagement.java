@@ -299,13 +299,14 @@ public class StudentManagement{
         				JLabel msg = Helper.createLabel("มีรหัสนักศึกษานี้อยู่ในระบบอยู่แล้ว คุณต้องการที่จะแก้ไขข้อมูลหรือไม่??");
         				int alert = JOptionPane.showConfirmDialog(null, msg, "ยืนยัน", JOptionPane.OK_CANCEL_OPTION);
         				if (alert == JOptionPane.OK_OPTION) {
+        					HashMap<String, Double> score = teacher.getStudents().get(i).getScore();
         					delete(teacher.getStudents().get(i).getStudentID());
-        					addStudent();
+        					addStudent(score.get("assignment1"), score.get("assignment2"), score.get("midterm_score"), score.get("final_score"));
         				}
             			return;	
         			}
         		}
-            	addStudent();
+            	addStudent(0.0, 0.0, 0.0, 0.0);
         	}
     	});
 
@@ -479,7 +480,7 @@ public class StudentManagement{
     
     // below here is method in all application
 
-    public void addStudent() {
+    public void addStudent(double assignment1, double assignment2, double midterm_score, double final_score) {
     	String studentID, faculty, title, name, surname, day, month, year, cardID,
     	address, race, religion, bloodType, tel, email, height, weight, sourcePath,
     	parentTel, disease, enrollAt, picturePath;
@@ -600,10 +601,10 @@ public class StudentManagement{
     	information.put("disease", disease);
     	information.put("enrollAt", enrollAt);
     	
-    	score.put("midterm_score", 0.0);
-    	score.put("final_score", 0.0);
-    	score.put("assignment1", 0.0);
-    	score.put("assignment2", 0.0);
+    	score.put("midterm_score", midterm_score);
+    	score.put("final_score", final_score);
+    	score.put("assignment1", assignment1);
+    	score.put("assignment2", assignment2);
     	
     	teacher.addStudent(new Student(information, score, picturePath));
     	// add success
@@ -740,17 +741,17 @@ public class StudentManagement{
     	ArrayList<Student> students = teacher.getStudents();
     	Object[][] data = new Object[students.size()][7];
 		for (int i = 0; i < students.size(); i++) {
-			data[i] = students.get(i).getScore();
+			data[i] = students.get(i).getGrade();
 		}
 
 		DefaultTableModel dm = new DefaultTableModel();
 
 		if (this.TableSortStatus == 0) {
-			Object[] header = {"รหัสนักศึกษา <", "ชื่อ", "นามสกุล", "เพิ่มเข้ามาในวันที่"	,""};
+			Object[] header = {"รหัสนักศึกษา <", "Assignment1", "Assignment2", "Midterm", "Final", "รวมคะแนน", "เกรดที่ได้"};
 			dm.setDataVector(data, header);
 		}
 		else {
-			Object[] header = {"รหัสนักศึกษา  >", "ชื่อ", "นามสกุล", "เพิ่มเข้ามาในวันที่"	,""};
+			Object[] header = {"รหัสนักศึกษา >", "Assignment1", "Assignment2", "Midterm", "Final", "รวมคะแนน", "เกรดที่ได้"};
 			dm.setDataVector(data, header);
 		}
 		scoreTable = new JTable(dm);

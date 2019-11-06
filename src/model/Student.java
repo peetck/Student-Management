@@ -41,7 +41,10 @@ public class Student {
 		
 		return info;
 	}
-	public Object[] getScore() {
+	public HashMap<String, Double> getScore(){
+		return this.score;
+	}
+	public Object[] getGrade() {
 		Object[] score = new Object[7];
 		score[0] = this.information.get("studentID");
 		score[1] = String.format("%.3f", this.score.get("assignment1"));
