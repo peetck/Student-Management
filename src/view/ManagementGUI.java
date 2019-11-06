@@ -7,13 +7,15 @@ import javax.swing.*;
 
 public class ManagementGUI{
     private JDesktopPane desktop;
-    private MyPanel menu, program, topmenu, bottommenu, menu1, menu2, menu3, menu4, menu5, menu6, version;
+    private MyPanel menu, program, topmenu, bottommenu, menu1, menu2, menu3, menu4, menu5, menu6, version, time;
     private JDesktopPane bottommenu_desktopPane;
     private JLabel menuMsg1, menuMsg2, menuMsg3, menuMsg4, menuMsg5, menuMsg6, icon1, icon2, icon3, icon4, icon5, icon6, bottoml1;
     private MyStudentGUI mystudent;
     private AddStudentGUI add;
     private SettingGUI setting;
     private ScoreGUI score;
+    private TimeLabel currentTime;
+    private Thread t1;
     public ManagementGUI(){
         desktop = new JDesktopPane();
         
@@ -39,21 +41,36 @@ public class ManagementGUI{
         bottommenu.setLayout(new BorderLayout());
         bottommenu.setLocation(0, 610);
         bottommenu.setSize(300, 90);
+        
+        
         bottommenu_desktopPane = new JDesktopPane();
         bottommenu_desktopPane.setBackground(new Color(0, 99, 178));
+        
         version = Helper.createPanel("");
         version.setSize(100, 30);
         version.setLocation(205, 50);
         version.setBackground(new Color(0, 99, 178));
-
         bottoml1 = Helper.createLabel("Version 1.0", Color.WHITE);
         version.add(bottoml1);
         
+        time = Helper.createPanel("");
+        time.setSize(100, 30);
+        time.setLocation(205, 20);
+        time.setBackground(new Color(0, 99, 178));
+        
+        currentTime = new TimeLabel();
+        t1 = new Thread(currentTime);
+        t1.start();
+        
+        time.add(currentTime);
+        
+        
         bottommenu_desktopPane.add(version);
-
+        bottommenu_desktopPane.add(time);
+        
         bottommenu.add(bottommenu_desktopPane);
 
-
+        
         
 
         menu1 = Helper.createPanel("");

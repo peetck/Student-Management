@@ -3,6 +3,8 @@ import javax.swing.*;
 
 
 import mdlaf.*;
+import view.TimeLabel;
+
 import java.awt.*;
 import java.io.*;
 
@@ -24,7 +26,9 @@ public class Main{
         catch (Exception e) {
             e.printStackTrace();
         }
-           new StudentManagement("localhost", 27017);
+
+        new StudentManagement("localhost", 27017);
+           
 
     }
 }
