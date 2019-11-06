@@ -569,10 +569,10 @@ public class StudentManagement{
     	n.put("disease", disease);
     	n.put("enrollAt", enrollAt);
     	
-    	n.put("midterm_score", 0.0);
-    	n.put("final_score", 0.0);
-    	n.put("assignment1", 0.0);
-    	n.put("assignment2", 0.0);
+    	n.put("midterm_score", midterm_score);
+    	n.put("final_score", final_score);
+    	n.put("assignment1", assignment1);
+    	n.put("assignment2", assignment2);
     	
     	n.put("picturePath", picturePath);
     	
