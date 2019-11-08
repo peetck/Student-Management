@@ -15,13 +15,14 @@ public class Main{
         try {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             
-            InputStream font = Main.class.getResourceAsStream("fonts/itim.ttf");
+            InputStream font = Main.class.getResourceAsStream("fonts/Kanit-ExtraLight.ttf");
             ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, font));
             font.close();
+            
             UIManager.setLookAndFeel(new MaterialLookAndFeel());
             JDialog.setDefaultLookAndFeelDecorated(false);
             UIManager.put("Button.mouseHoverEnable", true);
-            UIManager.put("TableHeader.font", new Font("itim", Font.PLAIN, 16));
+            UIManager.put("TableHeader.font", new Font("Kanit ExtraLight", Font.BOLD, 16));
 
 
         }

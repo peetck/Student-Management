@@ -5,7 +5,7 @@ import javax.swing.table.*;
 public class ButtonRenderer extends JButton implements TableCellRenderer{
 	public ButtonRenderer() {
 	    setOpaque(true);
-	    setFont(new Font("itim", Font.PLAIN, 16));
+	    setFont(new Font("Kanit ExtraLight", Font.PLAIN, 16));
 
 	 }
 

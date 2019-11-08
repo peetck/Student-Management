@@ -12,7 +12,7 @@ public class TimeLabel extends JLabel implements Runnable{
 		this.setText("");
 		this.setForeground(Color.WHITE);
 		this.setBackground(new Color(0, 99, 178));
-		this.setFont(new Font("itim", Font.PLAIN, 16));
+		this.setFont(new Font("Kanit ExtraLight", Font.PLAIN, 16));
 		this.setHorizontalAlignment(JLabel.CENTER);
 	}
 	
