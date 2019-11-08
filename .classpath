@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Picnic101/Desktop/IT/Student-Management/lib/material-ui-swing-0.9.6.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Picnic101/Desktop/IT/Student-Management/lib/mongo-2.10.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Picnic101/Desktop/IT/Student-Management/lib/material-ui-swing-0.9.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Picnic101/Desktop/IT/Student-Management/lib/mongo-2.10.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Picnic101/Desktop/IT/Student-Management/lib/LGoodDatePicker-10.4.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

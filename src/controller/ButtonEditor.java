@@ -96,7 +96,7 @@ public class ButtonEditor extends DefaultCellEditor {
 	    	a5 = Helper.createLabel(information.get("surname"));
 	    	
 	    	l6 = Helper.createLabel("วันเดือนปีเกิด");
-	    	a6 = Helper.createLabel(information.get("day") + information.get("month") + information.get("year"));
+	    	a6 = Helper.createLabel(information.get("day") + " / " + information.get("month") + " / " + information.get("year"));
 	    	l7 = Helper.createLabel("หมายเลขบัตรประชาชน");
 	    	a7 = Helper.createLabel(information.get("cardID"));
 	    	l8 = Helper.createLabel("ที่อยู่");

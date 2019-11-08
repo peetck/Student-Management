@@ -9,6 +9,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import com.mongodb.*;
 
@@ -422,9 +424,9 @@ public class StudentManagement{
 					    	managementPage.getAddStudentGUI().getF4().setText(info.get("name"));
 					    	managementPage.getAddStudentGUI().getF5().setText(info.get("surname"));
 					    	
-					    	managementPage.getAddStudentGUI().getF6_1().setSelectedItem(info.get("day"));
-					    	managementPage.getAddStudentGUI().getF6_2().setSelectedItem(info.get("month"));
-					    	managementPage.getAddStudentGUI().getF6_3().setSelectedItem(info.get("year"));
+							LocalDate ld = LocalDate.of(Integer.parseInt(info.get("year")), Integer.parseInt(info.get("month")), Integer.parseInt(info.get("day")));
+					    	managementPage.getAddStudentGUI().getF6().setDate(ld);
+
 					    	
 					    	managementPage.getAddStudentGUI().getF7().setText(info.get("cardID"));
 					    	managementPage.getAddStudentGUI().getF8().setText(info.get("address"));
@@ -492,9 +494,39 @@ public class StudentManagement{
     	name = managementPage.getAddStudentGUI().getF4().getText();
     	surname = managementPage.getAddStudentGUI().getF5().getText();
     	
-    	day = managementPage.getAddStudentGUI().getF6_1().getSelectedItem().toString();
-    	month = managementPage.getAddStudentGUI().getF6_2().getSelectedItem().toString();
-    	year = managementPage.getAddStudentGUI().getF6_3().getSelectedItem().toString();
+    	LocalDate date = managementPage.getAddStudentGUI().getF6().getDate();
+    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+    	
+    	try {
+    		String formattedString = date.format(formatter);
+        	
+        	String[] inpDate = formattedString.split(" ");
+        	
+        	HashMap<String, Integer> monthList = new HashMap<String, Integer>();
+        	monthList.put("January", 1);
+        	monthList.put("February", 2);
+        	monthList.put("March", 3);
+        	monthList.put("April", 4);
+        	monthList.put("May", 5);
+        	monthList.put("June", 6);
+        	monthList.put("July", 7);
+        	monthList.put("August", 8);
+        	monthList.put("September", 9);
+        	monthList.put("October", 10);
+        	monthList.put("November", 11);
+        	monthList.put("December", 12);
+        	
+        	day =  inpDate[0];
+        	month = "" + monthList.get(inpDate[1]);
+        	year = inpDate[2];
+    	}
+    	catch(Exception e) {
+    		JOptionPane.showMessageDialog(null, Helper.createLabel("กรุณากรอกข้อมูลให้ครบถ้วน"));
+    		return;
+    	}
+
+    	
+
     	
     	cardID = managementPage.getAddStudentGUI().getF7().getText();
     	address = managementPage.getAddStudentGUI().getF8().getText();
@@ -508,7 +540,7 @@ public class StudentManagement{
     	parentTel = managementPage.getAddStudentGUI().getF16().getText();
     	disease = managementPage.getAddStudentGUI().getF17().getText();
     	enrollAt = "" + java.time.LocalDate.now();
-    	
+
     	if (studentID.equals("") || name.equals("") || surname.equals("") || cardID.equals("") || address.equals("") ||
     		race.equals("") || religion.equals("") || bloodType.equals("") || tel.equals("") || email.equals("") ||
     		height.equals("") || weight.equals("") || parentTel.equals("") || disease.equals("")) {

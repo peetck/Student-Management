@@ -5,12 +5,15 @@ import java.awt.*;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import com.github.lgooddatepicker.components.DatePicker;
 public class AddStudentGUI {
 	private JDesktopPane p1;
-	private MyPanel left, right, picture, f6;
+	private MyPanel left, right, picture;
 	private JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12, l13, l14, l15, l16, l17, pictureLabel;
 	private JTextField f1,f4, f5, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17;
-	private JComboBox<String> f2, f3, f6_1, f6_2, f6_3;
+	private JComboBox<String> f2, f3;
+	private DatePicker f6;
 	private JButton btn1, btn2, btn3;
 	private GridBagConstraints gbc;
 	private Image defaultImg;
@@ -86,26 +89,7 @@ public class AddStudentGUI {
 		f5 = Helper.createTextField(20, 15);
 		
 		
-		f6 = Helper.createPanel("");
-		f6.setLayout(new GridLayout(1, 3));
-		
-		f6_1 = Helper.createComboBox();
-		for (int i = 1; i <= 31; i++) {
-			f6_1.addItem("" + i);
-		}
-		f6_2 = Helper.createComboBox();
-		for (int i = 1; i <= 12; i++) {
-			f6_2.addItem("" + i);
-		}
-		f6_3 = Helper.createComboBox();
-		for (int i = 1950; i <= 2019; i++) {
-			f6_3.addItem("" + i);
-		}
-		
-		
-		f6.add(f6_1);
-		f6.add(f6_2);
-		f6.add(f6_3);
+		f6 = new DatePicker();
 		
 		f7 = Helper.createTextField(20, 15);
 		f8 = Helper.createTextField(20, 15);
@@ -401,33 +385,8 @@ public class AddStudentGUI {
 	}
 
 
-	public JComboBox<String> getF6_1() {
-		return f6_1;
-	}
-
-
-	public void setF6_1(JComboBox<String> f6_1) {
-		this.f6_1 = f6_1;
-	}
-
-
-	public JComboBox<String> getF6_2() {
-		return f6_2;
-	}
-
-
-	public void setF6_2(JComboBox<String> f6_2) {
-		this.f6_2 = f6_2;
-	}
-
-
-	public JComboBox<String> getF6_3() {
-		return f6_3;
-	}
-
-
-	public void setF6_3(JComboBox<String> f6_3) {
-		this.f6_3 = f6_3;
+	public DatePicker getF6() {
+		return this.f6;
 	}
 
 
@@ -470,9 +429,7 @@ public class AddStudentGUI {
 		f3.setSelectedIndex(0);
 		f4.setText("");
 		f5.setText("");
-		f6_1.setSelectedIndex(0);
-		f6_2.setSelectedIndex(0);
-		f6_3.setSelectedIndex(0);
+		f6.setDate(null);
 		f7.setText("");
 		f8.setText("");
 		f9.setText("");
