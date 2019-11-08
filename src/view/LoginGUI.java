@@ -25,10 +25,10 @@ public class LoginGUI{
         link.setLocation(0, 630);
         
         linkPanel = new JDesktopPane();
-        linkPanel.setBackground(new Color(0, 138, 177));
+        linkPanel.setBackground(Color.white);
         
         href = Helper.createPanel("");
-        href.setBackground(new Color(0, 138, 177));
+        href.setBackground(Color.white);
         href.setSize(60, 60);
         href.setLocation(1110, 0);
 
@@ -45,7 +45,7 @@ public class LoginGUI{
         
         btn1 = Helper.createButton("Login");
         
-        title = Helper.createLabel("Student Management", 20);
+        title = Helper.createLabel("Student Management", 30);
         title.setHorizontalAlignment(JLabel.CENTER);
         
         l1 = Helper.createLabel("Username ");

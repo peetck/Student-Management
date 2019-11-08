@@ -17,8 +17,8 @@ public class ButtonEditor extends DefaultCellEditor {
 	  private HashMap<String, String> information;
 	  private boolean isPushed;
 	  private MyPanel p1;
-	  private JLabel l1, l2, l3, l4, l5, l6, l7, l8 , pictureLabel;
-	  private JLabel a1, a2, a3, a4, a5, a6, a7, a8;
+	  private JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12, l13, l14, l15, l16, l17 , pictureLabel;
+	  private JLabel a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, title;
 	  private GridBagConstraints gbc;
 	  
 	  public ButtonEditor(JCheckBox checkBox, Teacher teacher) {
@@ -66,6 +66,7 @@ public class ButtonEditor extends DefaultCellEditor {
 	    	p1 = Helper.createPanel("");
 	    	p1.setLayout(new GridBagLayout());
 	    	gbc = new GridBagConstraints();
+	    	
 
 	    	
 	    	pictureLabel = Helper.createLabel("");
@@ -94,23 +95,54 @@ public class ButtonEditor extends DefaultCellEditor {
 	    	l5 = Helper.createLabel("นามสกุล");
 	    	a5 = Helper.createLabel(information.get("surname"));
 	    	
-
+	    	l6 = Helper.createLabel("วันเดือนปีเกิด");
+	    	a6 = Helper.createLabel(information.get("day") + information.get("month") + information.get("year"));
+	    	l7 = Helper.createLabel("หมายเลขบัตรประชาชน");
+	    	a7 = Helper.createLabel(information.get("cardID"));
+	    	l8 = Helper.createLabel("ที่อยู่");
+	    	a8 = Helper.createLabel(information.get("address"));
+	    	
+	    	l9 = Helper.createLabel("เชื้อชาติ");
+	    	a9 = Helper.createLabel(information.get("race"));
+	    	l10 = Helper.createLabel("ศาสนา");
+	    	a10 = Helper.createLabel(information.get("religion"));
+	    	l11 = Helper.createLabel("หมู่เลือด");
+	    	a11 = Helper.createLabel(information.get("bloodType"));
+	    	l12 = Helper.createLabel("เบอร์ติดต่อ");
+	    	a12 = Helper.createLabel(information.get("tel"));
+	    	l13 = Helper.createLabel("อีเมล์");
+	    	a13 = Helper.createLabel(information.get("email"));
+	    	l14 = Helper.createLabel("ส่วนสูง");
+	    	a14 = Helper.createLabel(information.get("height"));
+	    	l15 = Helper.createLabel("นํ้าหนัก");
+	    	a15 = Helper.createLabel(information.get("weight"));
+	    	l16 = Helper.createLabel("เบอร์ติดต่อผู้ปกครอง");
+	    	a16 = Helper.createLabel(information.get("parentTel"));
+	    	l17 = Helper.createLabel("โรคประจําตัว");
+	    	a17 = Helper.createLabel(information.get("disease"));
+	    	
+	    	title = Helper.createLabel("ข้อมูลนักเรียน", 35);
+	    	
 	    	gbc.insets = new Insets(5, 10, 5, 0);
 	    	
 	        //gbc.fill = GridBagConstraints.BOTH;
 	        
-	        gbc.gridwidth = 2;
+	        gbc.gridwidth = 1;
 		    p1.add(pictureLabel, gbc);
+		    gbc.gridwidth = 2;
+		    gbc.gridx = 1;
+		    p1.add(title, gbc);
+		    gbc.fill = GridBagConstraints.BOTH;
 		    gbc.gridwidth = 1;
 		    gbc.gridx = 0;
 		    gbc.gridy = 1;
-		    gbc.insets = new Insets(20, 10, 5, 0);
+		    gbc.insets = new Insets(20, 50, 5, 50);
 		    gbc.anchor = GridBagConstraints.WEST;
 		    p1.add(l1, gbc);
 		    gbc.gridx = 1;
 		    gbc.gridy = 1;
 		    p1.add(a1, gbc);
-		    gbc.insets = new Insets(5, 10, 5, 0);
+		    gbc.insets = new Insets(5, 50, 5, 50);
 		    gbc.gridx = 0;
 		    gbc.gridy = 2;
 		    p1.add(l2, gbc);
@@ -135,8 +167,82 @@ public class ButtonEditor extends DefaultCellEditor {
 		    gbc.gridx = 1;
 		    gbc.gridy = 5;
 		    p1.add(a5, gbc);
-	    	
-			JOptionPane.showMessageDialog(null, p1, information.get("studentID"), -1);
+		    gbc.gridx = 0;
+		    gbc.gridy = 6;
+		    p1.add(l6, gbc);
+		    gbc.gridx = 1;
+		    gbc.gridy = 6;
+		    p1.add(a6, gbc);
+		    gbc.gridx = 0;
+		    gbc.gridy = 7;
+		    p1.add(l7, gbc);
+		    gbc.gridx = 1;
+		    gbc.gridy = 7;
+		    p1.add(a7, gbc);
+		    gbc.gridx = 0;
+		    gbc.gridy = 8;
+		    p1.add(l8, gbc);
+		    gbc.gridx = 1;
+		    gbc.gridy = 8;
+		    p1.add(a8, gbc);
+		    
+		    gbc.gridx = 0;
+		    gbc.gridy = 9;
+		    p1.add(l9, gbc);
+		    gbc.gridx = 1;
+		    gbc.gridy = 9;
+		    p1.add(a9, gbc);
+		    gbc.gridx = 0;
+		    gbc.gridy = 10;
+		    p1.add(l10, gbc);
+		    gbc.gridx = 1;
+		    gbc.gridy = 10;
+		    p1.add(a10, gbc);
+		    gbc.gridx = 0;
+		    gbc.gridy = 11;
+		    p1.add(l11, gbc);
+		    gbc.gridx = 1;
+		    gbc.gridy = 11;
+		    p1.add(a11, gbc);
+		    gbc.gridx = 0;
+		    gbc.gridy = 12;
+		    p1.add(l12, gbc);
+		    gbc.gridx = 1;
+		    gbc.gridy = 12;
+		    p1.add(a12, gbc);
+		    gbc.gridx = 0;
+		    gbc.gridy = 13;
+		    p1.add(l13, gbc);
+		    gbc.gridx = 1;
+		    gbc.gridy = 13;
+		    p1.add(a13, gbc);
+		    gbc.gridx = 0;
+		    gbc.gridy = 14;
+		    p1.add(l14, gbc);
+		    gbc.gridx = 1;
+		    gbc.gridy = 14;
+		    p1.add(a14, gbc);
+		    gbc.gridx = 0;
+		    gbc.gridy = 15;
+		    p1.add(l15, gbc);
+		    gbc.gridx = 1;
+		    gbc.gridy = 15;
+		    p1.add(a15, gbc);
+		    gbc.gridx = 0;
+		    gbc.gridy = 16;
+		    p1.add(l16, gbc);
+		    gbc.gridx = 1;
+		    gbc.gridy = 16;
+		    p1.add(a16, gbc);
+		    gbc.gridx = 0;
+		    gbc.gridy = 17;
+		    p1.add(l17, gbc);
+		    gbc.gridx = 1;
+		    gbc.gridy = 17;
+		    p1.add(a17, gbc);
+
+		    
+			JOptionPane.showMessageDialog(null, p1, "ข้อมูลเพิ่มเติม : " + information.get("studentID"), -1);
 	    }
 	    isPushed = false;
 	    return new String(label);

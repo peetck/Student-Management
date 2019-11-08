@@ -776,7 +776,7 @@ public class StudentManagement{
 		    }
 		});
 		
-		scoreTable.setBorder(new LineBorder(Color.RED, 0));
+		
 		managementPage.getScoreGUI().updateTable(scoreTable);
     }
     public void updatePage() {      

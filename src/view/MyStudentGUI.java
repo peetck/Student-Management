@@ -1,5 +1,6 @@
 package view;
 import javax.swing.*;
+import javax.swing.table.JTableHeader;
 
 import java.awt.*;
 
@@ -26,7 +27,8 @@ public class MyStudentGUI {
 		p1.add(container);
 	}
 	public void updateTable(JTable table) {
-
+		
+		
 		container.removeAll();
 		container.revalidate();
 		container.repaint();
@@ -35,6 +37,7 @@ public class MyStudentGUI {
 		
 		table_scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS); 
 		
+
 		container.add(table_scroll);
 
 		

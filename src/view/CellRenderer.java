@@ -10,9 +10,14 @@ public class CellRenderer extends DefaultTableCellRenderer {
 	@Override
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int col) {
 	    super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
-	    this.setBackground(Color.WHITE);
 	    this.setFont(new Font("itim", Font.PLAIN, 16));
 	    this.setHorizontalAlignment( JLabel.CENTER );
+	    if (col == 6) {
+	    	this.setBackground(new Color(156, 195, 213));
+	    }
+	    else {
+		    this.setBackground(Color.WHITE);
+	    }
 	    return this;
 	}
 }
