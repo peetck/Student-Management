@@ -44,27 +44,27 @@ public class AddStudentGUI {
         
 
         
-        l1 = Helper.createLabel("รหัสนักศึกษา : ");
-		l2 = Helper.createLabel("คณะ : ");
-        l3 = Helper.createLabel("คํานําหน้า : ");
-		l4 = Helper.createLabel("ชื่อ : ");
-		l5 = Helper.createLabel("นามสกุล : ");
-		l6 = Helper.createLabel("วันเดือนปีเกิด : ");
+        l1 = Helper.createLabel("รหัสนักศึกษา : ", 15);
+		l2 = Helper.createLabel("คณะ : ", 15);
+        l3 = Helper.createLabel("คํานําหน้า : ", 15);
+		l4 = Helper.createLabel("ชื่อ : ", 15);
+		l5 = Helper.createLabel("นามสกุล : ", 15);
+		l6 = Helper.createLabel("วันเดือนปีเกิด : ", 15);
 		
-		l7 = Helper.createLabel("หมายเลขบัตรประชาชน : ");
-		l8 = Helper.createLabel("ที่อยู่ : ");
-		l9 = Helper.createLabel("เชื้อชาติ : ");
-		l10 = Helper.createLabel("ศาสนา : ");
-		l11 = Helper.createLabel("หมู่เลือด : ");
-		l12 = Helper.createLabel("เบอร์ติดต่อ : ");
-		l13 = Helper.createLabel("อีเมล์ : ");
-		l14 = Helper.createLabel("ส่วนสูง : ");
-		l15 = Helper.createLabel("นํ้าหนัก : ");
-		l16 = Helper.createLabel("เบอร์ติดต่อผู้ปกครอง : ");
-		l17 = Helper.createLabel("โรคประจําตัว : ");
+		l7 = Helper.createLabel("หมายเลขบัตรประชาชน : ", 15);
+		l8 = Helper.createLabel("ที่อยู่ : ", 15);
+		l9 = Helper.createLabel("เชื้อชาติ : ", 15);
+		l10 = Helper.createLabel("ศาสนา : ", 15);
+		l11 = Helper.createLabel("หมู่เลือด : ", 15);
+		l12 = Helper.createLabel("เบอร์ติดต่อ : ", 15);
+		l13 = Helper.createLabel("อีเมล์ : ", 15);
+		l14 = Helper.createLabel("ส่วนสูง : ", 15);
+		l15 = Helper.createLabel("นํ้าหนัก : ", 15);
+		l16 = Helper.createLabel("เบอร์ติดต่อผู้ปกครอง : ", 15);
+		l17 = Helper.createLabel("โรคประจําตัว : ", 15);
 		
-		f1 = Helper.createTextField(20);
-		f2 = Helper.createComboBox();
+		f1 = Helper.createTextField(20, 15);
+		f2 = Helper.createComboBox(15);
 		f2.addItem("วิศวกรรมศาสตร์");
 		f2.addItem("สถาปัตยกรรมศาสตร์");
 		f2.addItem("ครุศาสตร์อุตสาหกรรม");
@@ -79,11 +79,11 @@ public class AddStudentGUI {
 		f2.addItem("ศิลปศาสตร์");
 		f2.addItem("วิศกรรมการบินและนักบินพาณิชย์");
 
-		f3 = Helper.createComboBox();
+		f3 = Helper.createComboBox(15);
 		f3.addItem("นาย");
 		f3.addItem("นางสาว");
-		f4 = Helper.createTextField(20);
-		f5 = Helper.createTextField(20);
+		f4 = Helper.createTextField(20, 15);
+		f5 = Helper.createTextField(20, 15);
 		
 		
 		f6 = Helper.createPanel("");
@@ -107,17 +107,17 @@ public class AddStudentGUI {
 		f6.add(f6_2);
 		f6.add(f6_3);
 		
-		f7 = Helper.createTextField(20);
-		f8 = Helper.createTextField(20);
-		f9 = Helper.createTextField(20);
-		f10 = Helper.createTextField(20);
-		f11 = Helper.createTextField(20);
-		f12 = Helper.createTextField(20);
-		f13 = Helper.createTextField(20);
-		f14 = Helper.createTextField(20);
-		f15 = Helper.createTextField(20);
-		f16 = Helper.createTextField(20);
-		f17 = Helper.createTextField(20);
+		f7 = Helper.createTextField(20, 15);
+		f8 = Helper.createTextField(20, 15);
+		f9 = Helper.createTextField(20, 15);
+		f10 = Helper.createTextField(20, 15);
+		f11 = Helper.createTextField(20, 15);
+		f12 = Helper.createTextField(20, 15);
+		f13 = Helper.createTextField(20, 15);
+		f14 = Helper.createTextField(20, 15);
+		f15 = Helper.createTextField(20, 15);
+		f16 = Helper.createTextField(20, 15);
+		f17 = Helper.createTextField(20, 15);
 		
 		left.add(l1, gbc);
 		gbc.gridx = 0;

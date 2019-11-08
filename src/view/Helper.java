@@ -12,6 +12,11 @@ public class Helper{
 		c.setFont(new Font("Kanit ExtraLight", Font.PLAIN, 16));
 		return c;
 	}
+	public static JComboBox<String> createComboBox(int size) {
+		JComboBox<String> c = new JComboBox<String>();
+		c.setFont(new Font("Kanit ExtraLight", Font.PLAIN, size));
+		return c;
+	}
 	// return MyPanel with image if want
     public static MyPanel createPanel(String url){
     	Image img = getImage(url);
@@ -28,6 +33,17 @@ public class Helper{
         l.setOpaque(false);
         return l;
     }
+    public static JLabel createLabel(String msg, boolean b){
+        JLabel l = new JLabel(msg);
+        if (b) {
+            l.setFont(new Font("Kanit ExtraLight", Font.BOLD, 16));
+        }
+        else {
+            l.setFont(new Font("Kanit ExtraLight", Font.PLAIN, 16));
+        }
+        l.setOpaque(false);
+        return l;
+    }
     public static JLabel createLabel(String msg, Color color){
         JLabel l = new JLabel(msg);
         l.setFont(new Font("Kanit ExtraLight", Font.PLAIN, 16));
@@ -38,6 +54,17 @@ public class Helper{
     public static JLabel createLabel(String msg, int size){
         JLabel l = new JLabel(msg);
         l.setFont(new Font("Kanit ExtraLight", Font.PLAIN, size));
+        l.setOpaque(false);
+        return l;
+    }
+    public static JLabel createLabel(String msg, int size, boolean b){
+        JLabel l = new JLabel(msg);
+        if (b) {
+            l.setFont(new Font("Kanit ExtraLight", Font.BOLD, size));
+        }
+        else {
+            l.setFont(new Font("Kanit ExtraLight", Font.PLAIN, size));
+        }
         l.setOpaque(false);
         return l;
     }
@@ -75,6 +102,12 @@ public class Helper{
     public static JTextField createTextField(int size){
         JTextField f = new JTextField(size);
         f.setFont(new Font("Kanit ExtraLight", Font.PLAIN, 16));
+        f.setOpaque(false);
+        return f;
+    }
+    public static JTextField createTextField(int size, int fsize){
+        JTextField f = new JTextField(size);
+        f.setFont(new Font("Kanit ExtraLight", Font.PLAIN, fsize));
         f.setOpaque(false);
         return f;
     }

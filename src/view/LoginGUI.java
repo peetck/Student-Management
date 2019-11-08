@@ -45,7 +45,7 @@ public class LoginGUI{
         
         btn1 = Helper.createButton("Login");
         
-        title = Helper.createLabel("Student Management", 30);
+        title = Helper.createLabel("Student Management", 30, true);
         title.setHorizontalAlignment(JLabel.CENTER);
         
         l1 = Helper.createLabel("Username ");
