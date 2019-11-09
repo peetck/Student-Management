@@ -221,33 +221,7 @@ public class StudentManagement{
 
         });
         
-        managementPage.getMenu4().addMouseListener(new MouseAdapter() {
 
-			public void mouseClicked(MouseEvent e) {
-				int before = currentPage;
-				currentPage = 4;
-				updatePage();
-				MyPanel p1 = Helper.createPanel("");
-				JLabel msg = Helper.createLabel("รหัสนักศึกษา : ");
-				JTextField tf = Helper.createTextField(10);
-				p1.add(msg);
-				p1.add(tf);
-				int alert = JOptionPane.showConfirmDialog(null, p1, "ลบนักเรียน", JOptionPane.OK_CANCEL_OPTION);
-				if (alert == JOptionPane.OK_OPTION) {
-					if ((delete(tf.getText()))) {
-						JLabel msg2 = Helper.createLabel("ลบนักศึกษานี้ออกจากระบบเรียบร้อยแล้ว");
-	    				JOptionPane.showMessageDialog(null, msg2);
-					}
-					else{
-						JLabel msg2 = Helper.createLabel("ไม่มีรหัสนักศึกษานี้อยู่ในระบบ");
-	    				JOptionPane.showMessageDialog(null, msg2);
-					}
-                }
-				currentPage = before;
-				updatePage();
-			}
-
-        });
         
         managementPage.getMenu2().addMouseListener(new MouseAdapter() {
 
@@ -262,25 +236,25 @@ public class StudentManagement{
 			}
 
         });
-        managementPage.getMenu5().addMouseListener(new MouseAdapter() {
+        managementPage.getMenu4().addMouseListener(new MouseAdapter() {
 
 			public void mouseClicked(MouseEvent e) {
-				if (currentPage == 5) {
+				if (currentPage == 4) {
 					return;
 				}
 				managementPage.set("setting");
 				
-				currentPage = 5;
+				currentPage = 4;
 				updatePage();
 			}
 
         });
 
-        managementPage.getMenu6().addMouseListener(new MouseAdapter() {
+        managementPage.getMenu5().addMouseListener(new MouseAdapter() {
 
 			public void mouseClicked(MouseEvent e) {
 				int before = currentPage;
-				currentPage = 6;
+				currentPage = 5;
 				updatePage();
 				JLabel msg = Helper.createLabel("คุณแน่ใจที่จะออกจากโปรแกรมใช่หรือไม่");
 				int dialogButton = JOptionPane.YES_NO_OPTION;
@@ -725,7 +699,7 @@ public class StudentManagement{
     // update Student table method
     public void updateTable() {
     	ArrayList<Student> students = teacher.getStudents();
-    	Object[][] data = new Object[students.size()][5];
+    	Object[][] data = new Object[students.size()][6];
 		for (int i = 0; i < students.size(); i++) {
 			data[i] = students.get(i).getTableHeadInfo();
 		}
@@ -734,16 +708,19 @@ public class StudentManagement{
 		DefaultTableModel dm = new DefaultTableModel();
 		
 		if (this.TableSortStatus == 0) {
-			Object[] header = {"รหัสนักศึกษา <", "ชื่อ", "นามสกุล", "เพิ่มเข้ามาในวันที่"	,""};
+			Object[] header = {"รหัสนักศึกษา <", "ชื่อ", "นามสกุล", "เพิ่มเข้ามาในวันที่"	,"", " "};
 			dm.setDataVector(data, header);
 		}
 		else {
-			Object[] header = {"รหัสนักศึกษา  >", "ชื่อ", "นามสกุล", "เพิ่มเข้ามาในวันที่"	,""};
+			Object[] header = {"รหัสนักศึกษา  >", "ชื่อ", "นามสกุล", "เพิ่มเข้ามาในวันที่"	,"", " "};
 			dm.setDataVector(data, header);
 		}
 		table = new JTable(dm);
 		table.getColumn("").setCellRenderer(new ButtonRenderer());
 		table.getColumn("").setCellEditor(new ButtonEditor(new JCheckBox(), teacher));
+		
+		table.getColumn(" ").setCellRenderer(new ButtonRenderer());
+		table.getColumn(" ").setCellEditor(new ButtonEditor2(new JCheckBox(), teacher, this));
 		
 		table.getTableHeader().setReorderingAllowed(false);
 		table.setDefaultEditor(Object.class, null);
@@ -817,14 +794,12 @@ public class StudentManagement{
 		managementPage.getMenu3().setBackground(new Color(156, 195, 213));
 		managementPage.getMenu4().setBackground(new Color(156, 195, 213));
 		managementPage.getMenu5().setBackground(new Color(156, 195, 213));
-		managementPage.getMenu6().setBackground(new Color(156, 195, 213));
     	switch(currentPage) {
     		case 1: managementPage.getMenu1().setBackground(Color.WHITE);break;
     		case 2: managementPage.getMenu2().setBackground(Color.WHITE);break;
     		case 3: managementPage.getMenu3().setBackground(Color.WHITE);break;
     		case 4: managementPage.getMenu4().setBackground(Color.WHITE);break;
     		case 5: managementPage.getMenu5().setBackground(Color.WHITE);break;
-    		case 6: managementPage.getMenu6().setBackground(Color.WHITE);break;
     	}
     }
     
@@ -907,6 +882,7 @@ public class StudentManagement{
 			k++;
     	}
     }
+
 }
 
 

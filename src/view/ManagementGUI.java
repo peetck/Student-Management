@@ -7,9 +7,9 @@ import javax.swing.*;
 
 public class ManagementGUI{
     private JDesktopPane desktop;
-    private MyPanel menu, program, topmenu, bottommenu, menu1, menu2, menu3, menu4, menu5, menu6, version, time;
+    private MyPanel menu, program, topmenu, bottommenu, menu1, menu2, menu3, menu4, menu5, version, time;
     private JDesktopPane bottommenu_desktopPane;
-    private JLabel menuMsg1, menuMsg2, menuMsg3, menuMsg4, menuMsg5, menuMsg6, icon1, icon2, icon3, icon4, icon5, icon6, bottoml1;
+    private JLabel menuMsg1, menuMsg2, menuMsg3, menuMsg4, menuMsg5, icon1, icon2, icon3, icon4, icon5, icon6, bottoml1;
     private MyStudentGUI mystudent;
     private AddStudentGUI add;
     private SettingGUI setting;
@@ -20,7 +20,7 @@ public class ManagementGUI{
         desktop = new JDesktopPane();
         
         menu = Helper.createPanel("");
-        menu.setLayout(new GridLayout(6, 1));
+        menu.setLayout(new GridLayout(5, 1));
         menu.setLocation(0, 130);
         menu.setSize(300, 480);
         menu.setVisible(true);
@@ -55,7 +55,7 @@ public class ManagementGUI{
         
         time = Helper.createPanel("");
         time.setSize(100, 30);
-        time.setLocation(200, 22);
+        time.setLocation(200, 24);
         time.setBackground(new Color(0, 99, 178));
         
         currentTime = new TimeLabel();
@@ -75,7 +75,7 @@ public class ManagementGUI{
 
         menu1 = Helper.createPanel("");
         menu1.setLayout(new BorderLayout());
-        menuMsg1 = Helper.createLabel("รายชื่อนักเรียน    ", 22);
+        menuMsg1 = Helper.createLabel("รายชื่อนักเรียน", 24, true);
         menuMsg1.setHorizontalAlignment(JLabel.CENTER);
         icon1 = Helper.createLabel("", "/images/menu_icon/List.png");
         menu1.add(menuMsg1);
@@ -83,7 +83,7 @@ public class ManagementGUI{
 
         menu2 = Helper.createPanel("");
         menu2.setLayout(new BorderLayout());
-        menuMsg2 = Helper.createLabel("คะแนน    ",  22);
+        menuMsg2 = Helper.createLabel("คะแนน",  24, true);
         icon2 = Helper.createLabel("", "/images/menu_icon/Score.png");
         menuMsg2.setHorizontalAlignment(JLabel.CENTER);
         menu2.add(menuMsg2);
@@ -91,35 +91,29 @@ public class ManagementGUI{
         
         menu3 = Helper.createPanel("");
         menu3.setLayout(new BorderLayout());
-        menuMsg3 = Helper.createLabel("เพิ่มนักเรียน    ",  22);
+        menuMsg3 = Helper.createLabel("เพิ่มนักเรียน",  24, true);
         icon3 = Helper.createLabel("", "/images/menu_icon/Add.png");
         menuMsg3.setHorizontalAlignment(JLabel.CENTER);
         menu3.add(menuMsg3);
         menu3.add(icon3, BorderLayout.EAST);
         
+
+        
         menu4 = Helper.createPanel("");
         menu4.setLayout(new BorderLayout());
-        menuMsg4 = Helper.createLabel("ลบนักเรียน    ",  22);
-        icon4 = Helper.createLabel("", "/images/menu_icon/Delete.png");
+        menuMsg4 = Helper.createLabel("ตั้งค่า",  24, true);
+        icon4 = Helper.createLabel("", "/images/menu_icon/Setting.png");
         menuMsg4.setHorizontalAlignment(JLabel.CENTER);
         menu4.add(menuMsg4);
         menu4.add(icon4, BorderLayout.EAST);
         
         menu5 = Helper.createPanel("");
         menu5.setLayout(new BorderLayout());
-        menuMsg5 = Helper.createLabel("ตั้งค่า    ",  22);
-        icon5 = Helper.createLabel("", "/images/menu_icon/Setting.png");
+        menuMsg5 = Helper.createLabel("ออกจากโปรแกรม",  24, true);
+        icon5 = Helper.createLabel("", "/images/menu_icon/Exit.png");
         menuMsg5.setHorizontalAlignment(JLabel.CENTER);
         menu5.add(menuMsg5);
         menu5.add(icon5, BorderLayout.EAST);
-        
-        menu6 = Helper.createPanel("");
-        menu6.setLayout(new BorderLayout());
-        menuMsg6 = Helper.createLabel("ออกจากโปรแกรม   ",  22);
-        icon6 = Helper.createLabel("", "/images/menu_icon/Exit.png");
-        menuMsg6.setHorizontalAlignment(JLabel.CENTER);
-        menu6.add(menuMsg6);
-        menu6.add(icon6, BorderLayout.EAST);
         
         
        
@@ -129,8 +123,7 @@ public class ManagementGUI{
         menu.add(menu3);
         menu.add(menu4);
         menu.add(menu5);
-        menu.add(menu6);
-        
+    
         program.setSize(900, 700);
         program.setLocation(300, 0);
         program.setVisible(true);
@@ -202,7 +195,5 @@ public class ManagementGUI{
     public MyPanel getMenu5() {
     	return this.menu5;
     }
-    public MyPanel getMenu6() {
-    	return this.menu6;
-    }
+
 }

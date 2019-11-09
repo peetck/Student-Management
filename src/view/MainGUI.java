@@ -23,6 +23,7 @@ public class MainGUI{
         fr.setIconImage(programIcon);
         fr.setVisible(true);
         fr.setLocationRelativeTo(null);
+
     }
     public void set(String select){
         if (select.equals("LoginGUI")){

@@ -31,13 +31,14 @@ public class Student {
 
 	}
 	public Object[] getTableHeadInfo() {
-		Object[] info = new Object[5];
+		Object[] info = new Object[6];
 		
 		info[0] = this.information.get("studentID");
 		info[1] = this.information.get("name");
 		info[2] = this.information.get("surname");
 		info[3] = this.information.get("enrollAt");
-		info[4] = " ดูข้อมูลเพิ่มเติม";
+		info[4] = "ดูข้อมูลเพิ่มเติม";
+		info[5] = "ลบนักเรียน";
 		
 		return info;
 	}
