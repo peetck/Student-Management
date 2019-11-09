@@ -55,7 +55,7 @@ public class ManagementGUI{
         
         time = Helper.createPanel("");
         time.setSize(100, 30);
-        time.setLocation(200, 24);
+        time.setLocation(205, 24);
         time.setBackground(new Color(0, 99, 178));
         
         currentTime = new TimeLabel();
@@ -63,7 +63,7 @@ public class ManagementGUI{
         t1.start();
         
         time.add(currentTime);
-        
+
         
         bottommenu_desktopPane.add(version);
         bottommenu_desktopPane.add(time);

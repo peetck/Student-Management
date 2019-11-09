@@ -23,7 +23,7 @@ public class AddStudentGUI {
 
 		p1 = new JDesktopPane();
 		gbc = new GridBagConstraints();
-		gbc.insets = new Insets(5, 0, 0, 0);
+		gbc.insets = new Insets(3, 0, 0, 0);
         gbc.fill = GridBagConstraints.BOTH;
         btn1 = Helper.createButton("ยืนยัน");
         btn2 = Helper.createButton("แก้ไขรูป");
@@ -163,12 +163,13 @@ public class AddStudentGUI {
 		left.add(f10, gbc);
 		gbc.gridx = 0;
 		gbc.gridy = 20;
+		gbc.insets = new Insets(10, 0, 0, 0);
 		left.add(btn3, gbc);
 		
 		
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		gbc.insets = new Insets(5, 0, 0, 0);
+		gbc.insets = new Insets(3, 0, 0, 0);
 		right.add(l11, gbc);
 		gbc.gridx = 0;
 		gbc.gridy = 1;
@@ -211,6 +212,7 @@ public class AddStudentGUI {
 		right.add(f17, gbc);
 		gbc.gridx = 0;
 		gbc.gridy = 14;
+		gbc.insets = new Insets(18, 0, 0, 0);
 		right.add(btn1, gbc);
 
 		
