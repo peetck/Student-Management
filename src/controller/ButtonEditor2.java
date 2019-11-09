@@ -1,10 +1,8 @@
 package controller;
 
 import java.awt.*;
-import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
-
 import model.*;
 import view.*;
 
@@ -15,7 +13,6 @@ public class ButtonEditor2 extends DefaultCellEditor {
 	  private Student student;
 	  private String label;
 	  private boolean isPushed;
-	  private MyPanel p1;
 	  private JLabel msg;
 	  private StudentManagement stu;
 	  

@@ -708,19 +708,19 @@ public class StudentManagement{
 		DefaultTableModel dm = new DefaultTableModel();
 		
 		if (this.TableSortStatus == 0) {
-			Object[] header = {"รหัสนักศึกษา <", "ชื่อ", "นามสกุล", "เพิ่มเข้ามาในวันที่"	,"", " "};
+			Object[] header = {"รหัสนักศึกษา <", "ชื่อ", "นามสกุล", "เพิ่มเข้ามาในวันที่"	,"-----", "----- "};
 			dm.setDataVector(data, header);
 		}
 		else {
-			Object[] header = {"รหัสนักศึกษา  >", "ชื่อ", "นามสกุล", "เพิ่มเข้ามาในวันที่"	,"", " "};
+			Object[] header = {"รหัสนักศึกษา  >", "ชื่อ", "นามสกุล", "เพิ่มเข้ามาในวันที่"	,"-----", "----- "};
 			dm.setDataVector(data, header);
 		}
 		table = new JTable(dm);
-		table.getColumn("").setCellRenderer(new ButtonRenderer());
-		table.getColumn("").setCellEditor(new ButtonEditor(new JCheckBox(), teacher));
+		table.getColumn("-----").setCellRenderer(new ButtonRenderer());
+		table.getColumn("-----").setCellEditor(new ButtonEditor(new JCheckBox(), teacher));
 		
-		table.getColumn(" ").setCellRenderer(new ButtonRenderer());
-		table.getColumn(" ").setCellEditor(new ButtonEditor2(new JCheckBox(), teacher, this));
+		table.getColumn("----- ").setCellRenderer(new ButtonRenderer());
+		table.getColumn("----- ").setCellEditor(new ButtonEditor2(new JCheckBox(), teacher, this));
 		
 		table.getTableHeader().setReorderingAllowed(false);
 		table.setDefaultEditor(Object.class, null);

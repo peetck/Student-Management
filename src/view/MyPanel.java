@@ -10,9 +10,6 @@ public class MyPanel extends JPanel{
     	if (select.equals("menu")) {
     		bgImage = bg.getScaledInstance(300, 115, Image.SCALE_DEFAULT);
     	}
-    	else if (select.equals("adddelete")) {
-    		bgImage = bg.getScaledInstance(450, 700, Image.SCALE_DEFAULT);
-    	}
     }
     @Override
     protected void paintComponent(Graphics g) {
