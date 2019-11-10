@@ -126,6 +126,13 @@ public class Helper{
         btn.setOpaque(false);
         return btn;
     }
+    public static JButton createButton(String msg, int size){
+        JButton btn = new JButton(msg);
+        btn.setFont(new Font("Kanit ExtraLight", Font.PLAIN, size));
+        MaterialUIMovement.add (btn, new Color(156, 195, 213), 5, 1000 / 60);
+        btn.setOpaque(false);
+        return btn;
+    }
     public static JButton createButton(String msg, Color color){
         JButton btn = new JButton(msg);
         btn.setFont(new Font("Kanit ExtraLight", Font.PLAIN, 16));

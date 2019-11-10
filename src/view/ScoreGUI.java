@@ -30,7 +30,7 @@ public class ScoreGUI {
 		bottom.setSize(900, 110);
 		bottom.setLocation(0, 590);
     		
-		btn1 = Helper.createButton("แก้ไขคะแนน");
+		btn1 = Helper.createButton("แก้ไขคะแนน", 23);
 		//btn1.setBackground(new Color(0, 99, 178));
 		
 		bottom.add(btn1);

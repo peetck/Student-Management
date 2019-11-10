@@ -67,12 +67,12 @@ public class LoginGUI{
         p1.setLayout(new GridBagLayout());
         gbc.fill = GridBagConstraints.BOTH;
 
-        gbc.insets = new Insets(280, 0, 30, 0);
+        gbc.insets = new Insets(260, 0, 30, 0);
         gbc.gridx = 0;
         gbc.gridy = 0;
         p1.add(title, gbc);
        
-        gbc.insets = new Insets(25, 0, 5, 0);
+        gbc.insets = new Insets(20, 0, 5, 0);
         gbc.gridx = 0;
         gbc.gridy = 1;
         p1.add(l1, gbc);
