@@ -272,7 +272,7 @@ public class StudentManagement{
         	public void actionPerformed(ActionEvent e) {
         		for (int i = 0; i < teacher.getStudents().size(); i++) {
         			if (teacher.getStudents().get(i).getStudentID().equals(managementPage.getAddStudentGUI().getF1().getText())) {
-        				JLabel msg = Helper.createLabel("มีรหัสนักศึกษานี้อยู่ในระบบอยู่แล้ว คุณต้องการที่จะแก้ไขข้อมูลหรือไม่??");
+        				JLabel msg = Helper.createLabel("มีรหัสนักเรียนนี้อยู่ในระบบอยู่แล้ว คุณต้องการที่จะแก้ไขข้อมูลหรือไม่??");
         				int alert = JOptionPane.showConfirmDialog(null, msg, "ยืนยัน", JOptionPane.OK_CANCEL_OPTION);
         				if (alert == JOptionPane.OK_OPTION) {
         					HashMap<String, Double> score = teacher.getStudents().get(i).getScore();
@@ -289,7 +289,7 @@ public class StudentManagement{
         managementPage.getScoreGUI().getBtn1().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		MyPanel p1 = Helper.createPanel("");
-				JLabel msg = Helper.createLabel("รหัสนักศึกษา : ");
+				JLabel msg = Helper.createLabel("รหัสนักเรียน : ");
 				JTextField tf = Helper.createTextField(10);
 				p1.add(msg);
 				p1.add(tf);
@@ -350,7 +350,7 @@ public class StudentManagement{
 							return;
 						}
 					}
-					JLabel msg2 = Helper.createLabel("ไม่มีรหัสนักศึกษานี้อยู่ในระบบ");
+					JLabel msg2 = Helper.createLabel("ไม่มีรหัสนักเรียนนี้อยู่ในระบบ");
     				JOptionPane.showMessageDialog(null, msg2);
                 }
         	}
@@ -377,7 +377,7 @@ public class StudentManagement{
         managementPage.getAddStudentGUI().getBtn3().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		MyPanel p1 = Helper.createPanel("");
-				JLabel msg = Helper.createLabel("รหัสนักศึกษา : ");
+				JLabel msg = Helper.createLabel("รหัสนักเรียน : ");
 				JTextField tf = Helper.createTextField(10);
 				p1.add(msg);
 				p1.add(tf);
@@ -433,22 +433,26 @@ public class StudentManagement{
 				else {
 					return;
 				}
-				JLabel msg2 = Helper.createLabel("ไม่มีรหัสนักศึกษานี้อยู่ในระบบ");
+				JLabel msg2 = Helper.createLabel("ไม่มีรหัสนักเรียนนี้อยู่ในระบบ");
 				JOptionPane.showMessageDialog(null, msg2);
         	}
         });
         
         loginPage.getGithub().addMouseListener(new MouseAdapter() {
         	public void mouseClicked(MouseEvent e) {
-				if (Desktop.isDesktopSupported()) {
-					try {
-				        Desktop.getDesktop().browse(new URI("https://github.com/peetck/Student-Management"));
+        		int alert = JOptionPane.showConfirmDialog(null, Helper.createLabel("คุณต้องการจะไปที่ github ของพวกเราใช่หรือไม่"), "Link to github", JOptionPane.OK_CANCEL_OPTION);
+				if (alert == JOptionPane.OK_OPTION) {
+					if (Desktop.isDesktopSupported()) {
+						try {
+					        Desktop.getDesktop().browse(new URI("https://github.com/peetck/Student-Management"));
+						}
+						catch (Exception e1) {}
+					} 
+					else {
+						System.out.println("Desktop is not supported!!");
 					}
-					catch (Exception e1) {}
-				} 
-				else {
-					System.out.println("Desktop is not supported!!");
 				}
+				
 			}
         });
         
@@ -708,11 +712,11 @@ public class StudentManagement{
 		DefaultTableModel dm = new DefaultTableModel();
 		
 		if (this.TableSortStatus == 0) {
-			Object[] header = {"รหัสนักศึกษา <", "ชื่อ", "นามสกุล", "เพิ่มเข้ามาในวันที่"	,"-----", "----- "};
+			Object[] header = {"รหัสนักเรียน <", "ชื่อ", "นามสกุล", "เพิ่มเข้ามาในวันที่"	,"-----", "----- "};
 			dm.setDataVector(data, header);
 		}
 		else {
-			Object[] header = {"รหัสนักศึกษา  >", "ชื่อ", "นามสกุล", "เพิ่มเข้ามาในวันที่"	,"-----", "----- "};
+			Object[] header = {"รหัสนักเรียน  >", "ชื่อ", "นามสกุล", "เพิ่มเข้ามาในวันที่"	,"-----", "----- "};
 			dm.setDataVector(data, header);
 		}
 		table = new JTable(dm);
@@ -756,11 +760,11 @@ public class StudentManagement{
 		DefaultTableModel dm = new DefaultTableModel();
 
 		if (this.TableSortStatus == 0) {
-			Object[] header = {"รหัสนักศึกษา <", "Assignment1", "Assignment2", "Midterm", "Final", "รวมคะแนน", "เกรดที่ได้"};
+			Object[] header = {"รหัสนักเรียน <", "Assignment1", "Assignment2", "Midterm", "Final", "รวมคะแนน", "เกรดที่ได้"};
 			dm.setDataVector(data, header);
 		}
 		else {
-			Object[] header = {"รหัสนักศึกษา >", "Assignment1", "Assignment2", "Midterm", "Final", "รวมคะแนน", "เกรดที่ได้"};
+			Object[] header = {"รหัสนักเรียน >", "Assignment1", "Assignment2", "Midterm", "Final", "รวมคะแนน", "เกรดที่ได้"};
 			dm.setDataVector(data, header);
 		}
 		scoreTable = new JTable(dm);
