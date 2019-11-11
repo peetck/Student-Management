@@ -39,28 +39,20 @@ public class StudentManagement{
     private RegisterGUI registerPage;
     private ManagementGUI managementPage;
     private int TableSortStatus = 0;
-    private String sortFrom = "studentID";
+    private boolean connected = false;
+    private String hostname;
+    private int port;
     
-    public StudentManagement(String hostname, int port){
-        try{
-            System.out.println("Connecting to mongoDB...");
-            connect = new Mongo(hostname, port);
-            db = connect.getDB("StudentManagement");
-            users = db.getCollection("users");
-            
-            /* Auto register (admin/admin) register */
-            BasicDBObject n = new BasicDBObject();
-            n.put("username", "admin");
-            n.put("password", Base64.getEncoder().withoutPadding().encodeToString("admin".getBytes()));
-            users.insert(n);
-            /*----------------*/
-        }
-        catch (Exception e){
-        	JOptionPane.showMessageDialog(null, "Can't Connect to MongoDB with \nHOSTNAME: " + hostname + "\nPORT: " + port);
-            System.exit(0);
-        }
+    public StudentManagement(String h, int p){
+        this.hostname = h;
+        this.port = p;
+    	
+        
         gui = new MainGUI();
+        
         gui.set("LoginGUI");
+        connectDB(hostname, port);
+        
         
         loginPage = gui.getLoginGUI();
         registerPage = gui.getRegisterGUI();
@@ -69,6 +61,10 @@ public class StudentManagement{
         // ********* below here is event of all application *********
         loginPage.getBtn1().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
+            	if (!connected) {
+            		JOptionPane.showMessageDialog(null, "Can't Connect to MongoDB with \nHOSTNAME: " + hostname + "\nPORT: " + port);
+            		return;
+            	}
                 String username = loginPage.getF1().getText();
                 String password = loginPage.getF2().getText();
                 DBCursor curs = users.find();
@@ -99,7 +95,10 @@ public class StudentManagement{
         });
         registerPage.getBtn1().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                System.out.println("RegisterGUI : Register btn clicked!!");
+            	if (!connected) {
+            		JOptionPane.showMessageDialog(null, "Can't Connect to MongoDB with \nHOSTNAME: " + hostname + "\nPORT: " + port);
+            		return;
+            	}
                 BasicDBObject n = new BasicDBObject();
                 String username = registerPage.getF1().getText();
                 String password = registerPage.getF2().getText();
@@ -456,10 +455,87 @@ public class StudentManagement{
 			}
         });
         
+        loginPage.getBtn2().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		MyPanel p1 = Helper.createPanel("");
+				p1.setLayout(new GridLayout(4, 2));
+				JLabel msg01 = Helper.createLabel("HOST : ");
+				JLabel msg02 = Helper.createLabel("PORT : ");
+				JTextField tf01 = Helper.createTextField(10);
+				JTextField tf02 = Helper.createTextField(10);
+				p1.add(msg01);
+				p1.add(tf01);
+				p1.add(msg02);
+				p1.add(tf02);
+				tf01.setText(hostname);
+				tf02.setText("" + port);
+				int alert2 = JOptionPane.showConfirmDialog(null, p1, "Database Setting", JOptionPane.OK_CANCEL_OPTION);
+				if (alert2 == JOptionPane.OK_OPTION) {
+					hostname = tf01.getText();
+					try {
+						port = Integer.parseInt(tf02.getText());
+					}
+					catch(Exception err) {
+						JOptionPane.showMessageDialog(null, Helper.createLabel("กรุณาใส่ PORT เป็นตัวเลขเท่านั้น"));
+						return;
+					}
+					connectDB(hostname, port);
+					if (connected) {
+						JOptionPane.showMessageDialog(null, "Connect successfully\nHOSTNAME: " + hostname + "\nPORT: " + port);
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "Can't Connect to MongoDB with \nHOSTNAME: " + hostname + "\nPORT: " + port);
+					}
+				}
+        	}
+        });
+        
+        
      }
     
     // below here is method in all application
+    public void connectDB(String hostname, int port) {
+    	JOptionPane opt = new JOptionPane(Helper.createLabel("กําลังเชื่อมต่อกับ  Database..."), JOptionPane.WARNING_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}); // no buttons
+        final JDialog dlg = opt.createDialog("Database Setting");
+        new Thread(new Runnable(){
+                public void run(){
+                  try{
+                	  try{
+                          System.out.println("Connecting to mongoDB..." + hostname + " " + port);
+                          connect = new Mongo(hostname, port);
+                          db = connect.getDB("StudentManagement");
+                          users = db.getCollection("users");
+                          connected = true;
+                          DBCursor curs = users.find();
+                          boolean haveAdmin = false;
+                          while (curs.hasNext()){
+                              DBObject t = curs.next();
+                              if (((String)t.get("username")).equals("admin")) {
+                            	  haveAdmin = true;
+                              }
 
+                          }
+                          if (!haveAdmin) {
+                        	  BasicDBObject n = new BasicDBObject();
+                              n.put("username", "admin");
+                              n.put("password", Base64.getEncoder().withoutPadding().encodeToString("admin".getBytes()));
+                              users.insert(n);
+                          }
+                          System.out.println("Connect successfully");
+                      }
+                      catch (Exception e){
+                      	connected = false;
+                      	System.out.println("Connect un-successfully");
+                      }
+                	  dlg.dispose();
+                  }
+                  catch (Exception e){}
+                }
+              }).start();
+        dlg.setVisible(true);
+    	
+    }
+    
     public void addStudent(double assignment1, double assignment2, double midterm_score, double final_score) {
     	String studentID, faculty, title, name, surname, day, month, year, cardID,
     	address, race, religion, bloodType, tel, email, height, weight, sourcePath,
@@ -701,6 +777,8 @@ public class StudentManagement{
     }
     
     // update Student table method
+    
+    
     public void updateTable() {
     	ArrayList<Student> students = teacher.getStudents();
     	Object[][] data = new Object[students.size()][6];

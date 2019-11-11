@@ -4,7 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 
 public class LoginGUI{
-    private JButton btn1;
+    private JButton btn1, btn2;
     private JDesktopPane desktop, linkPanel;
     private MyPanel link, p1, href;
     private JLabel l1, l2, l3, l4, title, github;
@@ -21,8 +21,9 @@ public class LoginGUI{
         
         link = Helper.createPanel("");
         link.setLayout(new BorderLayout());
-        link.setSize(1200, 70);
-        link.setLocation(0, 630);
+        link.setSize(200, 70);
+        link.setLocation(1000, 630);
+
         
         linkPanel = new JDesktopPane();
         linkPanel.setBackground(Color.white);
@@ -30,7 +31,7 @@ public class LoginGUI{
         href = Helper.createPanel("");
         href.setBackground(Color.white);
         href.setSize(60, 60);
-        href.setLocation(1110, 0);
+        href.setLocation(110, 0);
 
         
         github = Helper.createLabel("", "/images/github.png", 50, 50);
@@ -38,12 +39,17 @@ public class LoginGUI{
         
         href.add(github);
         
+        
+        
         linkPanel.add(href);
+
         
         link.add(linkPanel);
         
         
+        
         btn1 = Helper.createButton("Login");
+        btn2 = Helper.createButton("Database Setting");
         
         title = Helper.createLabel("Student Management", 30, true);
         title.setHorizontalAlignment(JLabel.CENTER);
@@ -67,7 +73,7 @@ public class LoginGUI{
         p1.setLayout(new GridBagLayout());
         gbc.fill = GridBagConstraints.BOTH;
 
-        gbc.insets = new Insets(260, 0, 30, 0);
+        gbc.insets = new Insets(220, 0, 30, 0);
         gbc.gridx = 0;
         gbc.gridy = 0;
         p1.add(title, gbc);
@@ -97,6 +103,9 @@ public class LoginGUI{
         p1.add(btn1, gbc);
         gbc.gridx = 0;
         gbc.gridy = 7;
+        p1.add(btn2, gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 8;
         p1.add(l4, gbc);
         
 
@@ -128,5 +137,8 @@ public class LoginGUI{
     }
     public JLabel getGithub() {
     	return this.github;
+    }
+    public JButton getBtn2() {
+    	return this.btn2;
     }
 }

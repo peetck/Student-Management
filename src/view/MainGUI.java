@@ -8,6 +8,7 @@ public class MainGUI{
     private RegisterGUI register;
     private ManagementGUI management;
     private Image programIcon;
+
     public MainGUI(){
         fr = new JFrame("Student Management");
         login = new LoginGUI();
@@ -48,6 +49,7 @@ public class MainGUI{
             fr.revalidate();
             fr.repaint();
         }
+
     }
     public LoginGUI getLoginGUI(){
         return this.login;

@@ -28,7 +28,7 @@ public class RegisterGUI{
         p1.setLayout(new GridBagLayout());
         
         
-        gbc.insets = new Insets(240, 20, 20, 0);
+        gbc.insets = new Insets(180, 20, 20, 0);
         gbc.fill = GridBagConstraints.BOTH;
         gbc.gridwidth = 2;
         p1.add(l1, gbc);
