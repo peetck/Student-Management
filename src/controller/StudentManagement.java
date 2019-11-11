@@ -52,6 +52,9 @@ public class StudentManagement{
         
         gui.set("LoginGUI");
         connectDB(hostname, port);
+        if (!connected) {
+        	JOptionPane.showMessageDialog(null, "Can't Connect to MongoDB with \nHOSTNAME: " + hostname + "\nPORT: " + port);
+		}
         
         
         loginPage = gui.getLoginGUI();
@@ -495,8 +498,8 @@ public class StudentManagement{
     
     // below here is method in all application
     public void connectDB(String hostname, int port) {
-    	JOptionPane opt = new JOptionPane(Helper.createLabel("กําลังเชื่อมต่อกับ  Database..."), JOptionPane.WARNING_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}); // no buttons
-        final JDialog dlg = opt.createDialog("Database Setting");
+    	JOptionPane opt = new JOptionPane(Helper.createLabel("กําลังเชื่อมต่อกับ  mongoDB..."), JOptionPane.WARNING_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}); // no buttons
+        final JDialog dlg = opt.createDialog("Connecting to mongoDB...");
         new Thread(new Runnable(){
                 public void run(){
                   try{
