@@ -5,7 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import model.*;
 import view.*;
-
+// for Delete Student
 public class ButtonEditor2 extends DefaultCellEditor {
 	  protected JButton button;
 	  private int row, col;
