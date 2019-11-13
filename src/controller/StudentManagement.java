@@ -80,6 +80,7 @@ public class StudentManagement{
                         gui.set("ManagementGUI");
                         myUsername = username;
                         login_success();
+                        managementPage.setUser(myUsername);
                         return;
                     }
                 }

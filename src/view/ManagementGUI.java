@@ -19,6 +19,7 @@ public class ManagementGUI{
     private ScoreGUI score;
     private TimeLabel currentTime;
     private Thread t1;
+    private JLabel welcome, user;
     public ManagementGUI(){
         desktop = new JDesktopPane();
         
@@ -39,7 +40,16 @@ public class ManagementGUI{
         topmenu = Helper.createPanel("");
         topmenu.setLocation(0, 0);
         topmenu.setSize(300, 130);
+        topmenu.setLayout(new GridLayout(2, 1));
         topmenu.setBackground(new Color(0, 99, 178));
+        
+        welcome = Helper.createLabel("ยินดีต้อนรับ", 35, Color.WHITE);
+        welcome.setHorizontalAlignment(JLabel.CENTER);
+        user = Helper.createLabel("", 25, Color.WHITE);
+        user.setHorizontalAlignment(JLabel.CENTER);
+        
+        topmenu.add(welcome);
+        topmenu.add(user);
         
         bottommenu = Helper.createPanel("");
         bottommenu.setLayout(new BorderLayout());
@@ -212,5 +222,8 @@ public class ManagementGUI{
     
     public void informationSet(Student stu) {
     	information.set(stu);
+    }
+    public void setUser(String user) {
+    	this.user.setText(user);
     }
 }
