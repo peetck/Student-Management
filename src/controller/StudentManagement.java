@@ -56,7 +56,7 @@ public class StudentManagement{
         managementPage = gui.getManagementGUI();
         connectDB(hostname, port);
         if (!connected) {
-        	JLabel d = Helper.createLabel("<html>ไม่สามารถเชื่อมต่อกับฐานข้อมูลได้ <br> HOSTNAME: " + hostname + "<br>PORT: " + port + "</html>");
+        	JLabel d = Helper.createLabel("ไม่สามารถเชื่อมต่อกับฐานข้อมูลได้ <br> HOSTNAME: " + hostname + "<br>PORT: " + port);
 			JOptionPane.showMessageDialog(null, d);
 		}
         
@@ -67,7 +67,7 @@ public class StudentManagement{
         loginPage.getBtn1().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
             	if (!connected) {
-            		JLabel d = Helper.createLabel("<html>ไม่สามารถเชื่อมต่อกับฐานข้อมูลได้ <br> HOSTNAME: " + hostname + "<br>PORT: " + port + "</html>");
+            		JLabel d = Helper.createLabel("ไม่สามารถเชื่อมต่อกับฐานข้อมูลได้ <br> HOSTNAME: " + hostname + "<br>PORT: " + port);
 					JOptionPane.showMessageDialog(null, d);
             		return;
             	}
@@ -102,7 +102,7 @@ public class StudentManagement{
         registerPage.getBtn1().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
             	if (!connected) {
-            		JLabel d = Helper.createLabel("<html>ไม่สามารถเชื่อมต่อกับฐานข้อมูลได้ <br> HOSTNAME: " + hostname + "<br>PORT: " + port + "</html>");
+            		JLabel d = Helper.createLabel("ไม่สามารถเชื่อมต่อกับฐานข้อมูลได้ <br> HOSTNAME: " + hostname + "<br>PORT: " + port);
 					JOptionPane.showMessageDialog(null, d);
             		return;
             	}
@@ -452,7 +452,7 @@ public class StudentManagement{
 						JOptionPane.showMessageDialog(null, d);
 					}
 					else {
-						JLabel d = Helper.createLabel("<html>ไม่สามารถเชื่อมต่อกับฐานข้อมูลได้ <br> HOSTNAME: " + hostname + "<br>PORT: " + port + "</html>");
+						JLabel d = Helper.createLabel("ไม่สามารถเชื่อมต่อกับฐานข้อมูลได้ <br> HOSTNAME: " + hostname + "<br>PORT: " + port);
 						JOptionPane.showMessageDialog(null, d);
 					}
 				}
