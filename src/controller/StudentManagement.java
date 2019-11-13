@@ -82,7 +82,7 @@ public class StudentManagement{
                         return;
                     }
                 }
-                loginPage.getL3().setText("Wrong Username or Password.");
+                loginPage.getL3().setText("Username หรือ Password ผิด");
             }
         });
         loginPage.getL4().addMouseListener (new MouseAdapter (){
@@ -113,21 +113,21 @@ public class StudentManagement{
                 while (curs.hasNext()){
                     DBObject t = curs.next();
                     if (((String)t.get("username")).equals(username)){
-                    	registerPage.getL5().setText("This username already taken!!");
+                    	registerPage.getL5().setText("Username นี้มีคนใช้แล้ว");
                     	registerPage.getL5().setForeground(Color.RED);
                         return;
                     }
                 }
                 if (username.length() < 4 || username.length() > 20) {
-                	registerPage.getL5().setText("Username length should be 4-20 characters.");
+                	registerPage.getL5().setText("Username ต้องมีความยาว 4 - 20 ตัวอักษร");
                 	registerPage.getL5().setForeground(Color.RED);
                 }
                 else if (password.length() < 6 || username.length() > 30) {
-                	registerPage.getL5().setText("Password length should be 6-30 characters.");
+                	registerPage.getL5().setText("Password ต้องมีความยาว 6 - 30 ตัวอักษร");
                 	registerPage.getL5().setForeground(Color.RED);
                 }
                 else if (username.equals(password)) {
-                	registerPage.getL5().setText("Password should be different from your username.");
+                	registerPage.getL5().setText("Password ต้องไม่เหมือนกับ username");
                 	registerPage.getL5().setForeground(Color.RED);
                 }
                 else if (password.equals(cpassword)){
@@ -148,26 +148,26 @@ public class StudentManagement{
                     	}
                     }
                     if (alphabet == false) {
-                    	registerPage.getL5().setText("Password can contain only letters a-z (A-Z) and any numbers from 0-9.");
+                    	registerPage.getL5().setText("Password สามารถเป็นได้แค่ตัวอักษร a ถึง z (A ถึง Z) และตัวเลข  0 ถึง 9.");
                     	registerPage.getL5().setForeground(Color.RED);
                     	return;
                     }
                     if (number == false || lower == false || upper == false) {
-                    	registerPage.getL5().setText("Password should have numbers upper case and lower case characters.");
+                    	registerPage.getL5().setText("Password ต้องมีตัวอักษรตัวเลขและตัวใหญ่");
                     	registerPage.getL5().setForeground(Color.RED);
                     	return;
                     }
                     n.put("username", username);
                     n.put("password", Base64.getEncoder().withoutPadding().encodeToString(password.getBytes()));
                     users.insert(n);
-                    registerPage.getL5().setText("Register complete!!");
+                    registerPage.getL5().setText("สมัครสมาชิกเรียบร้อยแล้ว สามารถเข้าใช้งานได้เลยทันที");
                 	registerPage.getL5().setForeground(Color.GREEN);
                 	registerPage.getF1().setText("");
                 	registerPage.getF2().setText("");
                 	registerPage.getF3().setText("");
                 }
                 else {
-                	registerPage.getL5().setText("Password not match!!");
+                	registerPage.getL5().setText("Password ทั้งสองช่องไม่ตรงกัน");
                 	registerPage.getL5().setForeground(Color.RED);
                 }
             }
