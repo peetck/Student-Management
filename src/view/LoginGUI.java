@@ -6,11 +6,12 @@ import javax.swing.*;
 public class LoginGUI{
     private JButton btn1, btn2;
     private JDesktopPane desktop, linkPanel;
-    private MyPanel link, p1, href;
-    private JLabel l1, l2, l3, l4, title, github;
+    private MyPanel link, p1, href, connectp;
+    private JLabel l1, l2, l3, l4, title, github, connect, unconnect;
     private JTextField f1;
     private JPasswordField f2;
     private GridBagConstraints gbc;
+
     public LoginGUI(){
 
     	desktop = new JDesktopPane();
@@ -21,8 +22,8 @@ public class LoginGUI{
         
         link = Helper.createPanel("");
         link.setLayout(new BorderLayout());
-        link.setSize(200, 70);
-        link.setLocation(1000, 630);
+        link.setSize(1200, 70);
+        link.setLocation(0, 630);
 
         
         linkPanel = new JDesktopPane();
@@ -31,18 +32,29 @@ public class LoginGUI{
         href = Helper.createPanel("");
         href.setBackground(Color.white);
         href.setSize(60, 60);
-        href.setLocation(110, 0);
+        href.setLocation(1110, 0);
+        
+        connectp = Helper.createPanel("");
+        connectp.setBackground(Color.white);
+        connectp.setSize(60, 60);
+        connectp.setLocation(0, 0);
 
+        connect = Helper.createLabel("", "/images/connected.png", 50, 50);
+        connect.setVisible(false);
+        unconnect = Helper.createLabel("", "/images/unconnected.png", 50, 50);
+        unconnect.setVisible(false);
         
         github = Helper.createLabel("", "/images/github.png", 50, 50);
         
         
         href.add(github);
         
+        connectp.add(connect);
+        connectp.add(unconnect);
         
         
         linkPanel.add(href);
-
+        linkPanel.add(connectp);
         
         link.add(linkPanel);
         
@@ -140,5 +152,17 @@ public class LoginGUI{
     }
     public JButton getBtn2() {
     	return this.btn2;
+    }
+    public void connected(boolean check) {
+		/*desktop.revalidate();
+		desktop.repaint();*/
+		if (check) {
+			connect.setVisible(true);
+	    	unconnect.setVisible(false);
+		}
+		else {
+			connect.setVisible(false);
+	    	unconnect.setVisible(true);
+		}
     }
 }

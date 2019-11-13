@@ -47,7 +47,7 @@ public class AddStudentGUI {
         
 
         
-        l1 = Helper.createLabel("รหัสนักศึกษา : ", 15);
+        l1 = Helper.createLabel("รหัสนักเรียน : ", 15);
 		l2 = Helper.createLabel("คณะ : ", 15);
         l3 = Helper.createLabel("คํานําหน้า : ", 15);
 		l4 = Helper.createLabel("ชื่อ : ", 15);

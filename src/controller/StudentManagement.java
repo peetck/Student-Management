@@ -51,21 +51,23 @@ public class StudentManagement{
         gui = new MainGUI();
         
         gui.set("LoginGUI");
+        loginPage = gui.getLoginGUI();
+        registerPage = gui.getRegisterGUI();
+        managementPage = gui.getManagementGUI();
         connectDB(hostname, port);
         if (!connected) {
         	JOptionPane.showMessageDialog(null, "Can't Connect to MongoDB with \nHOSTNAME: " + hostname + "\nPORT: " + port);
 		}
         
         
-        loginPage = gui.getLoginGUI();
-        registerPage = gui.getRegisterGUI();
-        managementPage = gui.getManagementGUI();
+        
         
         // ********* below here is event of all application *********
         loginPage.getBtn1().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
             	if (!connected) {
-            		JOptionPane.showMessageDialog(null, "Can't Connect to MongoDB with \nHOSTNAME: " + hostname + "\nPORT: " + port);
+            		JLabel d = Helper.createLabel("<html>ไม่สามารถเชื่อมต่อกับฐานข้อมูลได้ <br> HOSTNAME: " + hostname + "<br>PORT: " + port + "</html>");
+					JOptionPane.showMessageDialog(null, d);
             		return;
             	}
                 String username = loginPage.getF1().getText();
@@ -99,7 +101,8 @@ public class StudentManagement{
         registerPage.getBtn1().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
             	if (!connected) {
-            		JOptionPane.showMessageDialog(null, "Can't Connect to MongoDB with \nHOSTNAME: " + hostname + "\nPORT: " + port);
+            		JLabel d = Helper.createLabel("<html>ไม่สามารถเชื่อมต่อกับฐานข้อมูลได้ <br> HOSTNAME: " + hostname + "<br>PORT: " + port + "</html>");
+					JOptionPane.showMessageDialog(null, d);
             		return;
             	}
                 BasicDBObject n = new BasicDBObject();
@@ -303,10 +306,10 @@ public class StudentManagement{
 							// แก้ไข คะแนน
 							MyPanel p2 = Helper.createPanel("");
 							p2.setLayout(new GridLayout(4, 2));
-							JLabel msg01 = Helper.createLabel("Assignment1");
-							JLabel msg02 = Helper.createLabel("Assignment2");
-							JLabel msg03 = Helper.createLabel("Midterm Score");
-							JLabel msg04 = Helper.createLabel("Final Score");
+							JLabel msg01 = Helper.createLabel("คะแนนช่อง 1");
+							JLabel msg02 = Helper.createLabel("คะแนนช่อง 2");
+							JLabel msg03 = Helper.createLabel("คะแนนกลางภาค");
+							JLabel msg04 = Helper.createLabel("คะแนนปลายภาค");
 							JTextField tf01 = Helper.createTextField(10);
 							JTextField tf02 = Helper.createTextField(10);
 							JTextField tf03 = Helper.createTextField(10);
@@ -484,10 +487,12 @@ public class StudentManagement{
 					}
 					connectDB(hostname, port);
 					if (connected) {
-						JOptionPane.showMessageDialog(null, "Connect successfully\nHOSTNAME: " + hostname + "\nPORT: " + port);
+						JLabel d = Helper.createLabel("<html>เชื่อมต่อกับฐานข้อมูลสําเร็จ <br> HOSTNAME: " + hostname + "<br>PORT: " + port + "</html>");
+						JOptionPane.showMessageDialog(null, d);
 					}
 					else {
-						JOptionPane.showMessageDialog(null, "Can't Connect to MongoDB with \nHOSTNAME: " + hostname + "\nPORT: " + port);
+						JLabel d = Helper.createLabel("<html>ไม่สามารถเชื่อมต่อกับฐานข้อมูลได้ <br> HOSTNAME: " + hostname + "<br>PORT: " + port + "</html>");
+						JOptionPane.showMessageDialog(null, d);
 					}
 				}
         	}
@@ -499,7 +504,7 @@ public class StudentManagement{
     // below here is method in all application
     public void connectDB(String hostname, int port) {
     	JOptionPane opt = new JOptionPane(Helper.createLabel("กําลังเชื่อมต่อกับ  mongoDB..."), JOptionPane.WARNING_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}); // no buttons
-        final JDialog dlg = opt.createDialog("Connecting to mongoDB...");
+         JDialog dlg = opt.createDialog("Connecting to mongoDB...");
         new Thread(new Runnable(){
                 public void run(){
                   try{
@@ -525,10 +530,12 @@ public class StudentManagement{
                               users.insert(n);
                           }
                           System.out.println("Connect successfully");
+                          loginPage.connected(true);
                       }
                       catch (Exception e){
                       	connected = false;
                       	System.out.println("Connect un-successfully");
+                      	loginPage.connected(false);
                       }
                 	  dlg.dispose();
                   }
@@ -841,11 +848,11 @@ public class StudentManagement{
 		DefaultTableModel dm = new DefaultTableModel();
 
 		if (this.TableSortStatus == 0) {
-			Object[] header = {"รหัสนักเรียน <", "Assignment1", "Assignment2", "Midterm", "Final", "รวมคะแนน", "เกรดที่ได้"};
+			Object[] header = {"รหัสนักเรียน <", "คะแนนช่อง 1", "คะแนนช่อง 2", "คะแนนกลางภาค", "คะแนนปลายภาค", "รวมคะแนน", "เกรดที่ได้"};
 			dm.setDataVector(data, header);
 		}
 		else {
-			Object[] header = {"รหัสนักเรียน >", "Assignment1", "Assignment2", "Midterm", "Final", "รวมคะแนน", "เกรดที่ได้"};
+			Object[] header = {"รหัสนักเรียน >", "คะแนนช่อง 1", "คะแนนช่อง 2", "คะแนนกลางภาค", "คะแนนปลายภาค", "รวมคะแนน", "เกรดที่ได้"};
 			dm.setDataVector(data, header);
 		}
 		scoreTable = new JTable(dm);
