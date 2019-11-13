@@ -27,7 +27,7 @@ import view.*;
 public class StudentManagement{
     private MainGUI gui;
     private Teacher teacher;
-    private Mongo connect;
+    private MongoClient connect;
     private DB db;
     private DBCollection users;
     private String myUsername;
@@ -475,7 +475,7 @@ public class StudentManagement{
 				p1.add(tf02);
 				tf01.setText(hostname);
 				tf02.setText("" + port);
-				int alert2 = JOptionPane.showConfirmDialog(null, p1, "Database Setting", JOptionPane.OK_CANCEL_OPTION);
+				int alert2 = JOptionPane.showConfirmDialog(null, p1, "ตั้งค่า Database", JOptionPane.OK_CANCEL_OPTION);
 				if (alert2 == JOptionPane.OK_OPTION) {
 					hostname = tf01.getText();
 					try {
@@ -510,7 +510,8 @@ public class StudentManagement{
                   try{
                 	  try{
                           System.out.println("Connecting to mongoDB..." + hostname + " " + port);
-                          connect = new Mongo(hostname, port);
+                          
+                          connect = new MongoClient(hostname, port);
                           db = connect.getDB("StudentManagement");
                           users = db.getCollection("users");
                           connected = true;

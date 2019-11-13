@@ -90,11 +90,11 @@ public class LoginGUI{
         gbc.gridy = 0;
         p1.add(title, gbc);
        
-        gbc.insets = new Insets(20, 0, 5, 0);
+        gbc.insets = new Insets(30, 0, 5, 0);
         gbc.gridx = 0;
         gbc.gridy = 1;
         p1.add(l1, gbc);
-        gbc.insets = new Insets(5, 0, 5, 0);
+        gbc.insets = new Insets(3, 0, 3, 0);
         gbc.gridx = 0;
         gbc.gridy = 2;
         p1.add(f1, gbc);
