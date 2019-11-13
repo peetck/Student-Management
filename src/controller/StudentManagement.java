@@ -448,7 +448,7 @@ public class StudentManagement{
 					}
 					connectDB(hostname, port);
 					if (connected) {
-						JLabel d = Helper.createLabel("<html>เชื่อมต่อกับฐานข้อมูลสําเร็จ <br> HOSTNAME: " + hostname + "<br>PORT: " + port + "</html>");
+						JLabel d = Helper.createLabel("เชื่อมต่อกับฐานข้อมูลสําเร็จ <br> HOSTNAME: " + hostname + "<br>PORT: " + port);
 						JOptionPane.showMessageDialog(null, d);
 					}
 					else {
