@@ -378,32 +378,6 @@ public class StudentManagement{
         	}
         });
         
-        managementPage.getAddStudentGUI().getBtn3().addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		MyPanel p1 = Helper.createPanel("");
-				JLabel msg = Helper.createLabel("รหัสนักเรียน : ");
-				JTextField tf = Helper.createTextField(10);
-				p1.add(msg);
-				p1.add(tf);
-				int alert = JOptionPane.showConfirmDialog(null, p1, "ดึงข้อมูล", JOptionPane.OK_CANCEL_OPTION);
-				if (alert == JOptionPane.OK_OPTION) {
-					ArrayList<Student> arr = teacher.getStudents();
-					for (int i = 0; i < arr.size(); i++) {
-						if (arr.get(i).getStudentID().equals(tf.getText())) {
-					    	HashMap<String, String> info = arr.get(i).getInformation();
-					    	pullInformation(info, arr.get(i).getPicturePath());
-							return;
-						}
-					}
-				}
-				else {
-					return;
-				}
-				JLabel msg2 = Helper.createLabel("ไม่มีรหัสนักเรียนนี้อยู่ในระบบ");
-				JOptionPane.showMessageDialog(null, msg2);
-        	}
-        });
-        
         loginPage.getGithub().addMouseListener(new MouseAdapter() {
         	public void mouseClicked(MouseEvent e) {
         		int alert = JOptionPane.showConfirmDialog(null, Helper.createLabel("คุณต้องการจะไปที่ github ของพวกเราใช่หรือไม่"), "Link to github", JOptionPane.OK_CANCEL_OPTION);
