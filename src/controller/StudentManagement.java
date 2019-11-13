@@ -796,6 +796,7 @@ public class StudentManagement{
 		table.getColumn("----- ").setCellEditor(new ButtonEditor2(new JCheckBox(), teacher, this));
 		
 		table.getTableHeader().setReorderingAllowed(false);
+		table.getTableHeader().setResizingAllowed(false);
 		table.setDefaultEditor(Object.class, null);
 		table.setFillsViewportHeight(true);
 		
@@ -839,12 +840,12 @@ public class StudentManagement{
 		scoreTable = new JTable(dm);
 		scoreTable.setDefaultEditor(Object.class, null);
 		scoreTable.getTableHeader().setReorderingAllowed(false);
+		scoreTable.getTableHeader().setResizingAllowed(false);
 		scoreTable.setFillsViewportHeight(true);
 		for (int i = 0; i < scoreTable.getColumnCount(); i++) {
 			scoreTable.getColumnModel().getColumn(i).setCellRenderer(new CellRenderer());
 
 		}
-
 		scoreTable.getTableHeader().addMouseListener(new MouseAdapter() {
 		    @Override
 		    public void mouseClicked(MouseEvent e) {
