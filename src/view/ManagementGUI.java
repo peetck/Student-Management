@@ -4,6 +4,8 @@ import java.awt.*;
 
 import javax.swing.*;
 
+import model.Student;
+
 
 public class ManagementGUI{
     private JDesktopPane desktop;
@@ -13,6 +15,7 @@ public class ManagementGUI{
     private MyStudentGUI mystudent;
     private AddStudentGUI add;
     private SettingGUI setting;
+    private InformationGUI information;
     private ScoreGUI score;
     private TimeLabel currentTime;
     private Thread t1;
@@ -31,6 +34,7 @@ public class ManagementGUI{
         score = new ScoreGUI();
         add = new AddStudentGUI();
         setting = new SettingGUI();
+        information = new InformationGUI();
         
         topmenu = Helper.createPanel("");
         topmenu.setLocation(0, 0);
@@ -167,6 +171,13 @@ public class ManagementGUI{
     		program.repaint();
     		program.add(score.getPanel());
     	}
+    	else if (select.equals("information")) {
+    		program.removeAll();
+    		
+    		program.revalidate();
+    		program.repaint();
+    		program.add(information.getPanel());
+    	}
     }
     public JDesktopPane getPanel(){
         return this.desktop;
@@ -176,6 +187,9 @@ public class ManagementGUI{
     }
     public MyStudentGUI getMyStudentGUI() {
     	return this.mystudent;
+    }
+    public InformationGUI getInformationGUI() {
+    	return this.information;
     }
     public ScoreGUI getScoreGUI() {
     	return this.score;
@@ -195,5 +209,8 @@ public class ManagementGUI{
     public MyPanel getMenu5() {
     	return this.menu5;
     }
-
+    
+    public void informationSet(Student stu) {
+    	information.set(stu);
+    }
 }

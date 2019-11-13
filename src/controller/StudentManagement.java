@@ -56,7 +56,8 @@ public class StudentManagement{
         managementPage = gui.getManagementGUI();
         connectDB(hostname, port);
         if (!connected) {
-        	JOptionPane.showMessageDialog(null, "Can't Connect to MongoDB with \nHOSTNAME: " + hostname + "\nPORT: " + port);
+        	JLabel d = Helper.createLabel("<html>ไม่สามารถเชื่อมต่อกับฐานข้อมูลได้ <br> HOSTNAME: " + hostname + "<br>PORT: " + port + "</html>");
+			JOptionPane.showMessageDialog(null, d);
 		}
         
         
@@ -215,9 +216,7 @@ public class StudentManagement{
         managementPage.getMenu1().addMouseListener(new MouseAdapter() {
 
 			public void mouseClicked(MouseEvent e) {
-				if (currentPage == 1) {
-					return;
-				}
+				
 				managementPage.set("mystudent");
 				
 				currentPage = 1;
@@ -392,45 +391,7 @@ public class StudentManagement{
 					for (int i = 0; i < arr.size(); i++) {
 						if (arr.get(i).getStudentID().equals(tf.getText())) {
 					    	HashMap<String, String> info = arr.get(i).getInformation();
-					    	
-					    	
-					    	managementPage.getAddStudentGUI().getF1().setText(info.get("studentID"));
-
-					    	managementPage.getAddStudentGUI().getF2().setSelectedItem(info.get("faculty"));
-					    	
-					    	
-					    	managementPage.getAddStudentGUI().getF3().setSelectedItem(info.get("title"));
-					    	managementPage.getAddStudentGUI().getF4().setText(info.get("name"));
-					    	managementPage.getAddStudentGUI().getF5().setText(info.get("surname"));
-					    	
-							LocalDate ld = LocalDate.of(Integer.parseInt(info.get("year")), Integer.parseInt(info.get("month")), Integer.parseInt(info.get("day")));
-					    	managementPage.getAddStudentGUI().getF6().setDate(ld);
-
-					    	
-					    	managementPage.getAddStudentGUI().getF7().setText(info.get("cardID"));
-					    	managementPage.getAddStudentGUI().getF8().setText(info.get("address"));
-					    	managementPage.getAddStudentGUI().getF9().setText(info.get("race"));
-					    	managementPage.getAddStudentGUI().getF10().setText(info.get("religion"));
-					    	managementPage.getAddStudentGUI().getF11().setText(info.get("bloodType"));
-					    	managementPage.getAddStudentGUI().getF12().setText(info.get("tel"));
-					    	managementPage.getAddStudentGUI().getF13().setText(info.get("email"));
-					    	managementPage.getAddStudentGUI().getF14().setText(info.get("height"));
-					    	managementPage.getAddStudentGUI().getF15().setText(info.get("weight"));
-					    	managementPage.getAddStudentGUI().getF16().setText(info.get("parentTel"));
-					    	managementPage.getAddStudentGUI().getF17().setText(info.get("disease"));
-					    	
-					    	String path = arr.get(i).getPicturePath();
-					    	Image img = null;
-					    	if (path.equals("default")) {
-					    		img = Helper.getImage("/images/blank_profile.png");
-					    	}
-					    	else {
-					    		img = Toolkit.getDefaultToolkit().getImage(path);
-					    	}
-					    	img = img.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
-				        	ImageIcon icon = new ImageIcon(img);
-				        	managementPage.getAddStudentGUI().getPictureLabel().setIcon(icon);
-				        	managementPage.getAddStudentGUI().setPicturePath(path);
+					    	pullInformation(info, arr.get(i).getPicturePath());
 							return;
 						}
 					}
@@ -498,10 +459,55 @@ public class StudentManagement{
         	}
         });
         
-        
+        managementPage.getInformationGUI().getBtn1().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		managementPage.set("add/delete");
+				currentPage = 3;
+				updatePage();
+				pullInformation(managementPage.getInformationGUI().getInformation(), managementPage.getInformationGUI().getPicturePath());
+        	}
+        });
      }
     
     // below here is method in all application
+    public void pullInformation(HashMap<String, String> info, String path) {
+    	managementPage.getAddStudentGUI().getF1().setText(info.get("studentID"));
+
+    	managementPage.getAddStudentGUI().getF2().setSelectedItem(info.get("faculty"));
+    	
+    	
+    	managementPage.getAddStudentGUI().getF3().setSelectedItem(info.get("title"));
+    	managementPage.getAddStudentGUI().getF4().setText(info.get("name"));
+    	managementPage.getAddStudentGUI().getF5().setText(info.get("surname"));
+    	
+		LocalDate ld = LocalDate.of(Integer.parseInt(info.get("year")), Integer.parseInt(info.get("month")), Integer.parseInt(info.get("day")));
+    	managementPage.getAddStudentGUI().getF6().setDate(ld);
+
+    	
+    	managementPage.getAddStudentGUI().getF7().setText(info.get("cardID"));
+    	managementPage.getAddStudentGUI().getF8().setText(info.get("address"));
+    	managementPage.getAddStudentGUI().getF9().setText(info.get("race"));
+    	managementPage.getAddStudentGUI().getF10().setText(info.get("religion"));
+    	managementPage.getAddStudentGUI().getF11().setText(info.get("bloodType"));
+    	managementPage.getAddStudentGUI().getF12().setText(info.get("tel"));
+    	managementPage.getAddStudentGUI().getF13().setText(info.get("email"));
+    	managementPage.getAddStudentGUI().getF14().setText(info.get("height"));
+    	managementPage.getAddStudentGUI().getF15().setText(info.get("weight"));
+    	managementPage.getAddStudentGUI().getF16().setText(info.get("parentTel"));
+    	managementPage.getAddStudentGUI().getF17().setText(info.get("disease"));
+    	
+    	Image img = null;
+    	if (path.equals("default")) {
+    		img = Helper.getImage("/images/blank_profile.png");
+    	}
+    	else {
+    		img = Toolkit.getDefaultToolkit().getImage(path);
+    	}
+    	img = img.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
+    	ImageIcon icon = new ImageIcon(img);
+    	managementPage.getAddStudentGUI().getPictureLabel().setIcon(icon);
+    	managementPage.getAddStudentGUI().setPicturePath(path);
+    }
     public void connectDB(String hostname, int port) {
     	JOptionPane opt = new JOptionPane(Helper.createLabel("กําลังเชื่อมต่อกับ  mongoDB..."), JOptionPane.WARNING_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}); // no buttons
          JDialog dlg = opt.createDialog("Connecting to mongoDB...");
@@ -810,7 +816,7 @@ public class StudentManagement{
 		}
 		table = new JTable(dm);
 		table.getColumn("-----").setCellRenderer(new ButtonRenderer());
-		table.getColumn("-----").setCellEditor(new ButtonEditor(new JCheckBox(), teacher));
+		table.getColumn("-----").setCellEditor(new ButtonEditor(new JCheckBox(), teacher, managementPage));
 		
 		table.getColumn("----- ").setCellRenderer(new ButtonRenderer());
 		table.getColumn("----- ").setCellEditor(new ButtonEditor2(new JCheckBox(), teacher, this));

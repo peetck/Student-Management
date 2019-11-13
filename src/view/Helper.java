@@ -28,11 +28,11 @@ public class Helper{
     }
     // return JLabel with font 
     public static JLabel createLabel(String msg){
-        JLabel l = new JLabel(msg);
+        JLabel l = new JLabel("<html>" + msg + "</html>");
         l.setFont(new Font("Kanit ExtraLight", Font.PLAIN, 16));
         l.setOpaque(false);
         return l;
-    }
+    }	
     public static JLabel createLabel(String msg, boolean b){
         JLabel l = new JLabel(msg);
         if (b) {
@@ -97,7 +97,18 @@ public class Helper{
         //l.setHorizontalTextPosition(JLabel.LEFT);
         return l;
     }
+    public static JScrollPane createTextArea(String msg) {
+    	JTextArea ta = new JTextArea(msg);
+        ta.setFont(new Font("Kanit ExtraLight", Font.PLAIN, 16));
+        ta.setOpaque(false);
+        ta.setLineWrap(true);
+        ta.setWrapStyleWord(true);
+        ta.setEditable(false);
+        JScrollPane scroll = new JScrollPane(ta);
 
+        //scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS); 
+        return scroll;
+    }
     // return JTextField with font and selected size
     public static JTextField createTextField(int size){
         JTextField f = new JTextField(size);

@@ -61,11 +61,11 @@ public class ButtonEditor2 extends DefaultCellEditor {
 			int alert = JOptionPane.showConfirmDialog(null, msg, "ลบนักเรียน", JOptionPane.OK_CANCEL_OPTION);
 			if (alert == JOptionPane.OK_OPTION) {
 				if ((stu.delete(student.getStudentID()))) {
-					JLabel msg2 = Helper.createLabel("ลบนักศึกษานี้ออกจากระบบเรียบร้อยแล้ว");
+					JLabel msg2 = Helper.createLabel("ลบนักเรียนรหัส " + student.getStudentID() + " ออกจากระบบเรียบร้อยแล้ว");
     				JOptionPane.showMessageDialog(null, msg2);
 				}
 				else{
-					JLabel msg2 = Helper.createLabel("ไม่มีรหัสนักศึกษานี้อยู่ในระบบ");
+					JLabel msg2 = Helper.createLabel("ไม่มีรหัสนักเรียนนี้อยู่ในระบบ");
     				JOptionPane.showMessageDialog(null, msg2);
 				}
             }

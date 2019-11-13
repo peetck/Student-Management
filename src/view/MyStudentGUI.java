@@ -14,7 +14,7 @@ public class MyStudentGUI {
 		
 		container = Helper.createPanel("");
 		container.setLayout(new BorderLayout());
-		container.setSize(885, 700);
+		container.setSize(885, 690);
 		container.setLocation(0, 0);
 
 		
