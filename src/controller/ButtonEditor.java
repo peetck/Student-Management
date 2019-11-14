@@ -17,10 +17,12 @@ public class ButtonEditor extends DefaultCellEditor {
 	  private HashMap<String, String> information;
 	  private boolean isPushed;
 	  private ManagementGUI managementPage;
-	  public ButtonEditor(JCheckBox checkBox, Teacher teacher, ManagementGUI m) {
+	  private StudentManagement s;
+	  public ButtonEditor(JCheckBox checkBox, Teacher teacher, ManagementGUI m, StudentManagement s) {
 	    super(checkBox);
 	    this.managementPage = m;
 	    this.teacher = teacher;
+	    this.s = s;
 	    button = Helper.createButton("");
 	    button.setOpaque(true);
 	    button.addActionListener(new ActionListener() {
@@ -56,6 +58,7 @@ public class ButtonEditor extends DefaultCellEditor {
 
 	  public Object getCellEditorValue() {
 	    if (isPushed) {
+
 	    	managementPage.set("information");
 	    	student = teacher.getStudents().get(row);
 	    	managementPage.informationSet(student);

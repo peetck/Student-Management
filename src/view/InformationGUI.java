@@ -22,7 +22,7 @@ public class InformationGUI {
 		
 		/* 900 x 700 */
 		left = Helper.createPanel("");
-        left.setSize(410, 645);
+        left.setSize(380, 645);
         left.setLocation(50, 85);
         left.setLayout(new GridLayout(10, 2));
         //left.setBackground(Color.RED);
@@ -40,17 +40,23 @@ public class InformationGUI {
         picture.setLayout(new BorderLayout());
         
         titlep = Helper.createPanel("");
-        titlep.setSize(200, 45);
-        titlep.setLocation(100, 15);
+        titlep.setSize(300, 45);
+        titlep.setLocation(50, 15);
         titlep.setLayout(new BorderLayout());
         
+        title = Helper.createLabel(" ข้อมูลนักเรียน", 35, true);
+    	title.setHorizontalAlignment(JLabel.CENTER);
+    	title.setIcon(new ImageIcon(Helper.getImage("/images/student.png").getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+    	
+    	titlep.add(title);
+    	
         select = Helper.createPanel("");
-        select.setSize(390, 50);
+        select.setSize(350, 50);
         select.setLocation(490, 615);
         select.setLayout(new BorderLayout());
 
         
-        btn1 = Helper.createButton("แก้ไขข้อมูล");
+        btn1 = Helper.createButton("แก้ไขข้อมูล", 20);
         
         select.add(btn1);
         
@@ -134,12 +140,11 @@ public class InformationGUI {
     	a16 = Helper.createLabel(information.get("parentTel"));
     	a17 = Helper.createLabel(information.get("disease"));
     	
-    	title = Helper.createLabel("ข้อมูลนักเรียน", 35, true);
-    	title.setHorizontalAlignment(JLabel.CENTER);
+    	
     	
  		picture.add(pictureLabel);
  		
- 		titlep.add(title);
+ 		
 
     	left.add(l1);
 		left.add(a1);

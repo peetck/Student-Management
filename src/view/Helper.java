@@ -105,6 +105,8 @@ public class Helper{
         ta.setWrapStyleWord(true);
         ta.setEditable(false);
         JScrollPane scroll = new JScrollPane(ta);
+        scroll.getViewport().setOpaque(false);
+        scroll.setOpaque(false);
 
         //scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS); 
         return scroll;

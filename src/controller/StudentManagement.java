@@ -1,10 +1,14 @@
 package controller;
+
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.*;
 
 import java.awt.event.*;
 
 import java.io.*;
 import java.net.URI;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -17,6 +21,9 @@ import com.mongodb.*;
 import java.util.*;
 
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.table.*;
@@ -42,8 +49,9 @@ public class StudentManagement{
     private boolean connected = false;
     private String hostname;
     private int port;
-    
     public StudentManagement(String h, int p){
+    	
+    	
         this.hostname = h;
         this.port = p;
     	
@@ -96,12 +104,14 @@ public class StudentManagement{
         });
         registerPage.getBtn2().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
+
                 System.out.println("RegisterGUI : Back btn clicked!!");
                 gui.set("LoginGUI");
             }
         });
         registerPage.getBtn1().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
+
             	if (!connected) {
             		JLabel d = Helper.createLabel("ไม่สามารถเชื่อมต่อกับฐานข้อมูลได้ <br> HOSTNAME: " + hostname + "<br>PORT: " + port);
 					JOptionPane.showMessageDialog(null, d);
@@ -275,6 +285,7 @@ public class StudentManagement{
 
         managementPage.getAddStudentGUI().getBtn1().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		
         		for (int i = 0; i < teacher.getStudents().size(); i++) {
         			if (teacher.getStudents().get(i).getStudentID().equals(managementPage.getAddStudentGUI().getF1().getText())) {
         				JLabel msg = Helper.createLabel("มีรหัสนักเรียนนี้อยู่ในระบบอยู่แล้ว คุณต้องการที่จะแก้ไขข้อมูลหรือไม่??");
@@ -293,6 +304,7 @@ public class StudentManagement{
 
         managementPage.getScoreGUI().getBtn1().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		
         		MyPanel p1 = Helper.createPanel("");
 				JLabel msg = Helper.createLabel("รหัสนักเรียน : ");
 				JTextField tf = Helper.createTextField(10);
@@ -363,6 +375,7 @@ public class StudentManagement{
         
         managementPage.getAddStudentGUI().getBtn2().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		
         		JFileChooser chooser = new JFileChooser();
         	    chooser.showOpenDialog(null);
         	    File f = chooser.getSelectedFile();
@@ -399,6 +412,7 @@ public class StudentManagement{
         
         loginPage.getBtn2().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		
         		MyPanel p1 = Helper.createPanel("");
 				p1.setLayout(new GridLayout(4, 2));
 				JLabel msg01 = Helper.createLabel("HOST : ");
@@ -436,6 +450,7 @@ public class StudentManagement{
         
         managementPage.getInformationGUI().getBtn1().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		
         		managementPage.set("add/delete");
 				currentPage = 3;
 				updatePage();
@@ -791,7 +806,7 @@ public class StudentManagement{
 		}
 		table = new JTable(dm);
 		table.getColumn("-----").setCellRenderer(new ButtonRenderer());
-		table.getColumn("-----").setCellEditor(new ButtonEditor(new JCheckBox(), teacher, managementPage));
+		table.getColumn("-----").setCellEditor(new ButtonEditor(new JCheckBox(), teacher, managementPage, this));
 		
 		table.getColumn("----- ").setCellRenderer(new ButtonRenderer());
 		table.getColumn("----- ").setCellEditor(new ButtonEditor2(new JCheckBox(), teacher, this));
@@ -860,7 +875,7 @@ public class StudentManagement{
 		    }
 		});
 		
-		
+		scoreTable.setBorder(new LineBorder(Color.RED, 0));
 		managementPage.getScoreGUI().updateTable(scoreTable);
     }
     public void updatePage() {      
