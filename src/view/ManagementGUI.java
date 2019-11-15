@@ -16,7 +16,7 @@ public class ManagementGUI{
     private AddStudentGUI add;
     private SettingGUI setting;
     private InformationGUI information;
-    private ScoreGUI score;
+    private SubjectGUI subject;
     private TimeLabel currentTime;
     private Thread t1;
     private JLabel welcome, user;
@@ -32,7 +32,7 @@ public class ManagementGUI{
         program = Helper.createPanel("");
         program.setLayout(new GridLayout(1, 1));
         mystudent = new MyStudentGUI();
-        score = new ScoreGUI();
+        subject = new SubjectGUI();
         add = new AddStudentGUI();
         setting = new SettingGUI();
         information = new InformationGUI();
@@ -174,12 +174,12 @@ public class ManagementGUI{
     		program.repaint();
     		program.add(setting.getPanel());
     	}
-    	else if (select.equals("score")) {
+    	else if (select.equals("subject")) {
     		program.removeAll();
     		
     		program.revalidate();
     		program.repaint();
-    		program.add(score.getPanel());
+    		program.add(subject.getPanel());
     	}
     	else if (select.equals("information")) {
     		program.removeAll();
@@ -187,6 +187,27 @@ public class ManagementGUI{
     		program.revalidate();
     		program.repaint();
     		program.add(information.getPanel());
+    	}
+    	else if (select.equals("subject1")) {
+    		program.removeAll();
+    		
+    		program.revalidate();
+    		program.repaint();
+    		program.add(subject.getSubject1().getPanel());
+    	}
+    	else if (select.equals("subject2")) {
+    		program.removeAll();
+    		
+    		program.revalidate();
+    		program.repaint();
+    		program.add(subject.getSubject2().getPanel());
+    	}
+    	else if (select.equals("subject3")) {
+    		program.removeAll();
+    		
+    		program.revalidate();
+    		program.repaint();
+    		program.add(subject.getSubject3().getPanel());
     	}
     }
     public JDesktopPane getPanel(){
@@ -201,8 +222,8 @@ public class ManagementGUI{
     public InformationGUI getInformationGUI() {
     	return this.information;
     }
-    public ScoreGUI getScoreGUI() {
-    	return this.score;
+    public SubjectGUI getSubjectGUI() {
+    	return this.subject;
     }
     public SettingGUI getSettingGUI() {
     	return this.setting;

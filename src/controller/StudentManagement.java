@@ -39,7 +39,7 @@ public class StudentManagement{
     private DBCollection users;
     private String myUsername;
     private int currentPage = 1;
-    private JTable table, scoreTable;
+    private JTable table, scoreTable, scoreTable2, scoreTable3;
     
     
     private LoginGUI loginPage;
@@ -178,6 +178,10 @@ public class StudentManagement{
                     }
                     n.put("username", username);
                     n.put("password", Base64.getEncoder().withoutPadding().encodeToString(password.getBytes()));
+                    n.put("subject1", "");
+                    n.put("subject2", "");
+                    n.put("subject3", "");
+                    
                     users.insert(n);
                     registerPage.getL5().setText("สมัครสมาชิกเรียบร้อยแล้ว สามารถเข้าใช้งานได้เลยทันที");
                 	registerPage.getL5().setForeground(Color.GREEN);
@@ -248,10 +252,8 @@ public class StudentManagement{
         managementPage.getMenu2().addMouseListener(new MouseAdapter() {
 
 			public void mouseClicked(MouseEvent e) {
-				if (currentPage == 2) {
-					return;
-				}
-				managementPage.set("score");
+				
+				managementPage.set("subject");
 				
 				currentPage = 2;
 				updatePage();
@@ -300,16 +302,16 @@ public class StudentManagement{
         				if (alert == JOptionPane.OK_OPTION) {
         					HashMap<String, Double> score = teacher.getStudents().get(i).getScore();
         					delete(teacher.getStudents().get(i).getStudentID());
-        					addStudent(score.get("assignment1"), score.get("assignment2"), score.get("midterm_score"), score.get("final_score"));
+        					addStudent();
         				}
             			return;	
         			}
         		}
-            	addStudent(0.0, 0.0, 0.0, 0.0);
+            	addStudent();
         	}
     	});
 
-        managementPage.getScoreGUI().getBtn1().addActionListener(new ActionListener() {
+        /*managementPage.getScoreGUI().getBtn1().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		
         		MyPanel p1 = Helper.createPanel("");
@@ -379,7 +381,7 @@ public class StudentManagement{
 					JOptionPane.showOptionDialog(null, msg2, "แก้ไขคะแนน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
                 }
         	}
-        });
+        });*/
         
         managementPage.getAddStudentGUI().getBtn2().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
@@ -541,9 +543,91 @@ public class StudentManagement{
 				}
         	}
         });
+
+        managementPage.getSubjectGUI().getBtn1().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if (managementPage.getSubjectGUI().getSubject1() == null) {
+        			addSubject(1);
+        		}
+        		else {
+        			managementPage.set("subject1");
+        		}
+        	}
+        });
+        
+        managementPage.getSubjectGUI().getBtn2().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if (managementPage.getSubjectGUI().getSubject2() == null) {
+        			addSubject(2);
+        		}
+        		else {
+        			managementPage.set("subject2");
+        		}
+        	}
+        });
+        
+        managementPage.getSubjectGUI().getBtn3().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if (managementPage.getSubjectGUI().getSubject3() == null) {
+        			addSubject(3);
+        		}
+        		else {
+        			managementPage.set("subject3");
+        		}
+        	}
+        });
      }
     
-    // below here is method in all application
+    
+    // below here is method in all application -------------------------------------------------------------------------------------------------------------------------
+    public void addSubject(int select) {
+    	System.out.println(select);
+
+    	
+    	MyPanel p1 = Helper.createPanel("");
+    	p1.setLayout(new GridLayout(2, 2));
+		JLabel msg = Helper.createLabel("รหัสวิชา : ");
+		JLabel msg2 = Helper.createLabel("ชื่อวิชา");
+		JTextField tf = Helper.createTextField(10);
+		JTextField tf2 = Helper.createTextField(10);
+		p1.add(msg);
+		p1.add(tf);
+		p1.add(msg2);
+		p1.add(tf2);
+		int alert = JOptionPane.showOptionDialog(null, p1, "เพิ่มวิชา", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"เพิ่มวิชา", "ยกเลิก"}, null);
+		if (alert == JOptionPane.OK_OPTION) {
+			DBCursor curs = users.find();
+			while (curs.hasNext()){
+	            DBObject t = curs.next();
+	            if (((String)t.get("username")).equals(myUsername)) {
+	            	BasicDBObject n = new BasicDBObject();
+                    n.put("username", myUsername);
+                    n.put("password", (String)t.get("password"));
+                    n.put("subject1", (String)t.get("subject1"));
+	            	n.put("subject2", (String)t.get("subject2"));
+	            	n.put("subject3", (String)t.get("subject3"));
+                    String sub = tf2.getText() + "#" + tf.getText();
+                    if (select == 1) {
+                    	n.put("subject1", sub);
+                 	}
+                     else if (select == 2) {
+                    	 n.put("subject2", sub);
+                     }
+                     else {
+                    	 n.put("subject3", sub);
+                     }
+
+	            	
+	            	
+	            	users.remove(t);
+	            	users.insert(n);
+	            	managementPage.getSubjectGUI().setSubject( ((String)n.get("subject1")) , ((String)n.get("subject2")), ((String)n.get("subject3")));
+
+	            	return;
+	            }
+			}
+		}
+    }
     
     public void changePassword(String old, String newP, String comP) {
     	old = Base64.getEncoder().withoutPadding().encodeToString(old.getBytes()); // UGVlbG9naW43ODkxMA
@@ -692,6 +776,10 @@ public class StudentManagement{
                         	  BasicDBObject n = new BasicDBObject();
                               n.put("username", "admin");
                               n.put("password", Base64.getEncoder().withoutPadding().encodeToString("admin".getBytes()));
+                              n.put("subject1", "");
+                              n.put("subject2", "");
+                              n.put("subject3", "");
+                              
                               users.insert(n);
                           }
                           System.out.println("Connect successfully");
@@ -711,7 +799,7 @@ public class StudentManagement{
     	
     }
     
-    public void addStudent(double assignment1, double assignment2, double midterm_score, double final_score) {
+    public void addStudent() {
     	String studentID, faculty, title, name, surname, day, month, year, cardID,
     	address, race, religion, bloodType, tel, email, height, weight, sourcePath,
     	parentTel, disease, enrollAt, picturePath;
@@ -836,10 +924,20 @@ public class StudentManagement{
     	n.put("disease", disease);
     	n.put("enrollAt", enrollAt);
     	
-    	n.put("midterm_score", midterm_score);
-    	n.put("final_score", final_score);
-    	n.put("assignment1", assignment1);
-    	n.put("assignment2", assignment2);
+    	n.put("s1_midterm", 0);
+    	n.put("s1_final", 0);
+    	n.put("s1_assignment", 0);
+    	n.put("s1_project", 0);
+    	
+    	n.put("s2_midterm", 0);
+    	n.put("s2_final", 0);
+    	n.put("s2_assignment", 0);
+    	n.put("s2_project", 0);
+    	
+    	n.put("s3_midterm", 0);
+    	n.put("s3_final", 0);
+    	n.put("s3_assignment", 0);
+    	n.put("s3_project", 0);
     	
     	n.put("picturePath", picturePath);
     	
@@ -868,10 +966,20 @@ public class StudentManagement{
     	information.put("disease", disease);
     	information.put("enrollAt", enrollAt);
     	
-    	score.put("midterm_score", midterm_score);
-    	score.put("final_score", final_score);
-    	score.put("assignment1", assignment1);
-    	score.put("assignment2", assignment2);
+    	score.put("s1_midterm", 0.0);
+    	score.put("s1_final", 0.0);
+    	score.put("s1_assignment", 0.0);
+    	score.put("s1_project", 0.0);
+    	
+    	score.put("s2_midterm", 0.0);
+    	score.put("s2_final", 0.0);
+    	score.put("s2_assignment", 0.0);
+    	score.put("s2_project", 0.0);
+    	
+    	score.put("s3_midterm", 0.0);
+    	score.put("s3_final", 0.0);
+    	score.put("s3_assignment", 0.0);
+    	score.put("s3_project", 0.0);
     	
     	teacher.addStudent(new Student(information, score, picturePath));
     	// add success
@@ -912,6 +1020,18 @@ public class StudentManagement{
     }
     public void login_success() {
         System.out.println("Login success!!");
+        
+        DBCursor ucurs = users.find();
+        boolean haveAdmin = false;
+        while (ucurs.hasNext()){
+            DBObject t = ucurs.next();
+            if (((String)t.get("username")).equals(myUsername)) {
+          	  	managementPage.getSubjectGUI().setSubject( ((String)t.get("subject1")) , ((String)t.get("subject2")), ((String)t.get("subject3")));
+            }
+
+        }
+        
+        
     	teacher = new Teacher();
     	DBCollection myStudent = db.getCollection(myUsername);
     	DBCursor curs = myStudent.find();
@@ -943,10 +1063,20 @@ public class StudentManagement{
         	information.put("disease", "" + t.get("disease"));
         	information.put("enrollAt", "" + t.get("enrollAt"));
         	
-        	score.put("midterm_score", Double.parseDouble("" + t.get("midterm_score")));
-        	score.put("final_score", Double.parseDouble("" + t.get("final_score")));
-        	score.put("assignment1", Double.parseDouble("" + t.get("assignment1")));
-        	score.put("assignment2", Double.parseDouble("" + t.get("assignment2")));
+        	score.put("s1_midterm", Double.parseDouble(("" + t.get("s1_midterm"))));
+        	score.put("s1_final", Double.parseDouble(("" + t.get("s1_final"))));
+        	score.put("s1_assignment", Double.parseDouble(("" + t.get("s1_assignment"))));
+        	score.put("s1_project", Double.parseDouble(("" + t.get("s1_project"))));
+        	
+        	score.put("s2_midterm", Double.parseDouble(("" + t.get("s2_midterm"))));
+        	score.put("s2_final", Double.parseDouble(("" + t.get("s2_final"))));
+        	score.put("s2_assignment", Double.parseDouble(("" + t.get("s2_assignment"))));
+        	score.put("s2_project", Double.parseDouble(("" + t.get("s2_project"))));
+        	
+        	score.put("s3_midterm", Double.parseDouble(("" + t.get("s3_midterm"))));
+        	score.put("s3_final", Double.parseDouble(("" + t.get("s3_assignment"))));
+        	score.put("s3_assignment", Double.parseDouble(("" + t.get("s3_assignment"))));
+        	score.put("s3_project", Double.parseDouble(("" + t.get("s3_project"))));
         	
         	String picturePath = "" + t.get("picturePath");
             teacher.addStudent(new Student(information, score, picturePath));
@@ -1013,18 +1143,23 @@ public class StudentManagement{
     public void updateScoreTable() {
     	ArrayList<Student> students = teacher.getStudents();
     	Object[][] data = new Object[students.size()][7];
+    	Object[][] data2 = new Object[students.size()][7];
+    	Object[][] data3 = new Object[students.size()][7];
 		for (int i = 0; i < students.size(); i++) {
-			data[i] = students.get(i).getGrade();
+			data[i] = students.get(i).getGrade(1);
+			data2[i] = students.get(i).getGrade(2);
+			data3[i] = students.get(i).getGrade(3);
 		}
 
 		DefaultTableModel dm = new DefaultTableModel();
 
 		if (this.TableSortStatus == 0) {
-			Object[] header = {"รหัสนักเรียน <", "คะแนนช่อง 1", "คะแนนช่อง 2", "คะแนนกลางภาค", "คะแนนปลายภาค", "รวมคะแนน", "เกรดที่ได้"};
+			Object[] header = {"รหัสนักเรียน <", "คะแนนเก็บ", "คะแนนโครงงาน", "คะแนนกลางภาค", "คะแนนปลายภาค", "รวมคะแนน", "เกรดที่ได้"};
+			
 			dm.setDataVector(data, header);
 		}
 		else {
-			Object[] header = {"รหัสนักเรียน >", "คะแนนช่อง 1", "คะแนนช่อง 2", "คะแนนกลางภาค", "คะแนนปลายภาค", "รวมคะแนน", "เกรดที่ได้"};
+			Object[] header = {"รหัสนักเรียน >", "คะแนนเก็บ", "คะแนนโครงงาน", "คะแนนกลางภาค", "คะแนนปลายภาค", "รวมคะแนน", "เกรดที่ได้"};
 			dm.setDataVector(data, header);
 		}
 		scoreTable = new JTable(dm);
@@ -1048,9 +1183,86 @@ public class StudentManagement{
        
 		    }
 		});
+		dm = new DefaultTableModel();
+
+		if (this.TableSortStatus == 0) {
+			Object[] header = {"รหัสนักเรียน <", "คะแนนเก็บ", "คะแนนโครงงาน", "คะแนนกลางภาค", "คะแนนปลายภาค", "รวมคะแนน", "เกรดที่ได้"};
+			
+			dm.setDataVector(data2, header);
+		}
+		else {
+			Object[] header = {"รหัสนักเรียน >", "คะแนนเก็บ", "คะแนนโครงงาน", "คะแนนกลางภาค", "คะแนนปลายภาค", "รวมคะแนน", "เกรดที่ได้"};
+			dm.setDataVector(data2, header);
+		}
+		scoreTable2 = new JTable(dm);
+		scoreTable2.setDefaultEditor(Object.class, null);
+		scoreTable2.getTableHeader().setReorderingAllowed(false);
+		scoreTable2.getTableHeader().setResizingAllowed(false);
+		scoreTable2.setFillsViewportHeight(true);
+		for (int i = 0; i < scoreTable2.getColumnCount(); i++) {
+			scoreTable2.getColumnModel().getColumn(i).setCellRenderer(new CellRenderer());
+
+		}
+		scoreTable2.getTableHeader().addMouseListener(new MouseAdapter() {
+		    @Override
+		    public void mouseClicked(MouseEvent e) {
+		        int col = scoreTable2.columnAtPoint(e.getPoint());
+		        if (col == 0) {
+		        	sortTable(true);
+		        	updateTable();
+		        	updateScoreTable();
+		        }
+       
+		    }
+		});
+		
+		dm = new DefaultTableModel();
+
+		if (this.TableSortStatus == 0) {
+			Object[] header = {"รหัสนักเรียน <", "คะแนนเก็บ", "คะแนนโครงงาน", "คะแนนกลางภาค", "คะแนนปลายภาค", "รวมคะแนน", "เกรดที่ได้"};
+			
+			dm.setDataVector(data3, header);
+		}
+		else {
+			Object[] header = {"รหัสนักเรียน >", "คะแนนเก็บ", "คะแนนโครงงาน", "คะแนนกลางภาค", "คะแนนปลายภาค", "รวมคะแนน", "เกรดที่ได้"};
+			dm.setDataVector(data3, header);
+		}
+		
+		scoreTable3 = new JTable(dm);
+		scoreTable3.setDefaultEditor(Object.class, null);
+		scoreTable3.getTableHeader().setReorderingAllowed(false);
+		scoreTable3.getTableHeader().setResizingAllowed(false);
+		scoreTable3.setFillsViewportHeight(true);
+		for (int i = 0; i < scoreTable3.getColumnCount(); i++) {
+			scoreTable3.getColumnModel().getColumn(i).setCellRenderer(new CellRenderer());
+
+		}
+		scoreTable3.getTableHeader().addMouseListener(new MouseAdapter() {
+		    @Override
+		    public void mouseClicked(MouseEvent e) {
+		        int col = scoreTable3.columnAtPoint(e.getPoint());
+		        if (col == 0) {
+		        	sortTable(true);
+		        	updateTable();
+		        	updateScoreTable();
+		        }
+       
+		    }
+		});
+		
 		
 		scoreTable.setBorder(new LineBorder(Color.RED, 0));
-		managementPage.getScoreGUI().updateTable(scoreTable);
+		
+		if (managementPage.getSubjectGUI().getSubject1() != null) {
+			managementPage.getSubjectGUI().getSubject1().updateTable(scoreTable);
+		}
+		if (managementPage.getSubjectGUI().getSubject2() != null) {
+			managementPage.getSubjectGUI().getSubject2().updateTable(scoreTable2);
+		}
+		if (managementPage.getSubjectGUI().getSubject3() != null) {
+			managementPage.getSubjectGUI().getSubject3().updateTable(scoreTable3);
+		}
+
     }
     public void updatePage() {      
     	managementPage.getMenu1().setBackground(new Color(156, 195, 213));

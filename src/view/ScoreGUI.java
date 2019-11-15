@@ -9,7 +9,12 @@ public class ScoreGUI {
 	private JTable table;
 	private JButton btn1;
 	private JScrollPane table_scroll; 
-	public ScoreGUI() {
+	private String subject;
+	private String subjectID;
+	public ScoreGUI(String payload) {
+		String[] temp = payload.split("#");
+		this.subject = temp[0];
+		this.subjectID = temp[1];
 		p1 = new JDesktopPane();
 		
 		
@@ -55,6 +60,13 @@ public class ScoreGUI {
 	}
 	public JButton getBtn1() {
 		return this.btn1;
+	}
+	
+	public String getSubject() {
+		return this.subject;
+	}
+	public String getSubjectID() {
+		return this.subjectID;
 	}
 
 }
