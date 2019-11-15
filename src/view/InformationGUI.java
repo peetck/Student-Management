@@ -22,7 +22,7 @@ public class InformationGUI {
 		
 		/* 900 x 700 */
 		left = Helper.createPanel("");
-        left.setSize(380, 645);
+        left.setSize(380, 600);
         left.setLocation(50, 85);
         left.setLayout(new GridLayout(10, 2));
         //left.setBackground(Color.RED);

@@ -586,7 +586,12 @@ public class StudentManagement{
     		return;
     	}
 
-    	
+    	for (int i = 0; i < studentID.length(); i++) {
+    		if(!(studentID.charAt(i) >= '0' && studentID.charAt(i) <= '9')){
+    			JOptionPane.showMessageDialog(null, Helper.createLabel("กรุณากรอกรหัสนักเรียนเป็นตัวเลขเท่านั้น"));
+        		return;
+    		}
+    	}
 
     	
     	cardID = managementPage.getAddStudentGUI().getF7().getText();

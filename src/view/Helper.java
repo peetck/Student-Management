@@ -28,7 +28,7 @@ public class Helper{
     }
     // return JLabel with font 
     public static JLabel createLabel(String msg){
-        JLabel l = new JLabel("<html>" + msg + "</html>");
+        JLabel l = new JLabel(msg);
         l.setFont(new Font("Kanit ExtraLight", Font.PLAIN, 16));
         l.setOpaque(false);
         return l;
