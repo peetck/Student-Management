@@ -60,20 +60,20 @@ public class LoginGUI{
         
         
         
-        btn1 = Helper.createButton("Login");
-        btn2 = Helper.createButton("Database Setting");
+        btn1 = Helper.createButton("ล็อกอิน");
+        btn2 = Helper.createButton("ตั้งค่าฐานข้อมูล");
         
         title = Helper.createLabel("Student Management", 30, true);
         title.setHorizontalAlignment(JLabel.CENTER);
         
-        l1 = Helper.createLabel("Username ");
-        l2 = Helper.createLabel("Password ");
+        l1 = Helper.createLabel("ชื่อผู้ใช้ ");
+        l2 = Helper.createLabel("รหัสผ่าน ");
         
         l3 = Helper.createLabel("");
         l3.setForeground(Color.red);
         l3.setHorizontalAlignment(JLabel.CENTER);
         
-        l4 = Helper.createLabel("Create an account.");
+        l4 = Helper.createLabel("ยังไม่มีบัญชีเหรอ? สมัครเลย.");
         l4.setHorizontalAlignment(JLabel.CENTER);
         
         f1 = Helper.createTextField(30);

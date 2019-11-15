@@ -204,6 +204,9 @@ public class ManagementGUI{
     public ScoreGUI getScoreGUI() {
     	return this.score;
     }
+    public SettingGUI getSettingGUI() {
+    	return this.setting;
+    }
     public MyPanel getMenu1() {
     	return this.menu1;
     }

@@ -10,15 +10,15 @@ public class RegisterGUI{
     private GridBagConstraints gbc;
     public RegisterGUI(){
         p1 = Helper.createPanel("/images/bg.jpg");
-        l1 = Helper.createLabel("Register ", 30, true);
+        l1 = Helper.createLabel("สมัครสมาชิก ", 30, true);
         l1.setHorizontalAlignment(JLabel.CENTER);
-        l2 = Helper.createLabel("Username ");
-        l3 = Helper.createLabel("Password ");
-        l4 = Helper.createLabel("Confirm password ");
+        l2 = Helper.createLabel("ชื่อผู้ใช้ ");
+        l3 = Helper.createLabel("รหัสผ่าน ");
+        l4 = Helper.createLabel("ยืนยันรหัสผ่าน ");
         l5 = Helper.createLabel("");
         l5.setHorizontalAlignment(JLabel.CENTER);
-        btn1 = Helper.createButton("Register");
-        btn2 = Helper.createButton("Back");
+        btn1 = Helper.createButton("สมัครสมาชิก");
+        btn2 = Helper.createButton("ย้อนกลับ");
         f1 = Helper.createTextField(30);
         f2 = Helper.createPasswordField(30);
         f3 = Helper.createPasswordField(30);

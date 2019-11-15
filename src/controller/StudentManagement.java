@@ -64,7 +64,7 @@ public class StudentManagement{
         managementPage = gui.getManagementGUI();
         connectDB(hostname, port);
         if (!connected) {
-        	JLabel d = Helper.createLabel("ไม่สามารถเชื่อมต่อกับฐานข้อมูลได้ <br> HOSTNAME: " + hostname + "<br>PORT: " + port);
+        	JLabel d = Helper.createLabel("ไม่สามารถเชื่อมต่อกับฐานข้อมูลได้ \n HOSTNAME: " + hostname + "\nPORT: " + port);
 			JOptionPane.showMessageDialog(null, d);
 		}
         
@@ -75,7 +75,7 @@ public class StudentManagement{
         loginPage.getBtn1().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
             	if (!connected) {
-            		JLabel d = Helper.createLabel("ไม่สามารถเชื่อมต่อกับฐานข้อมูลได้ <br> HOSTNAME: " + hostname + "<br>PORT: " + port);
+            		JLabel d = Helper.createLabel("ไม่สามารถเชื่อมต่อกับฐานข้อมูลได้ \n HOSTNAME: " + hostname + "\nPORT: " + port);
 					JOptionPane.showMessageDialog(null, d);
             		return;
             	}
@@ -92,7 +92,7 @@ public class StudentManagement{
                         return;
                     }
                 }
-                loginPage.getL3().setText("Username หรือ Password ผิด");
+                loginPage.getL3().setText("ชื่อผู้ใช้ หรือ รหัสผ่านผิด");
             }
         });
         loginPage.getL4().addMouseListener (new MouseAdapter (){
@@ -113,7 +113,7 @@ public class StudentManagement{
             public void actionPerformed(ActionEvent e){
 
             	if (!connected) {
-            		JLabel d = Helper.createLabel("ไม่สามารถเชื่อมต่อกับฐานข้อมูลได้ <br> HOSTNAME: " + hostname + "<br>PORT: " + port);
+            		JLabel d = Helper.createLabel("ไม่สามารถเชื่อมต่อกับฐานข้อมูลได้ \n HOSTNAME: " + hostname + "\nPORT: " + port);
 					JOptionPane.showMessageDialog(null, d);
             		return;
             	}
@@ -125,21 +125,28 @@ public class StudentManagement{
                 while (curs.hasNext()){
                     DBObject t = curs.next();
                     if (((String)t.get("username")).equals(username)){
-                    	registerPage.getL5().setText("Username นี้มีคนใช้แล้ว");
+                    	registerPage.getL5().setText("ชื่อผู้ใช้นี้มีคนใช้แล้ว");
                     	registerPage.getL5().setForeground(Color.RED);
                         return;
                     }
                 }
+                for (int i = 0; i < username.length(); i++) {
+                	if (!((username.charAt(i) >= 48 && username.charAt(i) <= 57) || (username.charAt(i) >= 65 && username.charAt(i) <= 90) || (username.charAt(i) >= 97 && username.charAt(i) <= 122))) {
+                		registerPage.getL5().setText("ชื่อผู้ใช้สามารถประกอบด้วยตัวอักษร a ถึง z (A ถึง Z) และตัวเลขเท่านั้น");
+                    	registerPage.getL5().setForeground(Color.RED);
+                    	return;
+                	}
+                }
                 if (username.length() < 4 || username.length() > 20) {
-                	registerPage.getL5().setText("Username ต้องมีความยาว 4 - 20 ตัวอักษร");
+                	registerPage.getL5().setText("ชื่อผู้ใช้ต้องมีความยาว 4 - 20 ตัวอักษร");
                 	registerPage.getL5().setForeground(Color.RED);
                 }
                 else if (password.length() < 6 || username.length() > 30) {
-                	registerPage.getL5().setText("Password ต้องมีความยาว 6 - 30 ตัวอักษร");
+                	registerPage.getL5().setText("รหัสผ่านต้องมีความยาว 6 - 30 ตัวอักษร");
                 	registerPage.getL5().setForeground(Color.RED);
                 }
                 else if (username.equals(password)) {
-                	registerPage.getL5().setText("Password ต้องไม่เหมือนกับ username");
+                	registerPage.getL5().setText("รหัสผ่านต้องไม่เหมือนกับชื่อผู้ใช้");
                 	registerPage.getL5().setForeground(Color.RED);
                 }
                 else if (password.equals(cpassword)){
@@ -160,12 +167,12 @@ public class StudentManagement{
                     	}
                     }
                     if (alphabet == false) {
-                    	registerPage.getL5().setText("Password สามารถเป็นได้แค่ตัวอักษร a ถึง z (A ถึง Z) และตัวเลข  0 ถึง 9.");
+                    	registerPage.getL5().setText("รหัสผ่านสามารถเป็นได้แค่ตัวอักษร a ถึง z (A ถึง Z) และตัวเลข  0 ถึง 9.");
                     	registerPage.getL5().setForeground(Color.RED);
                     	return;
                     }
                     if (number == false || lower == false || upper == false) {
-                    	registerPage.getL5().setText("Password ต้องมีตัวอักษรตัวเลขและตัวใหญ่");
+                    	registerPage.getL5().setText("รหัสผ่านต้องมีตัวอักษรตัวเล็กตัวใหญ่และตัวเลขอย่างน้อยตัวละ 1 ตัวอักษร");
                     	registerPage.getL5().setForeground(Color.RED);
                     	return;
                     }
@@ -179,7 +186,7 @@ public class StudentManagement{
                 	registerPage.getF3().setText("");
                 }
                 else {
-                	registerPage.getL5().setText("Password ทั้งสองช่องไม่ตรงกัน");
+                	registerPage.getL5().setText("รหัสผ่านทั้งสองช่องไม่ตรงกัน");
                 	registerPage.getL5().setForeground(Color.RED);
                 }
             }
@@ -425,7 +432,7 @@ public class StudentManagement{
 				p1.add(tf02);
 				tf01.setText(hostname);
 				tf02.setText("" + port);
-				int alert2 = JOptionPane.showConfirmDialog(null, p1, "ตั้งค่า Database", JOptionPane.OK_CANCEL_OPTION);
+				int alert2 = JOptionPane.showConfirmDialog(null, p1, "ตั้งค่าฐานข้อมูล", JOptionPane.OK_CANCEL_OPTION);
 				if (alert2 == JOptionPane.OK_OPTION) {
 					hostname = tf01.getText();
 					try {
@@ -437,11 +444,11 @@ public class StudentManagement{
 					}
 					connectDB(hostname, port);
 					if (connected) {
-						JLabel d = Helper.createLabel("เชื่อมต่อกับฐานข้อมูลสําเร็จ <br> HOSTNAME: " + hostname + "<br>PORT: " + port);
+						JLabel d = Helper.createLabel("เชื่อมต่อกับฐานข้อมูลสําเร็จ \n HOSTNAME: " + hostname + "\nPORT: " + port);
 						JOptionPane.showMessageDialog(null, d);
 					}
 					else {
-						JLabel d = Helper.createLabel("ไม่สามารถเชื่อมต่อกับฐานข้อมูลได้ <br> HOSTNAME: " + hostname + "<br>PORT: " + port);
+						JLabel d = Helper.createLabel("ไม่สามารถเชื่อมต่อกับฐานข้อมูลได้ \n HOSTNAME: " + hostname + "\nPORT: " + port);
 						JOptionPane.showMessageDialog(null, d);
 					}
 				}
@@ -457,9 +464,164 @@ public class StudentManagement{
 				pullInformation(managementPage.getInformationGUI().getInformation(), managementPage.getInformationGUI().getPicturePath());
         	}
         });
+        
+        managementPage.getSettingGUI().getBtn1().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) { // change password
+        		MyPanel p1 = Helper.createPanel("");
+				p1.setLayout(new GridLayout(3, 2));
+				JLabel msg01 = Helper.createLabel("รหัสผ่านเดิม");
+				JLabel msg02 = Helper.createLabel("รหัสผ่านใหม่");
+				JLabel msg03 = Helper.createLabel("ยืนยันรหัสผ่านใหม่");
+				JPasswordField pf1 = Helper.createPasswordField(10);
+				JPasswordField pf2 = Helper.createPasswordField(10);
+				JPasswordField pf3 = Helper.createPasswordField(10);
+				p1.add(msg01);
+				p1.add(pf1);
+				p1.add(msg02);
+				p1.add(pf2);
+				p1.add(msg03);
+				p1.add(pf3);
+				int alert2 = JOptionPane.showConfirmDialog(null, p1, "เปลี่ยนรหัสผ่าน", JOptionPane.OK_CANCEL_OPTION);
+				if (alert2 == JOptionPane.OK_OPTION) {
+					changePassword(pf1.getText(), pf2.getText(), pf3.getText());
+				}
+        	}
+        });
+        
+        managementPage.getSettingGUI().getBtn2().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) { // logout
+        		JLabel l = Helper.createLabel("คุณต้องการที่จะล็อกเอ้าท์ออกจากระบบใช่หรือไม่");
+        		int alert = JOptionPane.showConfirmDialog(null, l, "ล็อกเอ้าท์", JOptionPane.OK_CANCEL_OPTION);
+				if (alert == JOptionPane.OK_OPTION) {
+	        		gui.set("LoginGUI");
+	        		managementPage.set("mystudent");
+					
+					currentPage = 1;
+					updatePage();
+				}
+        	}
+        });
+
+        managementPage.getSettingGUI().getBtn3().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) { // delete account
+        		JLabel l = Helper.createLabel("คุณต้องการที่จะลบบัญชีนี้ใช่หรือไม่");
+        		int alert = JOptionPane.showConfirmDialog(null, l, "ลบบัญชี", JOptionPane.OK_CANCEL_OPTION);
+				if (alert == JOptionPane.OK_OPTION) {
+					MyPanel p1 = Helper.createPanel("");
+					p1.setLayout(new GridLayout(2, 1));
+					JLabel msg01 = Helper.createLabel("กรุณากรอกรหัสผ่านของคุณเพื่อดําเนินการลบบัญชี");
+					JPasswordField pf = Helper.createPasswordField(10);
+					p1.add(msg01);
+					p1.add(pf);
+					int alert2 = JOptionPane.showConfirmDialog(null, p1, "ลบบัญชี", JOptionPane.OK_CANCEL_OPTION);
+					if (alert2 == JOptionPane.OK_OPTION) {
+						String inp = Base64.getEncoder().withoutPadding().encodeToString(pf.getText().getBytes());
+						if (deleteAccount(inp)) {
+							JLabel d = Helper.createLabel("ลบบัญชีนี้เรียบร้อยแล้ว");
+							JOptionPane.showMessageDialog(null, d);
+							
+							gui.set("LoginGUI");
+			        		managementPage.set("mystudent");
+							
+							currentPage = 1;
+							updatePage();
+							
+						}
+						else {
+							JLabel d = Helper.createLabel("รหัสผ่านไม่ถูกต้อง");
+							JOptionPane.showMessageDialog(null, d);
+						}
+					}
+				}
+        	}
+        });
      }
     
     // below here is method in all application
+    
+    public void changePassword(String old, String newP, String comP) {
+    	old = Base64.getEncoder().withoutPadding().encodeToString(old.getBytes()); // UGVlbG9naW43ODkxMA
+
+    	DBCursor curs = users.find();
+        while (curs.hasNext()){
+            DBObject t = curs.next();
+            if (((String)t.get("username")).equals(myUsername)) {
+            	if (old.equals(((String)t.get("password")))){
+            		if (newP.equals(comP)) {
+            			if (newP.length() < 6) {
+            				JLabel d = Helper.createLabel("รหัสผ่านต้องมีความยาว 6 - 30 ตัวอักษร");
+        					JOptionPane.showMessageDialog(null, d);
+        					return;
+            			}
+                        else if (myUsername.equals(newP)) {
+                        	JLabel d = Helper.createLabel("รหัสผ่านต้องไม่เหมือนกับชื่อผู้ใช้");
+        					JOptionPane.showMessageDialog(null, d);
+        					return;
+                        }
+                        boolean upper = false, lower = false, alphabet = true, number = false;
+                        String check = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                        for (int i = 0; i < newP.length(); i++) {
+                            if (Character.isUpperCase(newP.charAt(i))){
+                            	upper = true;
+                            }
+                            if (Character.isLowerCase(newP.charAt(i))){
+                            	lower = true;
+                            }
+                            if (newP.charAt(i) >= '0' && newP.charAt(i) <= '9') {
+                            	number = true;
+                            }
+                            if(!(check.contains("" + newP.charAt(i)))) {
+                            	alphabet = false;
+                            }
+                        }
+                        if (alphabet == false) {
+                        	JLabel d = Helper.createLabel("รหัสผ่านสามารถเป็นได้แค่ตัวอักษร a ถึง z (A ถึง Z) และตัวเลข  0 ถึง 9.");
+        					JOptionPane.showMessageDialog(null, d);
+        					return;
+                        }
+                        if (number == false || lower == false || upper == false) {
+                        	JLabel d = Helper.createLabel("รหัสผ่านต้องมีตัวอักษรตัวเล็กตัวใหญ่และตัวเลขอย่างน้อยตัวละ 1 ตัวอักษร");
+        					JOptionPane.showMessageDialog(null, d);
+        					return;
+                        }
+                		users.remove(t);
+                		BasicDBObject n = new BasicDBObject();
+                        n.put("username", myUsername);
+                        n.put("password", Base64.getEncoder().withoutPadding().encodeToString(newP.getBytes()));
+                        users.insert(n);
+                        JLabel d = Helper.createLabel("เปลี่ยนรหัสผ่านเรียบร้อยแล้ว");
+    					JOptionPane.showMessageDialog(null, d);
+    					return;
+            		}
+            		else {
+                		JLabel d = Helper.createLabel("กรุณากรอกรหัสผ่านใหม่ให้ตรงกัน");
+    					JOptionPane.showMessageDialog(null, d);
+    					return;
+                	}
+                }
+            	else {
+            		JLabel d = Helper.createLabel("รหัสผ่านเดิมไม่ถูกต้อง");
+    				JOptionPane.showMessageDialog(null, d);
+    				return;
+            	}
+            }
+        }
+    }
+
+    public boolean deleteAccount(String password) {
+    	DBCollection myStudent = db.getCollection(myUsername);
+    	DBCursor curs = users.find();
+        while (curs.hasNext()){
+            DBObject t = curs.next();
+            if (((String)t.get("username")).equals(myUsername) && password.equals((String)t.get("password"))) {
+            	users.remove(t);
+            	myStudent.drop();
+				return true;
+            }
+        }
+        return false;
+    }
+    
     public void pullInformation(HashMap<String, String> info, String path) {
     	managementPage.getAddStudentGUI().getF1().setText(info.get("studentID"));
 

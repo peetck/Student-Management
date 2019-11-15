@@ -5,6 +5,8 @@ import mdlaf.animation.*;
 
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+
 import java.awt.*;
 public class Helper{
 	public static JComboBox<String> createComboBox() {
@@ -146,12 +148,21 @@ public class Helper{
         btn.setOpaque(false);
         return btn;
     }
-    public static JButton createButton(String msg, Color color){
-        JButton btn = new JButton(msg);
-        btn.setFont(new Font("Kanit ExtraLight", Font.PLAIN, 16));
-        btn.setForeground(color);
+
+    
+    public static JButton createButton(String msg, int size, String path, int width, int height) {
+    	JButton btn = new JButton(msg);
+        btn.setFont(new Font("Kanit ExtraLight", Font.PLAIN, size));
         btn.setOpaque(false);
+        Image img = Helper.getImage(path);
+	    img = img.getScaledInstance(width, height, Image.SCALE_DEFAULT);
+	    ImageIcon icon = new ImageIcon(img);
+		btn.setIcon(icon);
+		btn.setIconTextGap(20);
+		btn.setBackground(Color.WHITE);
+		MaterialUIMovement.add (btn, new Color(156, 195, 213), 5, 1000 / 60);
         return btn;
+    	
     }
     public static Image getImage(String url) {
     	Image img = Toolkit.getDefaultToolkit().getImage(Helper.class.getResource(url));
