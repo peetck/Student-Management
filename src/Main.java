@@ -23,7 +23,10 @@ public class Main{
             JDialog.setDefaultLookAndFeelDecorated(false);
             UIManager.put("Button.mouseHoverEnable", true);
             UIManager.put("TableHeader.font", new Font("Kanit ExtraLight", Font.BOLD, 16));
-
+            
+            UIManager.put("OptionPane.messageFont", new Font("Kanit ExtraLight", Font.PLAIN, 16));
+            UIManager.put("OptionPane.buttonFont", new Font("Kanit ExtraLight", Font.PLAIN, 16));
+           
 
         }
         catch (Exception e) {
