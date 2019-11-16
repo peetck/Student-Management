@@ -48,8 +48,8 @@ public class ScoreGUI {
     		
 		btn1 = Helper.createButton("แก้ไขคะแนน", 25);
 		btn2 = Helper.createButton("ลบวิชา", 25);
-		btn3 = Helper.createButton("อัพโหลด CSV", 25);
-		btn4 = Helper.createButton("ดาวน์โหลด CSV", 25);
+		btn3 = Helper.createButton("อัพโหลดคะแนน", 25);
+		btn4 = Helper.createButton("ดาวน์โหลดคะแนน", 25);
 		
 		
 		bottom.add(btn1);

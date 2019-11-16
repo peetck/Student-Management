@@ -674,7 +674,122 @@ public class StudentManagement{
     
     // below here is method in all application -------------------------------------------------------------------------------------------------------------------------
     public void importCSV(int select) {
-    	System.out.println("IMPORT CSV " + select);
+    	MyPanel main = Helper.createPanel("");
+    	main.setLayout(new BorderLayout());
+    	MyPanel p = Helper.createPanel("");
+    	p.setLayout(new GridLayout(7, 1));
+    	JLabel l1 = Helper.createLabel("คุณลักษณะของไฟล์", 20, true);
+    	l1.setHorizontalAlignment(JLabel.CENTER);
+    	JLabel l2 = Helper.createLabel("- ต้องเป็นไฟล์ .csv เท่านั้น");
+    	JLabel l3 = Helper.createLabel("- แถวแรก(ไม่นับเฮดเดอร์) จะต้องเป็นรหัสนักเรียน, คะแนนเก็บ, คะแนนกลางภาค, คะแนนปลายภาค ตามลําดับ");
+    	JLabel l4 = Helper.createLabel("- หากมีคอลัมน์เกินมาจะไม่สนใจ");
+    	JLabel l5 = Helper.createLabel("- หากรหัสนักเรียนหรือคะแนนในแต่ละช่องไม่สมเหตุสมผลหรือไม่มีรหัสนักเรียนในระบบก็จะข้ามไปทําแถวถัดไป");
+    	JLabel l6 = Helper.createLabel("- รหัสนักเรียนที่มีในระบบแต่ไม่มีในไฟล์ก็จะไมได้รับการอัพเดทคะแนน");
+    	JLabel l7 = Helper.createLabel("รูปตัวอย่างไฟล์ที่ถูกต้อง", 18, true);
+    	l7.setHorizontalAlignment(JLabel.CENTER);
+    	JLabel picture = Helper.createLabel("", "/images/correct_csv.png", 600, 200);
+    	picture.setHorizontalAlignment(JLabel.CENTER);
+    	
+    	p.add(l1);
+    	p.add(l2);
+    	p.add(l3);
+    	p.add(l4);
+    	p.add(l5);
+    	p.add(l6);
+    	p.add(l7);
+
+    	
+    	main.add(p);
+    	main.add(picture, BorderLayout.SOUTH);
+    	JOptionPane.showOptionDialog(null, main, "อัพโหลดคะแนน", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน", }, null);
+    	
+    	JFileChooser chooser = new JFileChooser();
+		chooser.setAcceptAllFileFilterUsed(false);
+		chooser.setDialogTitle("อัพโหลดคะแนน");
+		
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV file", "csv");
+		chooser.addChoosableFileFilter(filter);
+
+		String path = "";
+		if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+			path = "" + chooser.getSelectedFile();
+		}
+		else {
+			System.out.println("No Selection ");
+			return;
+		}
+		
+		String data = "";
+		try {
+			Scanner scan = new Scanner(new File(path));
+	        scan.useDelimiter(",");
+	        while(scan.hasNext()){
+	        	data += scan.next() + "#";
+	        }
+	        scan.close();
+		}
+		catch(FileNotFoundException e) {
+			JOptionPane.showOptionDialog(null, Helper.createLabel("ระบบไม่สามารถหาไฟล์ได้"), "อัพโหลดคะแนน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน", }, null);
+			return;
+		}
+    	
+		String[] row = data.split("\n");
+		ArrayList<Student> arr = teacher.getStudents();
+		HashMap<String, String[]> map = new HashMap<String, String[]>();
+		for (int i = 0; i < row.length; i++) {
+
+			String[] each = row[i].split("#");
+			if (each.length >= 1) {
+				map.put(each[0], each);
+			}
+	
+		}
+		
+		es : for (int i = 0; i < arr.size(); i++) {
+			Student s = arr.get(i);
+			String id = s.getStudentID();
+			
+			
+			
+			DBCollection myStudent = db.getCollection(myUsername);
+	    	DBCursor curs = myStudent.find();
+	    	BasicDBObject n = new BasicDBObject();
+	    	while (curs.hasNext()) {
+	    		DBObject t = curs.next();
+	    		if (((String)t.get("studentID")).equals(id) && map.containsKey(id)) {
+	    			
+	    			double assignment = 0;
+	    			double project = 0;
+	    			double midterm = 0;
+	    			double finals = 0;
+	    			try {
+	    				assignment = Double.parseDouble(map.get(id)[1]);
+		    			project = Double.parseDouble(map.get(id)[2]);
+		    			midterm = Double.parseDouble(map.get(id)[3]);
+		    			finals = Double.parseDouble(map.get(id)[4]);
+	    			}
+	    			catch(Exception e) {
+	    				continue es;
+	    			}
+	    				
+	    			System.out.println(s.getStudentID());
+	    			s.setScore(select, assignment, project, midterm, finals);
+	    			
+	    			n.putAll(t);
+			    	n.put("s" + select + "_assignment", assignment);
+			    	n.put("s" + select + "_project", project);
+					n.put("s" + select + "_midterm", midterm);
+					n.put("s" + select + "_final", finals);
+			    	
+					myStudent.update(t, n);								
+    				
+    				updateScoreTable();
+    				
+    				break;
+	    		}
+	    	}
+		}
+		JOptionPane.showOptionDialog(null, "อัพโหลดคะแนนนักเรียนจากไฟล์ CSV เรียบร้อยแล้ว", "อัพโหลดคะแนน", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน", }, null);
     }
     
     public void exportCSV(int select) {
@@ -697,9 +812,14 @@ public class StudentManagement{
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV file", "csv");
 		chooser.addChoosableFileFilter(filter);
 		chooser.setSelectedFile(new File(title + "_score"));
+		chooser.setApproveButtonText("Save");
+		
 		String path = "";
 		if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-			path = "" + chooser.getSelectedFile() + ".csv";
+			path = "" + chooser.getSelectedFile();
+			if (!path.contains(".csv")) {
+				 path += ".csv";
+			}
 		}
 		else {
 			System.out.println("No Selection ");
@@ -728,7 +848,7 @@ public class StudentManagement{
 	    	}
 			pw.write(builder.toString());
 			pw.close();
-			JOptionPane.showOptionDialog(null, "ดาวน์โหลด CSV เรียบร้อยแล้ว", "ดาวน์โหลด CSV", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน", }, null);
+			JOptionPane.showOptionDialog(null, "ดาวน์โหลดคะแนนนักเรียนเรียบร้อยแล้ว", "ดาวน์โหลดคะแนน", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน", }, null);
 
 		}
 		catch (FileNotFoundException err) {
@@ -747,7 +867,7 @@ public class StudentManagement{
     		msg = managementPage.getSubjectGUI().getSubject3().getSubject();
     	}
     	JLabel l = Helper.createLabel("คุณต้องการที่จะลบวิชา " + msg + " ใช่หรือไม่");
-		int alert = JOptionPane.showOptionDialog(null, l, "ลบวิชา" + msg, JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[] {"ลบวิชา", "ยกเลิก"}, null);
+		int alert = JOptionPane.showOptionDialog(null, l, "ลบวิชา " + msg, JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[] {"ลบวิชา", "ยกเลิก"}, null);
 		if (alert == JOptionPane.OK_OPTION) {
 			DBCursor curs = users.find();
 			while (curs.hasNext()){
@@ -785,7 +905,7 @@ public class StudentManagement{
 	            	managementPage.set("subject");
 					currentPage = 2;
 					updatePage();
-					JOptionPane.showOptionDialog(null, Helper.createLabel("ลบวิชา " + msg + "เรียบร้อยแล้ว"), "ลบวิชา " + msg, JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+					JOptionPane.showOptionDialog(null, Helper.createLabel("ลบวิชา " + msg + " เรียบร้อยแล้ว"), "ลบวิชา " + msg, JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน"}, null);
 	            	return;
 	            }
 			}
@@ -846,28 +966,32 @@ public class StudentManagement{
 							return;
 						}
 						arr.get(i).setScore(select, Double.parseDouble(tf01.getText()), Double.parseDouble(tf02.getText()), Double.parseDouble(tf03.getText()), Double.parseDouble(tf04.getText()));
+						
 						updateScoreTable();
 						
 						BasicDBObject n = new BasicDBObject();
-;
+
 				    	
 						
 						DBCollection myStudent = db.getCollection(myUsername);
 				    	DBCursor curs = myStudent.find();
-				    	DBObject t = curs.next();
-				    	for (int j = 0; j < i; j++) {
-				    		t = curs.next();
+				    	while (curs.hasNext()) {
+				    		DBObject t = curs.next();
+				    		if (((String)t.get("studentID")).equals(tf.getText())) {
+				    			n.putAll(t);
+						    	n.put("s" + select + "_assignment", Double.parseDouble(tf01.getText()));
+						    	n.put("s" + select + "_project", Double.parseDouble(tf02.getText()));
+								n.put("s" + select + "_midterm", Double.parseDouble(tf03.getText()));
+								n.put("s" + select + "_final", Double.parseDouble(tf04.getText()));
+						    	
+								myStudent.update(t, n);								
+			    				JOptionPane.showOptionDialog(null, Helper.createLabel("แก้ไขคะแนนวิชา " + subjectTitle + "เรียบร้อยแล้ว"), "แก้ไขคะแนนวิชา" + subjectTitle, JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+			    				updateScoreTable();
+				    			return;
+				    		}
 				    	}
 						
-				    	n.putAll(t);
-				    	n.put("s" + select + "_assignment", Double.parseDouble(tf01.getText()));
-				    	n.put("s" + select + "_project", Double.parseDouble(tf02.getText()));
-						n.put("s" + select + "_midterm", Double.parseDouble(tf03.getText()));
-						n.put("s" + select + "_final", Double.parseDouble(tf04.getText()));
 				    	
-						myStudent.update(t, n);								
-	    				JOptionPane.showOptionDialog(null, Helper.createLabel("แก้ไขคะแนนวิชา " + subjectTitle + "เรียบร้อยแล้ว"), "แก้ไขคะแนนวิชา" + subjectTitle, JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน"}, null);
-	    				updateScoreTable();
 					}
 					return;
 				}
