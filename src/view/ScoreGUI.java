@@ -7,7 +7,7 @@ public class ScoreGUI {
 	private JDesktopPane p1;
 	private MyPanel container, bottom, topmenu;
 	private JTable table;
-	private JButton btn1;
+	private JButton btn1, btn2, btn3, btn4;
 	private JScrollPane table_scroll; 
 	private String subject;
 	private String subjectID;
@@ -23,13 +23,14 @@ public class ScoreGUI {
         topmenu.setSize(900, 130);
         topmenu.setLayout(new BorderLayout());
 
-        l1 = Helper.createLabel("<html>" + subject + " (" + subjectID + ")</html>", 30);
+        l1 = Helper.createLabel("<html>&nbsp;&nbsp;" + subject + " (" + subjectID + ")</html>", "/images/already_have_subject.png", 60, 60);
+        l1.setFont(new Font("Kanit ExtraLight", Font.PLAIN, 35));
         l1.setHorizontalAlignment(JLabel.CENTER);
         topmenu.add(l1);
 		
 		container = Helper.createPanel("");
 		container.setLayout(new BorderLayout());
-		container.setSize(900, 460);
+		container.setSize(885, 480);
 		container.setLocation(0, 130);
 		
 		
@@ -40,14 +41,21 @@ public class ScoreGUI {
 		container.add(table_scroll);
 		
 		bottom = Helper.createPanel("");
-		bottom.setLayout(new GridLayout(1, 2));
-		bottom.setSize(900, 110);
-		bottom.setLocation(0, 590);
+		bottom.setLayout(new GridLayout(1, 4));
+		bottom.setSize(900, 90);
+		bottom.setLocation(0, 610);
+		
     		
-		btn1 = Helper.createButton("แก้ไขคะแนน", 23);
+		btn1 = Helper.createButton("แก้ไขคะแนน", 20);
+		btn2 = Helper.createButton("ลบวิชา", 20);
+		btn3 = Helper.createButton("ดึงข้อมูลจาก csv", 20);
+		btn4 = Helper.createButton("โหลดข้อมูลจาก csv", 20);
 		
 		
 		bottom.add(btn1);
+		bottom.add(btn2);
+		bottom.add(btn3);
+		bottom.add(btn4);
 
 		p1.add(topmenu);
 		p1.add(container);
@@ -58,7 +66,7 @@ public class ScoreGUI {
 		String[] temp = inp.split("#");
 		this.subject = temp[0];
 		this.subjectID = temp[1];
-		l1.setText("<html>" + subject + " (" + subjectID + ")</html>");
+		l1.setText("<html>&nbsp;&nbsp;" + subject + " (" + subjectID + ")</html>");
 	}
 	
 	public JDesktopPane getPanel() {

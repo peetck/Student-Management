@@ -482,6 +482,7 @@ public class StudentManagement{
         		else {
         			managementPage.set("subject1");
         		}
+        		
         	}
         });
         
@@ -493,6 +494,7 @@ public class StudentManagement{
         		else {
         			managementPage.set("subject2");
         		}
+        		
         	}
         });
         
@@ -504,6 +506,7 @@ public class StudentManagement{
         		else {
         			managementPage.set("subject3");
         		}
+        		
         	}
         });
         
@@ -577,6 +580,10 @@ public class StudentManagement{
 
 					int alert2 = JOptionPane.showOptionDialog(null, p2, "แก้ไขคะแนนวิชา" + subjectTitle, JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"แก้ไขคะแนน", "ยกเลิก"}, null);
 					if (alert2 == JOptionPane.OK_OPTION) {
+						if (tf01.getText().equals("") || tf02.getText().equals("") || tf03.getText().equals("") || tf04.getText().equals("")) {
+							JOptionPane.showOptionDialog(null, Helper.createLabel("กรุณากรอกคะแนนให้ครบถ้วน"), "แก้ไขคะแนนวิชา" + subjectTitle	, JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+							return;
+						}
 						if (Double.parseDouble(tf01.getText()) + Double.parseDouble(tf02.getText()) + Double.parseDouble(tf03.getText()) + Double.parseDouble(tf04.getText()) > 100) {
 							JOptionPane.showOptionDialog(null, Helper.createLabel("ไม่สามารถกําหนคะแนนให้เกิน 100 ได้"), "แก้ไขคะแนนวิชา" + subjectTitle	, JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
 							return;

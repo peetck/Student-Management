@@ -48,6 +48,9 @@ public class SubjectGUI {
 	}
 
 	public JDesktopPane getPanel() {
+		btn1.setBackground(Color.WHITE);
+		btn2.setBackground(Color.WHITE);
+		btn3.setBackground(Color.WHITE);
 		return this.p1;
 	}
 	
