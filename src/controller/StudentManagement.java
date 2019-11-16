@@ -49,11 +49,11 @@ public class StudentManagement{
     private boolean connected = false;
     private String hostname;
     private int port;
-    public StudentManagement(String h, int p){
+    public StudentManagement(String inpHostname, int inpPort){
     	
     	
-        this.hostname = h;
-        this.port = p;
+        this.hostname = inpHostname;
+        this.port = inpPort;
     	
         
         gui = new MainGUI();
@@ -64,8 +64,24 @@ public class StudentManagement{
         managementPage = gui.getManagementGUI();
         connectDB(hostname, port);
         if (!connected) {
-        	JLabel d = Helper.createLabel("<html> เชื่อมต่อกับฐานข้อมูลไม่สําเร็จ <br> HOSTNAME: " + hostname + "<br>PORT: " + port + "</html>");
-			JOptionPane.showOptionDialog(null, d, "ตั้งค่าฐานข้อมูล", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+        	MyPanel p = Helper.createPanel("");
+			p.setLayout(new BorderLayout());
+			MyPanel p2 = Helper.createPanel("");
+			p2.setLayout(new GridLayout(2, 2));
+			JLabel m1 = Helper.createLabel("HOST : ");
+			JLabel m2 = Helper.createLabel("PORT : ");
+			JLabel l1 = Helper.createLabel(hostname);
+			JLabel l2 = Helper.createLabel("" + port);
+
+			p2.add(m1);
+			p2.add(l1);
+			p2.add(m2);
+			p2.add(l2);
+			
+			p.add(Helper.createLabel("เชื่อมต่อกับฐานข้อมูลไม่สําเร็จ"), BorderLayout.NORTH);
+			p.add(p2);
+
+			JOptionPane.showOptionDialog(null, p, "ตั้งค่าฐานข้อมูล", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
 		}
         
         
@@ -75,8 +91,24 @@ public class StudentManagement{
         loginPage.getBtn1().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
             	if (!connected) {
-            		JLabel d = Helper.createLabel("<html> เชื่อมต่อกับฐานข้อมูลไม่สําเร็จ <br> HOSTNAME: " + hostname + "<br>PORT: " + port + "</html>");
-					JOptionPane.showOptionDialog(null, d, "ตั้งค่าฐานข้อมูล", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+            		MyPanel p = Helper.createPanel("");
+					p.setLayout(new BorderLayout());
+					MyPanel p2 = Helper.createPanel("");
+					p2.setLayout(new GridLayout(2, 2));
+					JLabel m1 = Helper.createLabel("HOST : ");
+					JLabel m2 = Helper.createLabel("PORT : ");
+					JLabel l1 = Helper.createLabel(hostname);
+					JLabel l2 = Helper.createLabel("" + port);
+
+					p2.add(m1);
+					p2.add(l1);
+					p2.add(m2);
+					p2.add(l2);
+					
+					p.add(Helper.createLabel("เชื่อมต่อกับฐานข้อมูลไม่สําเร็จ"), BorderLayout.NORTH);
+					p.add(p2);
+
+					JOptionPane.showOptionDialog(null, p, "ตั้งค่าฐานข้อมูล", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
             		return;
             	}
                 String username = loginPage.getF1().getText();
@@ -113,8 +145,24 @@ public class StudentManagement{
             public void actionPerformed(ActionEvent e){
 
             	if (!connected) {
-            		JLabel d = Helper.createLabel("<html> เชื่อมต่อกับฐานข้อมูลไม่สําเร็จ <br> HOSTNAME: " + hostname + "<br>PORT: " + port + "</html>");
-					JOptionPane.showOptionDialog(null, d, "ตั้งค่าฐานข้อมูล", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+            		MyPanel p = Helper.createPanel("");
+					p.setLayout(new BorderLayout());
+					MyPanel p2 = Helper.createPanel("");
+					p2.setLayout(new GridLayout(2, 2));
+					JLabel m1 = Helper.createLabel("HOST : ");
+					JLabel m2 = Helper.createLabel("PORT : ");
+					JLabel l1 = Helper.createLabel(hostname);
+					JLabel l2 = Helper.createLabel("" + port);
+
+					p2.add(m1);
+					p2.add(l1);
+					p2.add(m2);
+					p2.add(l2);
+					
+					p.add(Helper.createLabel("เชื่อมต่อกับฐานข้อมูลไม่สําเร็จ"), BorderLayout.NORTH);
+					p.add(p2);
+
+					JOptionPane.showOptionDialog(null, p, "ตั้งค่าฐานข้อมูล", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
             		return;
             	}
                 BasicDBObject n = new BasicDBObject();
@@ -354,7 +402,7 @@ public class StudentManagement{
         	public void actionPerformed(ActionEvent e) {
         		
         		MyPanel p1 = Helper.createPanel("");
-				p1.setLayout(new GridLayout(4, 2));
+				p1.setLayout(new GridLayout(2, 2));
 				JLabel msg01 = Helper.createLabel("HOST : ");
 				JLabel msg02 = Helper.createLabel("PORT : ");
 				JTextField tf01 = Helper.createTextField(10);
@@ -380,12 +428,44 @@ public class StudentManagement{
 					}
 					connectDB(hostname, port);
 					if (connected) {
-						JLabel d = Helper.createLabel("<html> เชื่อมต่อกับฐานข้อมูลสําเร็จ <br> HOSTNAME: " + hostname + "<br>PORT: " + port + "</html>");
-						JOptionPane.showOptionDialog(null, d, "ตั้งค่าฐานข้อมูล", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+						MyPanel p = Helper.createPanel("");
+						p.setLayout(new BorderLayout());
+						MyPanel p2 = Helper.createPanel("");
+						p2.setLayout(new GridLayout(2, 2));
+						JLabel m1 = Helper.createLabel("HOST : ");
+						JLabel m2 = Helper.createLabel("PORT : ");
+						JLabel l1 = Helper.createLabel(hostname);
+						JLabel l2 = Helper.createLabel("" + port);
+
+						p2.add(m1);
+						p2.add(l1);
+						p2.add(m2);
+						p2.add(l2);
+						
+						p.add(Helper.createLabel("เชื่อมต่อกับฐานข้อมูลสําเร็จ"), BorderLayout.NORTH);
+						p.add(p2);
+
+						JOptionPane.showOptionDialog(null, p, "ตั้งค่าฐานข้อมูล", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน"}, null);
 					}
 					else {
-						JLabel d = Helper.createLabel("<html> เชื่อมต่อกับฐานข้อมูลไม่สําเร็จ <br> HOSTNAME: " + hostname + "<br>PORT: " + port + "</html>");
-						JOptionPane.showOptionDialog(null, d, "ตั้งค่าฐานข้อมูล", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+						MyPanel p = Helper.createPanel("");
+						p.setLayout(new BorderLayout());
+						MyPanel p2 = Helper.createPanel("");
+						p2.setLayout(new GridLayout(2, 2));
+						JLabel m1 = Helper.createLabel("HOST : ");
+						JLabel m2 = Helper.createLabel("PORT : ");
+						JLabel l1 = Helper.createLabel(hostname);
+						JLabel l2 = Helper.createLabel("" + port);
+
+						p2.add(m1);
+						p2.add(l1);
+						p2.add(m2);
+						p2.add(l2);
+						
+						p.add(Helper.createLabel("เชื่อมต่อกับฐานข้อมูลไม่สําเร็จ"), BorderLayout.NORTH);
+						p.add(p2);
+
+						JOptionPane.showOptionDialog(null, p, "ตั้งค่าฐานข้อมูล", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
 
 					}
 				}
@@ -446,8 +526,8 @@ public class StudentManagement{
         		int alert = JOptionPane.showOptionDialog(null, l, "ลบบัญชี", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[] {"ลบบัญชี", "ยกเลิก"}, null);
 				if (alert == JOptionPane.OK_OPTION) {
 					MyPanel p1 = Helper.createPanel("");
-					p1.setLayout(new GridLayout(2, 1));
-					JLabel msg01 = Helper.createLabel("กรุณากรอกรหัสผ่านของคุณเพื่อดําเนินการลบบัญชี");
+					p1.setLayout(new GridLayout(1, 2));
+					JLabel msg01 = Helper.createLabel("รหัสผ่าน : ");
 					JPasswordField pf = Helper.createPasswordField(10);
 					p1.add(msg01);
 					p1.add(pf);
@@ -510,21 +590,21 @@ public class StudentManagement{
         	}
         });
         
-        // subject1
+        // set score subject1
         managementPage.getSubjectGUI().getSubject1().getBtn1().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		updateScore(1);
         	}
         });
         
-        //subject2
+        // set score subject2
         managementPage.getSubjectGUI().getSubject2().getBtn1().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		updateScore(2);
         	}
         });
         
-        //subject3
+        // set score subject3
         managementPage.getSubjectGUI().getSubject3().getBtn1().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
 
@@ -532,10 +612,89 @@ public class StudentManagement{
         	}
         });
         
+        // delete subject1
+        managementPage.getSubjectGUI().getSubject1().getBtn2().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		deleteSubject(1);
+        	}
+        });
+        
+        // delete subject2
+        managementPage.getSubjectGUI().getSubject2().getBtn2().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		deleteSubject(2);
+        	}
+        });
+        
+        // delete subject3
+        managementPage.getSubjectGUI().getSubject3().getBtn2().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		deleteSubject(3);
+        	}
+        });
      }
     
     
     // below here is method in all application -------------------------------------------------------------------------------------------------------------------------
+    
+    public void deleteSubject(int select) {
+    	String msg = "";
+    	if (select == 1) {
+    		msg = managementPage.getSubjectGUI().getSubject1().getSubject();
+    	}
+    	else if (select == 2) {
+    		msg = managementPage.getSubjectGUI().getSubject2().getSubject();
+    	}
+    	else if (select == 3) {
+    		msg = managementPage.getSubjectGUI().getSubject3().getSubject();
+    	}
+    	JLabel l = Helper.createLabel("คุณต้องการที่จะลบวิชา " + msg + " ใช่หรือไม่");
+		int alert = JOptionPane.showOptionDialog(null, l, "ลบวิชา" + msg, JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[] {"ลบวิชา", "ยกเลิก"}, null);
+		if (alert == JOptionPane.OK_OPTION) {
+			DBCursor curs = users.find();
+			while (curs.hasNext()){
+	            DBObject t = curs.next();
+	            if (((String)t.get("username")).equals(myUsername)) {
+	            	BasicDBObject n = new BasicDBObject();
+	            	n.putAll(t);
+	            	
+	            	n.put("subject" + select, "");
+	            	
+	            	users.remove(t);
+	            	users.insert(n);
+	              	managementPage.getSubjectGUI().setSubject( ((String)n.get("subject1")) , ((String)n.get("subject2")), ((String)n.get("subject3")));
+	              	
+	              	DBCollection myStudent = db.getCollection(myUsername);
+	              	DBCursor curs2 = myStudent.find();
+	              	while (curs2.hasNext()) {
+	              		DBObject t2 = curs2.next();
+	              		BasicDBObject n2 = new BasicDBObject();
+	              		n2.putAll(t2);
+	              		n2.put("s" + select + "_assignment", 0);
+	              		n2.put("s" + select + "_project", 0);
+	              		n2.put("s" + select + "_midterm", 0);
+	              		n2.put("s" + select + "_final", 0);
+	              		
+	              		myStudent.remove(t2);
+	              		myStudent.insert(n2);
+	              	}
+	            	
+	              	ArrayList<Student> arr = teacher.getStudents();
+	              	for (int i = 0; i < arr.size(); i++) {
+	              		arr.get(i).setScore(select, 0.0, 0.0, 0.0, 0.0);
+	              	}
+	              	
+	            	managementPage.set("subject");
+					currentPage = 2;
+					updatePage();
+					JOptionPane.showOptionDialog(null, Helper.createLabel("ลบวิชา " + msg + "เรียบร้อยแล้ว"), "ลบวิชา " + msg, JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+	            	return;
+	            }
+			}
+		}
+    	
+    }
+    
     public void updateScore(int select) {
     	String subjectTitle = "";
     	if (select == 1) {
@@ -553,7 +712,7 @@ public class StudentManagement{
 		JTextField tf = Helper.createTextField(10);
 		p1.add(msg);
 		p1.add(tf);
-		int alert = JOptionPane.showOptionDialog(null, p1, "แก้ไขคะแนนวิชา" + subjectTitle, JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"แก้ไขคะแนน", "ยกเลิก"}, null);
+		int alert = JOptionPane.showOptionDialog(null, p1, "แก้ไขคะแนนวิชา " + subjectTitle, JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"แก้ไขคะแนน", "ยกเลิก"}, null);
 		if (alert == JOptionPane.OK_OPTION) {
 			ArrayList<Student> arr = teacher.getStudents();
 			for (int i = 0; i < arr.size(); i++) {
@@ -578,14 +737,14 @@ public class StudentManagement{
 					p2.add(msg04);
 					p2.add(tf04);
 
-					int alert2 = JOptionPane.showOptionDialog(null, p2, "แก้ไขคะแนนวิชา" + subjectTitle, JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"แก้ไขคะแนน", "ยกเลิก"}, null);
+					int alert2 = JOptionPane.showOptionDialog(null, p2, "แก้ไขคะแนนวิชา " + subjectTitle, JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"แก้ไขคะแนน", "ยกเลิก"}, null);
 					if (alert2 == JOptionPane.OK_OPTION) {
 						if (tf01.getText().equals("") || tf02.getText().equals("") || tf03.getText().equals("") || tf04.getText().equals("")) {
 							JOptionPane.showOptionDialog(null, Helper.createLabel("กรุณากรอกคะแนนให้ครบถ้วน"), "แก้ไขคะแนนวิชา" + subjectTitle	, JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
 							return;
 						}
 						if (Double.parseDouble(tf01.getText()) + Double.parseDouble(tf02.getText()) + Double.parseDouble(tf03.getText()) + Double.parseDouble(tf04.getText()) > 100) {
-							JOptionPane.showOptionDialog(null, Helper.createLabel("ไม่สามารถกําหนคะแนนให้เกิน 100 ได้"), "แก้ไขคะแนนวิชา" + subjectTitle	, JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+							JOptionPane.showOptionDialog(null, Helper.createLabel("ไม่สามารถกําหนคะแนนให้เกิน 100 ได้"), "แก้ไขคะแนนวิชา " + subjectTitle	, JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
 							return;
 						}
 						arr.get(i).setScore(select, Double.parseDouble(tf01.getText()), Double.parseDouble(tf02.getText()), Double.parseDouble(tf03.getText()), Double.parseDouble(tf04.getText()));
@@ -609,14 +768,14 @@ public class StudentManagement{
 						n.put("s" + select + "_final", Double.parseDouble(tf04.getText()));
 				    	
 						myStudent.update(t, n);								
-	    				JOptionPane.showOptionDialog(null, Helper.createLabel("แก้ไขคะแนนวิชา" + subjectTitle + "เรียบร้อยแล้ว"), "แก้ไขคะแนนวิชา" + subjectTitle, JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+	    				JOptionPane.showOptionDialog(null, Helper.createLabel("แก้ไขคะแนนวิชา " + subjectTitle + "เรียบร้อยแล้ว"), "แก้ไขคะแนนวิชา" + subjectTitle, JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน"}, null);
 	    				updateScoreTable();
 					}
 					return;
 				}
 			}
 			JLabel msg2 = Helper.createLabel("ไม่มีรหัสนักเรียนนี้อยู่ในระบบ");
-			JOptionPane.showOptionDialog(null, msg2, "แก้ไขคะแนนวิชา" + subjectTitle, JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+			JOptionPane.showOptionDialog(null, msg2, "แก้ไขคะแนนวิชา " + subjectTitle, JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
         }
     }
     public void addSubject(int select) {
@@ -663,6 +822,8 @@ public class StudentManagement{
 	            	managementPage.getSubjectGUI().setSubject( ((String)n.get("subject1")) , ((String)n.get("subject2")), ((String)n.get("subject3")));
 	            	
 	            	updateScoreTable();
+	            	JLabel l = Helper.createLabel("เพิ่มวิชา " + tf2.getText() + " เรียบร้อยแล้ว");
+	        		JOptionPane.showOptionDialog(null, l, "เพิ่มวิชา ", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน"}, null);
 	            	return;
 	            }
 			}
@@ -791,8 +952,8 @@ public class StudentManagement{
     	managementPage.getAddStudentGUI().setPicturePath(path);
     }
     public void connectDB(String hostname, int port) {
-    	JOptionPane opt = new JOptionPane(Helper.createLabel("กําลังเชื่อมต่อกับ  mongoDB..."), JOptionPane.WARNING_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}); // no buttons
-         JDialog dlg = opt.createDialog("เชื่อมต่อกับ  mongoDB");
+    	JOptionPane opt = new JOptionPane(Helper.createLabel("กําลังเชื่อมต่อกับฐานข้อมูล (MongoDB)..."), JOptionPane.WARNING_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}); // no buttons
+         JDialog dlg = opt.createDialog("กําลังเชื่อมต่อกับฐานข้อมูล (MongoDB)");
         new Thread(new Runnable(){
                 public void run(){
                   try{
@@ -1142,19 +1303,19 @@ public class StudentManagement{
 		DefaultTableModel dm = new DefaultTableModel();
 		
 		if (this.TableSortStatus == 0) {
-			Object[] header = {"รหัสนักเรียน <", "ชื่อ", "นามสกุล", "เพิ่มเข้ามาในวันที่"	,"-----", "----- "};
+			Object[] header = {"รหัสนักเรียน <", "ชื่อ", "นามสกุล", "เพิ่มเข้ามาในวันที่"	, " ", "  "};
 			dm.setDataVector(data, header);
 		}
 		else {
-			Object[] header = {"รหัสนักเรียน  >", "ชื่อ", "นามสกุล", "เพิ่มเข้ามาในวันที่"	,"-----", "----- "};
+			Object[] header = {"รหัสนักเรียน  >", "ชื่อ", "นามสกุล", "เพิ่มเข้ามาในวันที่"	, " ", "  "};
 			dm.setDataVector(data, header);
 		}
 		table = new JTable(dm);
-		table.getColumn("-----").setCellRenderer(new ButtonRenderer());
-		table.getColumn("-----").setCellEditor(new ButtonEditor(new JCheckBox(), teacher, managementPage, this));
+		table.getColumn(" ").setCellRenderer(new ButtonRenderer());
+		table.getColumn(" ").setCellEditor(new ButtonEditor(new JCheckBox(), teacher, managementPage, this));
 		
-		table.getColumn("----- ").setCellRenderer(new ButtonRenderer());
-		table.getColumn("----- ").setCellEditor(new ButtonEditor2(new JCheckBox(), teacher, this));
+		table.getColumn("  ").setCellRenderer(new ButtonRenderer());
+		table.getColumn("  ").setCellEditor(new ButtonEditor2(new JCheckBox(), teacher, this));
 		
 		table.getTableHeader().setReorderingAllowed(false);
 		table.getTableHeader().setResizingAllowed(false);

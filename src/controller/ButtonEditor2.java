@@ -35,12 +35,13 @@ public class ButtonEditor2 extends DefaultCellEditor {
 		  this.col = column;
 		  System.out.printf("Button press at (%d, %d)\n", this.row, this.col);
 		  if (isSelected) {
-			  button.setForeground(table.getSelectionForeground());
-			  button.setBackground(Color.WHITE);
-		  }
+		      button.setForeground(table.getSelectionForeground());
+		      button.setBackground(Color.WHITE);
+		    }
 		  else {
 			  button.setForeground(table.getForeground());
 			  button.setBackground(Color.WHITE);
+		      
 		  }
 		  if (value == null) {
 			  label = "";

@@ -13,11 +13,9 @@ public class ButtonRenderer extends JButton implements TableCellRenderer{
 	      boolean isSelected, boolean hasFocus, int row, int column) {
 	    if (isSelected) {
 	      setForeground(table.getSelectionForeground());
-	      //setBackground(table.getSelectionBackground());
 	      setBackground(Color.WHITE);
 	    } else {
 	      setForeground(table.getForeground());
-	      //setBackground(UIManager.getColor("Button.background"));
 	      setBackground(Color.WHITE);
 	      
 	    }

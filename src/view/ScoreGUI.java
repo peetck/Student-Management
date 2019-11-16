@@ -46,10 +46,10 @@ public class ScoreGUI {
 		bottom.setLocation(0, 610);
 		
     		
-		btn1 = Helper.createButton("แก้ไขคะแนน", 20);
-		btn2 = Helper.createButton("ลบวิชา", 20);
-		btn3 = Helper.createButton("ดึงข้อมูลจาก csv", 20);
-		btn4 = Helper.createButton("โหลดข้อมูลจาก csv", 20);
+		btn1 = Helper.createButton("แก้ไขคะแนน", 25);
+		btn2 = Helper.createButton("ลบวิชา", 25);
+		btn3 = Helper.createButton("อัพโหลด CSV", 25);
+		btn4 = Helper.createButton("ดาวน์โหลด CSV", 25);
 		
 		
 		bottom.add(btn1);
@@ -66,7 +66,7 @@ public class ScoreGUI {
 		String[] temp = inp.split("#");
 		this.subject = temp[0];
 		this.subjectID = temp[1];
-		l1.setText("<html>&nbsp;&nbsp;" + subject + " (" + subjectID + ")</html>");
+		l1.setText("<html>&nbsp;&nbsp;<b>วิชา " + subject + " (" + subjectID + ")</b></html>");
 	}
 	
 	public JDesktopPane getPanel() {
@@ -86,7 +86,15 @@ public class ScoreGUI {
 	public JButton getBtn1() {
 		return this.btn1;
 	}
-	
+	public JButton getBtn2() {
+		return this.btn2;
+	}
+	public JButton getBtn3() {
+		return this.btn3;
+	}
+	public JButton getBtn4() {
+		return this.btn4;
+	}
 	public String getSubject() {
 		return this.subject;
 	}
