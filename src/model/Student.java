@@ -22,7 +22,12 @@ public class Student {
 		
 	}
 
-	
+	public void setScore(int select, double assignment, double project, double midterm, double Final) {
+		this.score.put("s" + select + "_assignment", assignment);
+		this.score.put("s" + select + "_project", project);
+		this.score.put("s" + select + "_midterm", midterm);
+		this.score.put("s" + select + "_final", Final);
+	}
 	
 	public Object[] getTableHeadInfo() {
 		Object[] info = new Object[6];

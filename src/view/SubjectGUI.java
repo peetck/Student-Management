@@ -9,6 +9,7 @@ public class SubjectGUI {
 	private JButton btn1, btn2, btn3;
 	private ScoreGUI subject1, subject2, subject3;
 	private ImageIcon alreadyIcon = new ImageIcon(Helper.getImage("/images/already_have_subject.png").getScaledInstance(60, 60, Image.SCALE_DEFAULT));
+	private ImageIcon addIcon = new ImageIcon(Helper.getImage("/images/add_subject.png").getScaledInstance(60, 60, Image.SCALE_DEFAULT));
 	public SubjectGUI() {
 		p1 = new JDesktopPane();
 		
@@ -40,6 +41,9 @@ public class SubjectGUI {
 		p1.add(topcontainer);
 		p1.add(container);
 
+		subject1 = new ScoreGUI("empty#0");
+		subject2 = new ScoreGUI("empty#0");
+		subject3 = new ScoreGUI("empty#0");
 		
 	}
 
@@ -48,31 +52,35 @@ public class SubjectGUI {
 	}
 	
 	public void setSubject(String s1, String s2, String s3) {
-		if (s1.equals("")) {
-			subject1 = null;
-		}
-		else {
-			subject1 = new ScoreGUI(s1);
-			btn1.setText("<html> วิชา" + subject1.getSubject() + " (" + subject1.getSubjectID() + ")</html>");
+		if (!s1.equals("")) {
+			subject1.set(s1);
+			btn1.setText("<html>" + subject1.getSubject() + " (" + subject1.getSubjectID() + ")</html>");
 			btn1.setIcon(alreadyIcon);
 		}
-		
-		if (s2.equals("")) {
-			subject2 = null;
-		}
 		else {
-			subject2 = new ScoreGUI(s2);
-			btn2.setText("<html>วิชา" + subject2.getSubject() + " (" + subject2.getSubjectID() + ")</html>");
+			subject1.set("empty#0");
+			btn1.setText("ยังไม่ได้เพิ่มวิชาเหรอ? เพิ่มเลย");
+			btn1.setIcon(addIcon);
+		}
+		if (!s2.equals("")) {
+			subject2.set(s2);
+			btn2.setText("<html>" + subject2.getSubject() + " (" + subject2.getSubjectID() + ")</html>");
 			btn2.setIcon(alreadyIcon);
 		}
-		
-		if (s3.equals("")) {
-			subject3 = null;
+		else {
+			subject2.set("empty#0");
+			btn2.setText("ยังไม่ได้เพิ่มวิชาเหรอ? เพิ่มเลย");
+			btn2.setIcon(addIcon);
+		}
+		if (!s3.equals("")) {
+			subject3.set(s3);
+			btn3.setText("<html>" + subject3.getSubject() + " (" + subject3.getSubjectID() + ")</html>");
+			btn3.setIcon(alreadyIcon);
 		}
 		else {
-			subject3 = new ScoreGUI(s3);
-			btn3.setText("<html>วิชา" + subject3.getSubject() + " (" + subject3.getSubjectID() + ")</html>");
-			btn3.setIcon(alreadyIcon);
+			subject3.set("empty#0");
+			btn3.setText("ยังไม่ได้เพิ่มวิชาเหรอ? เพิ่มเลย");
+			btn3.setIcon(addIcon);
 		}
 
 	}

@@ -5,23 +5,32 @@ import java.awt.*;
 
 public class ScoreGUI {
 	private JDesktopPane p1;
-	private MyPanel container, bottom;
+	private MyPanel container, bottom, topmenu;
 	private JTable table;
 	private JButton btn1;
 	private JScrollPane table_scroll; 
 	private String subject;
 	private String subjectID;
+	private JLabel l1;
 	public ScoreGUI(String payload) {
 		String[] temp = payload.split("#");
 		this.subject = temp[0];
 		this.subjectID = temp[1];
 		p1 = new JDesktopPane();
 		
+		topmenu = Helper.createPanel("");
+        topmenu.setLocation(0, 0);
+        topmenu.setSize(900, 130);
+        topmenu.setLayout(new BorderLayout());
+
+        l1 = Helper.createLabel("<html>" + subject + " (" + subjectID + ")</html>", 30);
+        l1.setHorizontalAlignment(JLabel.CENTER);
+        topmenu.add(l1);
 		
 		container = Helper.createPanel("");
 		container.setLayout(new BorderLayout());
-		container.setSize(885, 590);
-		container.setLocation(0, 0);
+		container.setSize(900, 460);
+		container.setLocation(0, 130);
 		
 		
 		
@@ -36,14 +45,22 @@ public class ScoreGUI {
 		bottom.setLocation(0, 590);
     		
 		btn1 = Helper.createButton("แก้ไขคะแนน", 23);
-		//btn1.setBackground(new Color(0, 99, 178));
+		
 		
 		bottom.add(btn1);
 
+		p1.add(topmenu);
 		p1.add(container);
 		p1.add(bottom);
 	}
-
+	
+	public void set(String inp) {
+		String[] temp = inp.split("#");
+		this.subject = temp[0];
+		this.subjectID = temp[1];
+		l1.setText("<html>" + subject + " (" + subjectID + ")</html>");
+	}
+	
 	public JDesktopPane getPanel() {
 		return this.p1;
 	}

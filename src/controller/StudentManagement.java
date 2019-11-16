@@ -311,77 +311,7 @@ public class StudentManagement{
         	}
     	});
 
-        /*managementPage.getScoreGUI().getBtn1().addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		
-        		MyPanel p1 = Helper.createPanel("");
-				JLabel msg = Helper.createLabel("รหัสนักเรียน : ");
-				JTextField tf = Helper.createTextField(10);
-				p1.add(msg);
-				p1.add(tf);
-				int alert = JOptionPane.showOptionDialog(null, p1, "แก้ไขคะแนน", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"แก้ไขคะแนน", "ยกเลิก"}, null);
-				if (alert == JOptionPane.OK_OPTION) {
-					ArrayList<Student> arr = teacher.getStudents();
-					for (int i = 0; i < arr.size(); i++) {
-						if (tf.getText().equals(arr.get(i).getStudentID())) {
-							// แก้ไข คะแนน
-							MyPanel p2 = Helper.createPanel("");
-							p2.setLayout(new GridLayout(4, 2));
-							JLabel msg01 = Helper.createLabel("คะแนนช่อง 1");
-							JLabel msg02 = Helper.createLabel("คะแนนช่อง 2");
-							JLabel msg03 = Helper.createLabel("คะแนนกลางภาค");
-							JLabel msg04 = Helper.createLabel("คะแนนปลายภาค");
-							JTextField tf01 = Helper.createTextField(10);
-							JTextField tf02 = Helper.createTextField(10);
-							JTextField tf03 = Helper.createTextField(10);
-							JTextField tf04 = Helper.createTextField(10);
-							p2.add(msg01);
-							p2.add(tf01);
-							p2.add(msg02);
-							p2.add(tf02);
-							p2.add(msg03);
-							p2.add(tf03);
-							p2.add(msg04);
-							p2.add(tf04);
 
-							int alert2 = JOptionPane.showOptionDialog(null, p2, "แก้ไขคะแนน", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"แก้ไขคะแนน", "ยกเลิก"}, null);
-							if (alert2 == JOptionPane.OK_OPTION) {
-								if (Double.parseDouble(tf01.getText()) + Double.parseDouble(tf02.getText()) + Double.parseDouble(tf03.getText()) + Double.parseDouble(tf04.getText()) > 100) {
-									JOptionPane.showMessageDialog(null, Helper.createLabel("ไม่สามารถกําหนคะแนนให้เกิน 100 ได้"));
-									return;
-								}
-								arr.get(i).setScore(Double.parseDouble(tf01.getText()), Double.parseDouble(tf02.getText()), Double.parseDouble(tf03.getText()), Double.parseDouble(tf04.getText()));
-								updateScoreTable();
-								
-								BasicDBObject n = new BasicDBObject();
-;
-						    	
-								
-								DBCollection myStudent = db.getCollection(myUsername);
-						    	DBCursor curs = myStudent.find();
-						    	DBObject t = curs.next();
-						    	for (int j = 0; j < i; j++) {
-						    		t = curs.next();
-						    	}
-								
-						    	n.putAll(t);
-						    	n.put("assignment1", Double.parseDouble(tf01.getText()));
-						    	n.put("assignment2", Double.parseDouble(tf02.getText()));
-								n.put("midterm_score", Double.parseDouble(tf03.getText()));
-								n.put("final_score", Double.parseDouble(tf04.getText()));
-						    	
-								myStudent.update(t, n);								
-			    				JOptionPane.showOptionDialog(null, Helper.createLabel("แก้ไขคะแนนเรียบร้อยแล้ว"), "แก้ไขคะแนน", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน"}, null);
-			    				updateScoreTable();
-							}
-							return;
-						}
-					}
-					JLabel msg2 = Helper.createLabel("ไม่มีรหัสนักเรียนนี้อยู่ในระบบ");
-					JOptionPane.showOptionDialog(null, msg2, "แก้ไขคะแนน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
-                }
-        	}
-        });*/
         
         managementPage.getAddStudentGUI().getBtn2().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
@@ -546,7 +476,7 @@ public class StudentManagement{
 
         managementPage.getSubjectGUI().getBtn1().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		if (managementPage.getSubjectGUI().getSubject1() == null) {
+        		if (managementPage.getSubjectGUI().getSubject1().getSubject().equals("empty")) {
         			addSubject(1);
         		}
         		else {
@@ -557,7 +487,7 @@ public class StudentManagement{
         
         managementPage.getSubjectGUI().getBtn2().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		if (managementPage.getSubjectGUI().getSubject2() == null) {
+        		if (managementPage.getSubjectGUI().getSubject2().getSubject().equals("empty")) {
         			addSubject(2);
         		}
         		else {
@@ -568,7 +498,7 @@ public class StudentManagement{
         
         managementPage.getSubjectGUI().getBtn3().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		if (managementPage.getSubjectGUI().getSubject3() == null) {
+        		if (managementPage.getSubjectGUI().getSubject3().getSubject().equals("empty")) {
         			addSubject(3);
         		}
         		else {
@@ -576,10 +506,112 @@ public class StudentManagement{
         		}
         	}
         });
+        
+        // subject1
+        managementPage.getSubjectGUI().getSubject1().getBtn1().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		updateScore(1);
+        	}
+        });
+        
+        //subject2
+        managementPage.getSubjectGUI().getSubject2().getBtn1().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		updateScore(2);
+        	}
+        });
+        
+        //subject3
+        managementPage.getSubjectGUI().getSubject3().getBtn1().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+
+        		updateScore(3);
+        	}
+        });
+        
      }
     
     
     // below here is method in all application -------------------------------------------------------------------------------------------------------------------------
+    public void updateScore(int select) {
+    	String subjectTitle = "";
+    	if (select == 1) {
+    		subjectTitle = managementPage.getSubjectGUI().getSubject1().getSubject();
+    	}
+    	else if (select == 2) {
+    		subjectTitle = managementPage.getSubjectGUI().getSubject2().getSubject();
+    	}
+    	else if (select == 3) {
+    		subjectTitle = managementPage.getSubjectGUI().getSubject3().getSubject();
+    	}
+		MyPanel p1 = Helper.createPanel("");
+		p1.setLayout(new GridLayout(1, 2));
+		JLabel msg = Helper.createLabel("รหัสนักเรียน : ");
+		JTextField tf = Helper.createTextField(10);
+		p1.add(msg);
+		p1.add(tf);
+		int alert = JOptionPane.showOptionDialog(null, p1, "แก้ไขคะแนนวิชา" + subjectTitle, JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"แก้ไขคะแนน", "ยกเลิก"}, null);
+		if (alert == JOptionPane.OK_OPTION) {
+			ArrayList<Student> arr = teacher.getStudents();
+			for (int i = 0; i < arr.size(); i++) {
+				if (tf.getText().equals(arr.get(i).getStudentID())) {
+					// แก้ไข คะแนน
+					MyPanel p2 = Helper.createPanel("");
+					p2.setLayout(new GridLayout(4, 2));
+					JLabel msg01 = Helper.createLabel("คะแนนเก็บ");
+					JLabel msg02 = Helper.createLabel("คะแนนโครงงาน");
+					JLabel msg03 = Helper.createLabel("คะแนนกลางภาค");
+					JLabel msg04 = Helper.createLabel("คะแนนปลายภาค");
+					JTextField tf01 = Helper.createTextField(10);
+					JTextField tf02 = Helper.createTextField(10);
+					JTextField tf03 = Helper.createTextField(10);
+					JTextField tf04 = Helper.createTextField(10);
+					p2.add(msg01);
+					p2.add(tf01);
+					p2.add(msg02);
+					p2.add(tf02);
+					p2.add(msg03);
+					p2.add(tf03);
+					p2.add(msg04);
+					p2.add(tf04);
+
+					int alert2 = JOptionPane.showOptionDialog(null, p2, "แก้ไขคะแนนวิชา" + subjectTitle, JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"แก้ไขคะแนน", "ยกเลิก"}, null);
+					if (alert2 == JOptionPane.OK_OPTION) {
+						if (Double.parseDouble(tf01.getText()) + Double.parseDouble(tf02.getText()) + Double.parseDouble(tf03.getText()) + Double.parseDouble(tf04.getText()) > 100) {
+							JOptionPane.showOptionDialog(null, Helper.createLabel("ไม่สามารถกําหนคะแนนให้เกิน 100 ได้"), "แก้ไขคะแนนวิชา" + subjectTitle	, JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+							return;
+						}
+						arr.get(i).setScore(select, Double.parseDouble(tf01.getText()), Double.parseDouble(tf02.getText()), Double.parseDouble(tf03.getText()), Double.parseDouble(tf04.getText()));
+						updateScoreTable();
+						
+						BasicDBObject n = new BasicDBObject();
+;
+				    	
+						
+						DBCollection myStudent = db.getCollection(myUsername);
+				    	DBCursor curs = myStudent.find();
+				    	DBObject t = curs.next();
+				    	for (int j = 0; j < i; j++) {
+				    		t = curs.next();
+				    	}
+						
+				    	n.putAll(t);
+				    	n.put("s" + select + "_assignment", Double.parseDouble(tf01.getText()));
+				    	n.put("s" + select + "_project", Double.parseDouble(tf02.getText()));
+						n.put("s" + select + "_midterm", Double.parseDouble(tf03.getText()));
+						n.put("s" + select + "_final", Double.parseDouble(tf04.getText()));
+				    	
+						myStudent.update(t, n);								
+	    				JOptionPane.showOptionDialog(null, Helper.createLabel("แก้ไขคะแนนวิชา" + subjectTitle + "เรียบร้อยแล้ว"), "แก้ไขคะแนนวิชา" + subjectTitle, JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+	    				updateScoreTable();
+					}
+					return;
+				}
+			}
+			JLabel msg2 = Helper.createLabel("ไม่มีรหัสนักเรียนนี้อยู่ในระบบ");
+			JOptionPane.showOptionDialog(null, msg2, "แก้ไขคะแนนวิชา" + subjectTitle, JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+        }
+    }
     public void addSubject(int select) {
     	System.out.println(select);
 
@@ -622,7 +654,8 @@ public class StudentManagement{
 	            	users.remove(t);
 	            	users.insert(n);
 	            	managementPage.getSubjectGUI().setSubject( ((String)n.get("subject1")) , ((String)n.get("subject2")), ((String)n.get("subject3")));
-
+	            	
+	            	updateScoreTable();
 	            	return;
 	            }
 			}
@@ -1027,6 +1060,7 @@ public class StudentManagement{
             DBObject t = ucurs.next();
             if (((String)t.get("username")).equals(myUsername)) {
           	  	managementPage.getSubjectGUI().setSubject( ((String)t.get("subject1")) , ((String)t.get("subject2")), ((String)t.get("subject3")));
+          	  
             }
 
         }
@@ -1253,13 +1287,13 @@ public class StudentManagement{
 		
 		scoreTable.setBorder(new LineBorder(Color.RED, 0));
 		
-		if (managementPage.getSubjectGUI().getSubject1() != null) {
+		if (!managementPage.getSubjectGUI().getSubject1().getSubject().equals("empty")) {
 			managementPage.getSubjectGUI().getSubject1().updateTable(scoreTable);
 		}
-		if (managementPage.getSubjectGUI().getSubject2() != null) {
+		if (!managementPage.getSubjectGUI().getSubject2().getSubject().equals("empty")) {
 			managementPage.getSubjectGUI().getSubject2().updateTable(scoreTable2);
 		}
-		if (managementPage.getSubjectGUI().getSubject3() != null) {
+		if (!managementPage.getSubjectGUI().getSubject3().getSubject().equals("empty")) {
 			managementPage.getSubjectGUI().getSubject3().updateTable(scoreTable3);
 		}
 
