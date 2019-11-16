@@ -1,14 +1,12 @@
 package controller;
 
-import java.applet.Applet;
-import java.applet.AudioClip;
 import java.awt.*;
 
 import java.awt.event.*;
 
 import java.io.*;
 import java.net.URI;
-import java.net.URL;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -20,10 +18,6 @@ import com.mongodb.*;
 
 import java.util.*;
 
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.table.*;

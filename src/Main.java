@@ -1,42 +1,37 @@
 import controller.*;
 import javax.swing.*;
-import javax.swing.plaf.FontUIResource;
+
 
 import mdlaf.*;
-import view.TimeLabel;
+
 
 import java.awt.*;
 import java.io.*;
-import java.util.Enumeration;
 
 
-public class Main{
-    public static void main(String[] args) {
-        try {
-            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            
-            InputStream font = Main.class.getResourceAsStream("fonts/Kanit-ExtraLight.ttf");
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, font));
-            font.close();
-            
-            UIManager.setLookAndFeel(new MaterialLookAndFeel());
-            JDialog.setDefaultLookAndFeelDecorated(false);
-            UIManager.put("Button.mouseHoverEnable", true);
-            UIManager.put("TableHeader.font", new Font("Kanit ExtraLight", Font.BOLD, 16));
-            
-            UIManager.put("OptionPane.messageFont", new Font("Kanit ExtraLight", Font.PLAIN, 16));
-            UIManager.put("OptionPane.buttonFont", new Font("Kanit ExtraLight", Font.PLAIN, 16));
-           
+public class Main {
+	public static void main(String[] args) {
+		try {
+			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+			InputStream font = Main.class.getResourceAsStream("fonts/Kanit-ExtraLight.ttf");
+			ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, font));
+			font.close();
 
-        new StudentManagement("localhost", 27017);
-           
+			UIManager.setLookAndFeel(new MaterialLookAndFeel());
+			JDialog.setDefaultLookAndFeelDecorated(false);
+			UIManager.put("Button.mouseHoverEnable", true);
+			UIManager.put("TableHeader.font", new Font("Kanit ExtraLight", Font.BOLD, 16));
 
-    }
+			UIManager.put("OptionPane.messageFont", new Font("Kanit ExtraLight", Font.PLAIN, 16));
+			UIManager.put("OptionPane.buttonFont", new Font("Kanit ExtraLight", Font.PLAIN, 16));
 
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		new StudentManagement("localhost", 27017);
+
+	}
 
 }
