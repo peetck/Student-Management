@@ -20,8 +20,9 @@ import java.util.*;
 
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.*;
-
+import javax.swing.JFileChooser;
 
 import model.*;
 import view.*;
@@ -626,11 +627,89 @@ public class StudentManagement{
         		deleteSubject(3);
         	}
         });
+        
+        // download score as CSV {subject 1}
+        managementPage.getSubjectGUI().getSubject1().getBtn4().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+				exportCSV(1);
+        	}
+        });
+        
+        // download score as CSV {subject 2}
+        managementPage.getSubjectGUI().getSubject2().getBtn4().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		exportCSV(2);
+        	}
+        });
+        
+        // download score as CSV {subject 3}
+        managementPage.getSubjectGUI().getSubject3().getBtn4().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		exportCSV(3);
+        	}
+        });
      }
     
     
     // below here is method in all application -------------------------------------------------------------------------------------------------------------------------
-    
+    public void exportCSV(int select) {
+    	String title = "";
+		if (select == 1) {
+			title = managementPage.getSubjectGUI().getSubject1().getSubject();
+		}
+		else if (select == 2) {
+			title = managementPage.getSubjectGUI().getSubject2().getSubject();
+		}
+		else if (select == 3) {
+			title = managementPage.getSubjectGUI().getSubject3().getSubject();
+		}
+		
+    	ArrayList<Student> arr = teacher.getStudents();
+		JFileChooser chooser = new JFileChooser();
+		chooser.setAcceptAllFileFilterUsed(false);
+		chooser.setDialogTitle("ดาวน์โหลดคะแนน");
+		
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV file", "csv");
+		chooser.addChoosableFileFilter(filter);
+		chooser.setSelectedFile(new File(title + "_score"));
+		String path = "";
+		if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+			path = "" + chooser.getSelectedFile() + ".csv";
+		}
+		else {
+			System.out.println("No Selection ");
+			return;
+		}
+    	try{
+    		
+			PrintWriter pw = new PrintWriter(new File(path));
+			StringBuilder builder = new StringBuilder();
+
+			String ColumnNamesList = "studentID,Accumulated Score,Project Score,Midterm Score,Final Score,Total Score,Grade";
+			
+			builder.append(ColumnNamesList +"\n");
+			
+			for (int i = 0; i < arr.size(); i++) {
+	    		Object[] score = arr.get(i).getGrade(select);
+	    		
+	    		builder.append(score[0] + ",");
+	    		builder.append(score[1] + ",");
+	    		builder.append(score[2] + ",");
+	    		builder.append(score[3] + ",");
+	    		builder.append(score[4] + ",");
+	    		builder.append(score[5] + ",");
+	    		builder.append(score[6]);
+				builder.append('\n');
+	    	}
+			pw.write(builder.toString());
+			pw.close();
+			JOptionPane.showOptionDialog(null, "ดาวน์โหลด CSV เรียบร้อยแล้ว", "ดาวน์โหลด CSV", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน", }, null);
+
+		}
+		catch (FileNotFoundException err) {
+			System.out.println(err);
+		}
+    }
     public void deleteSubject(int select) {
     	String msg = "";
     	if (select == 1) {
