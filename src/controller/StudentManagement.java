@@ -628,30 +628,55 @@ public class StudentManagement{
         	}
         });
         
-        // download score as CSV {subject 1}
+        // export score as CSV {subject 1}
         managementPage.getSubjectGUI().getSubject1().getBtn4().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
 				exportCSV(1);
         	}
         });
         
-        // download score as CSV {subject 2}
+        // export score as CSV {subject 2}
         managementPage.getSubjectGUI().getSubject2().getBtn4().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		exportCSV(2);
         	}
         });
         
-        // download score as CSV {subject 3}
+        // export score as CSV {subject 3}
         managementPage.getSubjectGUI().getSubject3().getBtn4().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		exportCSV(3);
         	}
         });
+        
+        // import CSV to score {subject 1}
+        managementPage.getSubjectGUI().getSubject1().getBtn3().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		importCSV(1);
+        	}
+        });
+        
+		// import CSV to score {subject 2}
+		managementPage.getSubjectGUI().getSubject2().getBtn3().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				importCSV(2);
+			}
+		});
+
+		// import CSV to score {subject 3}
+		managementPage.getSubjectGUI().getSubject3().getBtn3().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				importCSV(3);
+			}
+		});
      }
     
     
     // below here is method in all application -------------------------------------------------------------------------------------------------------------------------
+    public void importCSV(int select) {
+    	System.out.println("IMPORT CSV " + select);
+    }
+    
     public void exportCSV(int select) {
     	String title = "";
 		if (select == 1) {
