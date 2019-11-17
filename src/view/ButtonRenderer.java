@@ -1,30 +1,28 @@
 package view;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.*;
 import javax.swing.table.*;
-public class ButtonRenderer extends JButton implements TableCellRenderer{
-	public ButtonRenderer() {
-	    setOpaque(true);
-	    setFont(new Font("Kanit ExtraLight", Font.PLAIN, 16));
 
+import mdlaf.animation.MaterialUIMovement;
+public class ButtonRenderer extends JLabel implements TableCellRenderer{
+	public ButtonRenderer() {
+	    setFont(new Font("Kanit ExtraLight", Font.PLAIN, 16));
+	    setHorizontalAlignment(JLabel.CENTER);
 	 }
 
-	  public Component getTableCellRendererComponent(JTable table, Object value,
-	      boolean isSelected, boolean hasFocus, int row, int column) {
-	    if (isSelected) {
+	  public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+	    if (column == 5) {
 	      setForeground(table.getSelectionForeground());
-	      setBackground(Color.WHITE);
-	    } else {
+	      setBackground(new Color(255, 0, 0, 60));
+	    }
+	    else if (column == 4){
 	      setForeground(table.getForeground());
-	      setBackground(Color.WHITE);
-	      
+	      setBackground(new Color(156, 195, 213, 85));
 	    }
-	    if (value == null) {
-	    	setText("");
-	    }
-	    else {
-	    	setText(value.toString());
-	    }
+	    setText(value.toString());
 	    return this;
 	  }
 }

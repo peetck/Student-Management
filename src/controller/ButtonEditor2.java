@@ -17,32 +17,23 @@ public class ButtonEditor2 extends DefaultCellEditor {
 	  private StudentManagement stu;
 	  
 	  public ButtonEditor2(JCheckBox checkBox, Teacher teacher, StudentManagement stu) {
-	    super(checkBox);
-	    this.teacher = teacher;
-	    this.stu = stu;
-	    button = Helper.createButton("");
-	    button.setOpaque(true);
-	    button.addActionListener(new ActionListener() {
-	      public void actionPerformed(ActionEvent e) {
-	        fireEditingStopped();
-	      }
-	    });
+		super(checkBox);
+		this.teacher = teacher;
+		this.stu = stu;
+		button = new JButton("");
+		button.setFont(new Font("Kanit ExtraLight", Font.PLAIN, 16));
+		button.setBackground(new Color(255, 0, 0, 40));
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				fireEditingStopped();
+			}
+		});
 
 	  }
 
 	  public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
 		  this.row = row;
 		  this.col = column;
-		  System.out.printf("Button press at (%d, %d)\n", this.row, this.col);
-		  if (isSelected) {
-		      button.setForeground(table.getSelectionForeground());
-		      button.setBackground(Color.WHITE);
-		    }
-		  else {
-			  button.setForeground(table.getForeground());
-			  button.setBackground(Color.WHITE);
-		      
-		  }
 		  if (value == null) {
 			  label = "";
 		  }

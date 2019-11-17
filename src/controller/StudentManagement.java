@@ -1555,6 +1555,9 @@ public class StudentManagement{
 		table.setFillsViewportHeight(true);
 		
 		for (int i = 0; i < table.getColumnCount() - 1; i++) {
+			if (table.getColumnModel().getColumn(i) == table.getColumn(" ") || table.getColumnModel().getColumn(i) == table.getColumn("  ")) {
+				continue;
+			}
 			table.getColumnModel().getColumn(i).setCellRenderer(new CellRenderer());
 		}
 		table.setBorder(new LineBorder(Color.RED, 0));
@@ -1686,6 +1689,8 @@ public class StudentManagement{
 		
 		
 		scoreTable.setBorder(new LineBorder(Color.RED, 0));
+		scoreTable2.setBorder(new LineBorder(Color.RED, 0));
+		scoreTable3.setBorder(new LineBorder(Color.RED, 0));
 		
 		if (!managementPage.getSubjectGUI().getSubject1().getSubject().equals("empty")) {
 			managementPage.getSubjectGUI().getSubject1().updateTable(scoreTable);

@@ -23,8 +23,9 @@ public class ButtonEditor extends DefaultCellEditor {
 	    this.managementPage = m;
 	    this.teacher = teacher;
 	    this.s = s;
-	    button = Helper.createButton("");
-	    button.setOpaque(true);
+	    button = new JButton("");
+	    button.setFont(new Font("Kanit ExtraLight", Font.PLAIN, 16));
+	    button.setBackground(new Color(156, 195, 213, 85));
 	    button.addActionListener(new ActionListener() {
 	      public void actionPerformed(ActionEvent e) {
 	        fireEditingStopped();
@@ -36,16 +37,6 @@ public class ButtonEditor extends DefaultCellEditor {
 	  public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
 		  this.row = row;
 		  this.col = column;
-		  System.out.printf("Button press at (%d, %d)\n", this.row, this.col);
-		  if (isSelected) {
-		      button.setForeground(table.getSelectionForeground());
-		      button.setBackground(Color.WHITE);
-		    }
-		  else {
-			  button.setForeground(table.getForeground());
-			  button.setBackground(Color.WHITE);
-		      
-		  }
 		  if (value == null) {
 			  label = "";
 		  }
