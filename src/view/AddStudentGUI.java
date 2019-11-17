@@ -18,20 +18,22 @@ public class AddStudentGUI {
 	private Image defaultImg;
 	private String picturePath;
 	private DatePickerSettings settings;
+	private JLabel title;
+	private MyPanel titlep;
 	public AddStudentGUI() {
 		
 
 		p1 = new JDesktopPane();
 		gbc = new GridBagConstraints();
-		gbc.insets = new Insets(3, 0, 0, 0);
+		gbc.insets = new Insets(2, 0, 0, 0);
         gbc.fill = GridBagConstraints.BOTH;
         btn1 = Helper.createButton("ยืนยัน");
         btn2 = Helper.createButton("แก้ไขรูป");
         
         
         left = Helper.createPanel("");
-        left.setSize(450, 700);
-        left.setLocation(0, 0);
+        left.setSize(450, 630);
+        left.setLocation(0, 70);
         left.setLayout(new GridBagLayout());
         
         right = Helper.createPanel("");
@@ -45,26 +47,35 @@ public class AddStudentGUI {
         picture.setLocation(610, 5);
         picture.setLayout(new BorderLayout());
         
-
+        titlep = Helper.createPanel("");
+        titlep.setSize(300, 50);
+        titlep.setLocation(50, 15);
+        titlep.setLayout(new BorderLayout());
         
-        l1 = Helper.createLabel("รหัสนักเรียน : ", 15);
-		l2 = Helper.createLabel("คณะ : ", 15);
-        l3 = Helper.createLabel("คํานําหน้า : ", 15);
-		l4 = Helper.createLabel("ชื่อ : ", 15);
-		l5 = Helper.createLabel("นามสกุล : ", 15);
-		l6 = Helper.createLabel("วันเดือนปีเกิด : ", 15);
+        title = Helper.createLabel(" เพิ่มนักเรียน", 35, true);
+    	title.setHorizontalAlignment(JLabel.CENTER);
+    	title.setIcon(new ImageIcon(Helper.getImage("/images/menu_icon/Add.png").getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+    	
+    	titlep.add(title);
+        
+        l1 = Helper.createLabel("รหัสนักเรียน : ", 15, true);
+		l2 = Helper.createLabel("คณะ : ", 15, true);
+        l3 = Helper.createLabel("คํานําหน้า : ", 15, true);
+		l4 = Helper.createLabel("ชื่อ : ", 15, true);
+		l5 = Helper.createLabel("นามสกุล : ", 15, true);
+		l6 = Helper.createLabel("วันเดือนปีเกิด : ", 15, true);
 		
-		l7 = Helper.createLabel("หมายเลขบัตรประชาชน : ", 15);
-		l8 = Helper.createLabel("ที่อยู่ : ", 15);
-		l9 = Helper.createLabel("เชื้อชาติ : ", 15);
-		l10 = Helper.createLabel("ศาสนา : ", 15);
-		l11 = Helper.createLabel("หมู่เลือด : ", 15);
-		l12 = Helper.createLabel("เบอร์ติดต่อ : ", 15);
-		l13 = Helper.createLabel("อีเมล์ : ", 15);
-		l14 = Helper.createLabel("ส่วนสูง : ", 15);
-		l15 = Helper.createLabel("นํ้าหนัก : ", 15);
-		l16 = Helper.createLabel("เบอร์ติดต่อผู้ปกครอง : ", 15);
-		l17 = Helper.createLabel("โรคประจําตัว : ", 15);
+		l7 = Helper.createLabel("หมายเลขบัตรประชาชน : ", 15, true);
+		l8 = Helper.createLabel("ที่อยู่ : ", 15, true);
+		l9 = Helper.createLabel("เชื้อชาติ : ", 15, true);
+		l10 = Helper.createLabel("ศาสนา : ", 15, true);
+		l11 = Helper.createLabel("หมู่เลือด : ", 15, true);
+		l12 = Helper.createLabel("เบอร์ติดต่อ : ", 15, true);
+		l13 = Helper.createLabel("อีเมล์ : ", 15, true);
+		l14 = Helper.createLabel("ส่วนสูง : ", 15, true);
+		l15 = Helper.createLabel("นํ้าหนัก : ", 15, true);
+		l16 = Helper.createLabel("เบอร์ติดต่อผู้ปกครอง : ", 15, true);
+		l17 = Helper.createLabel("โรคประจําตัว : ", 15, true);
 		
 		f1 = Helper.createTextField(20, 15);
 		f2 = Helper.createComboBox(15);
@@ -233,6 +244,7 @@ public class AddStudentGUI {
 		p1.add(left);
 		p1.add(right);
 		p1.add(picture);
+		p1.add(titlep);
 
 	}
 	

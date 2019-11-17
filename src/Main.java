@@ -25,6 +25,7 @@ public class Main {
 
 			UIManager.put("OptionPane.messageFont", new Font("Kanit ExtraLight", Font.PLAIN, 16));
 			UIManager.put("OptionPane.buttonFont", new Font("Kanit ExtraLight", Font.PLAIN, 16));
+			UIManager.put("ToolTip.font", new Font("Kanit ExtraLight", Font.PLAIN, 16));
 
 		}
 		catch (Exception e) {

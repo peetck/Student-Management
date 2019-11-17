@@ -137,6 +137,7 @@ public class Helper{
     public static JButton createButton(String msg){
         JButton btn = new JButton(msg);
         btn.setFont(new Font("Kanit ExtraLight", Font.PLAIN, 16));
+        btn.setBackground(new Color(156, 195, 213, 85));
         MaterialUIMovement.add (btn, new Color(156, 195, 213), 5, 1000 / 60);
         btn.setOpaque(false);
         return btn;
@@ -144,6 +145,7 @@ public class Helper{
     public static JButton createButton(String msg, int size){
         JButton btn = new JButton(msg);
         btn.setFont(new Font("Kanit ExtraLight", Font.PLAIN, size));
+        btn.setBackground(new Color(156, 195, 213, 85));
         MaterialUIMovement.add (btn, new Color(156, 195, 213), 5, 1000 / 60);
         btn.setOpaque(false);
         return btn;
@@ -154,6 +156,7 @@ public class Helper{
     	JButton btn = new JButton(msg);
         btn.setFont(new Font("Kanit ExtraLight", Font.PLAIN, size));
         btn.setOpaque(false);
+        btn.setBackground(new Color(156, 195, 213, 85));
         Image img = Helper.getImage(path);
 	    img = img.getScaledInstance(width, height, Image.SCALE_DEFAULT);
 	    ImageIcon icon = new ImageIcon(img);

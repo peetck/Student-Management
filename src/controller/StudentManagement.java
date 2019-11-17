@@ -16,12 +16,23 @@ import java.time.format.DateTimeFormatter;
 
 import com.mongodb.*;
 
+import mdlaf.animation.MaterialUIMovement;
+
 import java.util.*;
 
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.*;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.StandardChartTheme;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 import model.*;
 import view.*;
@@ -43,7 +54,24 @@ public class StudentManagement{
     private boolean connected = false;
     private String hostname;
     private int port;
+    private HashMap<String, Double> emptyScore = new HashMap<String, Double>();
     public StudentManagement(String inpHostname, int inpPort){
+    	
+    	emptyScore.put("s1_assignment", 0.0);
+    	emptyScore.put("s1_project", 0.0);
+    	emptyScore.put("s1_midterm", 0.0);
+    	emptyScore.put("s1_final", 0.0);
+    	
+    	emptyScore.put("s2_assignment", 0.0);
+    	emptyScore.put("s2_project", 0.0);
+    	emptyScore.put("s2_midterm", 0.0);
+    	emptyScore.put("s2_final", 0.0);
+    	
+    	emptyScore.put("s3_assignment", 0.0);
+    	emptyScore.put("s3_project", 0.0);
+    	emptyScore.put("s3_midterm", 0.0);
+    	emptyScore.put("s3_final", 0.0);
+    	
     	
     	
         this.hostname = inpHostname;
@@ -344,12 +372,12 @@ public class StudentManagement{
         				if (alert == JOptionPane.OK_OPTION) {
         					HashMap<String, Double> score = teacher.getStudents().get(i).getScore();
         					delete(teacher.getStudents().get(i).getStudentID());
-        					addStudent();
+        					addStudent(score);
         				}
             			return;	
         			}
         		}
-            	addStudent();
+             	addStudent(emptyScore);
         	}
     	});
 
@@ -467,6 +495,7 @@ public class StudentManagement{
         managementPage.getInformationGUI().getBtn1().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		
+        		
         		managementPage.set("add/delete");
 				currentPage = 3;
 				updatePage();
@@ -477,10 +506,52 @@ public class StudentManagement{
         managementPage.getInformationGUI().getBtn2().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		
+				
+        		String studentID = managementPage.getInformationGUI().getStudentID();
+        		HashMap<String, Double> score = new HashMap<String, Double>();
+        		ArrayList<Student> arr = teacher.getStudents();
+        		for (int i = 0; i < arr.size(); i++) {
+        			if (arr.get(i).getStudentID().equals(studentID)) {
+        				score = arr.get(i).getScore();
+        				break;
+        			}
+        		}
+        		
+				ChartPanel graph = createStudentGraph(studentID, score);
+				
+        		managementPage.set("information_graph");
+        		managementPage.getInformationGraphGUI().updateGraph(graph);
+				// show graph
+        	}
+        });
+        
+        managementPage.getInformationGUI().getBtn3().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
         		managementPage.set("mystudent");
 				currentPage = 1;
 				updatePage();
 
+        	}
+        });
+        
+        managementPage.getInformationGraphGUI().getBtn1().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        		managementPage.set("subject");
+				currentPage = 2;
+				updatePage();
+        		
+				
+        	}
+        });
+        
+        managementPage.getInformationGraphGUI().getBtn2().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        		
+        		managementPage.set("information");
+				
         	}
         });
         
@@ -679,6 +750,77 @@ public class StudentManagement{
     
     
     // below here is method in all application -------------------------------------------------------------------------------------------------------------------------
+    
+    public ChartPanel createStudentGraph(String studentID, HashMap<String, Double> score) {
+    	DefaultCategoryDataset data = new DefaultCategoryDataset();
+    	
+    	String subject1 = managementPage.getSubjectGUI().getSubject1().getSubject();
+    	String subject2 = managementPage.getSubjectGUI().getSubject2().getSubject();
+    	String subject3 = managementPage.getSubjectGUI().getSubject3().getSubject();
+    	
+   	
+    	if (subject1.equals("empty")) {
+    		subject1 = "วิชาที่1 (Empty)";
+    	}
+		if (subject2.equals("empty")) {
+			subject2 = "วิชาที่2 (Empty)";
+		}
+		if (subject3.equals("empty")) {
+			subject3 = "วิชาที่3 (Empty)";
+		}
+
+		data.addValue(score.get("s1_assignment"), "คะแนนเก็บ", subject1);
+    	data.addValue(score.get("s1_project"), "คะแนนโครงงาน", subject1);
+    	data.addValue(score.get("s1_midterm"), "คะแนนกลางภาค", subject1);
+    	data.addValue(score.get("s1_final"), "คะแนนไฟนอล", subject1);
+    	
+    	data.addValue(score.get("s2_assignment"), "คะแนนเก็บ", subject2);
+    	data.addValue(score.get("s2_project"), "คะแนนโครงงาน", subject2);
+    	data.addValue(score.get("s2_midterm"), "คะแนนกลางภาค", subject2);
+    	data.addValue(score.get("s2_final"), "คะแนนไฟนอล", subject2);
+    	
+    	data.addValue(score.get("s3_assignment"), "คะแนนเก็บ", subject3);
+    	data.addValue(score.get("s3_project"), "คะแนนโครงงาน", subject3);
+    	data.addValue(score.get("s3_midterm"), "คะแนนกลางภาค", subject3);
+    	data.addValue(score.get("s3_final"), "คะแนนไฟนอล", subject3);
+    	
+		JFreeChart chart = ChartFactory.createBarChart("คะแนนของนักเรียนรหัส " + studentID, "", "คะแนน", data, PlotOrientation.VERTICAL, true, true, false);
+
+		StandardChartTheme chartTheme = (StandardChartTheme) org.jfree.chart.StandardChartTheme.createJFreeTheme();
+		Font oldExtraLargeFont = chartTheme.getExtraLargeFont();
+		Font oldLargeFont = chartTheme.getLargeFont();
+		Font oldRegularFont = chartTheme.getRegularFont();
+		Font oldSmallFont = chartTheme.getSmallFont();
+
+		Font extraLargeFont = new Font("Kanit ExtraLight", oldExtraLargeFont.getStyle(), oldExtraLargeFont.getSize());
+		Font largeFont = new Font("Kanit ExtraLight", oldLargeFont.getStyle(), oldLargeFont.getSize());
+		Font regularFont = new Font("Kanit ExtraLight", oldRegularFont.getStyle(), oldRegularFont.getSize());
+		Font smallFont = new Font("Kanit ExtraLight", oldSmallFont.getStyle(), oldSmallFont.getSize());
+
+		chartTheme.setExtraLargeFont(extraLargeFont);
+		chartTheme.setLargeFont(largeFont);
+		chartTheme.setRegularFont(regularFont);
+		chartTheme.setSmallFont(smallFont);
+
+		chartTheme.setRangeGridlinePaint(Color.BLACK);
+
+		chartTheme.apply(chart);
+
+		CategoryPlot carPlot = chart.getCategoryPlot();
+
+		CategoryPlot plot = (CategoryPlot) carPlot;
+		NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
+		rangeAxis.setRange(0, 100);
+		plot.setBackgroundPaint(Color.WHITE);
+
+		ChartPanel chartPanel = new ChartPanel(chart);
+
+		chartPanel.setDomainZoomable(false);
+		chartPanel.setRangeZoomable(false);
+		
+		return chartPanel;
+    }
+    
     public void importCSV(int select) {
     	MyPanel main = Helper.createPanel("");
     	main.setLayout(new BorderLayout());
@@ -1232,7 +1374,7 @@ public class StudentManagement{
     	
     }
     
-    public void addStudent() {
+    public void addStudent(HashMap<String, Double> score) {
     	String studentID, faculty, title, name, surname, day, month, year, cardID,
     	address, race, religion, bloodType, tel, email, height, weight, sourcePath,
     	parentTel, disease, enrollAt, picturePath;
@@ -1323,7 +1465,7 @@ public class StudentManagement{
 	    
 	    
     	HashMap<String, String> information = new HashMap<String, String>();
-    	HashMap<String, Double> score = new HashMap<String, Double>();
+
     	
     	
     	
@@ -1357,20 +1499,20 @@ public class StudentManagement{
     	n.put("disease", disease);
     	n.put("enrollAt", enrollAt);
     	
-    	n.put("s1_midterm", 0);
-    	n.put("s1_final", 0);
-    	n.put("s1_assignment", 0);
-    	n.put("s1_project", 0);
+    	n.put("s1_midterm", score.get("s1_midterm"));
+    	n.put("s1_final", score.get("s1_final"));
+    	n.put("s1_assignment", score.get("s1_assignment"));
+    	n.put("s1_project", score.get("s1_project"));
     	
-    	n.put("s2_midterm", 0);
-    	n.put("s2_final", 0);
-    	n.put("s2_assignment", 0);
-    	n.put("s2_project", 0);
+    	n.put("s2_midterm", score.get("s2_midterm"));
+    	n.put("s2_final", score.get("s2_final"));
+    	n.put("s2_assignment", score.get("s2_assignment"));
+    	n.put("s2_project", score.get("s2_project"));
     	
-    	n.put("s3_midterm", 0);
-    	n.put("s3_final", 0);
-    	n.put("s3_assignment", 0);
-    	n.put("s3_project", 0);
+    	n.put("s3_midterm", score.get("s3_midterm"));
+    	n.put("s3_final", score.get("s3_final"));
+    	n.put("s3_assignment", score.get("s3_assignment"));
+    	n.put("s3_project", score.get("s3_project"));
     	
     	n.put("picturePath", picturePath);
     	
@@ -1398,21 +1540,7 @@ public class StudentManagement{
     	information.put("parentTel", parentTel);
     	information.put("disease", disease);
     	information.put("enrollAt", enrollAt);
-    	
-    	score.put("s1_midterm", 0.0);
-    	score.put("s1_final", 0.0);
-    	score.put("s1_assignment", 0.0);
-    	score.put("s1_project", 0.0);
-    	
-    	score.put("s2_midterm", 0.0);
-    	score.put("s2_final", 0.0);
-    	score.put("s2_assignment", 0.0);
-    	score.put("s2_project", 0.0);
-    	
-    	score.put("s3_midterm", 0.0);
-    	score.put("s3_final", 0.0);
-    	score.put("s3_assignment", 0.0);
-    	score.put("s3_project", 0.0);
+
     	
     	teacher.addStudent(new Student(information, score, picturePath));
     	// add success

@@ -20,6 +20,7 @@ public class ManagementGUI{
     private TimeLabel currentTime;
     private Thread t1;
     private JLabel welcome, user;
+    private InformationGraphGUI information_graph;
     public ManagementGUI(){
         desktop = new JDesktopPane();
         
@@ -36,6 +37,7 @@ public class ManagementGUI{
         add = new AddStudentGUI();
         setting = new SettingGUI();
         information = new InformationGUI();
+        information_graph = new InformationGraphGUI();
         
         topmenu = Helper.createPanel("");
         topmenu.setLocation(0, 0);
@@ -97,8 +99,8 @@ public class ManagementGUI{
 
         menu2 = Helper.createPanel("");
         menu2.setLayout(new BorderLayout());
-        menuMsg2 = Helper.createLabel("คะแนน",  24, true);
-        icon2 = Helper.createLabel("", "/images/menu_icon/Score.png");
+        menuMsg2 = Helper.createLabel("วิชาของคุณ",  24, true);
+        icon2 = Helper.createLabel("", "/images/menu_icon/Subject.png");
         menuMsg2.setHorizontalAlignment(JLabel.CENTER);
         menu2.add(menuMsg2);
         menu2.add(icon2, BorderLayout.EAST);
@@ -209,6 +211,13 @@ public class ManagementGUI{
     		program.repaint();
     		program.add(subject.getSubject3().getPanel());
     	}
+    	else if (select.equals("information_graph")) {
+    		program.removeAll();
+    		
+    		program.revalidate();
+    		program.repaint();
+    		program.add(information_graph.getPanel());
+    	}
     }
     public JDesktopPane getPanel(){
         return this.desktop;
@@ -221,6 +230,9 @@ public class ManagementGUI{
     }
     public InformationGUI getInformationGUI() {
     	return this.information;
+    }
+    public InformationGraphGUI getInformationGraphGUI() {
+    	return this.information_graph;
     }
     public SubjectGUI getSubjectGUI() {
     	return this.subject;

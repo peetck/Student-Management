@@ -9,6 +9,6 @@
 	<classpathentry kind="lib" path="lib/LGoodDatePicker-10.4.1.jar"/>
 	<classpathentry kind="lib" path="lib/material-ui-swing-0.9.6.jar"/>
 	<classpathentry kind="lib" path="lib/mongo-2.10.1.jar"/>
-	<classpathentry kind="lib" path="lib/jfreechart-1.0.14.jar"/>
+	<classpathentry kind="lib" path="lib/jfreechart-1.5.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
