@@ -1,12 +1,11 @@
 package view;
+
 import java.awt.*;
 
-
-
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 
 import com.github.lgooddatepicker.components.DatePicker;
+import com.github.lgooddatepicker.components.DatePickerSettings;
 public class AddStudentGUI {
 	private JDesktopPane p1;
 	private MyPanel left, right, picture;
@@ -18,6 +17,7 @@ public class AddStudentGUI {
 	private GridBagConstraints gbc;
 	private Image defaultImg;
 	private String picturePath;
+	private DatePickerSettings settings;
 	public AddStudentGUI() {
 		
 
@@ -88,8 +88,11 @@ public class AddStudentGUI {
 		f4 = Helper.createTextField(20, 15);
 		f5 = Helper.createTextField(20, 15);
 		
-		
-		f6 = new DatePicker();
+
+		settings = new DatePickerSettings();
+        settings.setAllowKeyboardEditing(false);
+        f6 = new DatePicker(settings);
+ 
 		
 		f7 = Helper.createTextField(20, 15);
 		f8 = Helper.createTextField(20, 15);

@@ -22,7 +22,6 @@ import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.*;
-import javax.swing.JFileChooser;
 
 import model.*;
 import view.*;
@@ -132,7 +131,7 @@ public class StudentManagement{
         registerPage.getBtn2().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
 
-                System.out.println("RegisterGUI : Back btn clicked!!");
+
                 gui.set("LoginGUI");
             }
         });
@@ -385,9 +384,7 @@ public class StudentManagement{
 						}
 						catch (Exception e1) {}
 					} 
-					else {
-						System.out.println("Desktop is not supported!!");
-					}
+
 				}
 				
 			}
@@ -477,6 +474,16 @@ public class StudentManagement{
         	}
         });
         
+        managementPage.getInformationGUI().getBtn2().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        		managementPage.set("mystudent");
+				currentPage = 1;
+				updatePage();
+
+        	}
+        });
+        
         managementPage.getSettingGUI().getBtn1().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) { // change password
         		MyPanel p1 = Helper.createPanel("");
@@ -521,7 +528,6 @@ public class StudentManagement{
         		int alert = JOptionPane.showOptionDialog(null, l, "ลบบัญชี", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[] {"ลบบัญชี", "ยกเลิก"}, null);
 				if (alert == JOptionPane.OK_OPTION) {
 					MyPanel p1 = Helper.createPanel("");
-					p1.setLayout(new GridLayout(1, 2));
 					JLabel msg01 = Helper.createLabel("รหัสผ่าน : ");
 					JPasswordField pf = Helper.createPasswordField(10);
 					p1.add(msg01);
@@ -687,7 +693,8 @@ public class StudentManagement{
     	JLabel l6 = Helper.createLabel("- รหัสนักเรียนที่มีในระบบแต่ไม่มีในไฟล์ก็จะไมได้รับการอัพเดทคะแนน");
     	JLabel l7 = Helper.createLabel("รูปตัวอย่างไฟล์ที่ถูกต้อง", 18, true);
     	l7.setHorizontalAlignment(JLabel.CENTER);
-    	JLabel picture = Helper.createLabel("", "/images/correct_csv.png", 600, 200);
+    	JLabel picture = Helper.createLabel("", "/images/correct_csv.png", 700, 200);
+    	picture.setBorder(BorderFactory.createLineBorder(Color.black));
     	picture.setHorizontalAlignment(JLabel.CENTER);
     	
     	p.add(l1);
@@ -715,7 +722,7 @@ public class StudentManagement{
 			path = "" + chooser.getSelectedFile();
 		}
 		else {
-			System.out.println("No Selection ");
+
 			return;
 		}
 		
@@ -771,8 +778,11 @@ public class StudentManagement{
 	    			catch(Exception e) {
 	    				continue es;
 	    			}
-	    				
-	    			System.out.println(s.getStudentID());
+	    			
+	    			if (assignment + project + midterm + finals > 100) {
+	    				continue es;
+	    			}
+
 	    			s.setScore(select, assignment, project, midterm, finals);
 	    			
 	    			n.putAll(t);
@@ -822,7 +832,7 @@ public class StudentManagement{
 			}
 		}
 		else {
-			System.out.println("No Selection ");
+
 			return;
 		}
     	try{
@@ -852,7 +862,7 @@ public class StudentManagement{
 
 		}
 		catch (FileNotFoundException err) {
-			System.out.println(err);
+
 		}
     }
     public void deleteSubject(int select) {
@@ -1001,7 +1011,7 @@ public class StudentManagement{
         }
     }
     public void addSubject(int select) {
-    	System.out.println(select);
+
 
     	
     	MyPanel p1 = Helper.createPanel("");
@@ -1431,7 +1441,7 @@ public class StudentManagement{
             			break;
             		}
             	}
-            	System.out.println("delete success");
+
 
             	updateTable();
                 updateScoreTable();

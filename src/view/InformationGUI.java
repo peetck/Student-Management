@@ -15,8 +15,10 @@ public class InformationGUI {
 	private JLabel title;
 	private JScrollPane a8;
 	private HashMap<String, String> information;
-	private JButton btn1;
+	private JButton btn1, btn2;
 	private String picturePath;
+	private GridBagConstraints gbc;
+
 	public InformationGUI() {
 		p1 = new JDesktopPane();
 		
@@ -28,7 +30,7 @@ public class InformationGUI {
         //left.setBackground(Color.RED);
         
         right = Helper.createPanel("");
-        right.setSize(390, 450);
+        right.setSize(390, 400);
         right.setLocation(490, 165);
         right.setLayout(new GridLayout(7, 2));
         //right.setBackground(Color.RED);
@@ -51,14 +53,20 @@ public class InformationGUI {
     	titlep.add(title);
     	
         select = Helper.createPanel("");
-        select.setSize(350, 50);
-        select.setLocation(490, 615);
-        select.setLayout(new BorderLayout());
+        select.setSize(350, 100);
+        select.setLocation(490, 570);
+        select.setLayout(new GridBagLayout());
 
+	   	gbc = new GridBagConstraints();
+	    gbc.fill = GridBagConstraints.BOTH;
+	    gbc.insets = new Insets(5, 0, 5, 0);
+        btn1 = Helper.createButton("แก้ไขข้อมูล", 17);
+        btn2 = Helper.createButton("ย้อนกลับ", 17);
         
-        btn1 = Helper.createButton("แก้ไขข้อมูล", 20);
-        
-        select.add(btn1);
+        gbc.weightx = 2;
+        select.add(btn1, gbc);
+        gbc.gridy = 1;
+        select.add(btn2, gbc);
         
         l1 = Helper.createLabel("รหัสนักเรียน : ", true);
         l2 = Helper.createLabel("คณะ : ", true);
@@ -193,6 +201,9 @@ public class InformationGUI {
 	}
 	public JButton getBtn1() {
 		return this.btn1;
+	}
+	public JButton getBtn2() {
+		return this.btn2;
 	}
 	public HashMap<String, String> getInformation() {
 		return this.information;
