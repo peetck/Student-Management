@@ -508,19 +508,19 @@ public class StudentManagement{
         		
 				
         		String studentID = managementPage.getInformationGUI().getStudentID();
-        		HashMap<String, Double> score = new HashMap<String, Double>();
         		ArrayList<Student> arr = teacher.getStudents();
         		for (int i = 0; i < arr.size(); i++) {
         			if (arr.get(i).getStudentID().equals(studentID)) {
-        				score = arr.get(i).getScore();
+        				ChartPanel graph = createStudentGraph(studentID, arr.get(i).getScore(), arr.get(i).getGrade(1), arr.get(i).getGrade(2), arr.get(i).getGrade(3));
+        				managementPage.getInformationGraphGUI().updateGraph(graph);
         				break;
         			}
         		}
         		
-				ChartPanel graph = createStudentGraph(studentID, score);
+				
 				
         		managementPage.set("information_graph");
-        		managementPage.getInformationGraphGUI().updateGraph(graph);
+        		
 				// show graph
         	}
         });
@@ -751,38 +751,39 @@ public class StudentManagement{
     
     // below here is method in all application -------------------------------------------------------------------------------------------------------------------------
     
-    public ChartPanel createStudentGraph(String studentID, HashMap<String, Double> score) {
+    public ChartPanel createStudentGraph(String studentID, HashMap<String, Double> score, Object[] grade1, Object[] grade2, Object[] grade3) {
     	DefaultCategoryDataset data = new DefaultCategoryDataset();
+
     	
-    	String subject1 = managementPage.getSubjectGUI().getSubject1().getSubject();
-    	String subject2 = managementPage.getSubjectGUI().getSubject2().getSubject();
-    	String subject3 = managementPage.getSubjectGUI().getSubject3().getSubject();
+    	String subject1 = " " + managementPage.getSubjectGUI().getSubject1().getSubject() + " (" + grade1[6] + ")";
+    	String subject2 = " " + managementPage.getSubjectGUI().getSubject2().getSubject() + " (" + grade2[6] + ")";
+    	String subject3 = " " + managementPage.getSubjectGUI().getSubject3().getSubject() + " (" + grade3[6] + ")";
     	
    	
-    	if (subject1.equals("empty")) {
-    		subject1 = "วิชาที่1 (Empty)";
+    	if (subject1.equals(" empty" + " (" + grade1[6] + ")")) {
+    		subject1 = "ที่1 (Empty)";
     	}
-		if (subject2.equals("empty")) {
-			subject2 = "วิชาที่2 (Empty)";
+		if (subject2.equals(" empty" + " (" + grade2[6] + ")")) {
+			subject2 = "ที่2 (Empty)";
 		}
-		if (subject3.equals("empty")) {
-			subject3 = "วิชาที่3 (Empty)";
+		if (subject3.equals(" empty" + " (" + grade3[6] + ")")) {
+			subject3 = "ที่3 (Empty)";
 		}
 
-		data.addValue(score.get("s1_assignment"), "คะแนนเก็บ", subject1);
-    	data.addValue(score.get("s1_project"), "คะแนนโครงงาน", subject1);
-    	data.addValue(score.get("s1_midterm"), "คะแนนกลางภาค", subject1);
-    	data.addValue(score.get("s1_final"), "คะแนนไฟนอล", subject1);
+		data.addValue(score.get("s1_assignment"), "คะแนนเก็บ",  "วิชา" + subject1);
+    	data.addValue(score.get("s1_project"), "คะแนนโครงงาน", "วิชา" + subject1);
+    	data.addValue(score.get("s1_midterm"), "คะแนนกลางภาค", "วิชา" + subject1);
+    	data.addValue(score.get("s1_final"), "คะแนนปลายภาค", "วิชา" + subject1);
     	
-    	data.addValue(score.get("s2_assignment"), "คะแนนเก็บ", subject2);
-    	data.addValue(score.get("s2_project"), "คะแนนโครงงาน", subject2);
-    	data.addValue(score.get("s2_midterm"), "คะแนนกลางภาค", subject2);
-    	data.addValue(score.get("s2_final"), "คะแนนไฟนอล", subject2);
+    	data.addValue(score.get("s2_assignment"), "คะแนนเก็บ", "วิชา" + subject2);
+    	data.addValue(score.get("s2_project"), "คะแนนโครงงาน", "วิชา" + subject2);
+    	data.addValue(score.get("s2_midterm"), "คะแนนกลางภาค", "วิชา" + subject2);
+    	data.addValue(score.get("s2_final"), "คะแนนปลายภาค", "วิชา" + subject2);
     	
-    	data.addValue(score.get("s3_assignment"), "คะแนนเก็บ", subject3);
-    	data.addValue(score.get("s3_project"), "คะแนนโครงงาน", subject3);
-    	data.addValue(score.get("s3_midterm"), "คะแนนกลางภาค", subject3);
-    	data.addValue(score.get("s3_final"), "คะแนนไฟนอล", subject3);
+    	data.addValue(score.get("s3_assignment"), "คะแนนเก็บ", "วิชา" + subject3);
+    	data.addValue(score.get("s3_project"), "คะแนนโครงงาน", "วิชา" + subject3);
+    	data.addValue(score.get("s3_midterm"), "คะแนนกลางภาค", "วิชา" + subject3);
+    	data.addValue(score.get("s3_final"), "คะแนนปลายภาค", "วิชา" + subject3);
     	
 		JFreeChart chart = ChartFactory.createBarChart("คะแนนของนักเรียนรหัส " + studentID, "", "คะแนน", data, PlotOrientation.VERTICAL, true, true, false);
 

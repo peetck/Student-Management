@@ -62,7 +62,7 @@ public class InformationGUI {
 	    gbc.fill = GridBagConstraints.BOTH;
 	    gbc.insets = new Insets(5, 0, 5, 0);
         btn1 = Helper.createButton("แก้ไขข้อมูล", 17);
-        btn2 = Helper.createButton("ดูกราฟคะแนน", 17);
+        btn2 = Helper.createButton("ดูคะแนน", 17);
         btn3 = Helper.createButton("ย้อนกลับ", 17);
         
         gbc.weightx = 2;
