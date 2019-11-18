@@ -7,7 +7,7 @@ public class ScoreGUI {
 	private JDesktopPane p1;
 	private MyPanel container, bottom, topmenu;
 	private JTable table;
-	private JButton btn1, btn2, btn3, btn4;
+	private JButton btn1, btn2, btn3, btn4, btn5;
 	private JScrollPane table_scroll; 
 	private String subject;
 	private String subjectID;
@@ -41,21 +41,23 @@ public class ScoreGUI {
 		container.add(table_scroll);
 		
 		bottom = Helper.createPanel("");
-		bottom.setLayout(new GridLayout(1, 4));
+		bottom.setLayout(new GridLayout(1, 5));
 		bottom.setSize(900, 90);
 		bottom.setLocation(0, 610);
 		
     		
-		btn1 = Helper.createButton("แก้ไขคะแนน", 25);
-		btn2 = Helper.createButton("ลบวิชา", 25);
-		btn3 = Helper.createButton("อัพโหลดคะแนน", 25);
-		btn4 = Helper.createButton("ดาวน์โหลดคะแนน", 25);
+		btn1 = Helper.createButton("แก้ไขคะแนน", 21);
+		btn2 = Helper.createButton("ลบวิชา", 21);
+		btn3 = Helper.createButton("ดูกราฟ", 21);
+		btn4 = Helper.createButton("อัพโหลดคะแนน", 21);
+		btn5 = Helper.createButton("ดาวน์โหลดคะแนน", 21);
 		
 		
 		bottom.add(btn1);
 		bottom.add(btn2);
 		bottom.add(btn3);
 		bottom.add(btn4);
+		bottom.add(btn5);
 
 		p1.add(topmenu);
 		p1.add(container);
@@ -94,6 +96,9 @@ public class ScoreGUI {
 	}
 	public JButton getBtn4() {
 		return this.btn4;
+	}
+	public JButton getBtn5() {
+		return this.btn5;
 	}
 	public String getSubject() {
 		return this.subject;

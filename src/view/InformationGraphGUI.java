@@ -15,8 +15,8 @@ public class InformationGraphGUI {
 		btn2 = Helper.createButton("ย้อนกลับ", 25);
 		
 		container = Helper.createPanel("");
-		container.setLayout(new BorderLayout());
-		container.setSize(900, 610);
+		container.setLayout(new GridLayout(1, 1));
+		container.setSize(880, 600);
 		container.setLocation(0, 0);
 		
 		bottom = Helper.createPanel("");
@@ -43,6 +43,7 @@ public class InformationGraphGUI {
 		return this.btn2;
 	}
 	
+
 	public void updateGraph(ChartPanel n) {
 		
 		container.removeAll();

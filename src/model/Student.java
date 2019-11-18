@@ -49,14 +49,14 @@ public class Student {
 	public Object[] getGrade(int select) {
 		Object[] score = new Object[7];
 		score[0] = this.information.get("studentID");
-		score[1] = String.format("%.3f", this.score.get("s" + select + "_assignment"));
-		score[2] = String.format("%.3f", this.score.get("s" + select + "_project"));
-		score[3] = String.format("%.3f", this.score.get("s" + select + "_midterm"));
-		score[4] = String.format("%.3f", this.score.get("s" + select + "_final"));
+		score[1] = String.format("%.2f", this.score.get("s" + select + "_assignment"));
+		score[2] = String.format("%.2f", this.score.get("s" + select + "_project"));
+		score[3] = String.format("%.2f", this.score.get("s" + select + "_midterm"));
+		score[4] = String.format("%.2f", this.score.get("s" + select + "_final"));
 		
 		double allScore = this.score.get("s" + select + "_assignment") + this.score.get("s" + select + "_project")
 		+ this.score.get("s" + select + "_midterm") + this.score.get("s" + select + "_final");
-		score[5] = String.format("%.3f", allScore);
+		score[5] = String.format("%.2f", allScore);
 		if (allScore >= 80) {
 			score[6] = "A";
 		}

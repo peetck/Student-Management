@@ -21,6 +21,7 @@ public class ManagementGUI{
     private Thread t1;
     private JLabel welcome, user;
     private InformationGraphGUI information_graph;
+    private OverallScoreGraphGUI overall_score_graph;
     public ManagementGUI(){
         desktop = new JDesktopPane();
         
@@ -38,6 +39,7 @@ public class ManagementGUI{
         setting = new SettingGUI();
         information = new InformationGUI();
         information_graph = new InformationGraphGUI();
+        overall_score_graph = new OverallScoreGraphGUI();
         
         topmenu = Helper.createPanel("");
         topmenu.setLocation(0, 0);
@@ -218,6 +220,13 @@ public class ManagementGUI{
     		program.repaint();
     		program.add(information_graph.getPanel());
     	}
+    	else if (select.equals("overall_score_graph")) {
+    		program.removeAll();
+    		
+    		program.revalidate();
+    		program.repaint();
+    		program.add(overall_score_graph.getPanel());
+    	}
     }
     public JDesktopPane getPanel(){
         return this.desktop;
@@ -233,6 +242,9 @@ public class ManagementGUI{
     }
     public InformationGraphGUI getInformationGraphGUI() {
     	return this.information_graph;
+    }
+    public OverallScoreGraphGUI getOverallScoreGraphGUI() {
+    	return this.overall_score_graph;
     }
     public SubjectGUI getSubjectGUI() {
     	return this.subject;

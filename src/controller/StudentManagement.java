@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -30,9 +31,16 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.StandardChartTheme;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.labels.StandardCategoryToolTipGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.BarPainter;
+import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.chart.renderer.category.CategoryItemRenderer;
+import org.jfree.chart.renderer.category.LineAndShapeRenderer;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 
 import model.*;
 import view.*;
@@ -706,50 +714,244 @@ public class StudentManagement{
         });
         
         // export score as CSV {subject 1}
-        managementPage.getSubjectGUI().getSubject1().getBtn4().addActionListener(new ActionListener() {
+        managementPage.getSubjectGUI().getSubject1().getBtn5().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
 				exportCSV(1);
         	}
         });
         
         // export score as CSV {subject 2}
-        managementPage.getSubjectGUI().getSubject2().getBtn4().addActionListener(new ActionListener() {
+        managementPage.getSubjectGUI().getSubject2().getBtn5().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		exportCSV(2);
         	}
         });
         
         // export score as CSV {subject 3}
-        managementPage.getSubjectGUI().getSubject3().getBtn4().addActionListener(new ActionListener() {
+        managementPage.getSubjectGUI().getSubject3().getBtn5().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		exportCSV(3);
         	}
         });
         
         // import CSV to score {subject 1}
-        managementPage.getSubjectGUI().getSubject1().getBtn3().addActionListener(new ActionListener() {
+        managementPage.getSubjectGUI().getSubject1().getBtn4().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		importCSV(1);
         	}
         });
         
 		// import CSV to score {subject 2}
-		managementPage.getSubjectGUI().getSubject2().getBtn3().addActionListener(new ActionListener() {
+		managementPage.getSubjectGUI().getSubject2().getBtn4().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				importCSV(2);
 			}
 		});
 
 		// import CSV to score {subject 3}
-		managementPage.getSubjectGUI().getSubject3().getBtn3().addActionListener(new ActionListener() {
+		managementPage.getSubjectGUI().getSubject3().getBtn4().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				importCSV(3);
+			}
+		});
+		
+		// see overall graph {subject 1}
+		managementPage.getSubjectGUI().getSubject1().getBtn3().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        		
+        		
+				ChartPanel graph = createOverallScoreGraph(1);
+				double[] stat = calStat(teacher.getStudents(), 1);
+        		managementPage.getOverallScoreGraphGUI().updateGraph(graph, 1);
+        		managementPage.getOverallScoreGraphGUI().set(stat);
+        		managementPage.set("overall_score_graph");
+        	}
+        });
+		
+		// see overall graph {subject 2}
+		managementPage.getSubjectGUI().getSubject2().getBtn3().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				ChartPanel graph = createOverallScoreGraph(2);
+				double[] stat = calStat(teacher.getStudents(), 2);
+				managementPage.getOverallScoreGraphGUI().updateGraph(graph, 2);
+				managementPage.getOverallScoreGraphGUI().set(stat);
+				managementPage.set("overall_score_graph");
+			}
+		});
+		
+		// see overall graph {subject 3}
+		managementPage.getSubjectGUI().getSubject3().getBtn3().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				ChartPanel graph = createOverallScoreGraph(3);
+				double[] stat = calStat(teacher.getStudents(), 3);
+				managementPage.getOverallScoreGraphGUI().updateGraph(graph, 3);
+				managementPage.getOverallScoreGraphGUI().set(stat);
+				managementPage.set("overall_score_graph");
+			}
+		});
+		
+		managementPage.getOverallScoreGraphGUI().getBtn1().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int select = managementPage.getOverallScoreGraphGUI().getSubject();
+				managementPage.set("subject" + select);
 			}
 		});
      }
     
     
     // below here is method in all application -------------------------------------------------------------------------------------------------------------------------
+    public double[] calStat(ArrayList<Student> arr, int select) {
+    	double max = 0;
+    	double min = 0;
+    	double mean = 0;
+    	double sd = 0;
+    	double sum = 0;
+    	
+    	for (int i = 0; i < arr.size(); i++) {
+    		double value = Double.parseDouble("" + arr.get(i).getGrade(select)[5]);
+    		sum += value;
+    		if (i == 0) {
+    			max = value;
+    			min = value;
+    			continue;
+    		}
+    		if (max < value) {
+    			max = value;
+    		}
+    		if (min > value) {
+    			min = value;
+    		}
+    		
+    	}
+    	
+    	mean = sum / arr.size();
+    	
+    	for(int i = 0; i < arr.size(); i++) {
+            sd += Math.pow(Double.parseDouble("" + arr.get(i).getGrade(select)[5]) - mean, 2);
+        }
+    	
+    	sd = Math.sqrt(sd / arr.size());
+    	
+    	double[] answer = {max, min, mean, sd};
+    	return answer;
+    }
+    public ChartPanel createOverallScoreGraph(int select) {
+    	DefaultCategoryDataset  data = new DefaultCategoryDataset ();
+    	
+    	ArrayList<Student> arr = teacher.getStudents();
+    	HashMap<String, Integer> grade = new HashMap<String, Integer>();
+    	for (int i = 0; i < arr.size(); i++) {
+    		Object[] temp = arr.get(i).getGrade(select);
+    		
+    		if (grade.containsKey("" + temp[6])) {
+    			grade.put("" + temp[6], grade.get("" + temp[6]) + 1);
+    		}
+    		else {
+    			grade.put("" + temp[6], 1);
+    		}
+    	}
+
+    	String[] loopg = {"A", "B+", "B", "C+", "C", "D+", "D", "F"};
+    	int highest = 0;
+    	for (String i : loopg) {
+    		if (grade.containsKey(i)) {
+    			data.setValue(grade.get(i), "เกรด", i);
+    			if (grade.get(i) > highest) {
+    				highest = grade.get(i);
+    			}
+    		}
+    		else {
+    			data.setValue(0, "เกรด", i);
+    		}
+    	}
+    	
+    	String title = "";
+    	if (select == 1) {
+    		title = managementPage.getSubjectGUI().getSubject1().getSubject();
+    	}
+    	else if (select == 2) {
+    		title = managementPage.getSubjectGUI().getSubject2().getSubject();
+    	}
+    	else if (select == 3) {
+    		title = managementPage.getSubjectGUI().getSubject3().getSubject();
+    	}
+    	
+    	ChartFactory.setChartTheme(StandardChartTheme.createLegacyTheme());
+    	JFreeChart chart = ChartFactory.createBarChart("จํานวนนักเรียนที่ได้เกรดต่างๆของวิชา " + title + " (คลิกขวาที่รูปเพื่อดาวน์โหลดได้)", "", "จํานวนคน", data, PlotOrientation.VERTICAL, false, true, false);
+
+		StandardChartTheme chartTheme = (StandardChartTheme) org.jfree.chart.StandardChartTheme.createJFreeTheme();
+		Font oldExtraLargeFont = chartTheme.getExtraLargeFont();
+		Font oldLargeFont = chartTheme.getLargeFont();
+		Font oldRegularFont = chartTheme.getRegularFont();
+		Font oldSmallFont = chartTheme.getSmallFont();
+
+		Font extraLargeFont = new Font("Kanit ExtraLight", oldExtraLargeFont.getStyle(), oldExtraLargeFont.getSize());
+		Font largeFont = new Font("Kanit ExtraLight", oldLargeFont.getStyle(), oldLargeFont.getSize());
+		Font regularFont = new Font("Kanit ExtraLight", oldRegularFont.getStyle(), oldRegularFont.getSize());
+		Font smallFont = new Font("Kanit ExtraLight", oldSmallFont.getStyle(), oldSmallFont.getSize());
+
+		chartTheme.setExtraLargeFont(extraLargeFont);
+		chartTheme.setLargeFont(largeFont);
+		chartTheme.setRegularFont(regularFont);
+		chartTheme.setSmallFont(smallFont);
+
+		chartTheme.setRangeGridlinePaint(Color.BLACK);
+
+		chartTheme.apply(chart);
+		
+		CategoryPlot carPlot = chart.getCategoryPlot();
+
+		CategoryPlot plot = (CategoryPlot) carPlot;
+
+		NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
+		rangeAxis.setRange(0, highest + 5);
+		plot.setBackgroundPaint(Color.WHITE);
+
+		Paint[] colors = {
+				new Color(62, 193, 79), new Color(88, 197, 96), new Color(110, 201, 113), new Color(129, 205, 129),
+				new Color(147, 209, 145), new Color(163, 212, 161), new Color(179, 216, 177), new Color(195, 219, 193)};
+		CategoryItemRenderer renderer = new BarRenderer() {
+		    public Paint getItemPaint(final int row, final int column) {
+		        return colors[column % colors.length];
+		    }
+		};
+
+		renderer.setDefaultToolTipGenerator(new StandardCategoryToolTipGenerator());
+		plot.setRenderer(renderer);
+
+		
+		rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
+		
+		ChartPanel chartPanel = new ChartPanel(chart);
+		
+		chartPanel.setDomainZoomable(false);
+		chartPanel.setRangeZoomable(false);
+		
+		JPopupMenu menu = new JPopupMenu();
+
+		JMenuItem menuitem = new JMenuItem("ดาวน์โหลด (PNG)");
+		menuitem.setFont(new Font("Kanit ExtraLight", Font.BOLD, 14));
+		menuitem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					chartPanel.doSaveAs();
+				}
+				catch (IOException err) {
+					System.out.println("Could not save chart");
+				}
+			}
+		});
+		
+		menu.add(menuitem);
+
+		chartPanel.setPopupMenu(menu);
+		
+		return chartPanel;
+    	
+    }
     
     public ChartPanel createStudentGraph(String studentID, HashMap<String, Double> score, Object[] grade1, Object[] grade2, Object[] grade3) {
     	DefaultCategoryDataset data = new DefaultCategoryDataset();
@@ -785,7 +987,8 @@ public class StudentManagement{
     	data.addValue(score.get("s3_midterm"), "คะแนนกลางภาค", "วิชา" + subject3);
     	data.addValue(score.get("s3_final"), "คะแนนปลายภาค", "วิชา" + subject3);
     	
-		JFreeChart chart = ChartFactory.createBarChart("คะแนนของนักเรียนรหัส " + studentID, "", "คะแนน", data, PlotOrientation.VERTICAL, true, true, false);
+    	ChartFactory.setChartTheme(StandardChartTheme.createLegacyTheme());
+		JFreeChart chart = ChartFactory.createBarChart("คะแนนของนักเรียนรหัส " + studentID + " (คลิกขวาที่รูปเพื่อดาวน์โหลดได้)", "", "คะแนน", data, PlotOrientation.VERTICAL, true, true, false);
 
 		StandardChartTheme chartTheme = (StandardChartTheme) org.jfree.chart.StandardChartTheme.createJFreeTheme();
 		Font oldExtraLargeFont = chartTheme.getExtraLargeFont();
@@ -814,10 +1017,34 @@ public class StudentManagement{
 		rangeAxis.setRange(0, 100);
 		plot.setBackgroundPaint(Color.WHITE);
 
+		plot.getRenderer().setSeriesPaint(0, new Color(0, 63, 92));
+		plot.getRenderer().setSeriesPaint(1, new Color(122, 81, 149));
+		plot.getRenderer().setSeriesPaint(2, new Color(239, 86, 117));
+		plot.getRenderer().setSeriesPaint(3, new Color(255, 166, 0));
+		
 		ChartPanel chartPanel = new ChartPanel(chart);
-
+		
 		chartPanel.setDomainZoomable(false);
 		chartPanel.setRangeZoomable(false);
+		
+		JPopupMenu menu = new JPopupMenu();
+
+		JMenuItem menuitem = new JMenuItem("ดาวน์โหลด (PNG)");
+		menuitem.setFont(new Font("Kanit ExtraLight", Font.BOLD, 14));
+		menuitem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					chartPanel.doSaveAs();
+				}
+				catch (IOException err) {
+					System.out.println("Could not save chart");
+				}
+			}
+		});
+		
+		menu.add(menuitem);
+
+		chartPanel.setPopupMenu(menu);
 		
 		return chartPanel;
     }
@@ -1169,6 +1396,11 @@ public class StudentManagement{
 		p1.add(tf2);
 		int alert = JOptionPane.showOptionDialog(null, p1, "เพิ่มวิชา", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"เพิ่มวิชา", "ยกเลิก"}, null);
 		if (alert == JOptionPane.OK_OPTION) {
+			
+			if (tf.getText().equals("") || tf2.getText().equals("")) {
+				JOptionPane.showOptionDialog(null, Helper.createLabel("กรุณากรอกข้อมูลให้ครบถ้วน"), "เพิ่มวิชา ", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+				return;
+			}
 			DBCursor curs = users.find();
 			while (curs.hasNext()){
 	            DBObject t = curs.next();
