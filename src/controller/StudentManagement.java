@@ -1220,8 +1220,9 @@ public class StudentManagement{
 			return;
 		}
     	try{
-    		
-			PrintWriter pw = new PrintWriter(new File(path));
+
+    		File f = new File(path);
+			PrintWriter pw = new PrintWriter(f);
 			StringBuilder builder = new StringBuilder();
 
 			String ColumnNamesList = "studentID,Accumulated Score,Project Score,Midterm Score,Final Score,Total Score,Grade";
@@ -1245,8 +1246,8 @@ public class StudentManagement{
 			JOptionPane.showOptionDialog(null, Language.get("downloadscoresuccess"), Language.get("downloadscore"), JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {Language.get("ok"), }, null);
 
 		}
-		catch (FileNotFoundException err) {
-
+		catch (Exception err) {
+			JOptionPane.showOptionDialog(null, "กรุณาปิดไฟล์ CSV ก่อน", Language.get("downloadscore"), JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {Language.get("ok"), }, null);
 		}
     }
     public void deleteSubject(int select) {
