@@ -48,16 +48,16 @@ public class ButtonEditor2 extends DefaultCellEditor {
 	  public Object getCellEditorValue() {
 	    if (isPushed) {
 	    	student = teacher.getStudents().get(row);
-			msg = Helper.createLabel("คุณต้องการลบนักเรียนรหัส " + student.getStudentID() + " ใช่หรือไม่");
+			msg = Helper.createLabel(Language.get("ButtonEditor2_msg1") + " " + student.getStudentID() + " " + Language.get("ButtonEditor2_msg2"));
 
-			int alert = JOptionPane.showConfirmDialog(null, msg, "ลบนักเรียน", JOptionPane.OK_CANCEL_OPTION);
+			int alert = JOptionPane.showConfirmDialog(null, msg, Language.get("ButtonEditor2_msg3"), JOptionPane.OK_CANCEL_OPTION);
 			if (alert == JOptionPane.OK_OPTION) {
 				if ((stu.delete(student.getStudentID()))) {
-					JLabel msg2 = Helper.createLabel("ลบนักเรียนรหัส " + student.getStudentID() + " ออกจากระบบเรียบร้อยแล้ว");
+					JLabel msg2 = Helper.createLabel(Language.get("ButtonEditor2_msg4") + " " + student.getStudentID() + " " + Language.get("ButtonEditor2_msg5"));
     				JOptionPane.showMessageDialog(null, msg2);
 				}
 				else{
-					JLabel msg2 = Helper.createLabel("ไม่มีรหัสนักเรียนนี้อยู่ในระบบ");
+					JLabel msg2 = Helper.createLabel(Language.get("nostudent"));
     				JOptionPane.showMessageDialog(null, msg2);
 				}
             }

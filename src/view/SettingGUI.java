@@ -2,6 +2,8 @@ package view;
 import javax.swing.*;
 import javax.swing.border.Border;
 
+import controller.Language;
+
 import java.awt.*;
 
 public class SettingGUI {
@@ -27,11 +29,11 @@ public class SettingGUI {
 		container_bot.setBackground(Color.WHITE);
 		
 		
-		btn1 = Helper.createButton("เปลี่ยนรหัสผ่าน", 40, "/images/password_change.png", 60, 60);
+		btn1 = Helper.createButton(Language.get("changepassword"), 40, "/images/password_change.png", 60, 60);
 
-		btn2 = Helper.createButton("ล็อกเอ้าท์", 40, "/images/logout.png", 60, 60);
+		btn2 = Helper.createButton(Language.get("logout"), 40, "/images/logout.png", 60, 60);
 
-		btn3 = Helper.createButton("ลบบัญชี", 40, "/images/delete_account.png", 60, 60);
+		btn3 = Helper.createButton(Language.get("deleteaccount"), 40, "/images/delete_account.png", 60, 60);
 
 		
 		

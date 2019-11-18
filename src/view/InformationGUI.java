@@ -1,6 +1,7 @@
 package view;
 import javax.swing.*;
 
+import controller.Language;
 import model.Student;
 
 import java.awt.*;
@@ -10,10 +11,10 @@ public class InformationGUI {
 	private JDesktopPane p1;
 	private MyPanel left, right, picture, titlep, select;
 	private JLabel pictureLabel;
-	private JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12, l13, l14, l15, l16, l17;
-	private JLabel a1, a2, a3, a4, a5, a6, a7, a9, a10, a11, a12, a13, a14, a15, a16, a17;
+	private JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12, l13, l14, l15, l16;
+	private JLabel a1, a2, a3, a4, a5, a6, a8, a9, a10, a11, a12, a13, a14, a15, a16;
 	private JLabel title;
-	private JScrollPane a8;
+	private JScrollPane a7;
 	private HashMap<String, String> information;
 	private JButton btn1, btn2, btn3;
 	private String picturePath;
@@ -33,7 +34,7 @@ public class InformationGUI {
         right = Helper.createPanel("");
         right.setSize(390, 370);
         right.setLocation(490, 165);
-        right.setLayout(new GridLayout(7, 2));
+        right.setLayout(new GridLayout(6, 2));
         //right.setBackground(Color.RED);
         
         picture = Helper.createPanel("");
@@ -61,9 +62,9 @@ public class InformationGUI {
 	   	gbc = new GridBagConstraints();
 	    gbc.fill = GridBagConstraints.BOTH;
 	    gbc.insets = new Insets(5, 0, 5, 0);
-        btn1 = Helper.createButton("แก้ไขข้อมูล", 17);
-        btn2 = Helper.createButton("ดูคะแนน", 17);
-        btn3 = Helper.createButton("ย้อนกลับ", 17);
+        btn1 = Helper.createButton(Language.get("editinformation"), 17);
+        btn2 = Helper.createButton(Language.get("seescore"), 17);
+        btn3 = Helper.createButton(Language.get("back"), 17);
         
         gbc.weightx = 2;
         select.add(btn1, gbc);
@@ -72,24 +73,23 @@ public class InformationGUI {
         gbc.gridy = 2;
         select.add(btn3, gbc);
         
-        l1 = Helper.createLabel("รหัสนักเรียน : ", true);
-        l2 = Helper.createLabel("คณะ : ", true);
-        l3 = Helper.createLabel("คํานําหน้า : ", true);
-		l4 = Helper.createLabel("ชื่อ : ", true);
-		l5 = Helper.createLabel("นามสกุล : ", true);
-		l6 = Helper.createLabel("วันเดือนปีเกิด : ", true);
+        l1 = Helper.createLabel(Language.get("studentid") + " : ", true);
+        l2 = Helper.createLabel(Language.get("title") + " : ", true);
+		l3 = Helper.createLabel(Language.get("name") + " : ", true);
+		l4 = Helper.createLabel(Language.get("surname") + " : ", true);
+		l5 = Helper.createLabel(Language.get("born") + " : ", true);
 		
-		l7 = Helper.createLabel("หมายเลขบัตรประชาชน : ", true);
-		l8 = Helper.createLabel("ที่อยู่ : ", true);
-		l9 = Helper.createLabel("เชื้อชาติ : ", true);
-		l10 = Helper.createLabel("ศาสนา : ", true);
-		l11 = Helper.createLabel("หมู่เลือด : ", true);
-		l12 = Helper.createLabel("เบอร์ติดต่อ : ", true);
-		l13 = Helper.createLabel("อีเมล์ : ", true);
-		l14 = Helper.createLabel("ส่วนสูง : ", true);
-		l15 = Helper.createLabel("นํ้าหนัก : ", true);
-		l16 = Helper.createLabel("เบอร์ติดต่อผู้ปกครอง : ", true);
-		l17 = Helper.createLabel("โรคประจําตัว : ", true);
+		l6 = Helper.createLabel(Language.get("idcard") + " : ", true);
+		l7 = Helper.createLabel(Language.get("address") + " : ", true);
+		l8 = Helper.createLabel(Language.get("race") + " : ", true);
+		l9 = Helper.createLabel(Language.get("religion") + " : ", true);
+		l10 = Helper.createLabel(Language.get("bloodtype") + " : ", true);
+		l11 = Helper.createLabel(Language.get("tel") + " : ", true);
+		l12 = Helper.createLabel(Language.get("email") + " : ", true);
+		l13 = Helper.createLabel(Language.get("height") + " : ", true);
+		l14 = Helper.createLabel(Language.get("weight") + " : ", true);
+		l15 = Helper.createLabel(Language.get("telp") + " : ", true);
+		l16 = Helper.createLabel(Language.get("disease") + " : ", true);
 		
 		
         
@@ -137,22 +137,22 @@ public class InformationGUI {
     	
     	
     	a1 = Helper.createLabel(information.get("studentID"));
-    	a2 = Helper.createLabel(information.get("faculty"));
-      	a3 = Helper.createLabel(information.get("title"));   	
-    	a4 = Helper.createLabel(information.get("name"));   	
-    	a5 = Helper.createLabel(information.get("surname"));  	
-    	a6 = Helper.createLabel(information.get("day") + " / " + information.get("month") + " / " + information.get("year"));	
-    	a7 = Helper.createLabel(information.get("cardID"));
-    	a8 = Helper.createTextArea(information.get("address"));
-    	a9 = Helper.createLabel(information.get("race"));
-    	a10 = Helper.createLabel(information.get("religion"));
-    	a11 = Helper.createLabel(information.get("bloodType"));
-    	a12 = Helper.createLabel(information.get("tel"));
-    	a13 = Helper.createLabel(information.get("email"));
-    	a14 = Helper.createLabel(information.get("height"));
-    	a15 = Helper.createLabel(information.get("weight"));
-    	a16 = Helper.createLabel(information.get("parentTel"));
-    	a17 = Helper.createLabel(information.get("disease"));
+
+      	a2 = Helper.createLabel(information.get("title"));   	
+    	a3 = Helper.createLabel(information.get("name"));   	
+    	a4 = Helper.createLabel(information.get("surname"));  	
+    	a5 = Helper.createLabel(information.get("day") + " / " + information.get("month") + " / " + information.get("year"));	
+    	a6 = Helper.createLabel(information.get("cardID"));
+    	a7 = Helper.createTextArea(information.get("address"));
+    	a8 = Helper.createLabel(information.get("race"));
+    	a9 = Helper.createLabel(information.get("religion"));
+    	a10 = Helper.createLabel(information.get("bloodType"));
+    	a11 = Helper.createLabel(information.get("tel"));
+    	a12 = Helper.createLabel(information.get("email"));
+    	a13 = Helper.createLabel(information.get("height"));
+    	a14 = Helper.createLabel(information.get("weight"));
+    	a15 = Helper.createLabel(information.get("parentTel"));
+    	a16 = Helper.createLabel(information.get("disease"));
     	
     	
     	
@@ -196,8 +196,6 @@ public class InformationGUI {
 		right.add(a15);
 		right.add(l16);
 		right.add(a16);
-		right.add(l17);
-		right.add(a17);
 		
 	}
 	

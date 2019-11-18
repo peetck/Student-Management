@@ -1,5 +1,7 @@
 package model;
 import java.util.*;
+
+import controller.Language;
 public class Student {
 
 	private HashMap<String, String> information;
@@ -36,8 +38,8 @@ public class Student {
 		info[1] = this.information.get("name");
 		info[2] = this.information.get("surname");
 		info[3] = this.information.get("enrollAt");
-		info[4] = "ดูข้อมูลเพิ่มเติม";
-		info[5] = "ลบนักเรียน";
+		info[4] = Language.get("moreinformation");
+		info[5] = Language.get("ButtonEditor2_msg3");
 		
 		return info;
 	}

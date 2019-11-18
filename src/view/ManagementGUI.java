@@ -4,6 +4,7 @@ import java.awt.*;
 
 import javax.swing.*;
 
+import controller.Language;
 import model.Student;
 
 
@@ -47,7 +48,7 @@ public class ManagementGUI{
         topmenu.setLayout(new GridLayout(2, 1));
         topmenu.setBackground(new Color(0, 99, 178));
         
-        welcome = Helper.createLabel("ยินดีต้อนรับ", 35, Color.WHITE);
+        welcome = Helper.createLabel(Language.get("welcome"), 35, Color.WHITE);
         welcome.setHorizontalAlignment(JLabel.CENTER);
         user = Helper.createLabel("", 25, Color.WHITE);
         user.setHorizontalAlignment(JLabel.CENTER);
@@ -68,7 +69,7 @@ public class ManagementGUI{
         version.setSize(100, 30);
         version.setLocation(200, 50);
         version.setBackground(new Color(0, 99, 178));
-        bottoml1 = Helper.createLabel("Version 1.0", Color.WHITE);
+        bottoml1 = Helper.createLabel(Language.get("version") + " 1.0", Color.WHITE);
         version.add(bottoml1);
         
         time = Helper.createPanel("");
@@ -93,7 +94,7 @@ public class ManagementGUI{
 
         menu1 = Helper.createPanel("");
         menu1.setLayout(new BorderLayout());
-        menuMsg1 = Helper.createLabel("รายชื่อนักเรียน", 24, true);
+        menuMsg1 = Helper.createLabel(Language.get("studentlist"), 24, true);
         menuMsg1.setHorizontalAlignment(JLabel.CENTER);
         icon1 = Helper.createLabel("", "/images/menu_icon/List.png");
         menu1.add(menuMsg1);
@@ -101,7 +102,7 @@ public class ManagementGUI{
 
         menu2 = Helper.createPanel("");
         menu2.setLayout(new BorderLayout());
-        menuMsg2 = Helper.createLabel("วิชาของคุณ",  24, true);
+        menuMsg2 = Helper.createLabel(Language.get("yoursubject"),  24, true);
         icon2 = Helper.createLabel("", "/images/menu_icon/Subject.png");
         menuMsg2.setHorizontalAlignment(JLabel.CENTER);
         menu2.add(menuMsg2);
@@ -109,7 +110,7 @@ public class ManagementGUI{
         
         menu3 = Helper.createPanel("");
         menu3.setLayout(new BorderLayout());
-        menuMsg3 = Helper.createLabel("เพิ่มนักเรียน",  24, true);
+        menuMsg3 = Helper.createLabel(Language.get("addstudent"),  24, true);
         icon3 = Helper.createLabel("", "/images/menu_icon/Add.png");
         menuMsg3.setHorizontalAlignment(JLabel.CENTER);
         menu3.add(menuMsg3);
@@ -119,7 +120,7 @@ public class ManagementGUI{
         
         menu4 = Helper.createPanel("");
         menu4.setLayout(new BorderLayout());
-        menuMsg4 = Helper.createLabel("ตั้งค่า",  24, true);
+        menuMsg4 = Helper.createLabel(Language.get("setting"),  24, true);
         icon4 = Helper.createLabel("", "/images/menu_icon/Setting.png");
         menuMsg4.setHorizontalAlignment(JLabel.CENTER);
         menu4.add(menuMsg4);
@@ -127,7 +128,7 @@ public class ManagementGUI{
         
         menu5 = Helper.createPanel("");
         menu5.setLayout(new BorderLayout());
-        menuMsg5 = Helper.createLabel("ออกจากโปรแกรม",  24, true);
+        menuMsg5 = Helper.createLabel(Language.get("exitprogram"),  24, true);
         icon5 = Helper.createLabel("", "/images/menu_icon/Exit.png");
         menuMsg5.setHorizontalAlignment(JLabel.CENTER);
         menu5.add(menuMsg5);

@@ -3,6 +3,8 @@ import java.awt.*;
 import javax.swing.*;
 
 import org.jfree.chart.ChartPanel;
+
+import controller.Language;
 public class OverallScoreGraphGUI {
 	
 	private JDesktopPane p;
@@ -43,7 +45,7 @@ public class OverallScoreGraphGUI {
 		bottom.setSize(900, 90);
 		bottom.setLocation(0, 610);
 		
-		btn1 = Helper.createButton("ย้อนกลับ", 25);
+		btn1 = Helper.createButton(Language.get("back"), 25);
 		
 		bottom.add(btn1);
 		
@@ -64,10 +66,10 @@ public class OverallScoreGraphGUI {
 	}
 	
 	public void set(double[] inp) {
-		max.setText("<html><b>คะแนนสูงสุด : </b>" + String.format("%.2f", inp[0]) + "</html>");
-		min.setText("<html><b>คะแนนตํ่าสุด : </b>" + String.format("%.2f", inp[1]) + "</html>");
-		mean.setText("<html><b>ค่าเฉลี่ย : </b>" + String.format("%.2f", inp[2]) + "</html>");
-		sd.setText("<html><b>ค่า SD : </b>" + String.format("%.2f", inp[3]) + "</html>");
+		max.setText("<html><b>" + Language.get("score_max") + " : </b>" + String.format("%.2f", inp[0]) + "</html>");
+		min.setText("<html><b>" + Language.get("score_min") + " : </b>" + String.format("%.2f", inp[1]) + "</html>");
+		mean.setText("<html><b>" + Language.get("score_mean") + " : </b>" + String.format("%.2f", inp[2]) + "</html>");
+		sd.setText("<html><b>" + Language.get("score_sd") + " : </b>" + String.format("%.2f", inp[3]) + "</html>");
 		
 	}
 	public void updateGraph(ChartPanel n, int select) {

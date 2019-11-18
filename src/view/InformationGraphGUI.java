@@ -3,6 +3,8 @@ import java.awt.*;
 import javax.swing.*;
 
 import org.jfree.chart.ChartPanel;
+
+import controller.Language;
 public class InformationGraphGUI {
 	private JDesktopPane p;
 	private MyPanel bottom, container;
@@ -11,8 +13,8 @@ public class InformationGraphGUI {
 		p = new JDesktopPane();
 		
 		// 900 * 700
-		btn1 = Helper.createButton("แก้ไขคะแนน", 25);
-		btn2 = Helper.createButton("ย้อนกลับ", 25);
+		btn1 = Helper.createButton(Language.get("editscore"), 25);
+		btn2 = Helper.createButton(Language.get("back"), 25);
 		
 		container = Helper.createPanel("");
 		container.setLayout(new GridLayout(1, 1));

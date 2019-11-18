@@ -1,18 +1,22 @@
 package view;
 
 import java.awt.*;
+import java.util.Locale;
 
 import javax.swing.*;
 
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.DatePickerSettings;
+
+import controller.Language;
+
 public class AddStudentGUI {
 	private JDesktopPane p1;
 	private MyPanel left, right, picture;
-	private JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12, l13, l14, l15, l16, l17, pictureLabel;
-	private JTextField f1,f4, f5, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17;
-	private JComboBox<String> f2, f3;
-	private DatePicker f6;
+	private JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12, l13, l14, l15, l16, pictureLabel;
+	private JTextField f1, f3, f4, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16;
+	private JComboBox<String> f2;
+	private DatePicker f5;
 	private JButton btn1, btn2;
 	private GridBagConstraints gbc;
 	private Image defaultImg;
@@ -27,8 +31,8 @@ public class AddStudentGUI {
 		gbc = new GridBagConstraints();
 		gbc.insets = new Insets(2, 0, 0, 0);
         gbc.fill = GridBagConstraints.BOTH;
-        btn1 = Helper.createButton("ยืนยัน");
-        btn2 = Helper.createButton("แก้ไขรูป");
+        btn1 = Helper.createButton(Language.get("ok"));
+        btn2 = Helper.createButton(Language.get("editimg"));
         
         
         left = Helper.createPanel("");
@@ -52,59 +56,47 @@ public class AddStudentGUI {
         titlep.setLocation(50, 15);
         titlep.setLayout(new BorderLayout());
         
-        title = Helper.createLabel(" เพิ่มนักเรียน", 35, true);
+        title = Helper.createLabel(Language.get("addstudent"), 35, true);
     	title.setHorizontalAlignment(JLabel.CENTER);
     	title.setIcon(new ImageIcon(Helper.getImage("/images/menu_icon/Add.png").getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
     	
     	titlep.add(title);
         
-        l1 = Helper.createLabel("รหัสนักเรียน : ", 15, true);
-		l2 = Helper.createLabel("คณะ : ", 15, true);
-        l3 = Helper.createLabel("คํานําหน้า : ", 15, true);
-		l4 = Helper.createLabel("ชื่อ : ", 15, true);
-		l5 = Helper.createLabel("นามสกุล : ", 15, true);
-		l6 = Helper.createLabel("วันเดือนปีเกิด : ", 15, true);
+        l1 = Helper.createLabel(Language.get("studentid") + " : ", 15, true);
+        l2 = Helper.createLabel(Language.get("title") + " : ", 15, true);
+		l3 = Helper.createLabel(Language.get("name") + " : ", 15, true);
+		l4 = Helper.createLabel(Language.get("surname") + " : ", 15, true);
+		l5 = Helper.createLabel(Language.get("born") + " : ", 15, true);
 		
-		l7 = Helper.createLabel("หมายเลขบัตรประชาชน : ", 15, true);
-		l8 = Helper.createLabel("ที่อยู่ : ", 15, true);
-		l9 = Helper.createLabel("เชื้อชาติ : ", 15, true);
-		l10 = Helper.createLabel("ศาสนา : ", 15, true);
-		l11 = Helper.createLabel("หมู่เลือด : ", 15, true);
-		l12 = Helper.createLabel("เบอร์ติดต่อ : ", 15, true);
-		l13 = Helper.createLabel("อีเมล์ : ", 15, true);
-		l14 = Helper.createLabel("ส่วนสูง : ", 15, true);
-		l15 = Helper.createLabel("นํ้าหนัก : ", 15, true);
-		l16 = Helper.createLabel("เบอร์ติดต่อผู้ปกครอง : ", 15, true);
-		l17 = Helper.createLabel("โรคประจําตัว : ", 15, true);
+		l6 = Helper.createLabel(Language.get("idcard") + " : ", 15, true);
+		l7 = Helper.createLabel(Language.get("address") + " : ", 15, true);
+		l8 = Helper.createLabel(Language.get("race") + " : ", 15, true);
+		l9 = Helper.createLabel(Language.get("religion") + " : ", 15, true);
+		l10 = Helper.createLabel(Language.get("bloodtype") + " : ", 15, true);
+		l11 = Helper.createLabel(Language.get("tel") + " : ", 15, true);
+		l12 = Helper.createLabel(Language.get("email") + " : ", 15, true);
+		l13 = Helper.createLabel(Language.get("height") + " : ", 15, true);
+		l14 = Helper.createLabel(Language.get("weight") + " : ", 15, true);
+		l15 = Helper.createLabel(Language.get("telp") + " : ", 15, true);
+		l16 = Helper.createLabel(Language.get("disease") + " : ", 15, true);
 		
 		f1 = Helper.createTextField(20, 15);
-		f2 = Helper.createComboBox(15);
-		f2.addItem("วิศวกรรมศาสตร์");
-		f2.addItem("สถาปัตยกรรมศาสตร์");
-		f2.addItem("ครุศาสตร์อุตสาหกรรม");
-		f2.addItem("เทคโนโลยีการเกษตร");
-		f2.addItem("วิทยาศาสตร์");
-		f2.addItem("อุตสาหกรรมเกษตร");
-		f2.addItem("เทคโนโลยีสารสนเทศ");
-		f2.addItem("วิทยาลัยนานาชาติ");
-		f2.addItem("วิทยาลัยนาโนเทคโนโลยี ฯ");
-		f2.addItem("วิทยาลัยนวัตกรรมการจัดการข้อมูล");
-		f2.addItem("วิทยาลัยการบริหารและจัดการ");
-		f2.addItem("ศิลปศาสตร์");
-		f2.addItem("วิศกรรมการบินและนักบินพาณิชย์");
 
-		f3 = Helper.createComboBox(15);
-		f3.addItem("นาย");
-		f3.addItem("นางสาว");
+
+		f2 = Helper.createComboBox(15);
+		f2.addItem(Language.get("male"));
+		f2.addItem(Language.get("female"));
+		f3 = Helper.createTextField(20, 15);
 		f4 = Helper.createTextField(20, 15);
-		f5 = Helper.createTextField(20, 15);
 		
 
 		settings = new DatePickerSettings();
         settings.setAllowKeyboardEditing(false);
-        f6 = new DatePicker(settings);
- 
+        settings.setLocale(Locale.US);
+        
+        f5 = new DatePicker(settings);
 		
+		f6 = Helper.createTextField(20, 15);
 		f7 = Helper.createTextField(20, 15);
 		f8 = Helper.createTextField(20, 15);
 		f9 = Helper.createTextField(20, 15);
@@ -115,7 +107,6 @@ public class AddStudentGUI {
 		f14 = Helper.createTextField(20, 15);
 		f15 = Helper.createTextField(20, 15);
 		f16 = Helper.createTextField(20, 15);
-		f17 = Helper.createTextField(20, 15);
 		
 		left.add(l1, gbc);
 		gbc.gridx = 0;
@@ -217,12 +208,6 @@ public class AddStudentGUI {
 		right.add(f16, gbc);
 		gbc.gridx = 0;
 		gbc.gridy = 12;
-		right.add(l17, gbc);
-		gbc.gridx = 0;
-		gbc.gridy = 13;
-		right.add(f17, gbc);
-		gbc.gridx = 0;
-		gbc.gridy = 14;
 		gbc.insets = new Insets(18, 0, 0, 0);
 		right.add(btn1, gbc);
 
@@ -258,17 +243,13 @@ public class AddStudentGUI {
 		this.f4 = f4;
 	}
 
-
-	public JTextField getF5() {
-		return f5;
+	public JComboBox<String> getF2(){
+		return this.f2;
 	}
 
-
-	public void setF5(JTextField f5) {
-		this.f5 = f5;
+	public JTextField getF6() {
+		return f6;
 	}
-
-
 	public JTextField getF7() {
 		return f7;
 	}
@@ -369,19 +350,9 @@ public class AddStudentGUI {
 	}
 
 
-	public JTextField getF17() {
-		return f17;
-	}
 
 
-	public void setF17(JTextField f17) {
-		this.f17 = f17;
-	}
 
-
-	public JComboBox<String> getF2() {
-		return f2;
-	}
 
 
 	public void setF2(JComboBox<String> f2) {
@@ -389,18 +360,16 @@ public class AddStudentGUI {
 	}
 
 
-	public JComboBox<String> getF3() {
-		return f3;
+	public JTextField getF3() {
+		return this.f3;
 	}
 
 
-	public void setF3(JComboBox<String> f3) {
-		this.f3 = f3;
-	}
 
 
-	public DatePicker getF6() {
-		return this.f6;
+
+	public DatePicker getF5() {
+		return this.f5;
 	}
 
 
@@ -438,10 +407,10 @@ public class AddStudentGUI {
 	public void reset() {
 		f1.setText("");
 		f2.setSelectedIndex(0);
-		f3.setSelectedIndex(0);
+		f3.setText("");
 		f4.setText("");
-		f5.setText("");
-		f6.setDate(null);
+		f5.setDate(null);
+		f6.setText("");
 		f7.setText("");
 		f8.setText("");
 		f9.setText("");
@@ -452,7 +421,6 @@ public class AddStudentGUI {
 		f14.setText("");
 		f15.setText("");
 		f16.setText("");
-		f17.setText("");
 		defaultImg = Helper.getImage("/images/blank_profile.png");
 		defaultImg = defaultImg.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 	    pictureLabel.setIcon(new ImageIcon(defaultImg));

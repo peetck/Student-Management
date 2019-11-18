@@ -3,11 +3,13 @@ import java.awt.*;
 
 import javax.swing.*;
 
+import controller.Language;
+
 public class LoginGUI{
     private JButton btn1, btn2;
     private JDesktopPane desktop, linkPanel;
     private MyPanel link, p1, href, connectp;
-    private JLabel l1, l2, l3, l4, title, github, connect, unconnect;
+    private JLabel l1, l2, l3, l4, title, github, connect, unconnect, language;
     private JTextField f1;
     private JPasswordField f2;
     private GridBagConstraints gbc;
@@ -31,8 +33,8 @@ public class LoginGUI{
         
         href = Helper.createPanel("");
         href.setBackground(Color.white);
-        href.setSize(60, 60);
-        href.setLocation(1110, 0);
+        href.setSize(200, 60);
+        href.setLocation(1020, 0);
         
         connectp = Helper.createPanel("");
         connectp.setBackground(Color.white);
@@ -46,8 +48,12 @@ public class LoginGUI{
         
         github = Helper.createLabel("", "/images/github.png", 50, 50);
         
+        language = Helper.createLabel("", "/images/language.png", 50, 50);
         
+        href.add(language);
         href.add(github);
+        
+        
         
         connectp.add(connect);
         connectp.add(unconnect);
@@ -60,20 +66,20 @@ public class LoginGUI{
         
         
         
-        btn1 = Helper.createButton("ล็อกอิน");
-        btn2 = Helper.createButton("ตั้งค่าฐานข้อมูล");
+        btn1 = Helper.createButton(Language.get("login"));
+        btn2 = Helper.createButton(Language.get("configdb"));
         
         title = Helper.createLabel("Student Management", 30, true);
         title.setHorizontalAlignment(JLabel.CENTER);
         
-        l1 = Helper.createLabel("ชื่อผู้ใช้ ");
-        l2 = Helper.createLabel("รหัสผ่าน ");
+        l1 = Helper.createLabel(Language.get("username"));
+        l2 = Helper.createLabel(Language.get("password"));
         
         l3 = Helper.createLabel("");
         l3.setForeground(Color.red);
         l3.setHorizontalAlignment(JLabel.CENTER);
         
-        l4 = Helper.createLabel("ยังไม่มีบัญชีเหรอ? สมัครเลย.");
+        l4 = Helper.createLabel(Language.get("registernow"));
         l4.setHorizontalAlignment(JLabel.CENTER);
         
         f1 = Helper.createTextField(30);
@@ -149,6 +155,9 @@ public class LoginGUI{
     }
     public JLabel getGithub() {
     	return this.github;
+    }
+    public JLabel getLanguage() {
+    	return this.language;
     }
     public JButton getBtn2() {
     	return this.btn2;

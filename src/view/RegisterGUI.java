@@ -1,6 +1,8 @@
 package view;
 import java.awt.*;
 import javax.swing.*;
+
+import controller.Language;
 public class RegisterGUI{
     private MyPanel p1;
     private JLabel l1, l2, l3, l4, l5;
@@ -10,15 +12,15 @@ public class RegisterGUI{
     private GridBagConstraints gbc;
     public RegisterGUI(){
         p1 = Helper.createPanel("/images/bg.jpg");
-        l1 = Helper.createLabel("สมัครสมาชิก ", 30, true);
+        l1 = Helper.createLabel(Language.get("register"), 30, true);
         l1.setHorizontalAlignment(JLabel.CENTER);
-        l2 = Helper.createLabel("ชื่อผู้ใช้ ");
-        l3 = Helper.createLabel("รหัสผ่าน ");
-        l4 = Helper.createLabel("ยืนยันรหัสผ่าน ");
+        l2 = Helper.createLabel(Language.get("username"));
+        l3 = Helper.createLabel(Language.get("password"));
+        l4 = Helper.createLabel(Language.get("confirmpassword"));
         l5 = Helper.createLabel("");
         l5.setHorizontalAlignment(JLabel.CENTER);
-        btn1 = Helper.createButton("สมัครสมาชิก");
-        btn2 = Helper.createButton("ย้อนกลับ");
+        btn1 = Helper.createButton(Language.get("register"));
+        btn2 = Helper.createButton(Language.get("back"));
         f1 = Helper.createTextField(30);
         f2 = Helper.createPasswordField(30);
         f3 = Helper.createPasswordField(30);

@@ -17,6 +17,7 @@ import java.time.format.DateTimeFormatter;
 
 import com.mongodb.*;
 
+import main.Main;
 import mdlaf.animation.MaterialUIMovement;
 
 import java.util.*;
@@ -108,10 +109,10 @@ public class StudentManagement{
 			p2.add(m2);
 			p2.add(l2);
 			
-			p.add(Helper.createLabel("เชื่อมต่อกับฐานข้อมูลไม่สําเร็จ"), BorderLayout.NORTH);
+			p.add(Helper.createLabel(Language.get("cantconnectdb")), BorderLayout.NORTH);
 			p.add(p2);
 
-			JOptionPane.showOptionDialog(null, p, "ตั้งค่าฐานข้อมูล", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+			JOptionPane.showOptionDialog(null, p, Language.get("configdb"), JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {Language.get("ok")}, null);
 		}
         
         
@@ -135,10 +136,10 @@ public class StudentManagement{
 					p2.add(m2);
 					p2.add(l2);
 					
-					p.add(Helper.createLabel("เชื่อมต่อกับฐานข้อมูลไม่สําเร็จ"), BorderLayout.NORTH);
+					p.add(Helper.createLabel(Language.get("cantconnectdb")), BorderLayout.NORTH);
 					p.add(p2);
 
-					JOptionPane.showOptionDialog(null, p, "ตั้งค่าฐานข้อมูล", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+					JOptionPane.showOptionDialog(null, p, Language.get("configdb"), JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {Language.get("ok")}, null);
             		return;
             	}
                 String username = loginPage.getF1().getText();
@@ -154,7 +155,7 @@ public class StudentManagement{
                         return;
                     }
                 }
-                loginPage.getL3().setText("ชื่อผู้ใช้ หรือ รหัสผ่านผิด");
+                loginPage.getL3().setText(Language.get("wrongusernameorpassword"));
             }
         });
         loginPage.getL4().addMouseListener (new MouseAdapter (){
@@ -189,10 +190,10 @@ public class StudentManagement{
 					p2.add(m2);
 					p2.add(l2);
 					
-					p.add(Helper.createLabel("เชื่อมต่อกับฐานข้อมูลไม่สําเร็จ"), BorderLayout.NORTH);
+					p.add(Helper.createLabel(Language.get("cantconnectdb")), BorderLayout.NORTH);
 					p.add(p2);
 
-					JOptionPane.showOptionDialog(null, p, "ตั้งค่าฐานข้อมูล", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+					JOptionPane.showOptionDialog(null, p, Language.get("configdb"), JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {Language.get("ok")}, null);
             		return;
             	}
                 BasicDBObject n = new BasicDBObject();
@@ -203,28 +204,28 @@ public class StudentManagement{
                 while (curs.hasNext()){
                     DBObject t = curs.next();
                     if (((String)t.get("username")).equals(username)){
-                    	registerPage.getL5().setText("ชื่อผู้ใช้นี้มีคนใช้แล้ว");
+                    	registerPage.getL5().setText(Language.get("usernamealreadyused"));
                     	registerPage.getL5().setForeground(Color.RED);
                         return;
                     }
                 }
                 for (int i = 0; i < username.length(); i++) {
                 	if (!((username.charAt(i) >= 48 && username.charAt(i) <= 57) || (username.charAt(i) >= 65 && username.charAt(i) <= 90) || (username.charAt(i) >= 97 && username.charAt(i) <= 122))) {
-                		registerPage.getL5().setText("ชื่อผู้ใช้สามารถประกอบด้วยตัวอักษร a ถึง z (A ถึง Z) และตัวเลขเท่านั้น");
+                		registerPage.getL5().setText(Language.get("usernameshouldatoz"));
                     	registerPage.getL5().setForeground(Color.RED);
                     	return;
                 	}
                 }
                 if (username.length() < 4 || username.length() > 20) {
-                	registerPage.getL5().setText("ชื่อผู้ใช้ต้องมีความยาว 4 - 20 ตัวอักษร");
+                	registerPage.getL5().setText(Language.get("usernamelength"));
                 	registerPage.getL5().setForeground(Color.RED);
                 }
                 else if (password.length() < 6 || username.length() > 30) {
-                	registerPage.getL5().setText("รหัสผ่านต้องมีความยาว 6 - 30 ตัวอักษร");
+                	registerPage.getL5().setText(Language.get("passwordlength"));
                 	registerPage.getL5().setForeground(Color.RED);
                 }
                 else if (username.equals(password)) {
-                	registerPage.getL5().setText("รหัสผ่านต้องไม่เหมือนกับชื่อผู้ใช้");
+                	registerPage.getL5().setText(Language.get("passwordusernamediff"));
                 	registerPage.getL5().setForeground(Color.RED);
                 }
                 else if (password.equals(cpassword)){
@@ -245,12 +246,12 @@ public class StudentManagement{
                     	}
                     }
                     if (alphabet == false) {
-                    	registerPage.getL5().setText("รหัสผ่านสามารถเป็นได้แค่ตัวอักษร a ถึง z (A ถึง Z) และตัวเลข  0 ถึง 9.");
+                    	registerPage.getL5().setText(Language.get("passwordshouldatoz"));
                     	registerPage.getL5().setForeground(Color.RED);
                     	return;
                     }
                     if (number == false || lower == false || upper == false) {
-                    	registerPage.getL5().setText("รหัสผ่านต้องมีตัวอักษรตัวเล็กตัวใหญ่และตัวเลขอย่างน้อยตัวละ 1 ตัวอักษร");
+                    	registerPage.getL5().setText(Language.get("passwordatleast"));
                     	registerPage.getL5().setForeground(Color.RED);
                     	return;
                     }
@@ -261,14 +262,14 @@ public class StudentManagement{
                     n.put("subject3", "");
                     
                     users.insert(n);
-                    registerPage.getL5().setText("สมัครสมาชิกเรียบร้อยแล้ว สามารถเข้าใช้งานได้เลยทันที");
+                    registerPage.getL5().setText(Language.get("registercomplete"));
                 	registerPage.getL5().setForeground(Color.GREEN);
                 	registerPage.getF1().setText("");
                 	registerPage.getF2().setText("");
                 	registerPage.getF3().setText("");
                 }
                 else {
-                	registerPage.getL5().setText("รหัสผ่านทั้งสองช่องไม่ตรงกัน");
+                	registerPage.getL5().setText(Language.get("passworddontmatch"));
                 	registerPage.getL5().setForeground(Color.RED);
                 }
             }
@@ -358,9 +359,9 @@ public class StudentManagement{
 				int before = currentPage;
 				currentPage = 5;
 				updatePage();
-				JLabel msg = Helper.createLabel("คุณแน่ใจที่จะออกจากโปรแกรมใช่หรือไม่");
+				JLabel msg = Helper.createLabel(Language.get("exitsure"));
 
-				int alert = JOptionPane.showOptionDialog(null, msg, "ออกจากโปรแกรม", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[] {"ออกจากโปรแกรม", "ยกเลิก"}, null);
+				int alert = JOptionPane.showOptionDialog(null, msg, Language.get("exitprogram"), JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[] {Language.get("exitprogram"), Language.get("cancel")}, null);
 				if(alert == JOptionPane.OK_OPTION){
 					System.exit(0);
 				}
@@ -375,8 +376,8 @@ public class StudentManagement{
         		
         		for (int i = 0; i < teacher.getStudents().size(); i++) {
         			if (teacher.getStudents().get(i).getStudentID().equals(managementPage.getAddStudentGUI().getF1().getText())) {
-        				JLabel msg = Helper.createLabel("มีรหัสนักเรียนนี้อยู่ในระบบอยู่แล้ว คุณต้องการที่จะแก้ไขข้อมูลหรือไม่??");
-        				int alert = JOptionPane.showOptionDialog(null, msg, "แก้ไขข้อมูล", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[] {"แก้ไขข้อมูล", "ยกเลิก"}, null);
+        				JLabel msg = Helper.createLabel(Language.get("alreadyhavestudent"));
+        				int alert = JOptionPane.showOptionDialog(null, msg, Language.get("editinformation"), JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[] {Language.get("editinformation"), Language.get("cancel")}, null);
         				if (alert == JOptionPane.OK_OPTION) {
         					HashMap<String, Double> score = teacher.getStudents().get(i).getScore();
         					delete(teacher.getStudents().get(i).getStudentID());
@@ -412,7 +413,7 @@ public class StudentManagement{
         
         loginPage.getGithub().addMouseListener(new MouseAdapter() {
         	public void mouseClicked(MouseEvent e) {
-        		int alert = JOptionPane.showOptionDialog(null, Helper.createLabel("คุณต้องการจะไปที่ github ของพวกเราใช่หรือไม่"), "ลิ้งไปยังหน้า github", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[] {"ยืนยัน", "ยกเลิก"}, null);
+        		int alert = JOptionPane.showOptionDialog(null, Helper.createLabel(Language.get("suregithublink")), Language.get("githublink"), JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[] {Language.get("ok"), Language.get("cancel")}, null);
 				if (alert == JOptionPane.OK_OPTION) {
 					if (Desktop.isDesktopSupported()) {
 						try {
@@ -443,15 +444,15 @@ public class StudentManagement{
 				tf02.setText("" + port);
 				
 
-				int alert = JOptionPane.showOptionDialog(null, p1, "ตั้งค่าฐานข้อมูล", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[] {"เชื่อมต่อ", "ยกเลิก"}, null);
+				int alert = JOptionPane.showOptionDialog(null, p1, Language.get("configdb"), JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[] {"เชื่อมต่อ", Language.get("cancel")}, null);
 				if (alert == JOptionPane.OK_OPTION) {
 					hostname = tf01.getText();
 					try {
 						port = Integer.parseInt(tf02.getText());
 					}
 					catch(Exception err) {
-						JLabel d = Helper.createLabel("กรุณาใส่ PORT เป็นตัวเลขเท่านั้น");
-						JOptionPane.showOptionDialog(null, d, "ตั้งค่าฐานข้อมูล", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+						JLabel d = Helper.createLabel(Language.get("pleaseinputportnumberonly"));
+						JOptionPane.showOptionDialog(null, d, Language.get("configdb"), JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {Language.get("ok")}, null);
 						return;
 					}
 					connectDB(hostname, port);
@@ -470,10 +471,10 @@ public class StudentManagement{
 						p2.add(m2);
 						p2.add(l2);
 						
-						p.add(Helper.createLabel("เชื่อมต่อกับฐานข้อมูลสําเร็จ"), BorderLayout.NORTH);
+						p.add(Helper.createLabel(Language.get("connectdbsuccess")), BorderLayout.NORTH);
 						p.add(p2);
 
-						JOptionPane.showOptionDialog(null, p, "ตั้งค่าฐานข้อมูล", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+						JOptionPane.showOptionDialog(null, p, Language.get("configdb"), JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {Language.get("ok")}, null);
 					}
 					else {
 						MyPanel p = Helper.createPanel("");
@@ -490,10 +491,10 @@ public class StudentManagement{
 						p2.add(m2);
 						p2.add(l2);
 						
-						p.add(Helper.createLabel("เชื่อมต่อกับฐานข้อมูลไม่สําเร็จ"), BorderLayout.NORTH);
+						p.add(Helper.createLabel(Language.get("cantconnectdb")), BorderLayout.NORTH);
 						p.add(p2);
 
-						JOptionPane.showOptionDialog(null, p, "ตั้งค่าฐานข้อมูล", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+						JOptionPane.showOptionDialog(null, p, Language.get("configdb"), JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {Language.get("ok")}, null);
 
 					}
 				}
@@ -567,9 +568,9 @@ public class StudentManagement{
         	public void actionPerformed(ActionEvent e) { // change password
         		MyPanel p1 = Helper.createPanel("");
 				p1.setLayout(new GridLayout(3, 2));
-				JLabel msg01 = Helper.createLabel("รหัสผ่านเดิม");
-				JLabel msg02 = Helper.createLabel("รหัสผ่านใหม่");
-				JLabel msg03 = Helper.createLabel("ยืนยันรหัสผ่านใหม่");
+				JLabel msg01 = Helper.createLabel(Language.get("oldpassword"));
+				JLabel msg02 = Helper.createLabel(Language.get("newpassword"));
+				JLabel msg03 = Helper.createLabel(Language.get("confirmnewpassword"));
 				JPasswordField pf1 = Helper.createPasswordField(10);
 				JPasswordField pf2 = Helper.createPasswordField(10);
 				JPasswordField pf3 = Helper.createPasswordField(10);
@@ -579,7 +580,7 @@ public class StudentManagement{
 				p1.add(pf2);
 				p1.add(msg03);
 				p1.add(pf3);
-				int alert = JOptionPane.showOptionDialog(null, p1, "เปลี่ยนรหัสผ่าน", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"เปลี่ยนรหัสผ่าน", "ยกเลิก"}, null);
+				int alert = JOptionPane.showOptionDialog(null, p1, Language.get("changepassword"), JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {Language.get("changepassword"), Language.get("cancel")}, null);
 				if (alert == JOptionPane.OK_OPTION) {
 					changePassword(pf1.getText(), pf2.getText(), pf3.getText());
 				}
@@ -588,9 +589,9 @@ public class StudentManagement{
         
         managementPage.getSettingGUI().getBtn2().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) { // logout
-        		JLabel l = Helper.createLabel("คุณต้องการที่จะล็อกเอ้าท์ออกจากระบบใช่หรือไม่");
+        		JLabel l = Helper.createLabel(Language.get("surewanttologout"));
 
-        		int alert = JOptionPane.showOptionDialog(null, l, "ล็อกเอ้าท์", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[] {"ล็อกเอ้าท์", "ยกเลิก"}, null);
+        		int alert = JOptionPane.showOptionDialog(null, l, Language.get("logout"), JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[] {Language.get("logout"), Language.get("cancel")}, null);
 				if (alert == JOptionPane.OK_OPTION) {
 	        		gui.set("LoginGUI");
 	        		managementPage.set("mystudent");
@@ -603,20 +604,20 @@ public class StudentManagement{
 
         managementPage.getSettingGUI().getBtn3().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) { // delete account
-        		JLabel l = Helper.createLabel("คุณต้องการที่จะลบบัญชีนี้ใช่หรือไม่");
-        		int alert = JOptionPane.showOptionDialog(null, l, "ลบบัญชี", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[] {"ลบบัญชี", "ยกเลิก"}, null);
+        		JLabel l = Helper.createLabel(Language.get("youneedtodeletethisaccount"));
+        		int alert = JOptionPane.showOptionDialog(null, l, Language.get("deleteaccount"), JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[] {Language.get("deleteaccount"), Language.get("cancel")}, null);
 				if (alert == JOptionPane.OK_OPTION) {
 					MyPanel p1 = Helper.createPanel("");
-					JLabel msg01 = Helper.createLabel("รหัสผ่าน : ");
+					JLabel msg01 = Helper.createLabel(Language.get("password") + " : ");
 					JPasswordField pf = Helper.createPasswordField(10);
 					p1.add(msg01);
 					p1.add(pf);
-					int alert2 = JOptionPane.showConfirmDialog(null, p1, "ลบบัญชี", JOptionPane.OK_CANCEL_OPTION);
+					int alert2 = JOptionPane.showConfirmDialog(null, p1, Language.get("deleteaccount"), JOptionPane.OK_CANCEL_OPTION);
 					if (alert2 == JOptionPane.OK_OPTION) {
 						String inp = Base64.getEncoder().withoutPadding().encodeToString(pf.getText().getBytes());
 						if (deleteAccount(inp)) {
-							JLabel d = Helper.createLabel("ลบบัญชีนี้เรียบร้อยแล้ว");
-							JOptionPane.showOptionDialog(null, d, "ลบบัญชี", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+							JLabel d = Helper.createLabel(Language.get("deleteaccountsuccess"));
+							JOptionPane.showOptionDialog(null, d, Language.get("deleteaccount"), JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {Language.get("ok")}, null);
 							
 							gui.set("LoginGUI");
 			        		managementPage.set("mystudent");
@@ -626,8 +627,8 @@ public class StudentManagement{
 							
 						}
 						else {
-							JLabel d = Helper.createLabel("รหัสผ่านไม่ถูกต้อง");
-							JOptionPane.showOptionDialog(null, d, "ลบบัญชี", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+							JLabel d = Helper.createLabel(Language.get("passwordnotcorrect"));
+							JOptionPane.showOptionDialog(null, d, Language.get("deleteaccount"), JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {Language.get("ok")}, null);
 						}
 					}
 				}
@@ -799,6 +800,19 @@ public class StudentManagement{
 				managementPage.set("subject" + select);
 			}
 		});
+		
+		loginPage.getLanguage().addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				if (Locale.getDefault().toString().equals("th_TH")) {
+					Language.init("en", "US");
+				}
+				else {
+					Language.init("th", "TH");
+				}
+				Main.reload(hostname, port);
+				System.out.println(Locale.getDefault());
+			}
+		});
      }
     
     
@@ -932,7 +946,7 @@ public class StudentManagement{
 		
 		JPopupMenu menu = new JPopupMenu();
 
-		JMenuItem menuitem = new JMenuItem("ดาวน์โหลด (PNG)");
+		JMenuItem menuitem = new JMenuItem(Language.get("pngdownload"));
 		menuitem.setFont(new Font("Kanit ExtraLight", Font.BOLD, 14));
 		menuitem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -972,20 +986,20 @@ public class StudentManagement{
 			subject3 = "ที่3 (Empty)";
 		}
 
-		data.addValue(score.get("s1_assignment"), "คะแนนเก็บ",  "วิชา" + subject1);
-    	data.addValue(score.get("s1_project"), "คะแนนโครงงาน", "วิชา" + subject1);
-    	data.addValue(score.get("s1_midterm"), "คะแนนกลางภาค", "วิชา" + subject1);
-    	data.addValue(score.get("s1_final"), "คะแนนปลายภาค", "วิชา" + subject1);
+		data.addValue(score.get("s1_assignment"), Language.get("score_assignment"),  Language.get("subject") + subject1);
+    	data.addValue(score.get("s1_project"), Language.get("score_project"), Language.get("subject") + subject1);
+    	data.addValue(score.get("s1_midterm"), Language.get("score_midterm"), Language.get("subject") + subject1);
+    	data.addValue(score.get("s1_final"), Language.get("score_final"), Language.get("subject") + subject1);
     	
-    	data.addValue(score.get("s2_assignment"), "คะแนนเก็บ", "วิชา" + subject2);
-    	data.addValue(score.get("s2_project"), "คะแนนโครงงาน", "วิชา" + subject2);
-    	data.addValue(score.get("s2_midterm"), "คะแนนกลางภาค", "วิชา" + subject2);
-    	data.addValue(score.get("s2_final"), "คะแนนปลายภาค", "วิชา" + subject2);
+    	data.addValue(score.get("s2_assignment"), Language.get("score_assignment"), Language.get("subject") + subject2);
+    	data.addValue(score.get("s2_project"), Language.get("score_project"), Language.get("subject") + subject2);
+    	data.addValue(score.get("s2_midterm"), Language.get("score_midterm"), Language.get("subject") + subject2);
+    	data.addValue(score.get("s2_final"), Language.get("score_final"), Language.get("subject") + subject2);
     	
-    	data.addValue(score.get("s3_assignment"), "คะแนนเก็บ", "วิชา" + subject3);
-    	data.addValue(score.get("s3_project"), "คะแนนโครงงาน", "วิชา" + subject3);
-    	data.addValue(score.get("s3_midterm"), "คะแนนกลางภาค", "วิชา" + subject3);
-    	data.addValue(score.get("s3_final"), "คะแนนปลายภาค", "วิชา" + subject3);
+    	data.addValue(score.get("s3_assignment"), Language.get("score_assignment"), Language.get("subject") + subject3);
+    	data.addValue(score.get("s3_project"), Language.get("score_project"), Language.get("subject") + subject3);
+    	data.addValue(score.get("s3_midterm"), Language.get("score_midterm"), Language.get("subject") + subject3);
+    	data.addValue(score.get("s3_final"), Language.get("score_final"), Language.get("subject") + subject3);
     	
     	ChartFactory.setChartTheme(StandardChartTheme.createLegacyTheme());
 		JFreeChart chart = ChartFactory.createBarChart("คะแนนของนักเรียนรหัส " + studentID + " (คลิกขวาที่รูปเพื่อดาวน์โหลดได้)", "", "คะแนน", data, PlotOrientation.VERTICAL, true, true, false);
@@ -1029,7 +1043,7 @@ public class StudentManagement{
 		
 		JPopupMenu menu = new JPopupMenu();
 
-		JMenuItem menuitem = new JMenuItem("ดาวน์โหลด (PNG)");
+		JMenuItem menuitem = new JMenuItem(Language.get("pngdownload"));
 		menuitem.setFont(new Font("Kanit ExtraLight", Font.BOLD, 14));
 		menuitem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -1054,14 +1068,14 @@ public class StudentManagement{
     	main.setLayout(new BorderLayout());
     	MyPanel p = Helper.createPanel("");
     	p.setLayout(new GridLayout(7, 1));
-    	JLabel l1 = Helper.createLabel("คุณลักษณะของไฟล์", 20, true);
+    	JLabel l1 = Helper.createLabel(Language.get("fileattribute"), 20, true);
     	l1.setHorizontalAlignment(JLabel.CENTER);
-    	JLabel l2 = Helper.createLabel("- ต้องเป็นไฟล์ .csv เท่านั้น");
-    	JLabel l3 = Helper.createLabel("- แถวแรก(ไม่นับเฮดเดอร์) จะต้องเป็นรหัสนักเรียน, คะแนนเก็บ, คะแนนกลางภาค, คะแนนปลายภาค ตามลําดับ");
-    	JLabel l4 = Helper.createLabel("- หากมีคอลัมน์เกินมาจะไม่สนใจ");
-    	JLabel l5 = Helper.createLabel("- หากรหัสนักเรียนหรือคะแนนในแต่ละช่องไม่สมเหตุสมผลหรือไม่มีรหัสนักเรียนในระบบก็จะข้ามไปทําแถวถัดไป");
-    	JLabel l6 = Helper.createLabel("- รหัสนักเรียนที่มีในระบบแต่ไม่มีในไฟล์ก็จะไมได้รับการอัพเดทคะแนน");
-    	JLabel l7 = Helper.createLabel("รูปตัวอย่างไฟล์ที่ถูกต้อง", 18, true);
+    	JLabel l2 = Helper.createLabel(Language.get("fileneed1"));
+    	JLabel l3 = Helper.createLabel(Language.get("fileneed2"));
+    	JLabel l4 = Helper.createLabel(Language.get("fileneed3"));
+    	JLabel l5 = Helper.createLabel(Language.get("fileneed4"));
+    	JLabel l6 = Helper.createLabel(Language.get("fileneed5"));
+    	JLabel l7 = Helper.createLabel(Language.get("filerightimg"), 18, true);
     	l7.setHorizontalAlignment(JLabel.CENTER);
     	JLabel picture = Helper.createLabel("", "/images/correct_csv.png", 700, 200);
     	picture.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -1078,11 +1092,11 @@ public class StudentManagement{
     	
     	main.add(p);
     	main.add(picture, BorderLayout.SOUTH);
-    	JOptionPane.showOptionDialog(null, main, "อัพโหลดคะแนน", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน", }, null);
+    	JOptionPane.showOptionDialog(null, main, Language.get("uploadscore"), JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {Language.get("ok"), }, null);
     	
     	JFileChooser chooser = new JFileChooser();
 		chooser.setAcceptAllFileFilterUsed(false);
-		chooser.setDialogTitle("อัพโหลดคะแนน");
+		chooser.setDialogTitle(Language.get("uploadscore"));
 		
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV file", "csv");
 		chooser.addChoosableFileFilter(filter);
@@ -1106,7 +1120,7 @@ public class StudentManagement{
 	        scan.close();
 		}
 		catch(FileNotFoundException e) {
-			JOptionPane.showOptionDialog(null, Helper.createLabel("ระบบไม่สามารถหาไฟล์ได้"), "อัพโหลดคะแนน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน", }, null);
+			JOptionPane.showOptionDialog(null, Helper.createLabel(Language.get("cantfindfile")), Language.get("uploadscore"), JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {Language.get("ok"), }, null);
 			return;
 		}
     	
@@ -1169,7 +1183,7 @@ public class StudentManagement{
 	    		}
 	    	}
 		}
-		JOptionPane.showOptionDialog(null, "อัพโหลดคะแนนนักเรียนจากไฟล์ CSV เรียบร้อยแล้ว", "อัพโหลดคะแนน", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน", }, null);
+		JOptionPane.showOptionDialog(null, Language.get("uploadscoresuccess"), Language.get("uploadscore"), JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {Language.get("ok"), }, null);
     }
     
     public void exportCSV(int select) {
@@ -1187,7 +1201,7 @@ public class StudentManagement{
     	ArrayList<Student> arr = teacher.getStudents();
 		JFileChooser chooser = new JFileChooser();
 		chooser.setAcceptAllFileFilterUsed(false);
-		chooser.setDialogTitle("ดาวน์โหลดคะแนน");
+		chooser.setDialogTitle(Language.get("downloadscore"));
 		
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV file", "csv");
 		chooser.addChoosableFileFilter(filter);
@@ -1228,7 +1242,7 @@ public class StudentManagement{
 	    	}
 			pw.write(builder.toString());
 			pw.close();
-			JOptionPane.showOptionDialog(null, "ดาวน์โหลดคะแนนนักเรียนเรียบร้อยแล้ว", "ดาวน์โหลดคะแนน", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน", }, null);
+			JOptionPane.showOptionDialog(null, Language.get("downloadscoresuccess"), Language.get("downloadscore"), JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {Language.get("ok"), }, null);
 
 		}
 		catch (FileNotFoundException err) {
@@ -1246,8 +1260,8 @@ public class StudentManagement{
     	else if (select == 3) {
     		msg = managementPage.getSubjectGUI().getSubject3().getSubject();
     	}
-    	JLabel l = Helper.createLabel("คุณต้องการที่จะลบวิชา " + msg + " ใช่หรือไม่");
-		int alert = JOptionPane.showOptionDialog(null, l, "ลบวิชา " + msg, JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[] {"ลบวิชา", "ยกเลิก"}, null);
+    	JLabel l = Helper.createLabel(Language.get("suredeletesubject") + msg);
+		int alert = JOptionPane.showOptionDialog(null, l, Language.get("deletesubject") + msg, JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[] {Language.get("deletesubject"), Language.get("cancel")}, null);
 		if (alert == JOptionPane.OK_OPTION) {
 			DBCursor curs = users.find();
 			while (curs.hasNext()){
@@ -1285,7 +1299,7 @@ public class StudentManagement{
 	            	managementPage.set("subject");
 					currentPage = 2;
 					updatePage();
-					JOptionPane.showOptionDialog(null, Helper.createLabel("ลบวิชา " + msg + " เรียบร้อยแล้ว"), "ลบวิชา " + msg, JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+					JOptionPane.showOptionDialog(null, Helper.createLabel(Language.get("deletesubject") + msg + Language.get("success")), Language.get("deletesubject") + msg, JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {Language.get("ok")}, null);
 	            	return;
 	            }
 			}
@@ -1310,7 +1324,7 @@ public class StudentManagement{
 		JTextField tf = Helper.createTextField(10);
 		p1.add(msg);
 		p1.add(tf);
-		int alert = JOptionPane.showOptionDialog(null, p1, "แก้ไขคะแนนวิชา " + subjectTitle, JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"แก้ไขคะแนน", "ยกเลิก"}, null);
+		int alert = JOptionPane.showOptionDialog(null, p1, Language.get("editscoresubject") + subjectTitle, JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"แก้ไขคะแนน", Language.get("cancel")}, null);
 		if (alert == JOptionPane.OK_OPTION) {
 			ArrayList<Student> arr = teacher.getStudents();
 			for (int i = 0; i < arr.size(); i++) {
@@ -1318,10 +1332,10 @@ public class StudentManagement{
 					// แก้ไข คะแนน
 					MyPanel p2 = Helper.createPanel("");
 					p2.setLayout(new GridLayout(4, 2));
-					JLabel msg01 = Helper.createLabel("คะแนนเก็บ");
-					JLabel msg02 = Helper.createLabel("คะแนนโครงงาน");
-					JLabel msg03 = Helper.createLabel("คะแนนกลางภาค");
-					JLabel msg04 = Helper.createLabel("คะแนนปลายภาค");
+					JLabel msg01 = Helper.createLabel(Language.get("score_assignment"));
+					JLabel msg02 = Helper.createLabel(Language.get("score_project"));
+					JLabel msg03 = Helper.createLabel(Language.get("score_midterm"));
+					JLabel msg04 = Helper.createLabel(Language.get("score_final"));
 					JTextField tf01 = Helper.createTextField(10);
 					JTextField tf02 = Helper.createTextField(10);
 					JTextField tf03 = Helper.createTextField(10);
@@ -1335,14 +1349,14 @@ public class StudentManagement{
 					p2.add(msg04);
 					p2.add(tf04);
 
-					int alert2 = JOptionPane.showOptionDialog(null, p2, "แก้ไขคะแนนวิชา " + subjectTitle, JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"แก้ไขคะแนน", "ยกเลิก"}, null);
+					int alert2 = JOptionPane.showOptionDialog(null, p2, Language.get("editscoresubject") + subjectTitle, JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"แก้ไขคะแนน", Language.get("cancel")}, null);
 					if (alert2 == JOptionPane.OK_OPTION) {
 						if (tf01.getText().equals("") || tf02.getText().equals("") || tf03.getText().equals("") || tf04.getText().equals("")) {
-							JOptionPane.showOptionDialog(null, Helper.createLabel("กรุณากรอกคะแนนให้ครบถ้วน"), "แก้ไขคะแนนวิชา" + subjectTitle	, JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+							JOptionPane.showOptionDialog(null, Helper.createLabel("กรุณากรอกคะแนนให้ครบถ้วน"), "แก้ไขคะแนนวิชา" + subjectTitle	, JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {Language.get("ok")}, null);
 							return;
 						}
 						if (Double.parseDouble(tf01.getText()) + Double.parseDouble(tf02.getText()) + Double.parseDouble(tf03.getText()) + Double.parseDouble(tf04.getText()) > 100) {
-							JOptionPane.showOptionDialog(null, Helper.createLabel("ไม่สามารถกําหนคะแนนให้เกิน 100 ได้"), "แก้ไขคะแนนวิชา " + subjectTitle	, JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+							JOptionPane.showOptionDialog(null, Helper.createLabel("ไม่สามารถกําหนคะแนนให้เกิน 100 ได้"), Language.get("editscoresubject") + subjectTitle	, JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {Language.get("ok")}, null);
 							return;
 						}
 						arr.get(i).setScore(select, Double.parseDouble(tf01.getText()), Double.parseDouble(tf02.getText()), Double.parseDouble(tf03.getText()), Double.parseDouble(tf04.getText()));
@@ -1365,7 +1379,7 @@ public class StudentManagement{
 								n.put("s" + select + "_final", Double.parseDouble(tf04.getText()));
 						    	
 								myStudent.update(t, n);								
-			    				JOptionPane.showOptionDialog(null, Helper.createLabel("แก้ไขคะแนนวิชา " + subjectTitle + "เรียบร้อยแล้ว"), "แก้ไขคะแนนวิชา" + subjectTitle, JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+			    				JOptionPane.showOptionDialog(null, Helper.createLabel(Language.get("editscoresubject") + subjectTitle + "เรียบร้อยแล้ว"), "แก้ไขคะแนนวิชา" + subjectTitle, JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {Language.get("ok")}, null);
 			    				updateScoreTable();
 				    			return;
 				    		}
@@ -1376,8 +1390,8 @@ public class StudentManagement{
 					return;
 				}
 			}
-			JLabel msg2 = Helper.createLabel("ไม่มีรหัสนักเรียนนี้อยู่ในระบบ");
-			JOptionPane.showOptionDialog(null, msg2, "แก้ไขคะแนนวิชา " + subjectTitle, JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+			JLabel msg2 = Helper.createLabel(Language.get("nostudent"));
+			JOptionPane.showOptionDialog(null, msg2, Language.get("editscoresubject") + subjectTitle, JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {Language.get("ok")}, null);
         }
     }
     public void addSubject(int select) {
@@ -1386,19 +1400,19 @@ public class StudentManagement{
     	
     	MyPanel p1 = Helper.createPanel("");
     	p1.setLayout(new GridLayout(2, 2));
-		JLabel msg = Helper.createLabel("รหัสวิชา : ");
-		JLabel msg2 = Helper.createLabel("ชื่อวิชา");
+		JLabel msg = Helper.createLabel(Language.get("subjectid") + " : ");
+		JLabel msg2 = Helper.createLabel(Language.get("subjectname") + " : ");
 		JTextField tf = Helper.createTextField(10);
 		JTextField tf2 = Helper.createTextField(10);
 		p1.add(msg);
 		p1.add(tf);
 		p1.add(msg2);
 		p1.add(tf2);
-		int alert = JOptionPane.showOptionDialog(null, p1, "เพิ่มวิชา", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"เพิ่มวิชา", "ยกเลิก"}, null);
+		int alert = JOptionPane.showOptionDialog(null, p1, Language.get("addsubject"), JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {Language.get("addsubject"), Language.get("cancel")}, null);
 		if (alert == JOptionPane.OK_OPTION) {
 			
 			if (tf.getText().equals("") || tf2.getText().equals("")) {
-				JOptionPane.showOptionDialog(null, Helper.createLabel("กรุณากรอกข้อมูลให้ครบถ้วน"), "เพิ่มวิชา ", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+				JOptionPane.showOptionDialog(null, Helper.createLabel(Language.get("pleasefill")), Language.get("addsubject"), JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {Language.get("ok")}, null);
 				return;
 			}
 			DBCursor curs = users.find();
@@ -1429,8 +1443,8 @@ public class StudentManagement{
 	            	managementPage.getSubjectGUI().setSubject( ((String)n.get("subject1")) , ((String)n.get("subject2")), ((String)n.get("subject3")));
 	            	
 	            	updateScoreTable();
-	            	JLabel l = Helper.createLabel("เพิ่มวิชา " + tf2.getText() + " เรียบร้อยแล้ว");
-	        		JOptionPane.showOptionDialog(null, l, "เพิ่มวิชา ", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+	            	JLabel l = Helper.createLabel(Language.get("addsubject") + tf2.getText() + Language.get("success"));
+	        		JOptionPane.showOptionDialog(null, l, Language.get("addsubject"), JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {Language.get("ok")}, null);
 	            	return;
 	            }
 			}
@@ -1447,13 +1461,13 @@ public class StudentManagement{
             	if (old.equals(((String)t.get("password")))){
             		if (newP.equals(comP)) {
             			if (newP.length() < 6) {
-            				JLabel d = Helper.createLabel("รหัสผ่านต้องมีความยาว 6 - 30 ตัวอักษร");
-    						JOptionPane.showOptionDialog(null, d, "เปลี่ยนรหัสผ่าน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+            				JLabel d = Helper.createLabel(Language.get("passwordlength"));
+    						JOptionPane.showOptionDialog(null, d, Language.get("changepassword"), JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {Language.get("ok")}, null);
         					return;
             			}
                         else if (myUsername.equals(newP)) {
-                        	JLabel d = Helper.createLabel("รหัสผ่านต้องไม่เหมือนกับชื่อผู้ใช้");
-                        	JOptionPane.showOptionDialog(null, d, "เปลี่ยนรหัสผ่าน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+                        	JLabel d = Helper.createLabel(Language.get("passwordusernamediff"));
+                        	JOptionPane.showOptionDialog(null, d, Language.get("changepassword"), JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {Language.get("ok")}, null);
         					return;
                         }
                         boolean upper = false, lower = false, alphabet = true, number = false;
@@ -1473,13 +1487,13 @@ public class StudentManagement{
                             }
                         }
                         if (alphabet == false) {
-                        	JLabel d = Helper.createLabel("รหัสผ่านสามารถเป็นได้แค่ตัวอักษร a ถึง z (A ถึง Z) และตัวเลข  0 ถึง 9.");
-                        	JOptionPane.showOptionDialog(null, d, "เปลี่ยนรหัสผ่าน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+                        	JLabel d = Helper.createLabel(Language.get("passwordshouldatoz"));
+                        	JOptionPane.showOptionDialog(null, d, Language.get("changepassword"), JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {Language.get("ok")}, null);
         					return;
                         }
                         if (number == false || lower == false || upper == false) {
-                        	JLabel d = Helper.createLabel("รหัสผ่านต้องมีตัวอักษรตัวเล็กตัวใหญ่และตัวเลขอย่างน้อยตัวละ 1 ตัวอักษร");
-                        	JOptionPane.showOptionDialog(null, d, "เปลี่ยนรหัสผ่าน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+                        	JLabel d = Helper.createLabel(Language.get("passwordatleast"));
+                        	JOptionPane.showOptionDialog(null, d, Language.get("changepassword"), JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {Language.get("ok")}, null);
         					return;
                         }
                 		users.remove(t);
@@ -1487,19 +1501,19 @@ public class StudentManagement{
                         n.put("username", myUsername);
                         n.put("password", Base64.getEncoder().withoutPadding().encodeToString(newP.getBytes()));
                         users.insert(n);
-                        JLabel d = Helper.createLabel("เปลี่ยนรหัสผ่านเรียบร้อยแล้ว");
-                        JOptionPane.showOptionDialog(null, d, "เปลี่ยนรหัสผ่าน", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+                        JLabel d = Helper.createLabel(Language.get("changepasswordsuccess"));
+                        JOptionPane.showOptionDialog(null, d, Language.get("changepassword"), JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {Language.get("ok")}, null);
     					return;
             		}
             		else {
-                		JLabel d = Helper.createLabel("กรุณากรอกรหัสผ่านใหม่ให้ตรงกัน");
-                		JOptionPane.showOptionDialog(null, d, "เปลี่ยนรหัสผ่าน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+                		JLabel d = Helper.createLabel(Language.get("matchpassword"));
+                		JOptionPane.showOptionDialog(null, d, Language.get("changepassword"), JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {Language.get("ok")}, null);
     					return;
                 	}
                 }
             	else {
-            		JLabel d = Helper.createLabel("รหัสผ่านเดิมไม่ถูกต้อง");
-            		JOptionPane.showOptionDialog(null, d, "เปลี่ยนรหัสผ่าน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+            		JLabel d = Helper.createLabel(Language.get("oldpassworddiff"));
+            		JOptionPane.showOptionDialog(null, d, Language.get("changepassword"), JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {Language.get("ok")}, null);
     				return;
             	}
             }
@@ -1523,28 +1537,27 @@ public class StudentManagement{
     public void pullInformation(HashMap<String, String> info, String path) {
     	managementPage.getAddStudentGUI().getF1().setText(info.get("studentID"));
 
-    	managementPage.getAddStudentGUI().getF2().setSelectedItem(info.get("faculty"));
+    	managementPage.getAddStudentGUI().getF2().setSelectedItem(info.get("title"));
     	
-    	
-    	managementPage.getAddStudentGUI().getF3().setSelectedItem(info.get("title"));
-    	managementPage.getAddStudentGUI().getF4().setText(info.get("name"));
-    	managementPage.getAddStudentGUI().getF5().setText(info.get("surname"));
+
+    	managementPage.getAddStudentGUI().getF3().setText(info.get("name"));
+    	managementPage.getAddStudentGUI().getF4().setText(info.get("surname"));
     	
 		LocalDate ld = LocalDate.of(Integer.parseInt(info.get("year")), Integer.parseInt(info.get("month")), Integer.parseInt(info.get("day")));
-    	managementPage.getAddStudentGUI().getF6().setDate(ld);
+    	managementPage.getAddStudentGUI().getF5().setDate(ld);
 
     	
-    	managementPage.getAddStudentGUI().getF7().setText(info.get("cardID"));
-    	managementPage.getAddStudentGUI().getF8().setText(info.get("address"));
-    	managementPage.getAddStudentGUI().getF9().setText(info.get("race"));
-    	managementPage.getAddStudentGUI().getF10().setText(info.get("religion"));
-    	managementPage.getAddStudentGUI().getF11().setText(info.get("bloodType"));
-    	managementPage.getAddStudentGUI().getF12().setText(info.get("tel"));
-    	managementPage.getAddStudentGUI().getF13().setText(info.get("email"));
-    	managementPage.getAddStudentGUI().getF14().setText(info.get("height"));
-    	managementPage.getAddStudentGUI().getF15().setText(info.get("weight"));
-    	managementPage.getAddStudentGUI().getF16().setText(info.get("parentTel"));
-    	managementPage.getAddStudentGUI().getF17().setText(info.get("disease"));
+    	managementPage.getAddStudentGUI().getF6().setText(info.get("cardID"));
+    	managementPage.getAddStudentGUI().getF7().setText(info.get("address"));
+    	managementPage.getAddStudentGUI().getF8().setText(info.get("race"));
+    	managementPage.getAddStudentGUI().getF9().setText(info.get("religion"));
+    	managementPage.getAddStudentGUI().getF10().setText(info.get("bloodType"));
+    	managementPage.getAddStudentGUI().getF11().setText(info.get("tel"));
+    	managementPage.getAddStudentGUI().getF12().setText(info.get("email"));
+    	managementPage.getAddStudentGUI().getF13().setText(info.get("height"));
+    	managementPage.getAddStudentGUI().getF14().setText(info.get("weight"));
+    	managementPage.getAddStudentGUI().getF15().setText(info.get("parentTel"));
+    	managementPage.getAddStudentGUI().getF16().setText(info.get("disease"));
     	
     	Image img = null;
     	if (path.equals("default")) {
@@ -1559,8 +1572,8 @@ public class StudentManagement{
     	managementPage.getAddStudentGUI().setPicturePath(path);
     }
     public void connectDB(String hostname, int port) {
-    	JOptionPane opt = new JOptionPane(Helper.createLabel("กําลังเชื่อมต่อกับฐานข้อมูล (MongoDB)..."), JOptionPane.WARNING_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}); // no buttons
-         JDialog dlg = opt.createDialog("กําลังเชื่อมต่อกับฐานข้อมูล (MongoDB)");
+    	JOptionPane opt = new JOptionPane(Helper.createLabel(Language.get("connectingdb") + "..."), JOptionPane.WARNING_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}); // no buttons
+         JDialog dlg = opt.createDialog(Language.get("connectingdb"));
         new Thread(new Runnable(){
                 public void run(){
                   try{
@@ -1608,18 +1621,17 @@ public class StudentManagement{
     }
     
     public void addStudent(HashMap<String, Double> score) {
-    	String studentID, faculty, title, name, surname, day, month, year, cardID,
+    	String studentID, title, name, surname, day, month, year, cardID,
     	address, race, religion, bloodType, tel, email, height, weight, sourcePath,
     	parentTel, disease, enrollAt, picturePath;
     	
     	studentID = managementPage.getAddStudentGUI().getF1().getText();
 
-    	faculty = managementPage.getAddStudentGUI().getF2().getSelectedItem().toString();
-    	title = managementPage.getAddStudentGUI().getF3().getSelectedItem().toString();
-    	name = managementPage.getAddStudentGUI().getF4().getText();
-    	surname = managementPage.getAddStudentGUI().getF5().getText();
+      	title = managementPage.getAddStudentGUI().getF2().getSelectedItem().toString();
+    	name = managementPage.getAddStudentGUI().getF3().getText();
+    	surname = managementPage.getAddStudentGUI().getF4().getText();
     	
-    	LocalDate date = managementPage.getAddStudentGUI().getF6().getDate();
+    	LocalDate date = managementPage.getAddStudentGUI().getF5().getDate();
     	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
     	
     	try {
@@ -1647,36 +1659,36 @@ public class StudentManagement{
     	}
     	catch(Exception e) {
 
-    		JOptionPane.showOptionDialog(null, Helper.createLabel("กรุณากรอกข้อมูลให้ครบถ้วน"), "เพิ่มนักเรียน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+    		JOptionPane.showOptionDialog(null, Helper.createLabel(Language.get("pleasefill")), Language.get("addstudent"), JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {Language.get("ok")}, null);
     		return;
     	}
 
     	for (int i = 0; i < studentID.length(); i++) {
     		if(!(studentID.charAt(i) >= '0' && studentID.charAt(i) <= '9')){
-    			JOptionPane.showOptionDialog(null, Helper.createLabel("กรุณากรอกรหัสนักเรียนเป็นตัวเลขเท่านั้น"), "เพิ่มนักเรียน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+    			JOptionPane.showOptionDialog(null, Helper.createLabel(Language.get("pleasefillonlynumber")), Language.get("addstudent"), JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {Language.get("ok")}, null);
         		return;
     		}
     	}
 
     	
-    	cardID = managementPage.getAddStudentGUI().getF7().getText();
-    	address = managementPage.getAddStudentGUI().getF8().getText();
-    	race = managementPage.getAddStudentGUI().getF9().getText();
-    	religion = managementPage.getAddStudentGUI().getF10().getText();
-    	bloodType = managementPage.getAddStudentGUI().getF11().getText();
-    	tel = managementPage.getAddStudentGUI().getF12().getText();
-    	email = managementPage.getAddStudentGUI().getF13().getText();
-    	height = managementPage.getAddStudentGUI().getF14().getText();
-    	weight = managementPage.getAddStudentGUI().getF15().getText();
-    	parentTel = managementPage.getAddStudentGUI().getF16().getText();
-    	disease = managementPage.getAddStudentGUI().getF17().getText();
+    	cardID = managementPage.getAddStudentGUI().getF6().getText();
+    	address = managementPage.getAddStudentGUI().getF7().getText();
+    	race = managementPage.getAddStudentGUI().getF8().getText();
+    	religion = managementPage.getAddStudentGUI().getF9().getText();
+    	bloodType = managementPage.getAddStudentGUI().getF10().getText();
+    	tel = managementPage.getAddStudentGUI().getF11().getText();
+    	email = managementPage.getAddStudentGUI().getF12().getText();
+    	height = managementPage.getAddStudentGUI().getF13().getText();
+    	weight = managementPage.getAddStudentGUI().getF14().getText();
+    	parentTel = managementPage.getAddStudentGUI().getF15().getText();
+    	disease = managementPage.getAddStudentGUI().getF16().getText();
     	enrollAt = "" + java.time.LocalDate.now();
 
     	if (studentID.equals("") || name.equals("") || surname.equals("") || cardID.equals("") || address.equals("") ||
     		race.equals("") || religion.equals("") || bloodType.equals("") || tel.equals("") || email.equals("") ||
     		height.equals("") || weight.equals("") || parentTel.equals("") || disease.equals("")) {
     		
-    		JOptionPane.showOptionDialog(null, Helper.createLabel("กรุณากรอกข้อมูลให้ครบถ้วน"), "เพิ่มนักเรียน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+    		JOptionPane.showOptionDialog(null, Helper.createLabel(Language.get("pleasefill")), Language.get("addstudent"), JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {Language.get("ok")}, null);
     		return;
     	}
     	
@@ -1710,7 +1722,6 @@ public class StudentManagement{
     	BasicDBObject n = new BasicDBObject();
 
     	n.put("studentID", studentID);
-    	n.put("faculty", faculty);
     	n.put("title", title);
     	n.put("name", name);
     	n.put("surname", surname);
@@ -1752,7 +1763,6 @@ public class StudentManagement{
     	myStudent.insert(n);
 
     	information.put("studentID", studentID);
-    	information.put("faculty", faculty);
     	information.put("title", title);
     	information.put("name", name);
     	information.put("surname", surname);
@@ -1784,8 +1794,8 @@ public class StudentManagement{
     	updateScoreTable();
     	
     	managementPage.getAddStudentGUI().reset();
-    	JLabel msg = Helper.createLabel("เพิ่มนักเรียนเรียบร้อยแล้ว");
-		JOptionPane.showOptionDialog(null, msg, "เพิ่มนักเรียน", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+    	JLabel msg = Helper.createLabel(Language.get("addstudentsuccess"));
+		JOptionPane.showOptionDialog(null, msg, Language.get("addstudent"), JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {Language.get("ok")}, null);
     }
     
 
@@ -1816,7 +1826,6 @@ public class StudentManagement{
         System.out.println("Login success!!");
         
         DBCursor ucurs = users.find();
-        boolean haveAdmin = false;
         while (ucurs.hasNext()){
             DBObject t = ucurs.next();
             if (((String)t.get("username")).equals(myUsername)) {
@@ -1836,7 +1845,6 @@ public class StudentManagement{
         	HashMap<String, Double> score = new HashMap<String, Double>();
         	
         	information.put("studentID", "" + t.get("studentID"));
-        	information.put("faculty", "" + t.get("faculty"));
         	information.put("title", "" + t.get("title"));
         	information.put("name", "" + t.get("name"));
         	information.put("surname", "" + t.get("surname"));
@@ -1896,11 +1904,11 @@ public class StudentManagement{
 		DefaultTableModel dm = new DefaultTableModel();
 		
 		if (this.TableSortStatus == 0) {
-			Object[] header = {"รหัสนักเรียน <", "ชื่อ", "นามสกุล", "เพิ่มเข้ามาในวันที่"	, " ", "  "};
+			Object[] header = {Language.get("studentid") + " <", Language.get("name"), Language.get("surname"), Language.get("addin")	, " ", "  "};
 			dm.setDataVector(data, header);
 		}
 		else {
-			Object[] header = {"รหัสนักเรียน  >", "ชื่อ", "นามสกุล", "เพิ่มเข้ามาในวันที่"	, " ", "  "};
+			Object[] header = {Language.get("studentid") + " >", Language.get("name"), Language.get("surname"), Language.get("addin")	, " ", "  "};
 			dm.setDataVector(data, header);
 		}
 		table = new JTable(dm);
@@ -1952,12 +1960,12 @@ public class StudentManagement{
 		DefaultTableModel dm = new DefaultTableModel();
 
 		if (this.TableSortStatus == 0) {
-			Object[] header = {"รหัสนักเรียน <", "คะแนนเก็บ", "คะแนนโครงงาน", "คะแนนกลางภาค", "คะแนนปลายภาค", "รวมคะแนน", "เกรดที่ได้"};
+			Object[] header = {Language.get("studentid") + " <", Language.get("score_assignment"), Language.get("score_project"), Language.get("score_midterm"), Language.get("score_final"), Language.get("score_all"), Language.get("score_grade")};
 			
 			dm.setDataVector(data, header);
 		}
 		else {
-			Object[] header = {"รหัสนักเรียน >", "คะแนนเก็บ", "คะแนนโครงงาน", "คะแนนกลางภาค", "คะแนนปลายภาค", "รวมคะแนน", "เกรดที่ได้"};
+			Object[] header = {Language.get("studentid") + " >", Language.get("score_assignment"), Language.get("score_project"), Language.get("score_midterm"), Language.get("score_final"), Language.get("score_all"), Language.get("score_grade")};
 			dm.setDataVector(data, header);
 		}
 		scoreTable = new JTable(dm);
@@ -1984,12 +1992,12 @@ public class StudentManagement{
 		dm = new DefaultTableModel();
 
 		if (this.TableSortStatus == 0) {
-			Object[] header = {"รหัสนักเรียน <", "คะแนนเก็บ", "คะแนนโครงงาน", "คะแนนกลางภาค", "คะแนนปลายภาค", "รวมคะแนน", "เกรดที่ได้"};
+			Object[] header = {Language.get("studentid") + " <", Language.get("score_assignment"), Language.get("score_project"), Language.get("score_midterm"), Language.get("score_final"), Language.get("score_all"), Language.get("score_grade")};
 			
 			dm.setDataVector(data2, header);
 		}
 		else {
-			Object[] header = {"รหัสนักเรียน >", "คะแนนเก็บ", "คะแนนโครงงาน", "คะแนนกลางภาค", "คะแนนปลายภาค", "รวมคะแนน", "เกรดที่ได้"};
+			Object[] header = {Language.get("studentid") + " >", Language.get("score_assignment"), Language.get("score_project"), Language.get("score_midterm"), Language.get("score_final"), Language.get("score_all"), Language.get("score_grade")};
 			dm.setDataVector(data2, header);
 		}
 		scoreTable2 = new JTable(dm);
@@ -2017,12 +2025,12 @@ public class StudentManagement{
 		dm = new DefaultTableModel();
 
 		if (this.TableSortStatus == 0) {
-			Object[] header = {"รหัสนักเรียน <", "คะแนนเก็บ", "คะแนนโครงงาน", "คะแนนกลางภาค", "คะแนนปลายภาค", "รวมคะแนน", "เกรดที่ได้"};
+			Object[] header = {Language.get("studentid") + " <", Language.get("score_assignment"), Language.get("score_project"), Language.get("score_midterm"), Language.get("score_final"), Language.get("score_all"), Language.get("score_grade")};
 			
 			dm.setDataVector(data3, header);
 		}
 		else {
-			Object[] header = {"รหัสนักเรียน >", "คะแนนเก็บ", "คะแนนโครงงาน", "คะแนนกลางภาค", "คะแนนปลายภาค", "รวมคะแนน", "เกรดที่ได้"};
+			Object[] header = {Language.get("studentid") + " >", Language.get("score_assignment"), Language.get("score_project"), Language.get("score_midterm"), Language.get("score_final"), Language.get("score_all"), Language.get("score_grade")};
 			dm.setDataVector(data3, header);
 		}
 		
@@ -2158,7 +2166,10 @@ public class StudentManagement{
 			k++;
     	}
     }
-
+    
+    public MainGUI getGUI() {
+    	return this.gui;
+    }
 }
 
 

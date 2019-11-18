@@ -1,6 +1,9 @@
 package view;
 import javax.swing.*;
 import javax.swing.table.*;
+
+import controller.Language;
+
 import java.awt.*;
 
 public class SubjectGUI {
@@ -26,9 +29,9 @@ public class SubjectGUI {
 		container.setLocation(0, 322);
 
 		
-		btn1 = Helper.createButton("ยังไม่ได้เพิ่มวิชาเหรอ? เพิ่มเลย", 30, "/images/add_subject.png", 60, 60);
-		btn2 = Helper.createButton("ยังไม่ได้เพิ่มวิชาเหรอ? เพิ่มเลย", 30, "/images/add_subject.png", 60, 60);
-		btn3 = Helper.createButton("ยังไม่ได้เพิ่มวิชาเหรอ? เพิ่มเลย", 30, "/images/add_subject.png", 60, 60);
+		btn1 = Helper.createButton(Language.get("dontaddsubjectaddnow"), 30, "/images/add_subject.png", 60, 60);
+		btn2 = Helper.createButton(Language.get("dontaddsubjectaddnow"), 30, "/images/add_subject.png", 60, 60);
+		btn3 = Helper.createButton(Language.get("dontaddsubjectaddnow"), 30, "/images/add_subject.png", 60, 60);
 
 
 		
@@ -62,7 +65,7 @@ public class SubjectGUI {
 		}
 		else {
 			subject1.set("empty#0");
-			btn1.setText("ยังไม่ได้เพิ่มวิชาเหรอ? เพิ่มเลย");
+			btn1.setText(Language.get("dontaddsubjectaddnow"));
 			btn1.setIcon(addIcon);
 		}
 		if (!s2.equals("")) {
@@ -72,7 +75,7 @@ public class SubjectGUI {
 		}
 		else {
 			subject2.set("empty#0");
-			btn2.setText("ยังไม่ได้เพิ่มวิชาเหรอ? เพิ่มเลย");
+			btn2.setText(Language.get("dontaddsubjectaddnow"));
 			btn2.setIcon(addIcon);
 		}
 		if (!s3.equals("")) {
@@ -82,7 +85,7 @@ public class SubjectGUI {
 		}
 		else {
 			subject3.set("empty#0");
-			btn3.setText("ยังไม่ได้เพิ่มวิชาเหรอ? เพิ่มเลย");
+			btn3.setText(Language.get("dontaddsubjectaddnow"));
 			btn3.setIcon(addIcon);
 		}
 
