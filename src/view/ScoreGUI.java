@@ -1,9 +1,6 @@
 package view;
 import javax.swing.*;
 import javax.swing.table.*;
-
-import controller.Language;
-
 import java.awt.*;
 
 public class ScoreGUI {
@@ -27,7 +24,7 @@ public class ScoreGUI {
         topmenu.setLayout(new BorderLayout());
 
         l1 = Helper.createLabel("<html>&nbsp;&nbsp;" + subject + " (" + subjectID + ")</html>", "/images/already_have_subject.png", 60, 60);
-        l1.setFont(new Font("Kanit ExtraLight", Font.BOLD, 35));
+        l1.setFont(new Font("Kanit ExtraLight", Font.PLAIN, 35));
         l1.setHorizontalAlignment(JLabel.CENTER);
         topmenu.add(l1);
 		
@@ -49,11 +46,11 @@ public class ScoreGUI {
 		bottom.setLocation(0, 610);
 		
     		
-		btn1 = Helper.createButton(Language.get("editscore"), 21);
-		btn2 = Helper.createButton(Language.get("deletesubject"), 21);
-		btn3 = Helper.createButton(Language.get("seegraph"), 21);
-		btn4 = Helper.createButton(Language.get("uploadscore"), 21);
-		btn5 = Helper.createButton(Language.get("downloadscore"), 21);
+		btn1 = Helper.createButton("แก้ไขคะแนน", 21);
+		btn2 = Helper.createButton("ลบวิชา", 21);
+		btn3 = Helper.createButton("ดูกราฟ", 21);
+		btn4 = Helper.createButton("อัพโหลดคะแนน", 21);
+		btn5 = Helper.createButton("ดาวน์โหลดคะแนน", 21);
 		
 		
 		bottom.add(btn1);
@@ -71,7 +68,7 @@ public class ScoreGUI {
 		String[] temp = inp.split("#");
 		this.subject = temp[0];
 		this.subjectID = temp[1];
-		l1.setText("  " +Language.get("subject") + " " + subject + " (" + subjectID + ")");
+		l1.setText("<html>&nbsp;&nbsp;<b>วิชา " + subject + " (" + subjectID + ")</b></html>");
 	}
 	
 	public JDesktopPane getPanel() {
