@@ -795,10 +795,276 @@ public class StudentManagement{
 				managementPage.set("subject" + select);
 			}
 		});
+		
+		managementPage.getMyStudentGUI().getBtn1().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				exportStudentInformationCSV();
+			}
+		});
+		
+		managementPage.getAddStudentGUI().getBtn3().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				importStudentInformationCSV();
+			}
+		});
      }
     
     
     // below here is method in all application -------------------------------------------------------------------------------------------------------------------------
+    
+    public void importStudentInformationCSV() {
+    	MyPanel main = Helper.createPanel("");
+    	main.setLayout(new BorderLayout());
+    	MyPanel p = Helper.createPanel("");
+    	p.setLayout(new GridLayout(8, 1));
+    	JLabel l1 = Helper.createLabel("คุณลักษณะของไฟล์", 20, true);
+    	l1.setHorizontalAlignment(JLabel.CENTER);
+    	JLabel l2 = Helper.createLabel("- ต้องเป็นไฟล์ .csv เท่านั้น");
+    	JLabel l3 = Helper.createLabel("- ข้อมูลในแต่ละแถว(ไม่นับเฮดเดอร์) จะต้องเรียงตามข้อมูลในการเพิ่มนักเรียน");
+    	JLabel l4 = Helper.createLabel("- หากมีคอลัมน์เกินมาจะไม่สนใจ");
+    	JLabel l5 = Helper.createLabel("- หากรหัสนักเรียนไม่ได้เป็นตัวเลขหรือวันเดือนปีเกิดไม่ใช่ตัวเลขก็จะไม่สนใจแถวนั้น");
+    	JLabel l6 = Helper.createLabel("- รหัสนักเรียนที่มีในระบบจะถูกอัพเดทข้อมูลแทนที่");
+    	JLabel l7 = Helper.createLabel("- ไฟล์ที่อัพโหลดต้องไม่เคยถูกแก้ไขด้วยโปรแกรม excel");
+    	JLabel l8 = Helper.createLabel("รูปตัวอย่างไฟล์ที่ถูกต้อง", 18, true);
+    	l8.setHorizontalAlignment(JLabel.CENTER);
+    	JLabel picture = Helper.createLabel("", "", 700, 200);
+    	picture.setBorder(BorderFactory.createLineBorder(Color.black));
+    	picture.setHorizontalAlignment(JLabel.CENTER);
+    	
+    	p.add(l1);
+    	p.add(l2);
+    	p.add(l3);
+    	p.add(l4);
+    	p.add(l5);
+    	p.add(l6);
+    	p.add(l7);
+    	p.add(l8);
+
+    	
+    	main.add(p);
+    	main.add(picture, BorderLayout.SOUTH);
+    	JOptionPane.showOptionDialog(null, main, "อัพโหลดข้อมูลนักเรียน", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน", }, null);
+    	
+    	JFileChooser chooser = new JFileChooser();
+		chooser.setAcceptAllFileFilterUsed(false);
+		chooser.setDialogTitle("อัพโหลดข้อมูลนักเรียน");
+		
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV file", "csv");
+		chooser.addChoosableFileFilter(filter);
+
+		String path = "";
+		if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+			path = "" + chooser.getSelectedFile();
+		}
+		else {
+
+			return;
+		}
+		
+		String data = "";
+		try {
+		
+			Scanner scan = new Scanner(new File(path));
+	        scan.useDelimiter(",");
+	        while(scan.hasNext()){
+	        	data += scan.next() + "#";
+	        }
+	        scan.close();
+		}
+		catch(FileNotFoundException e) {
+			JOptionPane.showOptionDialog(null, Helper.createLabel("ระบบไม่สามารถหาไฟล์ได้"), "อัพโหลดข้อมูลนักเรียน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน", }, null);
+			return;
+		}
+    	System.out.println(data);
+		String[] row = data.split("\n");
+		ArrayList<Student> arr = teacher.getStudents();
+		for (int i = 0; i < row.length; i++) {
+			if (i == 0) {
+				continue;
+			}
+			try {
+				HashMap<String, String> information = new HashMap<String, String>();
+				HashMap<String, Double> score = emptyScore;
+				String[] each = row[i].split("#");
+				
+				String picpath = "default";
+				
+				String studentID = each[0];
+				for (int j = 0; j < arr.size(); j++) {
+					if (arr.get(j).getStudentID().equals(studentID)) {
+						picpath = arr.get(j).getPicturePath();
+						delete(studentID);
+					}
+				}
+		    	String faculty = each[1];
+		    	String title = each[2];
+		    	String name = each[3];
+		    	String surname = each[4];
+		    	String[] date = each[5].split("\\.");
+
+		    	String day = date[0];
+		    	String month = date[1];
+		    	String year = date[2];
+		    	
+		    	String cardID = each[6];
+		    	String address = each[7];
+		    	String race = each[8];
+		    	String religion = each[9];
+		    	String bloodType = each[10];
+		    	String tel = each[11];
+		    	String email = each[12];
+		    	String height = each[13];
+		    	String weight = each[14];
+		    	String parentTel = each[15];
+		    	String disease = each[16];
+		    	String enrollAt = each[17];
+		    	
+		    	
+		    	
+		    	DBCollection myStudent = db.getCollection(myUsername);
+		    	
+		    	BasicDBObject n = new BasicDBObject();
+		    	n.put("studentID", studentID);
+		    	n.put("faculty", faculty);
+		    	n.put("title", title);
+		    	n.put("name", name);
+		    	n.put("surname", surname);
+		    	n.put("day", day);
+		    	n.put("month", month);
+		    	n.put("year", year);
+		    	n.put("cardID", cardID);
+		    	n.put("address", address);
+		    	n.put("race", race);
+		    	n.put("religion", religion);
+		    	n.put("bloodType", bloodType);
+		    	n.put("tel", tel);
+		    	n.put("email", email);
+		    	n.put("height", height);
+		    	n.put("weight", weight);
+		    	n.put("parentTel", parentTel);
+		    	n.put("disease", disease);
+		    	n.put("enrollAt", enrollAt);
+		    	n.put("s1_midterm", score.get("s1_midterm"));
+		    	n.put("s1_final", score.get("s1_final"));
+		    	n.put("s1_assignment", score.get("s1_assignment"));
+		    	n.put("s1_project", score.get("s1_project"));
+		    	n.put("s2_midterm", score.get("s2_midterm"));
+		    	n.put("s2_final", score.get("s2_final"));
+		    	n.put("s2_assignment", score.get("s2_assignment"));
+		    	n.put("s2_project", score.get("s2_project"));
+		    	n.put("s3_midterm", score.get("s3_midterm"));
+		    	n.put("s3_final", score.get("s3_final"));
+		    	n.put("s3_assignment", score.get("s3_assignment"));
+		    	n.put("s3_project", score.get("s3_project"));
+		    	n.put("picturePath", picpath);
+		    	
+		    	myStudent.insert(n);
+
+		    	information.put("studentID", studentID);
+		    	information.put("faculty", faculty);
+		    	information.put("title", title);
+		    	information.put("name", name);
+		    	information.put("surname", surname);
+		    	
+		    	information.put("day", day);
+		    	information.put("month", month);
+		    	information.put("year", year);
+		    	
+		    	information.put("cardID", cardID);
+		    	information.put("address", address);
+		    	information.put("race", race);
+		    	information.put("religion", religion);
+		    	information.put("bloodType", bloodType);
+		    	information.put("tel", tel);
+		    	information.put("email", email);
+		    	information.put("height", height);
+		    	information.put("weight", weight);
+		    	information.put("parentTel", parentTel);
+		    	information.put("disease", disease);
+		    	information.put("enrollAt", enrollAt);
+
+		    	
+		    	teacher.addStudent(new Student(information, score, picpath));
+		    	System.out.println("add success");
+			}
+			catch(Exception e) {
+				System.out.println(i);
+			}
+		}
+
+		sortTable(false);
+    	updateTable();
+    	updateScoreTable();
+    	
+		JOptionPane.showOptionDialog(null, "อัพโหลดข้อมูลนักเรียนจากไฟล์ CSV เรียบร้อยแล้ว", "อัพโหลดข้อมูลนักเรียน", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน", }, null);
+    }
+    
+    public void exportStudentInformationCSV() {
+    	String title = "Student_Information";
+    	ArrayList<Student> arr = teacher.getStudents();
+		JFileChooser chooser = new JFileChooser();
+		chooser.setAcceptAllFileFilterUsed(false);
+		chooser.setDialogTitle("ดาวน์โหลดข้อมูลนักเรียน");
+		
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV file", "csv");
+		chooser.addChoosableFileFilter(filter);
+		chooser.setSelectedFile(new File(title));
+		chooser.setApproveButtonText("Save");
+		
+		String path = "";
+		if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+			path = "" + chooser.getSelectedFile();
+			if (!path.contains(".csv")) {
+				 path += ".csv";
+			}
+		}
+		else {
+
+			return;
+		}
+    	try{
+    		
+			PrintWriter pw = new PrintWriter(new File(path));
+			StringBuilder builder = new StringBuilder();
+
+			String ColumnNamesList = "studentID,faculty,title,name,surname,date_of_birth,IDcard,Address,race,religion,bloodtype,contact,email,height,weight,contact(Parent),disease,enrollAt";
+			
+			builder.append(ColumnNamesList +"\n");
+			
+			for (int i = 0; i < arr.size(); i++) {
+	    		HashMap<String, String> info = arr.get(i).getInformation();
+	        	
+	    		builder.append(info.get("studentID") + ",");
+	    		builder.append(info.get("faculty") + ",");
+	    		builder.append(info.get("title") + ",");
+	    		builder.append(info.get("name") + ",");
+	    		builder.append(info.get("surname") + ",");
+	    		builder.append(info.get("day") + "." + info.get("month") + "." + info.get("year") + ",");
+	    		builder.append(info.get("cardID") + ",");
+	    		builder.append(info.get("address") + ",");
+	    		builder.append(info.get("race") + ",");
+	    		builder.append(info.get("religion") + ",");
+	    		builder.append(info.get("bloodType") + ",");
+	    		builder.append(info.get("tel") + ",");
+	    		builder.append(info.get("email") + ",");
+	    		builder.append(info.get("height") + ",");
+	    		builder.append(info.get("weight") + ",");
+	    		builder.append(info.get("parentTel") + ",");
+	    		builder.append(info.get("disease") + ",");
+	    		builder.append((info.get("enrollAt").replace('-', '.')));
+	    		
+				builder.append('\n');
+	    	}
+			pw.write(builder.toString());
+			pw.close();
+			JOptionPane.showOptionDialog(null, "ดาวน์โหลดข้อมูลนักเรียนเรียบร้อยแล้ว", "ดาวน์โหลดข้อมูลนักเรียน", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน", }, null);
+
+		}
+		catch (Exception err) {
+			JOptionPane.showOptionDialog(null, "กรุณาปิดไฟล์ CSV ที่เปิดอยู่ก่อน(ชื่อไฟล์เดียวกับที่บันทึก)", "ดาวน์โหลดข้อมูลนักเรียน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน", }, null);
+		}
+    }
+    
     public double[] calStat(ArrayList<Student> arr, int select) {
     	double max = 0;
     	double min = 0;
@@ -1053,7 +1319,7 @@ public class StudentManagement{
     	JLabel l1 = Helper.createLabel("คุณลักษณะของไฟล์", 20, true);
     	l1.setHorizontalAlignment(JLabel.CENTER);
     	JLabel l2 = Helper.createLabel("- ต้องเป็นไฟล์ .csv เท่านั้น");
-    	JLabel l3 = Helper.createLabel("- แถวแรก(ไม่นับเฮดเดอร์) จะต้องเป็นรหัสนักเรียน, คะแนนเก็บ, คะแนนกลางภาค, คะแนนปลายภาค ตามลําดับ");
+    	JLabel l3 = Helper.createLabel("- ข้อมูลในแต่ละแถว(ไม่นับเฮดเดอร์) จะต้องเป็นรหัสนักเรียน, คะแนนเก็บ, คะแนนกลางภาค, คะแนนปลายภาค ตามลําดับ");
     	JLabel l4 = Helper.createLabel("- หากมีคอลัมน์เกินมาจะไม่สนใจ");
     	JLabel l5 = Helper.createLabel("- หากรหัสนักเรียนหรือคะแนนในแต่ละช่องไม่สมเหตุสมผลหรือไม่มีรหัสนักเรียนในระบบก็จะข้ามไปทําแถวถัดไป");
     	JLabel l6 = Helper.createLabel("- รหัสนักเรียนที่มีในระบบแต่ไม่มีในไฟล์ก็จะไมได้รับการอัพเดทคะแนน");
