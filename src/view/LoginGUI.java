@@ -8,7 +8,7 @@ import controller.Language;
 public class LoginGUI{
     private JButton btn1, btn2;
     private JDesktopPane desktop, linkPanel;
-    private MyPanel link, p1, href, connectp;
+    private MyPanel link, p1, href, connectp, languagep;
     private JLabel l1, l2, l3, l4, title, github, connect, unconnect, language;
     private JTextField f1;
     private JPasswordField f2;
@@ -33,8 +33,8 @@ public class LoginGUI{
         
         href = Helper.createPanel("");
         href.setBackground(Color.white);
-        href.setSize(200, 60);
-        href.setLocation(1020, 0);
+        href.setSize(60, 60);
+        href.setLocation(570, 0);
         
         connectp = Helper.createPanel("");
         connectp.setBackground(Color.white);
@@ -48,19 +48,27 @@ public class LoginGUI{
         
         github = Helper.createLabel("", "/images/github.png", 50, 50);
         
-        language = Helper.createLabel("", "/images/language.png", 50, 50);
-        
-        href.add(language);
+       
         href.add(github);
         
+        languagep = Helper.createPanel("");
+        languagep.setBackground(Color.white);
+        languagep.setSize(60, 60);
+        languagep.setLocation(1120, 0);
         
+        language = Helper.createLabel("", "/images/language.png", 50, 50);
+        language.setHorizontalTextPosition(JLabel.LEFT);
+       
+        
+        languagep.add(language);
         
         connectp.add(connect);
         connectp.add(unconnect);
         
         
-        linkPanel.add(href);
+        //linkPanel.add(href);
         linkPanel.add(connectp);
+        linkPanel.add(languagep);
         
         link.add(linkPanel);
         

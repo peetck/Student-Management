@@ -27,7 +27,7 @@ public class ScoreGUI {
         topmenu.setLayout(new BorderLayout());
 
         l1 = Helper.createLabel("<html>&nbsp;&nbsp;" + subject + " (" + subjectID + ")</html>", "/images/already_have_subject.png", 60, 60);
-        l1.setFont(new Font("Kanit ExtraLight", Font.PLAIN, 35));
+        l1.setFont(new Font("Kanit ExtraLight", Font.BOLD, 35));
         l1.setHorizontalAlignment(JLabel.CENTER);
         topmenu.add(l1);
 		
@@ -71,7 +71,7 @@ public class ScoreGUI {
 		String[] temp = inp.split("#");
 		this.subject = temp[0];
 		this.subjectID = temp[1];
-		l1.setText("<html>&nbsp;&nbsp;<b>" +Language.get("subject") + " " + subject + " (" + subjectID + ")</b></html>");
+		l1.setText("  " +Language.get("subject") + " " + subject + " (" + subjectID + ")");
 	}
 	
 	public JDesktopPane getPanel() {
