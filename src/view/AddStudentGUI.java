@@ -30,7 +30,7 @@ public class AddStudentGUI {
         gbc.fill = GridBagConstraints.BOTH;
         btn1 = Helper.createButton("ยืนยัน");
         btn2 = Helper.createButton("แก้ไขรูป");
-        btn3 = Helper.createButton("เพิ่มจากไฟล์ CSV");
+        btn3 = Helper.createButton("เพิ่มจากไฟล์ xlsx");
         
         left = Helper.createPanel("");
         left.setSize(450, 630);

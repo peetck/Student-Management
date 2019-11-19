@@ -15,7 +15,7 @@ import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import org.apache.poi.sl.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
@@ -716,45 +716,45 @@ public class StudentManagement{
         	}
         });
         
-        // export score as CSV {subject 1}
+        // export score as xlsx {subject 1}
         managementPage.getSubjectGUI().getSubject1().getBtn5().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-				exportCSV(1);
+				export_xlsx(1);
         	}
         });
         
-        // export score as CSV {subject 2}
+        // export score as xlsx {subject 2}
         managementPage.getSubjectGUI().getSubject2().getBtn5().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		exportCSV(2);
+        		export_xlsx(2);
         	}
         });
         
-        // export score as CSV {subject 3}
+        // export score as xlsx {subject 3}
         managementPage.getSubjectGUI().getSubject3().getBtn5().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		exportCSV(3);
+        		export_xlsx(3);
         	}
         });
         
-        // import CSV to score {subject 1}
+        // import xlsx to score {subject 1}
         managementPage.getSubjectGUI().getSubject1().getBtn4().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		importCSV(1);
+        		import_xlsx(1);
         	}
         });
         
-		// import CSV to score {subject 2}
+		// import xlsx to score {subject 2}
 		managementPage.getSubjectGUI().getSubject2().getBtn4().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				importCSV(2);
+				import_xlsx(2);
 			}
 		});
 
-		// import CSV to score {subject 3}
+		// import xlsx to score {subject 3}
 		managementPage.getSubjectGUI().getSubject3().getBtn4().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				importCSV(3);
+				import_xlsx(3);
 			}
 		});
 		
@@ -805,13 +805,13 @@ public class StudentManagement{
 		
 		managementPage.getMyStudentGUI().getBtn1().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				exportStudentInformationCSV();
+				exportStudentInformationXLSX();
 			}
 		});
 		
 		managementPage.getAddStudentGUI().getBtn3().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				importStudentInformationCSV();
+				importStudentInformationXLSX();
 			}
 		});
      }
@@ -819,19 +819,19 @@ public class StudentManagement{
     
     // below here is method in all application -------------------------------------------------------------------------------------------------------------------------
     
-    public void importStudentInformationCSV() {
+    public void importStudentInformationXLSX() {
     	MyPanel main = Helper.createPanel("");
     	main.setLayout(new BorderLayout());
     	MyPanel p = Helper.createPanel("");
     	p.setLayout(new GridLayout(8, 1));
     	JLabel l1 = Helper.createLabel("คุณลักษณะของไฟล์", 20, true);
     	l1.setHorizontalAlignment(JLabel.CENTER);
-    	JLabel l2 = Helper.createLabel("- ต้องเป็นไฟล์ .csv เท่านั้น");
+    	JLabel l2 = Helper.createLabel("- ต้องเป็นไฟล์ .xlsx เท่านั้น");
     	JLabel l3 = Helper.createLabel("- ข้อมูลในแต่ละแถว(ไม่นับเฮดเดอร์) จะต้องเรียงตามข้อมูลในการเพิ่มนักเรียน");
     	JLabel l4 = Helper.createLabel("- หากมีคอลัมน์เกินมาจะไม่สนใจ");
     	JLabel l5 = Helper.createLabel("- หากรหัสนักเรียนไม่ได้เป็นตัวเลขหรือวันเดือนปีเกิดไม่ใช่ตัวเลขก็จะไม่สนใจแถวนั้น");
     	JLabel l6 = Helper.createLabel("- รหัสนักเรียนที่มีในระบบจะถูกอัพเดทข้อมูลแทนที่");
-    	JLabel l7 = Helper.createLabel("- ไฟล์ที่อัพโหลดต้องไม่เคยถูกแก้ไขด้วยโปรแกรม excel");
+    	JLabel l7 = Helper.createLabel("-----------");
     	JLabel l8 = Helper.createLabel("รูปตัวอย่างไฟล์ที่ถูกต้อง", 18, true);
     	l8.setHorizontalAlignment(JLabel.CENTER);
     	JLabel picture = Helper.createLabel("", "", 700, 200);
@@ -872,7 +872,7 @@ public class StudentManagement{
 		try {
 			FileInputStream excelFile = new FileInputStream(new File(path));
 	            Workbook workbook = new XSSFWorkbook(excelFile);
-	            Sheet datatypeSheet = workbook.getSheetAt(0);
+	            Sheet datatypeSheet = (Sheet) workbook.getSheetAt(0);
 	            Iterator<Row> iterator = datatypeSheet.iterator();
 
 	            while (iterator.hasNext()) {
@@ -883,18 +883,14 @@ public class StudentManagement{
 	                while (cellIterator.hasNext()) {
 
 	                    Cell currentCell = cellIterator.next();
-	                    //getCellTypeEnum shown as deprecated for version 3.15
-	                    //getCellTypeEnum ill be renamed to getCellType starting from version 4.0
-	                    if (currentCell.getCellType() == CellType.STRING) {
-	                        System.out.print(currentCell.getStringCellValue() + "--");
-	                    } else if (currentCell.getCellType() == CellType.NUMERIC) {
-	                        System.out.print(currentCell.getNumericCellValue() + "--");
-	                    }
+	                    currentCell.setCellType(CellType.STRING);
+	                    
+	                    data += currentCell.getStringCellValue() + "#";
 
 	                }
-	                System.out.println();
-
+	                data += "\n";
 	            }
+	        System.out.println(data);
 	        
 		}
 		catch(Exception e) {
@@ -1022,10 +1018,10 @@ public class StudentManagement{
     	updateTable();
     	updateScoreTable();
     	
-		JOptionPane.showOptionDialog(null, "อัพโหลดข้อมูลนักเรียนจากไฟล์ CSV เรียบร้อยแล้ว", "อัพโหลดข้อมูลนักเรียน", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน", }, null);
+		JOptionPane.showOptionDialog(null, "อัพโหลดข้อมูลนักเรียนจากไฟล์ xlsx เรียบร้อยแล้ว", "อัพโหลดข้อมูลนักเรียน", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน", }, null);
     }
     
-    public void exportStudentInformationCSV() {
+    public void exportStudentInformationXLSX() {
     	String title = "Student_Information";
     	ArrayList<Student> arr = teacher.getStudents();
 		JFileChooser chooser = new JFileChooser();
@@ -1097,12 +1093,7 @@ public class StudentManagement{
 	            int colNum = 0;
 	            for (Object field : datatype) {
 	                Cell cell = row.createCell(colNum++);
-	                if (field instanceof String) {
-	                    cell.setCellValue((String) field);
-	                }
-	                else if (field instanceof Integer) {
-	                    cell.setCellValue((Integer) field);
-	                }
+	                cell.setCellValue((String) field);
 	            }
 	        }
 
@@ -1126,7 +1117,7 @@ public class StudentManagement{
 		}
 		catch (Exception err) {
 			System.out.println(err);
-			JOptionPane.showOptionDialog(null, "กรุณาปิดไฟล์ CSV ที่เปิดอยู่ก่อน(ชื่อไฟล์เดียวกับที่บันทึก)", "ดาวน์โหลดข้อมูลนักเรียน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน", }, null);
+			JOptionPane.showOptionDialog(null, "กรุณาปิดไฟล์ xlsx ที่เปิดอยู่ก่อน(ชื่อไฟล์เดียวกับที่บันทึก)", "ดาวน์โหลดข้อมูลนักเรียน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน", }, null);
 		}
     }
     
@@ -1376,14 +1367,14 @@ public class StudentManagement{
 		return chartPanel;
     }
     
-    public void importCSV(int select) {
+    public void import_xlsx(int select) {
     	MyPanel main = Helper.createPanel("");
     	main.setLayout(new BorderLayout());
     	MyPanel p = Helper.createPanel("");
     	p.setLayout(new GridLayout(7, 1));
     	JLabel l1 = Helper.createLabel("คุณลักษณะของไฟล์", 20, true);
     	l1.setHorizontalAlignment(JLabel.CENTER);
-    	JLabel l2 = Helper.createLabel("- ต้องเป็นไฟล์ .csv เท่านั้น");
+    	JLabel l2 = Helper.createLabel("- ต้องเป็นไฟล์ .xlsx เท่านั้น");
     	JLabel l3 = Helper.createLabel("- ข้อมูลในแต่ละแถว(ไม่นับเฮดเดอร์) จะต้องเป็นรหัสนักเรียน, คะแนนเก็บ, คะแนนกลางภาค, คะแนนปลายภาค ตามลําดับ");
     	JLabel l4 = Helper.createLabel("- หากมีคอลัมน์เกินมาจะไม่สนใจ");
     	JLabel l5 = Helper.createLabel("- หากรหัสนักเรียนหรือคะแนนในแต่ละช่องไม่สมเหตุสมผลหรือไม่มีรหัสนักเรียนในระบบก็จะข้ามไปทําแถวถัดไป");
@@ -1411,7 +1402,7 @@ public class StudentManagement{
 		chooser.setAcceptAllFileFilterUsed(false);
 		chooser.setDialogTitle("อัพโหลดคะแนน");
 		
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV file", "csv");
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("xlsx file", "xlsx");
 		chooser.addChoosableFileFilter(filter);
 
 		String path = "";
@@ -1425,14 +1416,27 @@ public class StudentManagement{
 		
 		String data = "";
 		try {
-			Scanner scan = new Scanner(new File(path));
-	        scan.useDelimiter(",");
-	        while(scan.hasNext()){
-	        	data += scan.next() + "#";
-	        }
-	        scan.close();
+			FileInputStream excelFile = new FileInputStream(new File(path));
+            Workbook workbook = new XSSFWorkbook(excelFile);
+            Sheet datatypeSheet = (Sheet) workbook.getSheetAt(0);
+            Iterator<Row> iterator = datatypeSheet.iterator();
+
+            while (iterator.hasNext()) {
+
+                Row currentRow = iterator.next();
+                Iterator<Cell> cellIterator = currentRow.iterator();
+
+                while (cellIterator.hasNext()) {
+
+                    Cell currentCell = cellIterator.next();
+                    currentCell.setCellType(CellType.STRING);
+                    data += currentCell.getStringCellValue() + "#";
+
+                }
+                data += "\n";
+            }
 		}
-		catch(FileNotFoundException e) {
+		catch(Exception e) {
 			JOptionPane.showOptionDialog(null, Helper.createLabel("ระบบไม่สามารถหาไฟล์ได้"), "อัพโหลดคะแนน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน", }, null);
 			return;
 		}
@@ -1496,10 +1500,10 @@ public class StudentManagement{
 	    		}
 	    	}
 		}
-		JOptionPane.showOptionDialog(null, "อัพโหลดคะแนนนักเรียนจากไฟล์ CSV เรียบร้อยแล้ว", "อัพโหลดคะแนน", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน", }, null);
+		JOptionPane.showOptionDialog(null, "อัพโหลดคะแนนนักเรียนจากไฟล์ xlsx เรียบร้อยแล้ว", "อัพโหลดคะแนน", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน", }, null);
     }
     
-    public void exportCSV(int select) {
+    public void export_xlsx(int select) {
     	String title = "";
 		if (select == 1) {
 			title = managementPage.getSubjectGUI().getSubject1().getSubject();
@@ -1516,7 +1520,7 @@ public class StudentManagement{
 		chooser.setAcceptAllFileFilterUsed(false);
 		chooser.setDialogTitle("ดาวน์โหลดคะแนน");
 		
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV file", "csv");
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("xlsx file", "xlsx");
 		chooser.addChoosableFileFilter(filter);
 		chooser.setSelectedFile(new File(title + "_score"));
 		chooser.setApproveButtonText("Save");
@@ -1524,8 +1528,8 @@ public class StudentManagement{
 		String path = "";
 		if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 			path = "" + chooser.getSelectedFile();
-			if (!path.contains(".csv")) {
-				 path += ".csv";
+			if (!path.contains(".xlsx")) {
+				 path += ".xlsx";
 			}
 		}
 		else {
@@ -1533,33 +1537,52 @@ public class StudentManagement{
 			return;
 		}
     	try{
-    		
-			PrintWriter pw = new PrintWriter(new File(path));
-			StringBuilder builder = new StringBuilder();
-
-			String ColumnNamesList = "studentID,Accumulated Score,Project Score,Midterm Score,Final Score,Total Score,Grade";
+    		XSSFWorkbook workbook = new XSSFWorkbook();
+    	    XSSFSheet sheet = workbook.createSheet("Datatypes in Java");
+    	 	Object[][] alldata = new Object[7][arr.size()];
+    	    
+    		Object[] header = {"StudentID", "Accumulated Score", "Project Score", "Midterm Score", "Final Score", "Total Score", "Grade"};
+    		int count_index = 0;
+    		alldata[count_index++] = header;
+    
 			
-			builder.append(ColumnNamesList +"\n");
+			
+			int rowNum = 0;
+	        System.out.println("Creating excel");
+
 			
 			for (int i = 0; i < arr.size(); i++) {
 	    		Object[] score = arr.get(i).getGrade(select);
-	    		
-	    		builder.append(score[0] + ",");
-	    		builder.append(score[1] + ",");
-	    		builder.append(score[2] + ",");
-	    		builder.append(score[3] + ",");
-	    		builder.append(score[4] + ",");
-	    		builder.append(score[5] + ",");
-	    		builder.append(score[6]);
-				builder.append('\n');
+	    		alldata[count_index++] = score;
 	    	}
-			pw.write(builder.toString());
-			pw.close();
+
+	        
+	        for (Object[] datatype : alldata) {
+	            Row row = sheet.createRow(rowNum++);
+	            int colNum = 0;
+	            for (Object field : datatype) {
+	                Cell cell = row.createCell(colNum++);
+	                cell.setCellValue((String) field);
+	            }
+	        }
+
+	        try {
+	            FileOutputStream outputStream = new FileOutputStream(path);
+	            workbook.write(outputStream);
+	            workbook.close();
+	            outputStream.close();
+	        }
+	        catch (FileNotFoundException e) {
+	            e.printStackTrace();
+	        }
+	        catch (IOException e) {
+	            e.printStackTrace();
+	        }
 			JOptionPane.showOptionDialog(null, "ดาวน์โหลดคะแนนนักเรียนเรียบร้อยแล้ว", "ดาวน์โหลดคะแนน", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน", }, null);
 
 		}
 		catch (Exception err) {
-			JOptionPane.showOptionDialog(null, "กรุณาปิดไฟล์ CSV ที่เปิดอยู่ก่อน(ชื่อไฟล์เดียวกับที่บันทึก)", "ดาวน์โหลดคะแนน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน", }, null);
+			JOptionPane.showOptionDialog(null, "กรุณาปิดไฟล์ xlsx ที่เปิดอยู่ก่อน(ชื่อไฟล์เดียวกับที่บันทึก)", "ดาวน์โหลดคะแนน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน", }, null);
 		}
     }
     public void deleteSubject(int select) {
