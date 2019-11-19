@@ -10,5 +10,11 @@
 	<classpathentry kind="lib" path="lib/material-ui-swing-0.9.6.jar"/>
 	<classpathentry kind="lib" path="lib/mongo-2.10.1.jar"/>
 	<classpathentry kind="lib" path="lib/jfreechart-1.5.0.jar"/>
+	<classpathentry kind="lib" path="lib/poi-4.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/poi-ooxml-4.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/commons-collections4-4.4.jar"/>
+	<classpathentry kind="lib" path="lib/commons-compress-1.19.jar"/>
+	<classpathentry kind="lib" path="lib/xmlbeans-3.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/poi-ooxml-schemas-4.1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

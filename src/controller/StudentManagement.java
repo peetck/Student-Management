@@ -15,6 +15,13 @@ import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import org.apache.poi.sl.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import com.mongodb.*;
 
 import java.util.*;
@@ -849,7 +856,7 @@ public class StudentManagement{
 		chooser.setAcceptAllFileFilterUsed(false);
 		chooser.setDialogTitle("อัพโหลดข้อมูลนักเรียน");
 		
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV file", "csv");
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("XLSX file", "xlsx");
 		chooser.addChoosableFileFilter(filter);
 
 		String path = "";
@@ -863,15 +870,34 @@ public class StudentManagement{
 		
 		String data = "";
 		try {
-		
-			Scanner scan = new Scanner(new File(path));
-	        scan.useDelimiter(",");
-	        while(scan.hasNext()){
-	        	data += scan.next() + "#";
-	        }
-	        scan.close();
+			FileInputStream excelFile = new FileInputStream(new File(path));
+	            Workbook workbook = new XSSFWorkbook(excelFile);
+	            Sheet datatypeSheet = workbook.getSheetAt(0);
+	            Iterator<Row> iterator = datatypeSheet.iterator();
+
+	            while (iterator.hasNext()) {
+
+	                Row currentRow = iterator.next();
+	                Iterator<Cell> cellIterator = currentRow.iterator();
+
+	                while (cellIterator.hasNext()) {
+
+	                    Cell currentCell = cellIterator.next();
+	                    //getCellTypeEnum shown as deprecated for version 3.15
+	                    //getCellTypeEnum ill be renamed to getCellType starting from version 4.0
+	                    if (currentCell.getCellType() == CellType.STRING) {
+	                        System.out.print(currentCell.getStringCellValue() + "--");
+	                    } else if (currentCell.getCellType() == CellType.NUMERIC) {
+	                        System.out.print(currentCell.getNumericCellValue() + "--");
+	                    }
+
+	                }
+	                System.out.println();
+
+	            }
+	        
 		}
-		catch(FileNotFoundException e) {
+		catch(Exception e) {
 			JOptionPane.showOptionDialog(null, Helper.createLabel("ระบบไม่สามารถหาไฟล์ได้"), "อัพโหลดข้อมูลนักเรียน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน", }, null);
 			return;
 		}
@@ -1006,7 +1032,7 @@ public class StudentManagement{
 		chooser.setAcceptAllFileFilterUsed(false);
 		chooser.setDialogTitle("ดาวน์โหลดข้อมูลนักเรียน");
 		
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV file", "csv");
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("XLSX file", "xlsx");
 		chooser.addChoosableFileFilter(filter);
 		chooser.setSelectedFile(new File(title));
 		chooser.setApproveButtonText("Save");
@@ -1014,8 +1040,8 @@ public class StudentManagement{
 		String path = "";
 		if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 			path = "" + chooser.getSelectedFile();
-			if (!path.contains(".csv")) {
-				 path += ".csv";
+			if (!path.contains(".xlsx")) {
+				 path += ".xlsx";
 			}
 		}
 		else {
@@ -1023,44 +1049,83 @@ public class StudentManagement{
 			return;
 		}
     	try{
-    		
-			PrintWriter pw = new PrintWriter(new File(path));
-			StringBuilder builder = new StringBuilder();
+    		XSSFWorkbook workbook = new XSSFWorkbook();
+    	    XSSFSheet sheet = workbook.createSheet("Datatypes in Java");
+    	 	Object[][] alldata = new Object[18][arr.size()];
+    	    
+    		Object[] header = {"studentID", "faculty", "title", "name", "surname", "date_of_birth", "IDcard", "Address", "race", 
+    	                	"religion", "bloodtype", "contact", "email", "height", "weight", "contact(Patent)", "disease", "enrollAt"};
+    		int count_index = 0;
+    		alldata[count_index++] = header;
 
-			String ColumnNamesList = "studentID,faculty,title,name,surname,date_of_birth,IDcard,Address,race,religion,bloodtype,contact,email,height,weight,contact(Parent),disease,enrollAt";
-			
-			builder.append(ColumnNamesList +"\n");
-			
+    	        
+    	        
+    	        
+						
 			for (int i = 0; i < arr.size(); i++) {
 	    		HashMap<String, String> info = arr.get(i).getInformation();
 	        	
-	    		builder.append(info.get("studentID") + ",");
-	    		builder.append(info.get("faculty") + ",");
-	    		builder.append(info.get("title") + ",");
-	    		builder.append(info.get("name") + ",");
-	    		builder.append(info.get("surname") + ",");
-	    		builder.append(info.get("day") + "." + info.get("month") + "." + info.get("year") + ",");
-	    		builder.append(info.get("cardID") + ",");
-	    		builder.append(info.get("address") + ",");
-	    		builder.append(info.get("race") + ",");
-	    		builder.append(info.get("religion") + ",");
-	    		builder.append(info.get("bloodType") + ",");
-	    		builder.append(info.get("tel") + ",");
-	    		builder.append(info.get("email") + ",");
-	    		builder.append(info.get("height") + ",");
-	    		builder.append(info.get("weight") + ",");
-	    		builder.append(info.get("parentTel") + ",");
-	    		builder.append(info.get("disease") + ",");
-	    		builder.append((info.get("enrollAt").replace('-', '.')));
-	    		
-				builder.append('\n');
+	    		Object[] data = new Object[18];
+	    		data[0] = (info.get("studentID"));
+	    		data[1] = (info.get("faculty"));
+	    		data[2] = (info.get("title"));
+	    		data[3] = (info.get("name"));
+	    		data[4] = (info.get("surname"));
+	    		data[5] = (info.get("day") + "." + info.get("month") + "." + info.get("year"));
+	    		data[6] = (info.get("cardID"));
+	    		data[7] = (info.get("address"));
+	    		data[8] = (info.get("race"));
+	    		data[9] = (info.get("religion"));
+	    		data[10] = (info.get("bloodType"));
+	    		data[11] = (info.get("tel"));
+	    		data[12] = (info.get("email"));
+	    		data[13] = (info.get("height"));
+	    		data[14] = (info.get("weight"));
+	    		data[15] = (info.get("parentTel"));
+	    		data[16] = (info.get("disease"));
+	    		data[17] = ((info.get("enrollAt").replace('-', '.')));
+
+	    		alldata[count_index++] = data;
 	    	}
-			pw.write(builder.toString());
-			pw.close();
+			
+			
+			int rowNum = 0;
+	        System.out.println("Creating excel");
+
+	        for (Object[] datatype : alldata) {
+	            Row row = sheet.createRow(rowNum++);
+	            int colNum = 0;
+	            for (Object field : datatype) {
+	                Cell cell = row.createCell(colNum++);
+	                if (field instanceof String) {
+	                    cell.setCellValue((String) field);
+	                }
+	                else if (field instanceof Integer) {
+	                    cell.setCellValue((Integer) field);
+	                }
+	            }
+	        }
+
+	        try {
+	            FileOutputStream outputStream = new FileOutputStream(path);
+	            workbook.write(outputStream);
+	            workbook.close();
+	            outputStream.close();
+	        }
+	        catch (FileNotFoundException e) {
+	            e.printStackTrace();
+	        }
+	        catch (IOException e) {
+	            e.printStackTrace();
+	        }
+
+	        System.out.println("Create successfully.");
+			
 			JOptionPane.showOptionDialog(null, "ดาวน์โหลดข้อมูลนักเรียนเรียบร้อยแล้ว", "ดาวน์โหลดข้อมูลนักเรียน", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน", }, null);
 
 		}
 		catch (Exception err) {
+			System.out.println(err);
 			JOptionPane.showOptionDialog(null, "กรุณาปิดไฟล์ CSV ที่เปิดอยู่ก่อน(ชื่อไฟล์เดียวกับที่บันทึก)", "ดาวน์โหลดข้อมูลนักเรียน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน", }, null);
 		}
     }
