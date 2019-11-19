@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.*;
+import java.util.Locale;
 
 import javax.swing.*;
 
@@ -103,6 +104,7 @@ public class AddStudentGUI {
 		settings = new DatePickerSettings();
         settings.setAllowKeyboardEditing(false);
         f6 = new DatePicker(settings);
+        f6.setLocale(Locale.US);
  
 		
 		f7 = Helper.createTextField(20, 15);

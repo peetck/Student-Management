@@ -27,12 +27,14 @@ public class Main {
 			UIManager.put("OptionPane.messageFont", new Font("Kanit ExtraLight", Font.PLAIN, 16));
 			UIManager.put("OptionPane.buttonFont", new Font("Kanit ExtraLight", Font.PLAIN, 16));
 			UIManager.put("ToolTip.font", new Font("Kanit ExtraLight", Font.PLAIN, 16));
+			
+			new StudentManagement("localhost", 27017);
 
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			JOptionPane.showOptionDialog(null, "ไม่สามารถเริ่มต้นโปรแกรมได้กรุณาเช็คให้แน่ใจว่าคุณได้มี Java อยู่บนเครื่องเรียบร้อยแล้ว", "ไม่สามารถเริ่มโปรแกรมได้", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน", }, null);
 		}
-		new StudentManagement("localhost", 27017);
+		
 
 	}
 

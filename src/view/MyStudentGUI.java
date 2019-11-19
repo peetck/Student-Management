@@ -1,6 +1,5 @@
 package view;
 import javax.swing.*;
-import javax.swing.table.JTableHeader;
 
 import java.awt.*;
 

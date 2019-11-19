@@ -1,6 +1,5 @@
 package view;
 import javax.swing.*;
-import javax.swing.table.*;
 import java.awt.*;
 
 public class SubjectGUI {

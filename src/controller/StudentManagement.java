@@ -11,13 +11,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.text.NumberFormat;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import com.mongodb.*;
-
-import mdlaf.animation.MaterialUIMovement;
 
 import java.util.*;
 
@@ -34,13 +32,11 @@ import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.labels.StandardCategoryToolTipGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.renderer.category.BarPainter;
+
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.CategoryItemRenderer;
-import org.jfree.chart.renderer.category.LineAndShapeRenderer;
-import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.data.general.DefaultPieDataset;
 
 import model.*;
 import view.*;
@@ -1231,8 +1227,8 @@ public class StudentManagement{
 			JOptionPane.showOptionDialog(null, "ดาวน์โหลดคะแนนนักเรียนเรียบร้อยแล้ว", "ดาวน์โหลดคะแนน", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน", }, null);
 
 		}
-		catch (FileNotFoundException err) {
-
+		catch (Exception err) {
+			JOptionPane.showOptionDialog(null, "กรุณาปิดไฟล์ CSV ที่เปิดอยู่ก่อน(ชื่อไฟล์เดียวกับที่บันทึก)", "ดาวน์โหลดคะแนน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน", }, null);
 		}
     }
     public void deleteSubject(int select) {

@@ -1,12 +1,9 @@
 package view;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.*;
 import javax.swing.table.*;
 
-import mdlaf.animation.MaterialUIMovement;
 public class ButtonRenderer extends JLabel implements TableCellRenderer{
 	public ButtonRenderer() {
 	    setFont(new Font("Kanit ExtraLight", Font.PLAIN, 16));

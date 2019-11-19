@@ -5,7 +5,6 @@ import mdlaf.animation.*;
 
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 
 import java.awt.*;
 public class Helper{
