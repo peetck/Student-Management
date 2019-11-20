@@ -2085,6 +2085,19 @@ public class StudentManagement{
         	monthList.put("November", 11);
         	monthList.put("December", 12);
         	
+        	monthList.put("มกราคม", 1);
+        	monthList.put("กุมภาพันธ์", 2);
+        	monthList.put("มีนาคม", 3);
+        	monthList.put("เมษายน", 4);
+        	monthList.put("พฤษภาคม", 5);
+        	monthList.put("มิถุนายน", 6);
+        	monthList.put("กรกฎาคม", 7);
+        	monthList.put("สิงหาคม", 8);
+        	monthList.put("กันยายน", 9);
+        	monthList.put("ตุลาคม", 10);
+        	monthList.put("พฤศจิกายน", 11);
+        	monthList.put("ธันวาคม", 12);
+        	
         	day =  inpDate[0];
         	month = "" + monthList.get(inpDate[1]);
         	year = inpDate[2];
