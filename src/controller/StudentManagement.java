@@ -1619,7 +1619,7 @@ public class StudentManagement{
 		String path = "";
 		if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 			path = "" + chooser.getSelectedFile();
-			if (path.contains(".xlsx")) {
+			if (!path.contains(".xlsx")) {
 				 path += ".xlsx";
 			}
 		}
