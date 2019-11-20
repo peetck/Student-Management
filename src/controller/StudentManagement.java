@@ -143,7 +143,7 @@ public class StudentManagement{
         addManagementGUIEvent();
         addMyStudentGUIEvent();
         addOverallScoreGraphGUIEvent();
-        addStudentGUIEvent();
+        addAddStudentGUIEvent();
         addRegisterGUIEvent();
         addSettingGUIEvent();
         addScoreGUIEvent();
@@ -487,7 +487,7 @@ public class StudentManagement{
 			}
 		});
     }
-    public void addStudentGUIEvent() {
+    public void addAddStudentGUIEvent() {
     	addStudentPage.getBtn1().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		
@@ -513,6 +513,7 @@ public class StudentManagement{
         	public void actionPerformed(ActionEvent e) {
         		
         		JFileChooser chooser = new JFileChooser();
+        		setFileChooserFont(chooser.getComponents());
         	    chooser.showOpenDialog(null);
         	    File f = chooser.getSelectedFile();
         	    String sourcePath = f.getAbsolutePath();
@@ -854,7 +855,19 @@ public class StudentManagement{
     }
    
     // below here is method in all application -------------------------------------------------------------------------------------------------------------------------
-    
+    public void setFileChooserFont(Component[] comp){
+		for (int i = 0; i < comp.length; i++) {
+			if (comp[i] instanceof Container) {
+				setFileChooserFont(((Container) comp[i]).getComponents());
+			}
+			try {
+				comp[i].setFont(new Font("Kanit ExtraLight", Font.PLAIN, 16));
+			}
+			catch (Exception e) {
+
+			}
+		}
+	}
     public void importStudentInformationXLSX() {
     	MyPanel main = Helper.createPanel("");
     	main.setLayout(new BorderLayout());
@@ -862,17 +875,20 @@ public class StudentManagement{
     	p.setLayout(new GridLayout(8, 1));
     	JLabel l1 = Helper.createLabel("คุณลักษณะของไฟล์", 20, true);
     	l1.setHorizontalAlignment(JLabel.CENTER);
-    	JLabel l2 = Helper.createLabel("- ต้องเป็นไฟล์ .xlsx เท่านั้น");
-    	JLabel l3 = Helper.createLabel("- ข้อมูลในแต่ละแถว(ไม่นับเฮดเดอร์) จะต้องเรียงตามข้อมูลในการเพิ่มนักเรียน");
-    	JLabel l4 = Helper.createLabel("- หากมีคอลัมน์เกินมาจะไม่สนใจ");
-    	JLabel l5 = Helper.createLabel("- หากรหัสนักเรียนไม่ได้เป็นตัวเลขหรือวันเดือนปีเกิดไม่ใช่ตัวเลขก็จะไม่สนใจแถวนั้น");
-    	JLabel l6 = Helper.createLabel("- รหัสนักเรียนที่มีในระบบจะถูกอัพเดทข้อมูลแทนที่");
-    	JLabel l7 = Helper.createLabel("-----------");
+    	JLabel l2 = Helper.createLabel("- ต้องเป็นไฟล์ Excel (.xlsx) เท่านั้น");
+    	JLabel l3 = Helper.createLabel("- ข้อมูลในแต่ละแถว(ไม่นับเฮดเดอร์) จะต้องเรียงตามข้อมูลในการเพิ่มนักเรียน หากมีคอลัมน์เกินมาจะไม่สนใจ");
+    	JLabel l4 = Helper.createLabel("- ข้อมูลในแต่ละช่องต้องถูกต้อง");
+    	JLabel l5 = Helper.createLabel("- หากข้อมูลช่องใดช่องหนึ่งในแถวนั้นไม่ถูกต้องก็จะข้ามแถวนั้นไป");
+    	JLabel l6 = Helper.createLabel("- รหัสนักเรียนที่มีอยู่ในระบบแล้วจะถูกอัพเดทข้อมูลแทนที่");
+    	JLabel l7 = Helper.createLabel("- รหัสนักเรียนและหมายเลขบัตรประชาชนต้องเป็นตัวเลข, วันเดือนปีเกิดต้องอยู่ในรูปแบบ dd.mm.yy");
     	JLabel l8 = Helper.createLabel("รูปตัวอย่างไฟล์ที่ถูกต้อง", 18, true);
     	l8.setHorizontalAlignment(JLabel.CENTER);
-    	JLabel picture = Helper.createLabel("", "", 700, 200);
+    	JLabel picture = Helper.createLabel("", "/images/correct_information_xlsx.png", 700, 112);
+    	JLabel picture2 = Helper.createLabel("", "/images/correct_information2_xlsx.png", 700, 112);
     	picture.setBorder(BorderFactory.createLineBorder(Color.black));
     	picture.setHorizontalAlignment(JLabel.CENTER);
+    	picture2.setBorder(BorderFactory.createLineBorder(Color.black));
+    	picture2.setHorizontalAlignment(JLabel.CENTER);
     	
     	p.add(l1);
     	p.add(l2);
@@ -884,15 +900,17 @@ public class StudentManagement{
     	p.add(l8);
 
     	
-    	main.add(p);
-    	main.add(picture, BorderLayout.SOUTH);
+    	main.add(p, BorderLayout.NORTH);
+    	main.add(picture, BorderLayout.CENTER);
+    	main.add(picture2, BorderLayout.SOUTH);
     	JOptionPane.showOptionDialog(null, main, "อัพโหลดข้อมูลนักเรียน", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน", }, null);
     	
     	JFileChooser chooser = new JFileChooser();
+    	setFileChooserFont(chooser.getComponents());
 		chooser.setAcceptAllFileFilterUsed(false);
 		chooser.setDialogTitle("อัพโหลดข้อมูลนักเรียน");
 		
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("XLSX file", "xlsx");
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel File", "xlsx");
 		chooser.addChoosableFileFilter(filter);
 
 		String path = "";
@@ -935,10 +953,11 @@ public class StudentManagement{
 		}
     	System.out.println(data);
 		String[] row = data.split("\n");
+		int addsuccess = 0;
 		ArrayList<Student> arr = teacher.getStudents();
-		for (int i = 0; i < row.length; i++) {
+		es: for (int i = 0; i < row.length; i++) {
 			if (i == 0) {
-				continue;
+				continue es;
 			}
 			try {
 				HashMap<String, String> information = new HashMap<String, String>();
@@ -948,14 +967,41 @@ public class StudentManagement{
 				String picpath = "default";
 				
 				String studentID = each[0];
-				for (int j = 0; j < arr.size(); j++) {
-					if (arr.get(j).getStudentID().equals(studentID)) {
-						picpath = arr.get(j).getPicturePath();
-						delete(studentID);
+				for (int j = 0; j < studentID.length(); j++) {
+					if (!(studentID.charAt(j) >= '0' && studentID.charAt(j) <= '9')) {
+						continue es;
 					}
 				}
-		    	String faculty = each[1];
+				
+				
+				String[] facultys = {"วิศวกรรมศาสตร์",
+						"สถาปัตยกรรมศาสตร์",
+						"ครุศาสตร์อุตสาหกรรม",
+						"เทคโนโลยีการเกษตร",
+						"วิทยาศาสตร์",
+						"อุตสาหกรรมเกษตร",
+						"เทคโนโลยีสารสนเทศ",
+						"วิทยาลัยนานาชาติ",
+						"วิทยาลัยนาโนเทคโนโลยี ฯ",
+						"วิทยาลัยนวัตกรรมการจัดการข้อมูล",
+						"วิทยาลัยการบริหารและจัดการ",
+						"ศิลปศาสตร์",
+						"วิศกรรมการบินและนักบินพาณิชย์"};
+				String faculty = each[1];
+				for (String j : facultys) {
+					if (faculty.equals(j)) {
+						break;
+					}
+					if (j.equals("วิศกรรมการบินและนักบินพาณิชย์")) {
+						continue es;
+					}
+				}
+		    	
+		    	
 		    	String title = each[2];
+		    	if (!(title.equals("นาย")) && !(title.equals("นางสาว"))) {
+					continue es;
+				}
 		    	String name = each[3];
 		    	String surname = each[4];
 		    	String[] date = each[5].split("\\.");
@@ -975,9 +1021,14 @@ public class StudentManagement{
 		    	String weight = each[14];
 		    	String parentTel = each[15];
 		    	String disease = each[16];
-		    	String enrollAt = each[17];
+		    	String enrollAt = "" + java.time.LocalDate.now();
 		    	
-		    	
+		    	for (int j = 0; j < arr.size(); j++) {
+					if (arr.get(j).getStudentID().equals(studentID)) {
+						picpath = arr.get(j).getPicturePath();
+						delete(studentID);
+					}
+				}
 		    	
 		    	DBCollection myStudent = db.getCollection(myUsername);
 		    	
@@ -1044,6 +1095,7 @@ public class StudentManagement{
 		    	
 		    	teacher.addStudent(new Student(information, score, picpath));
 		    	System.out.println("add success");
+		    	addsuccess++;
 			}
 			catch(Exception e) {
 				System.out.println(i);
@@ -1053,18 +1105,19 @@ public class StudentManagement{
 		sortTable(false);
     	updateTable();
     	updateScoreTable();
-    	
-		JOptionPane.showOptionDialog(null, "อัพโหลดข้อมูลนักเรียนจากไฟล์ xlsx เรียบร้อยแล้ว", "อัพโหลดข้อมูลนักเรียน", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน", }, null);
+
+		JOptionPane.showOptionDialog(null, Helper.createLabel("อัพโหลดข้อมูลนักเรียนจากไฟล์ xlsx เรียบร้อยแล้ว จํานวน " + addsuccess + " คน"), "อัพโหลดข้อมูลนักเรียน", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน", }, null);
     }
     
     public void exportStudentInformationXLSX() {
-    	String title = "Student_Information";
+    	String title = "ข้อมูลนักเรียน";
     	ArrayList<Student> arr = teacher.getStudents();
 		JFileChooser chooser = new JFileChooser();
+		setFileChooserFont(chooser.getComponents());
 		chooser.setAcceptAllFileFilterUsed(false);
 		chooser.setDialogTitle("ดาวน์โหลดข้อมูลนักเรียน");
 		
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("XLSX file", "xlsx");
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel File", "xlsx");
 		chooser.addChoosableFileFilter(filter);
 		chooser.setSelectedFile(new File(title));
 		chooser.setApproveButtonText("Save");
@@ -1082,11 +1135,11 @@ public class StudentManagement{
 		}
     	try{
     		XSSFWorkbook workbook = new XSSFWorkbook();
-    	    XSSFSheet sheet = workbook.createSheet("Datatypes in Java");
+    	    XSSFSheet sheet = workbook.createSheet("studentinformation");
     	 	Object[][] alldata = new Object[18][arr.size()];
     	    
-    		Object[] header = {"studentID", "faculty", "title", "name", "surname", "date_of_birth", "IDcard", "Address", "race", 
-    	                	"religion", "bloodtype", "contact", "email", "height", "weight", "contact(Patent)", "disease", "enrollAt"};
+    		Object[] header = {"รหัสนักเรียน", "คณะ", "คํานําหน้า", "ชื่อ", "นามสกุล", "วันเดือนปีเกิด", "หมายเลขบัตรประชาชน", "ที่อยู่", "เชื้อชาติ", 
+    	                	"ศาสนา", "หมู่เลือด", "เบอร์ติดต่อ", "อีเมล์", "ส่วนสูง", "นํ้าหนัก", "เบอร์ติดต่อผู้ปกครอง", "โรคประจําตัว", "เพิ่มเข้ามาในวันที่"};
     		int count_index = 0;
     		alldata[count_index++] = header;
 
@@ -1153,7 +1206,7 @@ public class StudentManagement{
 		}
 		catch (Exception err) {
 			System.out.println(err);
-			JOptionPane.showOptionDialog(null, "กรุณาปิดไฟล์ xlsx ที่เปิดอยู่ก่อน(ชื่อไฟล์เดียวกับที่บันทึก)", "ดาวน์โหลดข้อมูลนักเรียน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน", }, null);
+			JOptionPane.showOptionDialog(null, "กรุณาปิดไฟล์ Excel (.xlsx) ที่เปิดอยู่ก่อน(ชื่อไฟล์เดียวกับที่บันทึก)", "ดาวน์โหลดข้อมูลนักเรียน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน", }, null);
 		}
     }
     
@@ -1410,14 +1463,14 @@ public class StudentManagement{
     	p.setLayout(new GridLayout(7, 1));
     	JLabel l1 = Helper.createLabel("คุณลักษณะของไฟล์", 20, true);
     	l1.setHorizontalAlignment(JLabel.CENTER);
-    	JLabel l2 = Helper.createLabel("- ต้องเป็นไฟล์ .xlsx เท่านั้น");
+    	JLabel l2 = Helper.createLabel("- ต้องเป็นไฟล์ Excel เท่านั้น (.xlsx) เท่านั้น");
     	JLabel l3 = Helper.createLabel("- ข้อมูลในแต่ละแถว(ไม่นับเฮดเดอร์) จะต้องเป็นรหัสนักเรียน, คะแนนเก็บ, คะแนนกลางภาค, คะแนนปลายภาค ตามลําดับ");
-    	JLabel l4 = Helper.createLabel("- หากมีคอลัมน์เกินมาจะไม่สนใจ");
-    	JLabel l5 = Helper.createLabel("- หากรหัสนักเรียนหรือคะแนนในแต่ละช่องไม่สมเหตุสมผลหรือไม่มีรหัสนักเรียนในระบบก็จะข้ามไปทําแถวถัดไป");
+    	JLabel l4 = Helper.createLabel("- ข้อมูลต้องเป็นตัวเลขเท่านั้นและหากมีคอลัมน์เกินมาจะไม่สนใจ");
+    	JLabel l5 = Helper.createLabel("- หากรหัสนักเรียนหรือคะแนนในแต่ละช่องไม่สมเหตุสมผล (รวมกันเกิน 100 คะแนน) หรือไม่มีรหัสนักเรียนในระบบก็จะข้ามไปทําแถวถัดไป");
     	JLabel l6 = Helper.createLabel("- รหัสนักเรียนที่มีในระบบแต่ไม่มีในไฟล์ก็จะไมได้รับการอัพเดทคะแนน");
     	JLabel l7 = Helper.createLabel("รูปตัวอย่างไฟล์ที่ถูกต้อง", 18, true);
     	l7.setHorizontalAlignment(JLabel.CENTER);
-    	JLabel picture = Helper.createLabel("", "/images/correct_csv.png", 700, 200);
+    	JLabel picture = Helper.createLabel("", "/images/correct_score_xlsx.png", 887, 196);
     	picture.setBorder(BorderFactory.createLineBorder(Color.black));
     	picture.setHorizontalAlignment(JLabel.CENTER);
     	
@@ -1435,10 +1488,11 @@ public class StudentManagement{
     	JOptionPane.showOptionDialog(null, main, "อัพโหลดคะแนน", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน", }, null);
     	
     	JFileChooser chooser = new JFileChooser();
+    	setFileChooserFont(chooser.getComponents());
 		chooser.setAcceptAllFileFilterUsed(false);
 		chooser.setDialogTitle("อัพโหลดคะแนน");
 		
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("xlsx file", "xlsx");
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel File", "xlsx");
 		chooser.addChoosableFileFilter(filter);
 
 		String path = "";
@@ -1488,7 +1542,7 @@ public class StudentManagement{
 			}
 	
 		}
-		
+		int addsuccess = 0;
 		es : for (int i = 0; i < arr.size(); i++) {
 			Student s = arr.get(i);
 			String id = s.getStudentID();
@@ -1531,12 +1585,12 @@ public class StudentManagement{
 					myStudent.update(t, n);								
     				
     				updateScoreTable();
-    				
+    				addsuccess++;
     				break;
 	    		}
 	    	}
 		}
-		JOptionPane.showOptionDialog(null, "อัพโหลดคะแนนนักเรียนจากไฟล์ xlsx เรียบร้อยแล้ว", "อัพโหลดคะแนน", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน", }, null);
+		JOptionPane.showOptionDialog(null, "อัพโหลดคะแนนนักเรียนจากไฟล์ xlsx เรียบร้อยแล้ว จํานวน " + addsuccess + " คน", "อัพโหลดคะแนน", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน", }, null);
     }
     
     public void export_xlsx(int select) {
@@ -1553,18 +1607,19 @@ public class StudentManagement{
 		
     	ArrayList<Student> arr = teacher.getStudents();
 		JFileChooser chooser = new JFileChooser();
+		setFileChooserFont(chooser.getComponents());
 		chooser.setAcceptAllFileFilterUsed(false);
 		chooser.setDialogTitle("ดาวน์โหลดคะแนน");
 		
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("xlsx file", "xlsx");
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel File", "xlsx");
 		chooser.addChoosableFileFilter(filter);
-		chooser.setSelectedFile(new File(title + "_score"));
+		chooser.setSelectedFile(new File("คะแนนวิชา" + title));
 		chooser.setApproveButtonText("Save");
 		
 		String path = "";
 		if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 			path = "" + chooser.getSelectedFile();
-			if (!path.contains(".xlsx")) {
+			if (path.contains(".xlsx")) {
 				 path += ".xlsx";
 			}
 		}
@@ -1574,10 +1629,10 @@ public class StudentManagement{
 		}
     	try{
     		XSSFWorkbook workbook = new XSSFWorkbook();
-    	    XSSFSheet sheet = workbook.createSheet("Datatypes in Java");
+    	    XSSFSheet sheet = workbook.createSheet("score");
     	 	Object[][] alldata = new Object[7][arr.size()];
     	    
-    		Object[] header = {"StudentID", "Accumulated Score", "Project Score", "Midterm Score", "Final Score", "Total Score", "Grade"};
+    		Object[] header = {"รหัสนักเรียน", "คะแนนเก็บ", "คะแนนโครงงาน", "คะแนนกลางภาค", "คะแนนปลายภาค", "คะแนนรวม", "เกรดที่ได้"};
     		int count_index = 0;
     		alldata[count_index++] = header;
     
@@ -1618,7 +1673,7 @@ public class StudentManagement{
 
 		}
 		catch (Exception err) {
-			JOptionPane.showOptionDialog(null, "กรุณาปิดไฟล์ xlsx ที่เปิดอยู่ก่อน(ชื่อไฟล์เดียวกับที่บันทึก)", "ดาวน์โหลดคะแนน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน", }, null);
+			JOptionPane.showOptionDialog(null, "กรุณาปิดไฟล์ Excel (.xlsx) ที่เปิดอยู่ก่อน(ชื่อไฟล์เดียวกับที่บันทึก)", "ดาวน์โหลดคะแนน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน", }, null);
 		}
     }
     public void deleteSubject(int select) {
@@ -1780,7 +1835,7 @@ public class StudentManagement{
 		int alert = JOptionPane.showOptionDialog(null, p1, "เพิ่มวิชา", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"เพิ่มวิชา", "ยกเลิก"}, null);
 		if (alert == JOptionPane.OK_OPTION) {
 			for (int i = 0; i < tf.getText().length(); i++) {
-				if (!(tf.getText().charAt(i) >= 0 && tf.getText().charAt(i) <= 9)) {
+				if (!(tf.getText().charAt(i) >= '0' && tf.getText().charAt(i) <= '9')) {
 					JOptionPane.showOptionDialog(null, Helper.createLabel("กรุณากรอกรหัสวิชาเป็นตัวเลขเท่านั้น"), "เพิ่มวิชา ", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
 					return;
 				}
@@ -2270,7 +2325,6 @@ public class StudentManagement{
         updatePage();
     }
     
-    // update Student table method
     
     
     public void updateTable() {
