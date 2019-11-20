@@ -48,54 +48,75 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import model.*;
 import view.*;
 public class StudentManagement{
-    private MainGUI gui;
-    private Teacher teacher;
-    private MongoClient connect;
-    private DB db;
-    private DBCollection users;
-    private String myUsername;
-    private int currentPage = 1;
-    private JTable table, scoreTable, scoreTable2, scoreTable3;
-    
-    
-    private LoginGUI loginPage;
-    private RegisterGUI registerPage;
-    private ManagementGUI managementPage;
-    private int TableSortStatus = 0;
-    private boolean connected = false;
-    private String hostname;
-    private int port;
+	private Teacher teacher;
+	private MongoClient connect;
+	private DB db;
+	private DBCollection users;
+	private String myUsername;
+	private int currentPage = 1;
+	private JTable table, scoreTable, scoreTable2, scoreTable3;
+	private int TableSortStatus = 0;
+	private boolean connected = false;
+	private String hostname;
+	private int port;
     private HashMap<String, Double> emptyScore = new HashMap<String, Double>();
+    private MainGUI gui;
+	private LoginGUI loginPage;
+	private RegisterGUI registerPage;
+	private ManagementGUI managementPage;
+	private AddStudentGUI addStudentPage;
+	private InformationGraphGUI informationGraphPage;
+	private InformationGUI informationPage;
+	private MyStudentGUI myStudentPage;
+	private OverallScoreGraphGUI overallScoreGraphPage;
+	private SettingGUI settingPage;
+	private SubjectGUI subjectPage;
+	private ScoreGUI subject1, subject2, subject3;
+	
     public StudentManagement(String inpHostname, int inpPort){
-    	
+    	// create empty score HashMap with all 0.0
     	emptyScore.put("s1_assignment", 0.0);
     	emptyScore.put("s1_project", 0.0);
     	emptyScore.put("s1_midterm", 0.0);
     	emptyScore.put("s1_final", 0.0);
-    	
     	emptyScore.put("s2_assignment", 0.0);
     	emptyScore.put("s2_project", 0.0);
     	emptyScore.put("s2_midterm", 0.0);
     	emptyScore.put("s2_final", 0.0);
-    	
     	emptyScore.put("s3_assignment", 0.0);
     	emptyScore.put("s3_project", 0.0);
     	emptyScore.put("s3_midterm", 0.0);
     	emptyScore.put("s3_final", 0.0);
     	
-    	
-    	
+    	// get host name and port
         this.hostname = inpHostname;
         this.port = inpPort;
-    	
         
+        // create new MainGUI
         gui = new MainGUI();
         
+        // set MainGUI to LoginPage
         gui.set("LoginGUI");
+        
+        // get all Page and save in variable
         loginPage = gui.getLoginGUI();
         registerPage = gui.getRegisterGUI();
         managementPage = gui.getManagementGUI();
+        addStudentPage = managementPage.getAddStudentGUI();
+    	informationGraphPage = managementPage.getInformationGraphGUI();
+    	informationPage = managementPage.getInformationGUI();
+    	myStudentPage = managementPage.getMyStudentGUI();
+    	overallScoreGraphPage = managementPage.getOverallScoreGraphGUI();
+    	settingPage = managementPage.getSettingGUI();
+    	subjectPage = managementPage.getSubjectGUI();
+    	subject1 = subjectPage.getSubject1();
+    	subject2 = subjectPage.getSubject2();
+    	subject3 = subjectPage.getSubject3();
+    	
+    	// connect to database (mongoDB)
         connectDB(hostname, port);
+        
+        // if can't connect to database
         if (!connected) {
         	MyPanel p = Helper.createPanel("");
 			p.setLayout(new BorderLayout());
@@ -105,23 +126,132 @@ public class StudentManagement{
 			JLabel m2 = Helper.createLabel("PORT : ");
 			JLabel l1 = Helper.createLabel(hostname);
 			JLabel l2 = Helper.createLabel("" + port);
-
 			p2.add(m1);
 			p2.add(l1);
 			p2.add(m2);
 			p2.add(l2);
-			
 			p.add(Helper.createLabel("เชื่อมต่อกับฐานข้อมูลไม่สําเร็จ"), BorderLayout.NORTH);
 			p.add(p2);
-
 			JOptionPane.showOptionDialog(null, p, "ตั้งค่าฐานข้อมูล", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
 		}
         
+        // add event in all Page
+        addSubjectGUIEvent();
+        addInformationGraphGUIEvent();
+        addInformationGUIEvent();
+        addLoginGUIEvent();
+        addManagementGUIEvent();
+        addMyStudentGUIEvent();
+        addOverallScoreGraphGUIEvent();
+        addStudentGUIEvent();
+        addRegisterGUIEvent();
+        addSettingGUIEvent();
+        addScoreGUIEvent();
+    }
+    public void addSubjectGUIEvent() {
+    	subjectPage.getBtn1().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if (managementPage.getSubjectGUI().getSubject1().getSubject().equals("empty")) {
+        			addSubject(1);
+        		}
+        		else {
+        			managementPage.set("subject1");
+        		}
+        		
+        	}
+        });
         
+    	subjectPage.getBtn2().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if (managementPage.getSubjectGUI().getSubject2().getSubject().equals("empty")) {
+        			addSubject(2);
+        		}
+        		else {
+        			managementPage.set("subject2");
+        		}
+        		
+        	}
+        });
         
+    	subjectPage.getBtn3().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if (managementPage.getSubjectGUI().getSubject3().getSubject().equals("empty")) {
+        			addSubject(3);
+        		}
+        		else {
+        			managementPage.set("subject3");
+        		}
+        		
+        	}
+        });
         
-        // ********* below here is event of all application *********
-        loginPage.getBtn1().addActionListener(new ActionListener(){
+    }
+    public void addInformationGraphGUIEvent() {
+    	 informationGraphPage.getBtn1().addActionListener(new ActionListener() {
+         	public void actionPerformed(ActionEvent e) {
+         		
+         		managementPage.set("subject");
+ 				currentPage = 2;
+ 				updatePage();
+         		
+ 				
+         	}
+         });
+         
+         informationGraphPage.getBtn2().addActionListener(new ActionListener() {
+         	public void actionPerformed(ActionEvent e) {
+         		
+         		
+         		managementPage.set("information");
+ 				
+         	}
+         });
+    }
+    public void addInformationGUIEvent() {
+    	informationPage.getBtn1().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        		
+        		managementPage.set("add/delete");
+				currentPage = 3;
+				updatePage();
+				pullInformation(informationPage.getInformation(), informationPage.getPicturePath());
+        	}
+        });
+        
+        informationPage.getBtn2().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+				
+        		String studentID = informationPage.getStudentID();
+        		ArrayList<Student> arr = teacher.getStudents();
+        		for (int i = 0; i < arr.size(); i++) {
+        			if (arr.get(i).getStudentID().equals(studentID)) {
+        				ChartPanel graph = createStudentGraph(studentID, arr.get(i).getScore(), arr.get(i).getGrade(1), arr.get(i).getGrade(2), arr.get(i).getGrade(3));
+        				informationGraphPage.updateGraph(graph);
+        				break;
+        			}
+        		}
+        		
+				
+				
+        		managementPage.set("information_graph");
+
+        	}
+        });
+        
+        informationPage.getBtn3().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        		managementPage.set("mystudent");
+				currentPage = 1;
+				updatePage();
+
+        	}
+        });
+    }
+    public void addLoginGUIEvent() {
+    	loginPage.getBtn1().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
             	if (!connected) {
             		MyPanel p = Helper.createPanel("");
@@ -167,7 +297,244 @@ public class StudentManagement{
             }
 
         });
-        registerPage.getBtn2().addActionListener(new ActionListener(){
+        
+        KeyListener loginListener = new KeyAdapter() {
+        	public void keyPressed(KeyEvent e) {
+        		int keycode = e.getKeyCode();
+        		if (keycode == 10) {
+        			loginPage.getBtn1().doClick();
+        		}
+        	}
+        };
+        loginPage.getF1().addKeyListener(loginListener);
+        loginPage.getF2().addKeyListener(loginListener);
+        
+        loginPage.getGithub().addMouseListener(new MouseAdapter() {
+        	public void mouseClicked(MouseEvent e) {
+        		int alert = JOptionPane.showOptionDialog(null, Helper.createLabel("คุณต้องการจะไปที่ github ของพวกเราใช่หรือไม่"), "ลิ้งไปยังหน้า github", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[] {"ยืนยัน", "ยกเลิก"}, null);
+				if (alert == JOptionPane.OK_OPTION) {
+					if (Desktop.isDesktopSupported()) {
+						try {
+					        Desktop.getDesktop().browse(new URI("https://github.com/peetck/Student-Management"));
+						}
+						catch (Exception e1) {}
+					} 
+
+				}
+				
+			}
+        });
+        
+        loginPage.getBtn2().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        		MyPanel p1 = Helper.createPanel("");
+				p1.setLayout(new GridLayout(2, 2));
+				JLabel msg01 = Helper.createLabel("HOST : ");
+				JLabel msg02 = Helper.createLabel("PORT : ");
+				JTextField tf01 = Helper.createTextField(10);
+				JTextField tf02 = Helper.createTextField(10);
+				p1.add(msg01);
+				p1.add(tf01);
+				p1.add(msg02);
+				p1.add(tf02);
+				tf01.setText(hostname);
+				tf02.setText("" + port);
+				
+
+				int alert = JOptionPane.showOptionDialog(null, p1, "ตั้งค่าฐานข้อมูล", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[] {"เชื่อมต่อ", "ยกเลิก"}, null);
+				if (alert == JOptionPane.OK_OPTION) {
+					hostname = tf01.getText();
+					try {
+						port = Integer.parseInt(tf02.getText());
+					}
+					catch(Exception err) {
+						JLabel d = Helper.createLabel("กรุณาใส่ PORT เป็นตัวเลขเท่านั้น");
+						JOptionPane.showOptionDialog(null, d, "ตั้งค่าฐานข้อมูล", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+						return;
+					}
+					connectDB(hostname, port);
+					if (connected) {
+						MyPanel p = Helper.createPanel("");
+						p.setLayout(new BorderLayout());
+						MyPanel p2 = Helper.createPanel("");
+						p2.setLayout(new GridLayout(2, 2));
+						JLabel m1 = Helper.createLabel("HOST : ");
+						JLabel m2 = Helper.createLabel("PORT : ");
+						JLabel l1 = Helper.createLabel(hostname);
+						JLabel l2 = Helper.createLabel("" + port);
+
+						p2.add(m1);
+						p2.add(l1);
+						p2.add(m2);
+						p2.add(l2);
+						
+						p.add(Helper.createLabel("เชื่อมต่อกับฐานข้อมูลสําเร็จ"), BorderLayout.NORTH);
+						p.add(p2);
+
+						JOptionPane.showOptionDialog(null, p, "ตั้งค่าฐานข้อมูล", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+					}
+					else {
+						MyPanel p = Helper.createPanel("");
+						p.setLayout(new BorderLayout());
+						MyPanel p2 = Helper.createPanel("");
+						p2.setLayout(new GridLayout(2, 2));
+						JLabel m1 = Helper.createLabel("HOST : ");
+						JLabel m2 = Helper.createLabel("PORT : ");
+						JLabel l1 = Helper.createLabel(hostname);
+						JLabel l2 = Helper.createLabel("" + port);
+
+						p2.add(m1);
+						p2.add(l1);
+						p2.add(m2);
+						p2.add(l2);
+						
+						p.add(Helper.createLabel("เชื่อมต่อกับฐานข้อมูลไม่สําเร็จ"), BorderLayout.NORTH);
+						p.add(p2);
+
+						JOptionPane.showOptionDialog(null, p, "ตั้งค่าฐานข้อมูล", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+
+					}
+				}
+        	}
+        });
+    }
+    public void addManagementGUIEvent() {
+    	managementPage.getMenu3().addMouseListener(new MouseAdapter() {
+
+			public void mouseClicked(MouseEvent e) {
+				if (currentPage == 3) {
+					return;
+				}
+				managementPage.set("add/delete");
+				
+				currentPage = 3;
+				updatePage();
+			}
+
+        });
+        
+        managementPage.getMenu1().addMouseListener(new MouseAdapter() {
+
+			public void mouseClicked(MouseEvent e) {
+				
+				managementPage.set("mystudent");
+				
+				currentPage = 1;
+				updatePage();
+			}
+
+        });
+        
+
+        
+        managementPage.getMenu2().addMouseListener(new MouseAdapter() {
+
+			public void mouseClicked(MouseEvent e) {
+				
+				managementPage.set("subject");
+				
+				currentPage = 2;
+				updatePage();
+			}
+
+        });
+        managementPage.getMenu4().addMouseListener(new MouseAdapter() {
+
+			public void mouseClicked(MouseEvent e) {
+				if (currentPage == 4) {
+					return;
+				}
+				managementPage.set("setting");
+				
+				currentPage = 4;
+				updatePage();
+			}
+
+        });
+
+        managementPage.getMenu5().addMouseListener(new MouseAdapter() {
+
+			public void mouseClicked(MouseEvent e) {
+				int before = currentPage;
+				currentPage = 5;
+				updatePage();
+				JLabel msg = Helper.createLabel("คุณแน่ใจที่จะออกจากโปรแกรมใช่หรือไม่");
+
+				int alert = JOptionPane.showOptionDialog(null, msg, "ออกจากโปรแกรม", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[] {"ออกจากโปรแกรม", "ยกเลิก"}, null);
+				if(alert == JOptionPane.OK_OPTION){
+					System.exit(0);
+				}
+				currentPage = before;
+				updatePage();
+			}
+
+        });
+
+    }
+    public void addMyStudentGUIEvent() {
+    	myStudentPage.getBtn1().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				exportStudentInformationXLSX();
+			}
+		});
+    }
+    public void addOverallScoreGraphGUIEvent() {
+    	overallScoreGraphPage.getBtn1().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int select = overallScoreGraphPage.getSubject();
+				managementPage.set("subject" + select);
+			}
+		});
+    }
+    public void addStudentGUIEvent() {
+    	addStudentPage.getBtn1().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        		for (int i = 0; i < teacher.getStudents().size(); i++) {
+        			if (teacher.getStudents().get(i).getStudentID().equals(addStudentPage.getF1().getText())) {
+        				JLabel msg = Helper.createLabel("มีรหัสนักเรียนนี้อยู่ในระบบอยู่แล้ว คุณต้องการที่จะแก้ไขข้อมูลหรือไม่??");
+        				int alert = JOptionPane.showOptionDialog(null, msg, "แก้ไขข้อมูล", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[] {"แก้ไขข้อมูล", "ยกเลิก"}, null);
+        				if (alert == JOptionPane.OK_OPTION) {
+        					HashMap<String, Double> score = teacher.getStudents().get(i).getScore();
+        					delete(teacher.getStudents().get(i).getStudentID());
+        					addStudent(score);
+        				}
+            			return;	
+        			}
+        		}
+             	addStudent(emptyScore);
+        	}
+    	});
+
+
+        
+    	addStudentPage.getBtn2().addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        		JFileChooser chooser = new JFileChooser();
+        	    chooser.showOpenDialog(null);
+        	    File f = chooser.getSelectedFile();
+        	    String sourcePath = f.getAbsolutePath();
+
+        	    
+        	    
+        	    Image img = Toolkit.getDefaultToolkit().getImage(sourcePath);
+        	    img = img.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
+        	    ImageIcon icon = new ImageIcon(img);
+        	    addStudentPage.getPictureLabel().setIcon(icon);
+        	    addStudentPage.setPicturePath(sourcePath);
+
+        	}
+        });
+    	addStudentPage.getBtn3().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				importStudentInformationXLSX();
+			}
+		});
+    }
+    public void addRegisterGUIEvent() {
+    	registerPage.getBtn2().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
 
 
@@ -276,18 +643,6 @@ public class StudentManagement{
                 }
             }
         });
-        // LoginGui enter event
-        KeyListener loginListener = new KeyAdapter() {
-        	public void keyPressed(KeyEvent e) {
-        		int keycode = e.getKeyCode();
-        		if (keycode == 10) {
-        			loginPage.getBtn1().doClick();
-        		}
-        	}
-        };
-        loginPage.getF1().addKeyListener(loginListener);
-        loginPage.getF2().addKeyListener(loginListener);
-        
         KeyListener registerListener = new KeyAdapter() {
 
         	public void keyPressed(KeyEvent e) {
@@ -301,272 +656,9 @@ public class StudentManagement{
         registerPage.getF1().addKeyListener(registerListener);
         registerPage.getF2().addKeyListener(registerListener);
         registerPage.getF3().addKeyListener(registerListener);
-        
-        managementPage.getMenu3().addMouseListener(new MouseAdapter() {
-
-			public void mouseClicked(MouseEvent e) {
-				if (currentPage == 3) {
-					return;
-				}
-				managementPage.set("add/delete");
-				
-				currentPage = 3;
-				updatePage();
-			}
-
-        });
-        
-        managementPage.getMenu1().addMouseListener(new MouseAdapter() {
-
-			public void mouseClicked(MouseEvent e) {
-				
-				managementPage.set("mystudent");
-				
-				currentPage = 1;
-				updatePage();
-			}
-
-        });
-        
-
-        
-        managementPage.getMenu2().addMouseListener(new MouseAdapter() {
-
-			public void mouseClicked(MouseEvent e) {
-				
-				managementPage.set("subject");
-				
-				currentPage = 2;
-				updatePage();
-			}
-
-        });
-        managementPage.getMenu4().addMouseListener(new MouseAdapter() {
-
-			public void mouseClicked(MouseEvent e) {
-				if (currentPage == 4) {
-					return;
-				}
-				managementPage.set("setting");
-				
-				currentPage = 4;
-				updatePage();
-			}
-
-        });
-
-        managementPage.getMenu5().addMouseListener(new MouseAdapter() {
-
-			public void mouseClicked(MouseEvent e) {
-				int before = currentPage;
-				currentPage = 5;
-				updatePage();
-				JLabel msg = Helper.createLabel("คุณแน่ใจที่จะออกจากโปรแกรมใช่หรือไม่");
-
-				int alert = JOptionPane.showOptionDialog(null, msg, "ออกจากโปรแกรม", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[] {"ออกจากโปรแกรม", "ยกเลิก"}, null);
-				if(alert == JOptionPane.OK_OPTION){
-					System.exit(0);
-				}
-				currentPage = before;
-				updatePage();
-			}
-
-        });
-
-        managementPage.getAddStudentGUI().getBtn1().addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		
-        		for (int i = 0; i < teacher.getStudents().size(); i++) {
-        			if (teacher.getStudents().get(i).getStudentID().equals(managementPage.getAddStudentGUI().getF1().getText())) {
-        				JLabel msg = Helper.createLabel("มีรหัสนักเรียนนี้อยู่ในระบบอยู่แล้ว คุณต้องการที่จะแก้ไขข้อมูลหรือไม่??");
-        				int alert = JOptionPane.showOptionDialog(null, msg, "แก้ไขข้อมูล", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[] {"แก้ไขข้อมูล", "ยกเลิก"}, null);
-        				if (alert == JOptionPane.OK_OPTION) {
-        					HashMap<String, Double> score = teacher.getStudents().get(i).getScore();
-        					delete(teacher.getStudents().get(i).getStudentID());
-        					addStudent(score);
-        				}
-            			return;	
-        			}
-        		}
-             	addStudent(emptyScore);
-        	}
-    	});
-
-
-        
-        managementPage.getAddStudentGUI().getBtn2().addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		
-        		JFileChooser chooser = new JFileChooser();
-        	    chooser.showOpenDialog(null);
-        	    File f = chooser.getSelectedFile();
-        	    String sourcePath = f.getAbsolutePath();
-
-        	    
-        	    
-        	    Image img = Toolkit.getDefaultToolkit().getImage(sourcePath);
-        	    img = img.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
-        	    ImageIcon icon = new ImageIcon(img);
-        	    managementPage.getAddStudentGUI().getPictureLabel().setIcon(icon);
-        	    managementPage.getAddStudentGUI().setPicturePath(sourcePath);
-
-        	}
-        });
-        
-        loginPage.getGithub().addMouseListener(new MouseAdapter() {
-        	public void mouseClicked(MouseEvent e) {
-        		int alert = JOptionPane.showOptionDialog(null, Helper.createLabel("คุณต้องการจะไปที่ github ของพวกเราใช่หรือไม่"), "ลิ้งไปยังหน้า github", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[] {"ยืนยัน", "ยกเลิก"}, null);
-				if (alert == JOptionPane.OK_OPTION) {
-					if (Desktop.isDesktopSupported()) {
-						try {
-					        Desktop.getDesktop().browse(new URI("https://github.com/peetck/Student-Management"));
-						}
-						catch (Exception e1) {}
-					} 
-
-				}
-				
-			}
-        });
-        
-        loginPage.getBtn2().addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		
-        		MyPanel p1 = Helper.createPanel("");
-				p1.setLayout(new GridLayout(2, 2));
-				JLabel msg01 = Helper.createLabel("HOST : ");
-				JLabel msg02 = Helper.createLabel("PORT : ");
-				JTextField tf01 = Helper.createTextField(10);
-				JTextField tf02 = Helper.createTextField(10);
-				p1.add(msg01);
-				p1.add(tf01);
-				p1.add(msg02);
-				p1.add(tf02);
-				tf01.setText(hostname);
-				tf02.setText("" + port);
-				
-
-				int alert = JOptionPane.showOptionDialog(null, p1, "ตั้งค่าฐานข้อมูล", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[] {"เชื่อมต่อ", "ยกเลิก"}, null);
-				if (alert == JOptionPane.OK_OPTION) {
-					hostname = tf01.getText();
-					try {
-						port = Integer.parseInt(tf02.getText());
-					}
-					catch(Exception err) {
-						JLabel d = Helper.createLabel("กรุณาใส่ PORT เป็นตัวเลขเท่านั้น");
-						JOptionPane.showOptionDialog(null, d, "ตั้งค่าฐานข้อมูล", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
-						return;
-					}
-					connectDB(hostname, port);
-					if (connected) {
-						MyPanel p = Helper.createPanel("");
-						p.setLayout(new BorderLayout());
-						MyPanel p2 = Helper.createPanel("");
-						p2.setLayout(new GridLayout(2, 2));
-						JLabel m1 = Helper.createLabel("HOST : ");
-						JLabel m2 = Helper.createLabel("PORT : ");
-						JLabel l1 = Helper.createLabel(hostname);
-						JLabel l2 = Helper.createLabel("" + port);
-
-						p2.add(m1);
-						p2.add(l1);
-						p2.add(m2);
-						p2.add(l2);
-						
-						p.add(Helper.createLabel("เชื่อมต่อกับฐานข้อมูลสําเร็จ"), BorderLayout.NORTH);
-						p.add(p2);
-
-						JOptionPane.showOptionDialog(null, p, "ตั้งค่าฐานข้อมูล", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน"}, null);
-					}
-					else {
-						MyPanel p = Helper.createPanel("");
-						p.setLayout(new BorderLayout());
-						MyPanel p2 = Helper.createPanel("");
-						p2.setLayout(new GridLayout(2, 2));
-						JLabel m1 = Helper.createLabel("HOST : ");
-						JLabel m2 = Helper.createLabel("PORT : ");
-						JLabel l1 = Helper.createLabel(hostname);
-						JLabel l2 = Helper.createLabel("" + port);
-
-						p2.add(m1);
-						p2.add(l1);
-						p2.add(m2);
-						p2.add(l2);
-						
-						p.add(Helper.createLabel("เชื่อมต่อกับฐานข้อมูลไม่สําเร็จ"), BorderLayout.NORTH);
-						p.add(p2);
-
-						JOptionPane.showOptionDialog(null, p, "ตั้งค่าฐานข้อมูล", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
-
-					}
-				}
-        	}
-        });
-        
-        managementPage.getInformationGUI().getBtn1().addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		
-        		
-        		managementPage.set("add/delete");
-				currentPage = 3;
-				updatePage();
-				pullInformation(managementPage.getInformationGUI().getInformation(), managementPage.getInformationGUI().getPicturePath());
-        	}
-        });
-        
-        managementPage.getInformationGUI().getBtn2().addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		
-				
-        		String studentID = managementPage.getInformationGUI().getStudentID();
-        		ArrayList<Student> arr = teacher.getStudents();
-        		for (int i = 0; i < arr.size(); i++) {
-        			if (arr.get(i).getStudentID().equals(studentID)) {
-        				ChartPanel graph = createStudentGraph(studentID, arr.get(i).getScore(), arr.get(i).getGrade(1), arr.get(i).getGrade(2), arr.get(i).getGrade(3));
-        				managementPage.getInformationGraphGUI().updateGraph(graph);
-        				break;
-        			}
-        		}
-        		
-				
-				
-        		managementPage.set("information_graph");
-        		
-				// show graph
-        	}
-        });
-        
-        managementPage.getInformationGUI().getBtn3().addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		
-        		managementPage.set("mystudent");
-				currentPage = 1;
-				updatePage();
-
-        	}
-        });
-        
-        managementPage.getInformationGraphGUI().getBtn1().addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		
-        		managementPage.set("subject");
-				currentPage = 2;
-				updatePage();
-        		
-				
-        	}
-        });
-        
-        managementPage.getInformationGraphGUI().getBtn2().addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		
-        		
-        		managementPage.set("information");
-				
-        	}
-        });
-        
-        managementPage.getSettingGUI().getBtn1().addActionListener(new ActionListener() {
+    }
+    public void addSettingGUIEvent() {
+    	settingPage.getBtn1().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) { // change password
         		MyPanel p1 = Helper.createPanel("");
 				p1.setLayout(new GridLayout(3, 2));
@@ -589,7 +681,7 @@ public class StudentManagement{
         	}
         });
         
-        managementPage.getSettingGUI().getBtn2().addActionListener(new ActionListener() {
+    	settingPage.getBtn2().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) { // logout
         		JLabel l = Helper.createLabel("คุณต้องการที่จะล็อกเอ้าท์ออกจากระบบใช่หรือไม่");
 
@@ -604,7 +696,7 @@ public class StudentManagement{
         	}
         });
 
-        managementPage.getSettingGUI().getBtn3().addActionListener(new ActionListener() {
+    	settingPage.getBtn3().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) { // delete account
         		JLabel l = Helper.createLabel("คุณต้องการที่จะลบบัญชีนี้ใช่หรือไม่");
         		int alert = JOptionPane.showOptionDialog(null, l, "ลบบัญชี", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[] {"ลบบัญชี", "ยกเลิก"}, null);
@@ -636,59 +728,23 @@ public class StudentManagement{
 				}
         	}
         });
-
-        managementPage.getSubjectGUI().getBtn1().addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		if (managementPage.getSubjectGUI().getSubject1().getSubject().equals("empty")) {
-        			addSubject(1);
-        		}
-        		else {
-        			managementPage.set("subject1");
-        		}
-        		
-        	}
-        });
-        
-        managementPage.getSubjectGUI().getBtn2().addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		if (managementPage.getSubjectGUI().getSubject2().getSubject().equals("empty")) {
-        			addSubject(2);
-        		}
-        		else {
-        			managementPage.set("subject2");
-        		}
-        		
-        	}
-        });
-        
-        managementPage.getSubjectGUI().getBtn3().addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		if (managementPage.getSubjectGUI().getSubject3().getSubject().equals("empty")) {
-        			addSubject(3);
-        		}
-        		else {
-        			managementPage.set("subject3");
-        		}
-        		
-        	}
-        });
-        
-        // set score subject1
-        managementPage.getSubjectGUI().getSubject1().getBtn1().addActionListener(new ActionListener() {
+    }
+    public void addScoreGUIEvent() {
+    	subject1.getBtn1().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		updateScore(1);
         	}
         });
         
         // set score subject2
-        managementPage.getSubjectGUI().getSubject2().getBtn1().addActionListener(new ActionListener() {
+    	subject2.getBtn1().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		updateScore(2);
         	}
         });
         
         // set score subject3
-        managementPage.getSubjectGUI().getSubject3().getBtn1().addActionListener(new ActionListener() {
+    	subject3.getBtn1().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
 
         		updateScore(3);
@@ -696,70 +752,70 @@ public class StudentManagement{
         });
         
         // delete subject1
-        managementPage.getSubjectGUI().getSubject1().getBtn2().addActionListener(new ActionListener() {
+    	subject1.getBtn2().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		deleteSubject(1);
         	}
         });
         
         // delete subject2
-        managementPage.getSubjectGUI().getSubject2().getBtn2().addActionListener(new ActionListener() {
+    	subject2.getBtn2().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		deleteSubject(2);
         	}
         });
         
         // delete subject3
-        managementPage.getSubjectGUI().getSubject3().getBtn2().addActionListener(new ActionListener() {
+    	subject3.getBtn2().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		deleteSubject(3);
         	}
         });
         
         // export score as xlsx {subject 1}
-        managementPage.getSubjectGUI().getSubject1().getBtn5().addActionListener(new ActionListener() {
+    	subject1.getBtn5().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
 				export_xlsx(1);
         	}
         });
         
         // export score as xlsx {subject 2}
-        managementPage.getSubjectGUI().getSubject2().getBtn5().addActionListener(new ActionListener() {
+    	subject2.getBtn5().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		export_xlsx(2);
         	}
         });
         
         // export score as xlsx {subject 3}
-        managementPage.getSubjectGUI().getSubject3().getBtn5().addActionListener(new ActionListener() {
+    	subject3.getBtn5().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		export_xlsx(3);
         	}
         });
         
         // import xlsx to score {subject 1}
-        managementPage.getSubjectGUI().getSubject1().getBtn4().addActionListener(new ActionListener() {
+    	subject1.getBtn4().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		import_xlsx(1);
         	}
         });
         
 		// import xlsx to score {subject 2}
-		managementPage.getSubjectGUI().getSubject2().getBtn4().addActionListener(new ActionListener() {
+    	subject2.getBtn4().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				import_xlsx(2);
 			}
 		});
 
 		// import xlsx to score {subject 3}
-		managementPage.getSubjectGUI().getSubject3().getBtn4().addActionListener(new ActionListener() {
+    	subject3.getBtn4().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				import_xlsx(3);
 			}
 		});
 		
 		// see overall graph {subject 1}
-		managementPage.getSubjectGUI().getSubject1().getBtn3().addActionListener(new ActionListener() {
+    	subject1.getBtn3().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		
         		
@@ -773,7 +829,7 @@ public class StudentManagement{
         });
 		
 		// see overall graph {subject 2}
-		managementPage.getSubjectGUI().getSubject2().getBtn3().addActionListener(new ActionListener() {
+    	subject2.getBtn3().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				ChartPanel graph = createOverallScoreGraph(2);
@@ -785,7 +841,7 @@ public class StudentManagement{
 		});
 		
 		// see overall graph {subject 3}
-		managementPage.getSubjectGUI().getSubject3().getBtn3().addActionListener(new ActionListener() {
+    	subject3.getBtn3().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				ChartPanel graph = createOverallScoreGraph(3);
@@ -795,28 +851,8 @@ public class StudentManagement{
 				managementPage.set("overall_score_graph");
 			}
 		});
-		
-		managementPage.getOverallScoreGraphGUI().getBtn1().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int select = managementPage.getOverallScoreGraphGUI().getSubject();
-				managementPage.set("subject" + select);
-			}
-		});
-		
-		managementPage.getMyStudentGUI().getBtn1().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				exportStudentInformationXLSX();
-			}
-		});
-		
-		managementPage.getAddStudentGUI().getBtn3().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				importStudentInformationXLSX();
-			}
-		});
-     }
-    
-    
+    }
+   
     // below here is method in all application -------------------------------------------------------------------------------------------------------------------------
     
     public void importStudentInformationXLSX() {
@@ -1731,9 +1767,6 @@ public class StudentManagement{
         }
     }
     public void addSubject(int select) {
-
-
-    	
     	MyPanel p1 = Helper.createPanel("");
     	p1.setLayout(new GridLayout(2, 2));
 		JLabel msg = Helper.createLabel("รหัสวิชา : ");
@@ -1746,7 +1779,12 @@ public class StudentManagement{
 		p1.add(tf2);
 		int alert = JOptionPane.showOptionDialog(null, p1, "เพิ่มวิชา", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"เพิ่มวิชา", "ยกเลิก"}, null);
 		if (alert == JOptionPane.OK_OPTION) {
-			
+			for (int i = 0; i < tf.getText().length(); i++) {
+				if (!(tf.getText().charAt(i) >= 0 && tf.getText().charAt(i) <= 9)) {
+					JOptionPane.showOptionDialog(null, Helper.createLabel("กรุณากรอกรหัสวิชาเป็นตัวเลขเท่านั้น"), "เพิ่มวิชา ", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+					return;
+				}
+			}
 			if (tf.getText().equals("") || tf2.getText().equals("")) {
 				JOptionPane.showOptionDialog(null, Helper.createLabel("กรุณากรอกข้อมูลให้ครบถ้วน"), "เพิ่มวิชา ", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
 				return;
@@ -1908,6 +1946,7 @@ public class StudentManagement{
     	managementPage.getAddStudentGUI().getPictureLabel().setIcon(icon);
     	managementPage.getAddStudentGUI().setPicturePath(path);
     }
+    
     public void connectDB(String hostname, int port) {
     	JOptionPane opt = new JOptionPane(Helper.createLabel("กําลังเชื่อมต่อกับฐานข้อมูล (MongoDB)..."), JOptionPane.WARNING_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}); // no buttons
          JDialog dlg = opt.createDialog("กําลังเชื่อมต่อกับฐานข้อมูล (MongoDB)");
@@ -2166,7 +2205,6 @@ public class StudentManagement{
         System.out.println("Login success!!");
         
         DBCursor ucurs = users.find();
-        boolean haveAdmin = false;
         while (ucurs.hasNext()){
             DBObject t = ucurs.next();
             if (((String)t.get("username")).equals(myUsername)) {

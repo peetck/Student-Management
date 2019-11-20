@@ -38,7 +38,7 @@ public class AddStudentGUI {
         left.setLayout(new GridBagLayout());
         
         right = Helper.createPanel("");
-        right.setSize(450, 525);
+        right.setSize(450, 500);
         right.setLocation(450, 175);
         right.setLayout(new GridBagLayout());
         
