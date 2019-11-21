@@ -1887,6 +1887,10 @@ public class StudentManagement{
     }
     
     public void changePassword(String old, String newP, String comP) {
+    	if (myUsername.equals("admin")) {
+    		JOptionPane.showOptionDialog(null, Helper.createLabel("คุณไม่สามารถเปลี่ยนรหัสผ่านของบัญชี admin ได้"), "เปลี่ยนรหัสผ่าน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+    		return;
+    	}
     	old = Base64.getEncoder().withoutPadding().encodeToString(old.getBytes()); // UGVlbG9naW43ODkxMA
 
     	DBCursor curs = users.find();
