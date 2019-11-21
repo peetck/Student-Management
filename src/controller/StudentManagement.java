@@ -722,8 +722,14 @@ public class StudentManagement{
 							
 						}
 						else {
-							JLabel d = Helper.createLabel("รหัสผ่านไม่ถูกต้อง");
-							JOptionPane.showOptionDialog(null, d, "ลบบัญชี", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+							if (myUsername.equals("admin")) {
+								JLabel d = Helper.createLabel("คุณไม่สามารถลบบัญชี admin ได้");
+								JOptionPane.showOptionDialog(null, d, "ลบบัญชี", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+							}
+							else {
+								JLabel d = Helper.createLabel("รหัสผ่านไม่ถูกต้อง");
+								JOptionPane.showOptionDialog(null, d, "ลบบัญชี", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+							}
 						}
 					}
 				}
@@ -1951,6 +1957,9 @@ public class StudentManagement{
 
     public boolean deleteAccount(String password) {
     	DBCollection myStudent = db.getCollection(myUsername);
+    	if (myUsername.equals("admin")) {
+    		return false;
+    	}
     	DBCursor curs = users.find();
         while (curs.hasNext()){
             DBObject t = curs.next();
