@@ -1673,7 +1673,8 @@ public class StudentManagement{
 	        }
 	        catch (Exception e) {
 				JOptionPane.showOptionDialog(null, "กรุณาปิดไฟล์ Excel (.xlsx) ที่เปิดอยู่ก่อน(ชื่อไฟล์เดียวกับที่บันทึก)", "ดาวน์โหลดคะแนน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน", }, null);
-			}
+				return;
+	        }
 			JOptionPane.showOptionDialog(null, "ดาวน์โหลดคะแนนนักเรียนเรียบร้อยแล้ว", "ดาวน์โหลดคะแนน", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน", }, null);
 
 		}
