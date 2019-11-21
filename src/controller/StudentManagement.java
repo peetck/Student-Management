@@ -475,6 +475,11 @@ public class StudentManagement{
     public void addMyStudentGUIEvent() {
     	myStudentPage.getBtn1().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				importStudentInformationXLSX();
+			}
+		});
+    	myStudentPage.getBtn2().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				exportStudentInformationXLSX();
 			}
 		});
@@ -528,11 +533,6 @@ public class StudentManagement{
 
         	}
         });
-    	addStudentPage.getBtn3().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				importStudentInformationXLSX();
-			}
-		});
     }
     public void addRegisterGUIEvent() {
     	registerPage.getBtn2().addActionListener(new ActionListener(){
@@ -1467,7 +1467,7 @@ public class StudentManagement{
     	JLabel l3 = Helper.createLabel("- ข้อมูลในแต่ละแถว(ไม่นับเฮดเดอร์) จะต้องเป็นรหัสนักเรียน, คะแนนเก็บ, คะแนนกลางภาค, คะแนนปลายภาค ตามลําดับ");
     	JLabel l4 = Helper.createLabel("- ข้อมูลต้องเป็นตัวเลขเท่านั้นและหากมีคอลัมน์เกินมาจะไม่สนใจ");
     	JLabel l5 = Helper.createLabel("- หากรหัสนักเรียนหรือคะแนนในแต่ละช่องไม่สมเหตุสมผล (รวมกันเกิน 100 คะแนน) หรือไม่มีรหัสนักเรียนในระบบก็จะข้ามไปทําแถวถัดไป");
-    	JLabel l6 = Helper.createLabel("- รหัสนักเรียนที่มีในระบบแต่ไม่มีในไฟล์ก็จะไมได้รับการอัพเดทคะแนน");
+    	JLabel l6 = Helper.createLabel("- รหัสนักเรียนที่มีในระบบแต่ไม่มีในไฟล์ก็จะไม่ได้รับการอัพเดทคะแนน");
     	JLabel l7 = Helper.createLabel("รูปตัวอย่างไฟล์ที่ถูกต้อง", 18, true);
     	l7.setHorizontalAlignment(JLabel.CENTER);
     	JLabel picture = Helper.createLabel("", "/images/correct_score_xlsx.png", 887, 196);

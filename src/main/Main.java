@@ -32,7 +32,7 @@ public class Main {
 
 		}
 		catch (Exception e) {
-			JOptionPane.showOptionDialog(null, "ไม่สามารถเริ่มต้นโปรแกรมได้กรุณาเช็คให้แน่ใจว่าคุณได้มี Java อยู่บนเครื่องเรียบร้อยแล้ว", "ไม่สามารถเริ่มโปรแกรมได้", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน", }, null);
+			JOptionPane.showOptionDialog(null, "ไม่สามารถเริ่มต้นโปรแกรมได้", "ไม่สามารถเริ่มต้นโปรแกรมได้", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน", }, null);
 		}
 		
 

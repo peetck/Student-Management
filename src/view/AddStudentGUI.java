@@ -14,7 +14,7 @@ public class AddStudentGUI {
 	private JTextField f1,f4, f5, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17;
 	private JComboBox<String> f2, f3;
 	private DatePicker f6;
-	private JButton btn1, btn2, btn3;
+	private JButton btn1, btn2;
 	private GridBagConstraints gbc;
 	private Image defaultImg;
 	private String picturePath;
@@ -30,7 +30,6 @@ public class AddStudentGUI {
         gbc.fill = GridBagConstraints.BOTH;
         btn1 = Helper.createButton("ยืนยัน");
         btn2 = Helper.createButton("แก้ไขรูป");
-        btn3 = Helper.createButton("เพิ่มจากไฟล์ xlsx");
         
         left = Helper.createPanel("");
         left.setSize(450, 630);
@@ -39,7 +38,7 @@ public class AddStudentGUI {
         
         right = Helper.createPanel("");
         right.setSize(450, 500);
-        right.setLocation(450, 175);
+        right.setLocation(450, 185);
         right.setLayout(new GridBagLayout());
         
         picture = Helper.createPanel("");
@@ -226,10 +225,6 @@ public class AddStudentGUI {
 		gbc.gridy = 14;
 		gbc.insets = new Insets(15, 0, 0, 0);
 		right.add(btn1, gbc);
-		gbc.gridx = 0;
-		gbc.gridy = 15;
-		gbc.insets = new Insets(5, 0, 0, 0);
-		right.add(btn3, gbc);
 		
 
         pictureLabel = Helper.createLabel("");
@@ -422,10 +417,6 @@ public class AddStudentGUI {
 
 	public JButton getBtn2() {
 		return this.btn2;
-	}
-	
-	public JButton getBtn3() {
-		return this.btn3;
 	}
 	
 	public JLabel getPictureLabel() {

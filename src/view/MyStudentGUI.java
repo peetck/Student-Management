@@ -7,7 +7,7 @@ public class MyStudentGUI {
 	private JDesktopPane p1;
 	private MyPanel container, bottom;
 	private JScrollPane table_scroll;
-	private JButton btn1;
+	private JButton btn1, btn2;
 	public MyStudentGUI() {
 		p1 = new JDesktopPane();
 
@@ -19,13 +19,16 @@ public class MyStudentGUI {
 
 		
 		bottom = Helper.createPanel("");
-		bottom.setLayout(new GridLayout(1, 1));
+		bottom.setLayout(new GridLayout(1, 2));
 		bottom.setSize(900, 90);
 		bottom.setLocation(0, 610);
 		
-		btn1 = Helper.createButton("ดาวน์โหลดข้อมูลนักเรียน", 25);
+		btn1 = Helper.createButton("อัพโหลดข้อมูลนักเรียน", 25);
+		btn2 = Helper.createButton("ดาวน์โหลดข้อมูลนักเรียน", 25);
+		
 		
 		bottom.add(btn1);
+		bottom.add(btn2);
 		
 		table_scroll = new JScrollPane(new JTable());
 		table_scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS); 
@@ -56,5 +59,8 @@ public class MyStudentGUI {
 	}
 	public JButton getBtn1() {
 		return this.btn1;
+	}
+	public JButton getBtn2() {
+		return this.btn2;
 	}
 }
