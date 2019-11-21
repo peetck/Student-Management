@@ -951,7 +951,8 @@ public class StudentManagement{
 	                data += "\n";
 	            }
 	        System.out.println(data);
-	        
+	        workbook.close();
+	        excelFile.close();
 		}
 		catch(Exception e) {
 			JOptionPane.showOptionDialog(null, Helper.createLabel("ระบบไม่สามารถหาไฟล์ได้"), "อัพโหลดข้อมูลนักเรียน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน", }, null);
@@ -1530,6 +1531,8 @@ public class StudentManagement{
                 }
                 data += "\n";
             }
+            workbook.close();
+	        excelFile.close();
 		}
 		catch(Exception e) {
 			JOptionPane.showOptionDialog(null, Helper.createLabel("ระบบไม่สามารถหาไฟล์ได้"), "อัพโหลดคะแนน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน", }, null);
