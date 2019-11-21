@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class MyStudentGUI {
 	private JDesktopPane p1;
-	private MyPanel container, bottom;
+	private JPanel container, bottom;
 	private JScrollPane table_scroll;
 	private JButton btn1, btn2;
 	public MyStudentGUI() {

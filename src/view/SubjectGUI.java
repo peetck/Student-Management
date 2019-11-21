@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class SubjectGUI {
 	private JDesktopPane p1;
-	private MyPanel container, topcontainer;
+	private JPanel container, topcontainer;
 	private JButton btn1, btn2, btn3;
 	private ScoreGUI subject1, subject2, subject3;
 	private ImageIcon alreadyIcon = new ImageIcon(Helper.getImage("/images/already_have_subject.png").getScaledInstance(60, 60, Image.SCALE_DEFAULT));

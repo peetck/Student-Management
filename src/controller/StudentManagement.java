@@ -118,9 +118,9 @@ public class StudentManagement{
         
         // if can't connect to database
         if (!connected) {
-        	MyPanel p = Helper.createPanel("");
+        	JPanel p = Helper.createPanel("");
 			p.setLayout(new BorderLayout());
-			MyPanel p2 = Helper.createPanel("");
+			JPanel p2 = Helper.createPanel("");
 			p2.setLayout(new GridLayout(2, 2));
 			JLabel m1 = Helper.createLabel("HOST : ");
 			JLabel m2 = Helper.createLabel("PORT : ");
@@ -254,9 +254,9 @@ public class StudentManagement{
     	loginPage.getBtn1().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
             	if (!connected) {
-            		MyPanel p = Helper.createPanel("");
+            		JPanel p = Helper.createPanel("");
 					p.setLayout(new BorderLayout());
-					MyPanel p2 = Helper.createPanel("");
+					JPanel p2 = Helper.createPanel("");
 					p2.setLayout(new GridLayout(2, 2));
 					JLabel m1 = Helper.createLabel("HOST : ");
 					JLabel m2 = Helper.createLabel("PORT : ");
@@ -328,7 +328,7 @@ public class StudentManagement{
         loginPage.getBtn2().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		
-        		MyPanel p1 = Helper.createPanel("");
+        		JPanel p1 = Helper.createPanel("");
 				p1.setLayout(new GridLayout(2, 2));
 				JLabel msg01 = Helper.createLabel("HOST : ");
 				JLabel msg02 = Helper.createLabel("PORT : ");
@@ -355,9 +355,9 @@ public class StudentManagement{
 					}
 					connectDB(hostname, port);
 					if (connected) {
-						MyPanel p = Helper.createPanel("");
+						JPanel p = Helper.createPanel("");
 						p.setLayout(new BorderLayout());
-						MyPanel p2 = Helper.createPanel("");
+						JPanel p2 = Helper.createPanel("");
 						p2.setLayout(new GridLayout(2, 2));
 						JLabel m1 = Helper.createLabel("HOST : ");
 						JLabel m2 = Helper.createLabel("PORT : ");
@@ -375,9 +375,9 @@ public class StudentManagement{
 						JOptionPane.showOptionDialog(null, p, "ตั้งค่าฐานข้อมูล", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน"}, null);
 					}
 					else {
-						MyPanel p = Helper.createPanel("");
+						JPanel p = Helper.createPanel("");
 						p.setLayout(new BorderLayout());
-						MyPanel p2 = Helper.createPanel("");
+						JPanel p2 = Helper.createPanel("");
 						p2.setLayout(new GridLayout(2, 2));
 						JLabel m1 = Helper.createLabel("HOST : ");
 						JLabel m2 = Helper.createLabel("PORT : ");
@@ -546,9 +546,9 @@ public class StudentManagement{
             public void actionPerformed(ActionEvent e){
 
             	if (!connected) {
-            		MyPanel p = Helper.createPanel("");
+            		JPanel p = Helper.createPanel("");
 					p.setLayout(new BorderLayout());
-					MyPanel p2 = Helper.createPanel("");
+					JPanel p2 = Helper.createPanel("");
 					p2.setLayout(new GridLayout(2, 2));
 					JLabel m1 = Helper.createLabel("HOST : ");
 					JLabel m2 = Helper.createLabel("PORT : ");
@@ -661,7 +661,7 @@ public class StudentManagement{
     public void addSettingGUIEvent() {
     	settingPage.getBtn1().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) { // change password
-        		MyPanel p1 = Helper.createPanel("");
+        		JPanel p1 = Helper.createPanel("");
 				p1.setLayout(new GridLayout(3, 2));
 				JLabel msg01 = Helper.createLabel("รหัสผ่านเดิม");
 				JLabel msg02 = Helper.createLabel("รหัสผ่านใหม่");
@@ -702,7 +702,7 @@ public class StudentManagement{
         		JLabel l = Helper.createLabel("คุณต้องการที่จะลบบัญชีนี้ใช่หรือไม่");
         		int alert = JOptionPane.showOptionDialog(null, l, "ลบบัญชี", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[] {"ลบบัญชี", "ยกเลิก"}, null);
 				if (alert == JOptionPane.OK_OPTION) {
-					MyPanel p1 = Helper.createPanel("");
+					JPanel p1 = Helper.createPanel("");
 					JLabel msg01 = Helper.createLabel("รหัสผ่าน : ");
 					JPasswordField pf = Helper.createPasswordField(10);
 					p1.add(msg01);
@@ -875,9 +875,9 @@ public class StudentManagement{
 		}
 	}
     public void importStudentInformationXLSX() {
-    	MyPanel main = Helper.createPanel("");
+    	JPanel main = Helper.createPanel("");
     	main.setLayout(new BorderLayout());
-    	MyPanel p = Helper.createPanel("");
+    	JPanel p = Helper.createPanel("");
     	p.setLayout(new GridLayout(8, 1));
     	JLabel l1 = Helper.createLabel("คุณลักษณะของไฟล์", 20, true);
     	l1.setHorizontalAlignment(JLabel.CENTER);
@@ -1463,9 +1463,9 @@ public class StudentManagement{
     }
     
     public void import_xlsx(int select) {
-    	MyPanel main = Helper.createPanel("");
+    	JPanel main = Helper.createPanel("");
     	main.setLayout(new BorderLayout());
-    	MyPanel p = Helper.createPanel("");
+    	JPanel p = Helper.createPanel("");
     	p.setLayout(new GridLayout(7, 1));
     	JLabel l1 = Helper.createLabel("คุณลักษณะของไฟล์", 20, true);
     	l1.setHorizontalAlignment(JLabel.CENTER);
@@ -1751,7 +1751,7 @@ public class StudentManagement{
     	else if (select == 3) {
     		subjectTitle = managementPage.getSubjectGUI().getSubject3().getSubject();
     	}
-		MyPanel p1 = Helper.createPanel("");
+		JPanel p1 = Helper.createPanel("");
 		p1.setLayout(new GridLayout(1, 2));
 		JLabel msg = Helper.createLabel("รหัสนักเรียน : ");
 		JTextField tf = Helper.createTextField(10);
@@ -1763,7 +1763,7 @@ public class StudentManagement{
 			for (int i = 0; i < arr.size(); i++) {
 				if (tf.getText().equals(arr.get(i).getStudentID())) {
 					// แก้ไข คะแนน
-					MyPanel p2 = Helper.createPanel("");
+					JPanel p2 = Helper.createPanel("");
 					p2.setLayout(new GridLayout(4, 2));
 					JLabel msg01 = Helper.createLabel("คะแนนเก็บ");
 					JLabel msg02 = Helper.createLabel("คะแนนโครงงาน");
@@ -1828,7 +1828,7 @@ public class StudentManagement{
         }
     }
     public void addSubject(int select) {
-    	MyPanel p1 = Helper.createPanel("");
+    	JPanel p1 = Helper.createPanel("");
     	p1.setLayout(new GridLayout(2, 2));
 		JLabel msg = Helper.createLabel("รหัสวิชา : ");
 		JLabel msg2 = Helper.createLabel("ชื่อวิชา");
@@ -2624,22 +2624,3 @@ public class StudentManagement{
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

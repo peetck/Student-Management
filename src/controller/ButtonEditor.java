@@ -1,28 +1,23 @@
 package controller;
 
 import java.awt.*;
-import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
-
 import model.*;
 import view.*;
 
 public class ButtonEditor extends DefaultCellEditor {
-	  protected JButton button;
-	  private int row, col;
+	  private JButton button;
+	  private int row;
 	  private String label;
 	  private Teacher teacher;
 	  private Student student;
-	  private HashMap<String, String> information;
 	  private boolean isPushed;
 	  private ManagementGUI managementPage;
-	  private StudentManagement s;
 	  public ButtonEditor(JCheckBox checkBox, Teacher teacher, ManagementGUI m, StudentManagement s) {
 	    super(checkBox);
 	    this.managementPage = m;
 	    this.teacher = teacher;
-	    this.s = s;
 	    button = new JButton("");
 	    button.setFont(new Font("Kanit ExtraLight", Font.PLAIN, 16));
 	    button.setBackground(new Color(156, 195, 213, 85));
@@ -36,7 +31,6 @@ public class ButtonEditor extends DefaultCellEditor {
 
 	  public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
 		  this.row = row;
-		  this.col = column;
 		  if (value == null) {
 			  label = "";
 		  }

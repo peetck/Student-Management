@@ -9,9 +9,9 @@ import model.Student;
 
 public class ManagementGUI{
     private JDesktopPane desktop;
-    private MyPanel menu, program, topmenu, bottommenu, menu1, menu2, menu3, menu4, menu5, version, time;
+    private JPanel menu, program, topmenu, bottommenu, menu1, menu2, menu3, menu4, menu5, version, time;
     private JDesktopPane bottommenu_desktopPane;
-    private JLabel menuMsg1, menuMsg2, menuMsg3, menuMsg4, menuMsg5, icon1, icon2, icon3, icon4, icon5, icon6, bottoml1;
+    private JLabel menuMsg1, menuMsg2, menuMsg3, menuMsg4, menuMsg5, icon1, icon2, icon3, icon4, icon5, bottoml1;
     private MyStudentGUI mystudent;
     private AddStudentGUI add;
     private SettingGUI setting;
@@ -252,19 +252,19 @@ public class ManagementGUI{
     public SettingGUI getSettingGUI() {
     	return this.setting;
     }
-    public MyPanel getMenu1() {
+    public JPanel getMenu1() {
     	return this.menu1;
     }
-    public MyPanel getMenu2() {
+    public JPanel getMenu2() {
     	return this.menu2;
     }
-    public MyPanel getMenu3() {
+    public JPanel getMenu3() {
     	return this.menu3;
     }
-    public MyPanel getMenu4() {
+    public JPanel getMenu4() {
     	return this.menu4;
     }
-    public MyPanel getMenu5() {
+    public JPanel getMenu5() {
     	return this.menu5;
     }
     

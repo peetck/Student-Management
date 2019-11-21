@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class SettingGUI {
 	private JDesktopPane p1;
-	private MyPanel container, container_bot;
+	private JPanel container, container_bot;
 	private JButton btn1, btn2, btn3;
 	public SettingGUI() {
 		p1 = new JDesktopPane();

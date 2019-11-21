@@ -5,7 +5,7 @@ import javax.swing.*;
 import org.jfree.chart.ChartPanel;
 public class InformationGraphGUI {
 	private JDesktopPane p;
-	private MyPanel bottom, container;
+	private JPanel bottom, container;
 	private JButton btn1, btn2;
 	public InformationGraphGUI() {
 		p = new JDesktopPane();

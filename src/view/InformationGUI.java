@@ -7,7 +7,7 @@ import java.awt.*;
 import java.util.HashMap;
 public class InformationGUI {
 	private JDesktopPane p1;
-	private MyPanel left, right, picture, titlep, select;
+	private JPanel left, right, picture, titlep, select;
 	private JLabel pictureLabel;
 	private JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12, l13, l14, l15, l16, l17;
 	private JLabel a1, a2, a3, a4, a5, a6, a7, a9, a10, a11, a12, a13, a14, a15, a16, a17;

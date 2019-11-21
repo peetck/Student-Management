@@ -18,13 +18,19 @@ public class Helper{
 		c.setFont(new Font("Kanit ExtraLight", Font.PLAIN, size));
 		return c;
 	}
-	// return MyPanel with image if want
-    public static MyPanel createPanel(String url){
+
+    public static JPanel createPanel(String url){
+    	if (url.equals("")) {
+        	return new JPanel();
+    	}
     	Image img = getImage(url);
         return new MyPanel(img);
     }
-    public static MyPanel createPanel(String url, String select){
-    	Image img = getImage(url);
+    public static JPanel createPanel(String url, String select){
+    	if (url.equals("")) {
+    		return new JPanel();
+    	}
+		Image img = getImage(url);
         return new MyPanel(img, select);
     }
     // return JLabel with font 

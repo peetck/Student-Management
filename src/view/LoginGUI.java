@@ -6,7 +6,7 @@ import javax.swing.*;
 public class LoginGUI{
     private JButton btn1, btn2;
     private JDesktopPane desktop, linkPanel;
-    private MyPanel link, p1, href, connectp;
+    private JPanel link, p1, href, connectp;
     private JLabel l1, l2, l3, l4, title, github, connect, unconnect;
     private JTextField f1;
     private JPasswordField f2;

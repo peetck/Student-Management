@@ -1,14 +1,9 @@
 package main;
 import controller.*;
 import javax.swing.*;
-
-
 import mdlaf.*;
-
-
 import java.awt.*;
 import java.io.*;
-
 
 public class Main {
 	public static void main(String[] args) {

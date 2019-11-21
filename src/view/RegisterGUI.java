@@ -2,7 +2,7 @@ package view;
 import java.awt.*;
 import javax.swing.*;
 public class RegisterGUI{
-    private MyPanel p1;
+    private JPanel p1;
     private JLabel l1, l2, l3, l4, l5;
     private JTextField f1;
     private JPasswordField f2, f3;
@@ -80,7 +80,7 @@ public class RegisterGUI{
     public JPasswordField getF3(){
         return this.f3;
     }
-    public MyPanel getPanel(){
+    public JPanel getPanel(){
         return this.p1;
     }
     public JLabel getL5() {

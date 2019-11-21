@@ -4,8 +4,7 @@ import java.awt.*;
 
 public class ScoreGUI {
 	private JDesktopPane p1;
-	private MyPanel container, bottom, topmenu;
-	private JTable table;
+	private JPanel container, bottom, topmenu;
 	private JButton btn1, btn2, btn3, btn4, btn5;
 	private JScrollPane table_scroll; 
 	private String subject;
@@ -75,7 +74,6 @@ public class ScoreGUI {
 	}
 
 	public void updateTable(JTable table) {
-		this.table = table;
 		container.removeAll();
 		container.revalidate();
 		container.repaint();

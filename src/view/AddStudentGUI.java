@@ -9,7 +9,7 @@ import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.DatePickerSettings;
 public class AddStudentGUI {
 	private JDesktopPane p1;
-	private MyPanel left, right, picture;
+	private JPanel left, right, picture;
 	private JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12, l13, l14, l15, l16, l17, pictureLabel;
 	private JTextField f1,f4, f5, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17;
 	private JComboBox<String> f2, f3;
@@ -20,7 +20,7 @@ public class AddStudentGUI {
 	private String picturePath;
 	private DatePickerSettings settings;
 	private JLabel title;
-	private MyPanel titlep;
+	private JPanel titlep;
 	public AddStudentGUI() {
 		
 

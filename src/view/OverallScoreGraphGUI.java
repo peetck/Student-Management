@@ -6,7 +6,7 @@ import org.jfree.chart.ChartPanel;
 public class OverallScoreGraphGUI {
 	
 	private JDesktopPane p;
-	private MyPanel top, bottom, middle;
+	private JPanel top, bottom, middle;
 	private JLabel max, min, mean, sd;
 	private JButton btn1;
 	private int subject;
