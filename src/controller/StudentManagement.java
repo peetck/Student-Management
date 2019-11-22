@@ -1143,7 +1143,7 @@ public class StudentManagement{
     	try{
     		XSSFWorkbook workbook = new XSSFWorkbook();
     	    XSSFSheet sheet = workbook.createSheet("studentinformation");
-    	 	Object[][] alldata = new Object[18][arr.size()];
+    	 	Object[][] alldata = new Object[arr.size() + 1][18];
     	    
     		Object[] header = {"รหัสนักเรียน", "คณะ", "คํานําหน้า", "ชื่อ", "นามสกุล", "วันเดือนปีเกิด", "หมายเลขบัตรประชาชน", "ที่อยู่", "เชื้อชาติ", 
     	                	"ศาสนา", "หมู่เลือด", "เบอร์ติดต่อ", "อีเมล์", "ส่วนสูง", "นํ้าหนัก", "เบอร์ติดต่อผู้ปกครอง", "โรคประจําตัว", "เพิ่มเข้ามาในวันที่"};
@@ -1638,7 +1638,7 @@ public class StudentManagement{
     	try{
     		XSSFWorkbook workbook = new XSSFWorkbook();
     	    XSSFSheet sheet = workbook.createSheet("score");
-    	 	Object[][] alldata = new Object[7][arr.size()];
+    	 	Object[][] alldata = new Object[arr.size() + 1][7];
     	    
     		Object[] header = {"รหัสนักเรียน", "คะแนนเก็บ", "คะแนนโครงงาน", "คะแนนกลางภาค", "คะแนนปลายภาค", "คะแนนรวม", "เกรดที่ได้"};
     		int count_index = 0;
@@ -1651,11 +1651,11 @@ public class StudentManagement{
 
 			
 			for (int i = 0; i < arr.size(); i++) {
+
 	    		Object[] score = arr.get(i).getGrade(select);
 	    		alldata[count_index++] = score;
 	    	}
 
-	        
 	        for (Object[] datatype : alldata) {
 	            Row row = sheet.createRow(rowNum++);
 	            int colNum = 0;
@@ -1671,7 +1671,7 @@ public class StudentManagement{
 	            workbook.close();
 	            outputStream.close();
 	        }
-	        catch (Exception e) {
+	        catch (Exception e) {	        	
 				JOptionPane.showOptionDialog(null, "กรุณาปิดไฟล์ Excel (.xlsx) ที่เปิดอยู่ก่อน(ชื่อไฟล์เดียวกับที่บันทึก)", "ดาวน์โหลดคะแนน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน", }, null);
 				return;
 	        }
@@ -1679,6 +1679,7 @@ public class StudentManagement{
 
 		}
 		catch (Exception err) {
+			System.out.println(err);
 			JOptionPane.showOptionDialog(null, "กรุณาปิดไฟล์ Excel (.xlsx) ที่เปิดอยู่ก่อน(ชื่อไฟล์เดียวกับที่บันทึก)", "ดาวน์โหลดคะแนน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน", }, null);
 		}
     }
