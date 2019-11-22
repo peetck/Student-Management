@@ -1936,10 +1936,14 @@ public class StudentManagement{
                         	JOptionPane.showOptionDialog(null, d, "เปลี่ยนรหัสผ่าน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
         					return;
                         }
-                		users.remove(t);
+                		
                 		BasicDBObject n = new BasicDBObject();
                         n.put("username", myUsername);
                         n.put("password", Base64.getEncoder().withoutPadding().encodeToString(newP.getBytes()));
+                        n.put("subject1", (String)t.get("subject1"));
+                        n.put("subject2", (String)t.get("subject2"));
+                        n.put("subject3", (String)t.get("subject3"));
+                        users.remove(t);
                         users.insert(n);
                         JLabel d = Helper.createLabel("เปลี่ยนรหัสผ่านเรียบร้อยแล้ว");
                         JOptionPane.showOptionDialog(null, d, "เปลี่ยนรหัสผ่าน", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน"}, null);
