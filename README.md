@@ -3,8 +3,8 @@
 * เป็นส่วนหนึ่งของวิชา OOP KMITL 2019
 
 # Request ⚙️
-* Java
-* MongoDB
+* <a href='https://www.oracle.com/technetwork/java/javase/downloads/jdk13-downloads-5672538.html'>Java (JDK)</a>
+* <a href='https://www.mongodb.com/'>MongoDB</a>
 
 # Group Members :family:
 
@@ -16,7 +16,3 @@
 |[@peetck](https://github.com/peetck)|[@thangmo29](https://github.com/thangmo29)|[@skaferun9](https://github.com/skaferun9)|[@blackjokerrr](https://github.com/blackjokerrr)|[@nnotex99](https://github.com/nnotex99)|
 
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/made-with-java.svg)](https://forthebadge.com)
-
-# Class Diagram :information_source:
-
-<img src='ClassDiagram.jpg'>
