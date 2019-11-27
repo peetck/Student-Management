@@ -883,10 +883,10 @@ public class StudentManagement{
     	l1.setHorizontalAlignment(JLabel.CENTER);
     	JLabel l2 = Helper.createLabel("- ต้องเป็นไฟล์ Excel (.xlsx) เท่านั้น");
     	JLabel l3 = Helper.createLabel("- ข้อมูลในแต่ละแถว(ไม่นับเฮดเดอร์) จะต้องเรียงตามข้อมูลในการเพิ่มนักเรียน หากมีคอลัมน์เกินมาจะไม่สนใจ");
-    	JLabel l4 = Helper.createLabel("- ข้อมูลในแต่ละช่องต้องถูกต้อง");
+    	JLabel l4 = Helper.createLabel("- รหัสนักเรียนที่มีอยู่ในระบบแล้วจะถูกอัพเดทข้อมูลแทนที่");
     	JLabel l5 = Helper.createLabel("- หากข้อมูลช่องใดช่องหนึ่งในแถวนั้นไม่ถูกต้องก็จะข้ามแถวนั้นไป");
-    	JLabel l6 = Helper.createLabel("- รหัสนักเรียนที่มีอยู่ในระบบแล้วจะถูกอัพเดทข้อมูลแทนที่");
-    	JLabel l7 = Helper.createLabel("- รหัสนักเรียนและหมายเลขบัตรประชาชนต้องเป็นตัวเลข, วันเดือนปีเกิดต้องอยู่ในรูปแบบ dd.mm.yy");
+    	JLabel l6 = Helper.createLabel("- ข้อมูลในแต่ละช่องต้องถูกต้อง รหัสนักเรียนและ หมายเลขบัตรประชาชน (13 หลัก) ต้องเป็นตัวเลข");
+    	JLabel l7 = Helper.createLabel("- วันเดือนปีเกิดต้องอยู่ในรูปแบบ dd.mm.yy และหมู่เลือดต้องถูกต้อง (A, B, O, AB)");
     	JLabel l8 = Helper.createLabel("รูปตัวอย่างไฟล์ที่ถูกต้อง", 18, true);
     	l8.setHorizontalAlignment(JLabel.CENTER);
     	JLabel picture = Helper.createLabel("", "/images/correct_information_xlsx.png", 700, 112);
@@ -1028,6 +1028,17 @@ public class StudentManagement{
 		    	String race = each[8];
 		    	String religion = each[9];
 		    	String bloodType = each[10];
+		    	
+		    	String[] bt = {"A", "B", "O", "AB"};
+		    	for (String j : bt) {
+		    		if (bloodType.equals(j)) {
+		    			break;
+		    		}
+		    		if (j.equals("AB")) {
+		    			continue es;
+		    		}
+		    	}
+		    	
 		    	String tel = each[11];
 		    	String email = each[12];
 		    	String height = each[13];
@@ -2005,7 +2016,7 @@ public class StudentManagement{
     	managementPage.getAddStudentGUI().getF8().setText(info.get("address"));
     	managementPage.getAddStudentGUI().getF9().setText(info.get("race"));
     	managementPage.getAddStudentGUI().getF10().setText(info.get("religion"));
-    	managementPage.getAddStudentGUI().getF11().setText(info.get("bloodType"));
+    	managementPage.getAddStudentGUI().getF11().setSelectedItem(info.get("bloodType"));
     	managementPage.getAddStudentGUI().getF12().setText(info.get("tel"));
     	managementPage.getAddStudentGUI().getF13().setText(info.get("email"));
     	managementPage.getAddStudentGUI().getF14().setText(info.get("height"));
@@ -2142,10 +2153,23 @@ public class StudentManagement{
 
     	
     	cardID = managementPage.getAddStudentGUI().getF7().getText();
+    	
+    	if (cardID.length() != 13) {
+    		JOptionPane.showOptionDialog(null, Helper.createLabel("กรุณากรอกรหัสบัตรประชาชนให้ครบ 13 หลัก"), "เพิ่มนักเรียน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+    		return;
+    	}
+    	
+    	for (int i = 0; i < cardID.length(); i++) {
+    		if(!(cardID.charAt(i) >= '0' && cardID.charAt(i) <= '9')){
+    			JOptionPane.showOptionDialog(null, Helper.createLabel("กรุณากรอกรหัสบัตรประชาชนเป็นตัวเลขเท่านั้น"), "เพิ่มนักเรียน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+        		return;
+    		}
+    	}
+    	
     	address = managementPage.getAddStudentGUI().getF8().getText();
     	race = managementPage.getAddStudentGUI().getF9().getText();
     	religion = managementPage.getAddStudentGUI().getF10().getText();
-    	bloodType = managementPage.getAddStudentGUI().getF11().getText();
+    	bloodType = managementPage.getAddStudentGUI().getF11().getSelectedItem().toString();
     	tel = managementPage.getAddStudentGUI().getF12().getText();
     	email = managementPage.getAddStudentGUI().getF13().getText();
     	height = managementPage.getAddStudentGUI().getF14().getText();

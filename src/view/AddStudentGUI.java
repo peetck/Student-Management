@@ -11,8 +11,8 @@ public class AddStudentGUI {
 	private JDesktopPane p1;
 	private JPanel left, right, picture;
 	private JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12, l13, l14, l15, l16, l17, pictureLabel;
-	private JTextField f1,f4, f5, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17;
-	private JComboBox<String> f2, f3;
+	private JTextField f1,f4, f5, f7, f8, f9, f10, f12, f13, f14, f15, f16, f17;
+	private JComboBox<String> f2, f3, f11;
 	private DatePicker f6;
 	private JButton btn1, btn2;
 	private GridBagConstraints gbc;
@@ -109,7 +109,13 @@ public class AddStudentGUI {
 		f8 = Helper.createTextField(20, 15);
 		f9 = Helper.createTextField(20, 15);
 		f10 = Helper.createTextField(20, 15);
-		f11 = Helper.createTextField(20, 15);
+		
+		f11 = Helper.createComboBox(15);
+		f11.addItem("A");
+		f11.addItem("B");
+		f11.addItem("O");
+		f11.addItem("AB");
+	
 		f12 = Helper.createTextField(20, 15);
 		f13 = Helper.createTextField(20, 15);
 		f14 = Helper.createTextField(20, 15);
@@ -307,12 +313,12 @@ public class AddStudentGUI {
 	}
 
 
-	public JTextField getF11() {
+	public JComboBox<String> getF11() {
 		return f11;
 	}
 
 
-	public void setF11(JTextField f11) {
+	public void setF11(JComboBox<String> f11) {
 		this.f11 = f11;
 	}
 
@@ -442,7 +448,7 @@ public class AddStudentGUI {
 		f8.setText("");
 		f9.setText("");
 		f10.setText("");
-		f11.setText("");
+		f11.setSelectedIndex(0);
 		f12.setText("");
 		f13.setText("");
 		f14.setText("");
