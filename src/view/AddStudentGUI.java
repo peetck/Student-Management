@@ -88,14 +88,13 @@ public class AddStudentGUI {
 		f2.addItem("เทคโนโลยีสารสนเทศ");
 		f2.addItem("วิทยาลัยนานาชาติ");
 		f2.addItem("วิทยาลัยนาโนเทคโนโลยี ฯ");
-		f2.addItem("วิทยาลัยนวัตกรรมการจัดการข้อมูล");
 		f2.addItem("วิทยาลัยการบริหารและจัดการ");
 		f2.addItem("ศิลปศาสตร์");
-		f2.addItem("วิศกรรมการบินและนักบินพาณิชย์");
 
 		f3 = Helper.createComboBox(15);
 		f3.addItem("นาย");
 		f3.addItem("นางสาว");
+		f3.addItem("นาง");
 		f4 = Helper.createTextField(20, 15);
 		f5 = Helper.createTextField(20, 15);
 		

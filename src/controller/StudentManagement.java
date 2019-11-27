@@ -967,13 +967,21 @@ public class StudentManagement{
 				continue es;
 			}
 			try {
+				String[] each = row[i].split("#");
+				String studentID = each[0];
 				HashMap<String, String> information = new HashMap<String, String>();
 				HashMap<String, Double> score = emptyScore;
-				String[] each = row[i].split("#");
+				
+				for (int stu = 0; stu < teacher.getStudents().size(); stu++) {
+					if ((teacher.getStudents().get(stu).getStudentID()).equals(studentID)) {
+						score = teacher.getStudents().get(stu).getScore();
+					}
+				}
+			
 				
 				String picpath = "default";
 				
-				String studentID = each[0];
+				
 				for (int j = 0; j < studentID.length(); j++) {
 					if (!(studentID.charAt(j) >= '0' && studentID.charAt(j) <= '9')) {
 						continue es;
@@ -990,23 +998,21 @@ public class StudentManagement{
 						"เทคโนโลยีสารสนเทศ",
 						"วิทยาลัยนานาชาติ",
 						"วิทยาลัยนาโนเทคโนโลยี ฯ",
-						"วิทยาลัยนวัตกรรมการจัดการข้อมูล",
 						"วิทยาลัยการบริหารและจัดการ",
-						"ศิลปศาสตร์",
-						"วิศกรรมการบินและนักบินพาณิชย์"};
+						"ศิลปศาสตร์"};
 				String faculty = each[1];
 				for (String j : facultys) {
 					if (faculty.equals(j)) {
 						break;
 					}
-					if (j.equals("วิศกรรมการบินและนักบินพาณิชย์")) {
+					if (j.equals("ศิลปศาสตร์")) { // if can't find faculty
 						continue es;
 					}
 				}
 		    	
 		    	
 		    	String title = each[2];
-		    	if (!(title.equals("นาย")) && !(title.equals("นางสาว"))) {
+		    	if (!(title.equals("นาย")) && !(title.equals("นางสาว")) && !(title.equals("นาง"))) {
 					continue es;
 				}
 		    	String name = each[3];
@@ -1813,7 +1819,7 @@ public class StudentManagement{
 								n.put("s" + select + "_final", Double.parseDouble(tf04.getText()));
 						    	
 								myStudent.update(t, n);								
-			    				JOptionPane.showOptionDialog(null, Helper.createLabel("แก้ไขคะแนนวิชา " + subjectTitle + "เรียบร้อยแล้ว"), "แก้ไขคะแนนวิชา" + subjectTitle, JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+			    				JOptionPane.showOptionDialog(null, Helper.createLabel("แก้ไขคะแนนของรหัสนักเรียน " + tf.getText() + " (" + subjectTitle + ") เรียบร้อยแล้ว"), "แก้ไขคะแนนวิชา" + subjectTitle, JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน"}, null);
 			    				updateScoreTable();
 				    			return;
 				    		}
@@ -2259,7 +2265,7 @@ public class StudentManagement{
     	updateScoreTable();
     	
     	managementPage.getAddStudentGUI().reset();
-    	JLabel msg = Helper.createLabel("เพิ่มนักเรียนเรียบร้อยแล้ว");
+    	JLabel msg = Helper.createLabel("เพิ่มนักเรียนรหัส " + studentID + " เรียบร้อยแล้ว");
 		JOptionPane.showOptionDialog(null, msg, "เพิ่มนักเรียน", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"ยืนยัน"}, null);
     }
     
