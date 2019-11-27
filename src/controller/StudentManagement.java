@@ -2029,6 +2029,7 @@ public class StudentManagement{
     public void connectDB(String hostname, int port) {
     	JOptionPane opt = new JOptionPane(Helper.createLabel("กําลังเชื่อมต่อกับฐานข้อมูล (MongoDB)..."), JOptionPane.WARNING_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}); // no buttons
          JDialog dlg = opt.createDialog("กําลังเชื่อมต่อกับฐานข้อมูล (MongoDB)");
+         	dlg.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         new Thread(new Runnable(){
                 public void run(){
                   try{
