@@ -11,7 +11,7 @@
   </p>
 </p>
 
-## About The Project
+## About The Project :scroll:
 
 <img src="https://github.com/peetck/Student-Management/blob/master/images/main.png?raw=true" alt="main">
 
@@ -36,14 +36,14 @@
 * <a href='https://www.oracle.com/technetwork/java/javase/downloads/jdk13-downloads-5672538.html'>Java (JDK)</a>
 * <a href='https://www.mongodb.com/'>MongoDB</a>
 
-## Download
+## Download 🔨
 * ติดตั้ง <a href='https://www.oracle.com/technetwork/java/javase/downloads/jdk13-downloads-5672538.html'>Java (JDK)</a> ให้เรียบร้อย
 * ค่าเริ่มต้นของ Database(MongoDB) ที่โปรแกรมตั้งไว้จะเป็น localhost โดยสามารถโหลด MongoDB ได้ <a href='https://www.mongodb.com/'>ที่นี้</a>
-* โหลด Zip file จาก a href='https://github.com/peetck/Student-Management/archive/master.zip'>ที่นี้</a>
+* โหลด Zip file จาก <a href='https://github.com/peetck/Student-Management/archive/master.zip'>ที่นี้</a>
 * ทำการแตกไฟล์
 * ดับเบิ้ลคลิกที่ Student-Management.jar เพื่อเริ่มต้นโปรแกรม
 
-## Screenshot
+## Screenshot 📷
 <p><img width="50%" src="https://github.com/peetck/Student-Management/blob/master/images/ss1.png?raw=true"><img width="50%" src="https://github.com/peetck/Student-Management/blob/master/images/ss2.png?raw=true"></p>
 
 <p><img width="50%" src="https://github.com/peetck/Student-Management/blob/master/images/ss3.png?raw=true"><img width="50%" src="https://github.com/peetck/Student-Management/blob/master/images/ss4.png?raw=true"></p>
