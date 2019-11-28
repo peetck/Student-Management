@@ -34,11 +34,11 @@
 
 ## Request ⚙️
 * <a href='https://www.oracle.com/technetwork/java/javase/downloads/jdk13-downloads-5672538.html'>Java (JDK)</a>
-* <a href='https://www.mongodb.com/'>MongoDB</a>
+* <a href='https://www.mongodb.com/download-center/community'>MongoDB</a>
 
 ## Download 🔨
 * ติดตั้ง <a href='https://www.oracle.com/technetwork/java/javase/downloads/jdk13-downloads-5672538.html'>Java (JDK)</a> ให้เรียบร้อย
-* ค่าเริ่มต้นของ Database(MongoDB) ที่โปรแกรมตั้งไว้จะเป็น localhost โดยสามารถโหลด MongoDB ได้ <a href='https://www.mongodb.com/'>ที่นี้</a>
+* ค่าเริ่มต้นของ Database(MongoDB) ที่โปรแกรมตั้งไว้จะเป็น localhost โดยสามารถโหลด MongoDB ได้ <a href='https://www.mongodb.com/download-center/community'>ที่นี้</a>
 * โหลด Zip file จาก <a href='https://github.com/peetck/Student-Management/archive/master.zip'>ที่นี้</a>
 * ทำการแตกไฟล์
 * ดับเบิ้ลคลิกที่ Student-Management.jar เพื่อเริ่มต้นโปรแกรม
