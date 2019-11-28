@@ -2155,7 +2155,7 @@ public class StudentManagement{
     	cardID = managementPage.getAddStudentGUI().getF7().getText();
     	
     	if (cardID.length() != 13) {
-    		JOptionPane.showOptionDialog(null, Helper.createLabel("กรุณากรอกรหัสบัตรประชาชนให้ครบ 13 หลัก"), "เพิ่มนักเรียน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
+    		JOptionPane.showOptionDialog(null, Helper.createLabel("กรุณากรอกรหัสบัตรประชาชน 13 หลักเท่านั้น"), "เพิ่มนักเรียน", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[] {"ยืนยัน"}, null);
     		return;
     	}
     	

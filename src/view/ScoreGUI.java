@@ -17,11 +17,11 @@ public class ScoreGUI {
 		p1 = new JDesktopPane();
 		
 		topmenu = Helper.createPanel("");
-        topmenu.setLocation(0, 0);
-        topmenu.setSize(900, 130);
+        topmenu.setLocation(50, 0);
+        topmenu.setSize(800, 130);
         topmenu.setLayout(new BorderLayout());
 
-        l1 = Helper.createLabel("<html>&nbsp;&nbsp;" + subject + " (" + subjectID + ")</html>", "/images/already_have_subject.png", 60, 60);
+        l1 = Helper.createLabel("  " + subject + " (" + subjectID + ")", "/images/already_have_subject.png", 60, 60);
         l1.setFont(new Font("Kanit ExtraLight", Font.PLAIN, 35));
         l1.setHorizontalAlignment(JLabel.CENTER);
         topmenu.add(l1);
