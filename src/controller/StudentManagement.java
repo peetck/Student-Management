@@ -1025,6 +1025,12 @@ public class StudentManagement{
 		    	
 		    	String cardID = each[6];
 		    	
+		    	for (int j = 0; j < cardID.length(); j++) {
+					if (!(cardID.charAt(j) >= '0' && cardID.charAt(j) <= '9')) {
+						continue es;
+					}
+				}
+		    	
 		    	if (cardID.length() != 13) {
 		    		continue es;
 		    	}
