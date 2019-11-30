@@ -981,6 +981,9 @@ public class StudentManagement{
 				
 				String picpath = "default";
 				
+				if (studentID.length() != 13) {
+					continue es;
+				}
 				
 				for (int j = 0; j < studentID.length(); j++) {
 					if (!(studentID.charAt(j) >= '0' && studentID.charAt(j) <= '9')) {
