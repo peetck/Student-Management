@@ -980,10 +980,7 @@ public class StudentManagement{
 			
 				
 				String picpath = "default";
-				
-				if (studentID.length() != 13) {
-					continue es;
-				}
+
 				
 				for (int j = 0; j < studentID.length(); j++) {
 					if (!(studentID.charAt(j) >= '0' && studentID.charAt(j) <= '9')) {
@@ -1027,6 +1024,11 @@ public class StudentManagement{
 		    	String year = date[2];
 		    	
 		    	String cardID = each[6];
+		    	
+		    	if (cardID.length() != 13) {
+		    		continue es;
+		    	}
+		    	
 		    	String address = each[7];
 		    	String race = each[8];
 		    	String religion = each[9];
